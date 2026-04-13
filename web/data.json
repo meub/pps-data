@@ -61,7 +61,9 @@
       "prof_residual": -3.65,
       "cluster_id": 0,
       "pca_x": 6.249,
-      "pca_y": -1.128
+      "pca_y": -1.128,
+      "nearest_alt_school_mi": 1.91,
+      "nearest_alt_school_name": "James John Elementary School"
     },
     {
       "school_name": "Whitman Elementary School",
@@ -124,7 +126,9 @@
       "prof_residual": -11.65,
       "cluster_id": 0,
       "pca_x": 2.766,
-      "pca_y": -0.65
+      "pca_y": -0.65,
+      "nearest_alt_school_mi": 0.88,
+      "nearest_alt_school_name": "Kelly Elementary School"
     },
     {
       "school_name": "Skyline Elementary School",
@@ -187,7 +191,9 @@
       "prof_residual": 4.2,
       "cluster_id": 2,
       "pca_x": -1.201,
-      "pca_y": -2.004
+      "pca_y": -2.004,
+      "nearest_alt_school_mi": 6.45,
+      "nearest_alt_school_name": "Astor Elementary School"
     },
     {
       "school_name": "Creston Elementary School",
@@ -250,7 +256,9 @@
       "prof_residual": 1.98,
       "cluster_id": 3,
       "pca_x": 0.96,
-      "pca_y": -2.925
+      "pca_y": -2.925,
+      "nearest_alt_school_mi": 0.8,
+      "nearest_alt_school_name": "Richmond Elementary School"
     },
     {
       "school_name": "Odyssey Program (K-8)",
@@ -313,7 +321,9 @@
       "prof_residual": null,
       "cluster_id": null,
       "pca_x": null,
-      "pca_y": null
+      "pca_y": null,
+      "nearest_alt_school_mi": 3.91,
+      "nearest_alt_school_name": "Winterhaven School"
     },
     {
       "school_name": "Woodmere Elementary School",
@@ -376,7 +386,9 @@
       "prof_residual": -11.73,
       "cluster_id": 0,
       "pca_x": 3.551,
-      "pca_y": -1.103
+      "pca_y": -1.103,
+      "nearest_alt_school_mi": 0.6,
+      "nearest_alt_school_name": "Kelly Elementary School"
     },
     {
       "school_name": "Arleta Elementary School",
@@ -439,7 +451,9 @@
       "prof_residual": -13.28,
       "cluster_id": 3,
       "pca_x": 1.578,
-      "pca_y": -2.44
+      "pca_y": -2.44,
+      "nearest_alt_school_mi": 0.82,
+      "nearest_alt_school_name": "Woodstock Elementary School"
     },
     {
       "school_name": "Peninsula Elementary School",
@@ -502,7 +516,9 @@
       "prof_residual": -2.26,
       "cluster_id": 0,
       "pca_x": 1.366,
-      "pca_y": -0.328
+      "pca_y": -0.328,
+      "nearest_alt_school_mi": 2.33,
+      "nearest_alt_school_name": "Woodlawn Elementary School"
     },
     {
       "school_name": "Chief Joseph Elementary School",
@@ -565,7 +581,9 @@
       "prof_residual": -7.9,
       "cluster_id": 2,
       "pca_x": -0.409,
-      "pca_y": -1.84
+      "pca_y": -1.84,
+      "nearest_alt_school_mi": 1.86,
+      "nearest_alt_school_name": "Woodlawn Elementary School"
     },
     {
       "school_name": "Lee Elementary School",
@@ -628,7 +646,9 @@
       "prof_residual": -0.03,
       "cluster_id": 0,
       "pca_x": 1.837,
-      "pca_y": -0.83
+      "pca_y": -0.83,
+      "nearest_alt_school_mi": 1.1,
+      "nearest_alt_school_name": "Vestal Elementary School"
     },
     {
       "school_name": "Lent Elementary School",
@@ -691,7 +711,9 @@
       "prof_residual": 14.36,
       "cluster_id": 0,
       "pca_x": 4.381,
-      "pca_y": -0.785
+      "pca_y": -0.785,
+      "nearest_alt_school_mi": 0.93,
+      "nearest_alt_school_name": "Kelly Elementary School"
     },
     {
       "school_name": "Irvington Elementary School",
@@ -754,7 +776,9 @@
       "prof_residual": 1.04,
       "cluster_id": 2,
       "pca_x": -0.319,
-      "pca_y": -0.128
+      "pca_y": -0.128,
+      "nearest_alt_school_mi": 0.85,
+      "nearest_alt_school_name": "Sabin Elementary School"
     },
     {
       "school_name": "Lewis Elementary School",
@@ -817,7 +841,9 @@
       "prof_residual": -0.59,
       "cluster_id": 2,
       "pca_x": -0.471,
-      "pca_y": -1.272
+      "pca_y": -1.272,
+      "nearest_alt_school_mi": 0.63,
+      "nearest_alt_school_name": "Woodstock Elementary School"
     },
     {
       "school_name": "Forest Park Elementary School",
@@ -880,7 +906,9 @@
       "prof_residual": 26.44,
       "cluster_id": 2,
       "pca_x": -0.741,
-      "pca_y": -2.591
+      "pca_y": -2.591,
+      "nearest_alt_school_mi": 3.53,
+      "nearest_alt_school_name": "James John Elementary School"
     },
     {
       "school_name": "Rieke Elementary School",
@@ -943,7 +971,9 @@
       "prof_residual": 13.67,
       "cluster_id": 2,
       "pca_x": -1.825,
-      "pca_y": -1.888
+      "pca_y": -1.888,
+      "nearest_alt_school_mi": 0.84,
+      "nearest_alt_school_name": "Capitol Hill Elementary School"
     },
     {
       "school_name": "Abernethy Elementary School",
@@ -1006,7 +1036,9 @@
       "prof_residual": 6.19,
       "cluster_id": 2,
       "pca_x": -1.628,
-      "pca_y": -1.888
+      "pca_y": -1.888,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Ainsworth Elementary School",
@@ -1069,7 +1101,9 @@
       "prof_residual": 24.48,
       "cluster_id": 2,
       "pca_x": -2.523,
-      "pca_y": 0.171
+      "pca_y": 0.171,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Alameda Elementary School",
@@ -1132,7 +1166,9 @@
       "prof_residual": 9.9,
       "cluster_id": 2,
       "pca_x": -2.879,
-      "pca_y": -0.213
+      "pca_y": -0.213,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Alliance High School",
@@ -1195,7 +1231,9 @@
       "prof_residual": null,
       "cluster_id": null,
       "pca_x": null,
-      "pca_y": null
+      "pca_y": null,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Astor Elementary School",
@@ -1258,7 +1296,9 @@
       "prof_residual": -7.85,
       "cluster_id": 2,
       "pca_x": -0.71,
-      "pca_y": -0.564
+      "pca_y": -0.564,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Atkinson Elementary School",
@@ -1321,7 +1361,9 @@
       "prof_residual": 4.32,
       "cluster_id": 2,
       "pca_x": -0.165,
-      "pca_y": -0.895
+      "pca_y": -0.895,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Beach Elementary School",
@@ -1384,7 +1426,9 @@
       "prof_residual": 6.12,
       "cluster_id": 0,
       "pca_x": 0.762,
-      "pca_y": -0.015
+      "pca_y": -0.015,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Beaumont Middle School",
@@ -1447,7 +1491,9 @@
       "prof_residual": 4.87,
       "cluster_id": 2,
       "pca_x": -0.406,
-      "pca_y": -0.199
+      "pca_y": -0.199,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Beverly Cleary School ",
@@ -1510,7 +1556,9 @@
       "prof_residual": 5.62,
       "cluster_id": 2,
       "pca_x": -2.464,
-      "pca_y": -0.482
+      "pca_y": -0.482,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Boise-Eliot Elementary School",
@@ -1573,7 +1621,9 @@
       "prof_residual": -9.1,
       "cluster_id": 0,
       "pca_x": 2.337,
-      "pca_y": 1.628
+      "pca_y": 1.628,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Bridger Creative Science School",
@@ -1636,7 +1686,9 @@
       "prof_residual": -18.41,
       "cluster_id": 2,
       "pca_x": -0.658,
-      "pca_y": -0.481
+      "pca_y": -0.481,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Bridlemile Elementary School",
@@ -1699,7 +1751,9 @@
       "prof_residual": 6.92,
       "cluster_id": 2,
       "pca_x": -1.738,
-      "pca_y": -0.876
+      "pca_y": -0.876,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Buckman Elementary School",
@@ -1762,7 +1816,9 @@
       "prof_residual": -12.4,
       "cluster_id": 3,
       "pca_x": 0.133,
-      "pca_y": -0.699
+      "pca_y": -0.699,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Capitol Hill Elementary School",
@@ -1825,7 +1881,9 @@
       "prof_residual": -3.44,
       "cluster_id": 2,
       "pca_x": -1.869,
-      "pca_y": 0.063
+      "pca_y": 0.063,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Chapman Elementary School",
@@ -1888,7 +1946,9 @@
       "prof_residual": -4.47,
       "cluster_id": 1,
       "pca_x": -0.154,
-      "pca_y": 2.177
+      "pca_y": 2.177,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Clark Elementary School",
@@ -1951,7 +2011,9 @@
       "prof_residual": -3.45,
       "cluster_id": null,
       "pca_x": null,
-      "pca_y": null
+      "pca_y": null,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "C\u00e9sar Ch\u00e1vez K-8 School",
@@ -2014,7 +2076,9 @@
       "prof_residual": -2.53,
       "cluster_id": 0,
       "pca_x": 3.14,
-      "pca_y": 1.2
+      "pca_y": 1.2,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Dr. Martin Luther King Jr. School",
@@ -2077,7 +2141,9 @@
       "prof_residual": 9.78,
       "cluster_id": 0,
       "pca_x": 2.004,
-      "pca_y": 0.546
+      "pca_y": 0.546,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Duniway Elementary School",
@@ -2140,7 +2206,9 @@
       "prof_residual": -3.86,
       "cluster_id": 2,
       "pca_x": -1.706,
-      "pca_y": -1.493
+      "pca_y": -1.493,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Faubion Elementary School",
@@ -2203,7 +2271,9 @@
       "prof_residual": -10.12,
       "cluster_id": 0,
       "pca_x": 1.384,
-      "pca_y": 1.886
+      "pca_y": 1.886,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "George Middle School",
@@ -2266,7 +2336,9 @@
       "prof_residual": -3.37,
       "cluster_id": 0,
       "pca_x": 3.166,
-      "pca_y": -0.597
+      "pca_y": -0.597,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Glencoe Elementary School",
@@ -2329,7 +2401,9 @@
       "prof_residual": 5.0,
       "cluster_id": 2,
       "pca_x": -1.463,
-      "pca_y": -1.378
+      "pca_y": -1.378,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Gray Middle School",
@@ -2392,7 +2466,9 @@
       "prof_residual": -3.97,
       "cluster_id": 2,
       "pca_x": -1.485,
-      "pca_y": -0.711
+      "pca_y": -0.711,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Grout Elementary School",
@@ -2455,7 +2531,9 @@
       "prof_residual": 4.58,
       "cluster_id": 0,
       "pca_x": 0.51,
-      "pca_y": 1.207
+      "pca_y": 1.207,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Harriet Tubman Middle School",
@@ -2518,7 +2596,9 @@
       "prof_residual": 1.89,
       "cluster_id": 1,
       "pca_x": 0.356,
-      "pca_y": 3.942
+      "pca_y": 3.942,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Harrison Park School",
@@ -2581,7 +2661,9 @@
       "prof_residual": 7.2,
       "cluster_id": 0,
       "pca_x": 3.033,
-      "pca_y": 1.936
+      "pca_y": 1.936,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Hayhurst Elementary School",
@@ -2644,7 +2726,9 @@
       "prof_residual": -0.86,
       "cluster_id": 2,
       "pca_x": -1.61,
-      "pca_y": -0.658
+      "pca_y": -0.658,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Hosford Middle School",
@@ -2707,7 +2791,9 @@
       "prof_residual": -9.18,
       "cluster_id": 1,
       "pca_x": -1.884,
-      "pca_y": 2.196
+      "pca_y": 2.196,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Jackson Middle School",
@@ -2770,7 +2856,9 @@
       "prof_residual": -2.81,
       "cluster_id": 1,
       "pca_x": -1.614,
-      "pca_y": 2.517
+      "pca_y": 2.517,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "James John Elementary School",
@@ -2833,7 +2921,9 @@
       "prof_residual": -5.92,
       "cluster_id": 0,
       "pca_x": 1.917,
-      "pca_y": 0.297
+      "pca_y": 0.297,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Kellogg Middle School",
@@ -2896,7 +2986,9 @@
       "prof_residual": -1.97,
       "cluster_id": null,
       "pca_x": null,
-      "pca_y": null
+      "pca_y": null,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Kelly Elementary School",
@@ -2959,7 +3051,9 @@
       "prof_residual": -18.57,
       "cluster_id": 0,
       "pca_x": 2.489,
-      "pca_y": 0.922
+      "pca_y": 0.922,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Lane Middle School",
@@ -3022,7 +3116,9 @@
       "prof_residual": -14.48,
       "cluster_id": 0,
       "pca_x": 1.147,
-      "pca_y": 1.712
+      "pca_y": 1.712,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Laurelhurst Elementary School",
@@ -3085,7 +3181,9 @@
       "prof_residual": 2.57,
       "cluster_id": 2,
       "pca_x": -3.929,
-      "pca_y": 0.523
+      "pca_y": 0.523,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Llewellyn Elementary School",
@@ -3148,7 +3246,9 @@
       "prof_residual": 1.54,
       "cluster_id": 2,
       "pca_x": -1.836,
-      "pca_y": -1.848
+      "pca_y": -1.848,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Maplewood Elementary School",
@@ -3211,7 +3311,9 @@
       "prof_residual": -4.45,
       "cluster_id": 2,
       "pca_x": -1.376,
-      "pca_y": -0.944
+      "pca_y": -0.944,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Markham Elementary School",
@@ -3274,7 +3376,9 @@
       "prof_residual": 7.76,
       "cluster_id": 0,
       "pca_x": 0.671,
-      "pca_y": 0.062
+      "pca_y": 0.062,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Marysville Elementary School",
@@ -3337,7 +3441,9 @@
       "prof_residual": -6.38,
       "cluster_id": 0,
       "pca_x": 1.938,
-      "pca_y": -0.325
+      "pca_y": -0.325,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Metropolitan Learning Center",
@@ -3400,7 +3506,9 @@
       "prof_residual": -19.59,
       "cluster_id": 3,
       "pca_x": -1.095,
-      "pca_y": -0.022
+      "pca_y": -0.022,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Mt Tabor Middle School",
@@ -3463,7 +3571,9 @@
       "prof_residual": 10.11,
       "cluster_id": 2,
       "pca_x": -0.793,
-      "pca_y": -1.199
+      "pca_y": -1.199,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Ockley Green Middle School",
@@ -3526,7 +3636,9 @@
       "prof_residual": -14.34,
       "cluster_id": 1,
       "pca_x": -0.065,
-      "pca_y": 3.203
+      "pca_y": 3.203,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Richmond Elementary School",
@@ -3589,7 +3701,9 @@
       "prof_residual": 28.4,
       "cluster_id": 1,
       "pca_x": -2.455,
-      "pca_y": 1.66
+      "pca_y": 1.66,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Rigler Elementary School",
@@ -3652,7 +3766,9 @@
       "prof_residual": 3.08,
       "cluster_id": 0,
       "pca_x": 2.28,
-      "pca_y": 0.481
+      "pca_y": 0.481,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Rose City Park",
@@ -3715,7 +3831,9 @@
       "prof_residual": 8.19,
       "cluster_id": 2,
       "pca_x": -0.028,
-      "pca_y": -0.557
+      "pca_y": -0.557,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Roseway Heights School",
@@ -3778,7 +3896,9 @@
       "prof_residual": -10.15,
       "cluster_id": 0,
       "pca_x": 0.398,
-      "pca_y": 1.086
+      "pca_y": 1.086,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Sabin Elementary School",
@@ -3841,7 +3961,9 @@
       "prof_residual": -0.49,
       "cluster_id": 2,
       "pca_x": -0.294,
-      "pca_y": -1.664
+      "pca_y": -1.664,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Scott Elementary School",
@@ -3904,7 +4026,9 @@
       "prof_residual": -0.53,
       "cluster_id": 0,
       "pca_x": 1.434,
-      "pca_y": 0.212
+      "pca_y": 0.212,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Sellwood Middle School",
@@ -3967,7 +4091,9 @@
       "prof_residual": -8.04,
       "cluster_id": 2,
       "pca_x": -2.664,
-      "pca_y": 0.358
+      "pca_y": 0.358,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Sitton Elementary School",
@@ -4030,7 +4156,9 @@
       "prof_residual": 4.52,
       "cluster_id": 0,
       "pca_x": 2.427,
-      "pca_y": 0.104
+      "pca_y": 0.104,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Stephenson Elementary School",
@@ -4093,7 +4221,9 @@
       "prof_residual": 10.69,
       "cluster_id": 2,
       "pca_x": -1.62,
-      "pca_y": -0.416
+      "pca_y": -0.416,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Sunnyside Environmental School",
@@ -4156,7 +4286,9 @@
       "prof_residual": -14.98,
       "cluster_id": 2,
       "pca_x": -1.927,
-      "pca_y": 0.812
+      "pca_y": 0.812,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Vernon Elementary School",
@@ -4219,7 +4351,9 @@
       "prof_residual": 0.04,
       "cluster_id": 2,
       "pca_x": -1.198,
-      "pca_y": 0.821
+      "pca_y": 0.821,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Vestal Elementary School",
@@ -4282,7 +4416,9 @@
       "prof_residual": -12.56,
       "cluster_id": 0,
       "pca_x": 1.049,
-      "pca_y": 1.429
+      "pca_y": 1.429,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "West Sylvan Middle School",
@@ -4345,7 +4481,9 @@
       "prof_residual": 8.66,
       "cluster_id": 1,
       "pca_x": -2.601,
-      "pca_y": 3.325
+      "pca_y": 3.325,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Winterhaven School",
@@ -4408,7 +4546,9 @@
       "prof_residual": 19.22,
       "cluster_id": 2,
       "pca_x": -2.792,
-      "pca_y": 0.069
+      "pca_y": 0.069,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Woodlawn Elementary School",
@@ -4471,7 +4611,9 @@
       "prof_residual": 13.52,
       "cluster_id": 0,
       "pca_x": 0.958,
-      "pca_y": 0.07
+      "pca_y": 0.07,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "Woodstock Elementary School",
@@ -4534,7 +4676,9 @@
       "prof_residual": 16.21,
       "cluster_id": 2,
       "pca_x": -0.303,
-      "pca_y": -0.605
+      "pca_y": -0.605,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "da Vinci Middle School",
@@ -4597,7 +4741,9 @@
       "prof_residual": -13.74,
       "cluster_id": 1,
       "pca_x": -1.322,
-      "pca_y": 2.027
+      "pca_y": 2.027,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     },
     {
       "school_name": "ACCESS Academy",
@@ -4660,7 +4806,9 @@
       "prof_residual": null,
       "cluster_id": null,
       "pca_x": null,
-      "pca_y": null
+      "pca_y": null,
+      "nearest_alt_school_mi": null,
+      "nearest_alt_school_name": null
     }
   ],
   "meta": {
@@ -4927,6 +5075,18 @@
       "desc": "Number of residential building permits issued since 2022-01-01 inside the school's PPS attendance area. Permits = approved to build; not all reach completion.",
       "source": "Portland BDS via PortlandMaps",
       "fmt": "int"
+    },
+    "nearest_alt_school_mi": {
+      "label": "Miles to nearest alt.",
+      "desc": "Great-circle distance from this closure candidate to the nearest non-candidate school of the same grade band (elementary, k8, middle, or alternative). A rough proxy for transportation impact: families would have to travel at least this far if their school closes (district reassignment may differ).",
+      "source": "Derived from NCES CCD coordinates",
+      "fmt": "miles"
+    },
+    "nearest_alt_school_name": {
+      "label": "Nearest alt. school",
+      "desc": "Name of the closest non-candidate school of the same grade band.",
+      "source": "Derived from NCES CCD coordinates",
+      "fmt": "text"
     },
     "street_address": {
       "label": "Address",

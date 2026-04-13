@@ -59,6 +59,8 @@ META = {
     "n_pipeline_projects_within_1mi": {"label": "Pipeline projects", "desc": "Number of affordable housing projects in development inside the school's PPS attendance area.", "source": "OAHI", "fmt": "int"},
     "permits_units_within_1mi_since_2022": {"label": "Permitted units (2022+)", "desc": "New residential units on building permits issued since 2022-01-01 inside the school's PPS attendance area — single-family, ADUs, and multifamily (all tenures). Schools without a published catchment fall back to a 1-mile radius.", "source": "Portland BDS via PortlandMaps", "fmt": "int"},
     "n_permits_within_1mi_since_2022": {"label": "Permits (2022+)", "desc": "Number of residential building permits issued since 2022-01-01 inside the school's PPS attendance area. Permits = approved to build; not all reach completion.", "source": "Portland BDS via PortlandMaps", "fmt": "int"},
+    "nearest_alt_school_mi": {"label": "Miles to nearest alt.", "desc": "Great-circle distance from this closure candidate to the nearest non-candidate school of the same grade band (elementary, k8, middle, or alternative). A rough proxy for transportation impact: families would have to travel at least this far if their school closes (district reassignment may differ).", "source": "Derived from NCES CCD coordinates", "fmt": "miles"},
+    "nearest_alt_school_name": {"label": "Nearest alt. school", "desc": "Name of the closest non-candidate school of the same grade band.", "source": "Derived from NCES CCD coordinates", "fmt": "text"},
     "street_address": {"label": "Address", "desc": "Street address of the building.", "source": "NCES CCD + manual", "fmt": "text"},
     "latitude": {"label": "Latitude", "desc": "Geocoded latitude.", "source": "NCES CCD", "fmt": "text"},
     "longitude": {"label": "Longitude", "desc": "Geocoded longitude.", "source": "NCES CCD", "fmt": "text"},
@@ -191,6 +193,40 @@ def derive_columns(df):
     df["pca_y"] = pd.NA
     df.loc[cl_mask, "pca_x"] = coords[:, 0].round(3)
     df.loc[cl_mask, "pca_y"] = coords[:, 1].round(3)
+
+    # Transportation impact: haversine miles from each closure candidate to the
+    # nearest non-candidate school of the same grade band.
+    R_MI = 3958.7613  # earth radius in miles
+    df["nearest_alt_school_mi"] = pd.NA
+    df["nearest_alt_school_name"] = pd.NA
+    cand_idx = df.index[df["is_closure_candidate"].astype(bool)]
+    for i in cand_idx:
+        cand_lat = df.at[i, "latitude"]
+        cand_lon = df.at[i, "longitude"]
+        cand_level = df.at[i, "level"]
+        if pd.isna(cand_lat) or pd.isna(cand_lon):
+            continue
+        peers = df[
+            (df["level"] == cand_level)
+            & (~df["is_closure_candidate"].astype(bool))
+            & df["latitude"].notna()
+            & df["longitude"].notna()
+            & (df.index != i)
+        ]
+        if len(peers) == 0:
+            continue
+        lat1 = math.radians(float(cand_lat))
+        lon1 = math.radians(float(cand_lon))
+        lat2 = np.radians(peers["latitude"].to_numpy(dtype=float))
+        lon2 = np.radians(peers["longitude"].to_numpy(dtype=float))
+        dlat = lat2 - lat1
+        dlon = lon2 - lon1
+        a = np.sin(dlat / 2) ** 2 + math.cos(lat1) * np.cos(lat2) * np.sin(dlon / 2) ** 2
+        c = 2 * np.arcsin(np.sqrt(a))
+        d_mi = R_MI * c
+        nearest = int(np.argmin(d_mi))
+        df.at[i, "nearest_alt_school_mi"] = round(float(d_mi[nearest]), 2)
+        df.at[i, "nearest_alt_school_name"] = peers.iloc[nearest]["school_name"]
     return df
 
 

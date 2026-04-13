@@ -250,6 +250,17 @@
     <div class="panel chart-card"><div id="plot-year-hist" style="height: 360px;"></div></div>
   </section>
 
+  <section>
+    <h2>Transportation impact — miles to nearest same-level alternative</h2>
+    <p class="note">
+      Great-circle distance from each closure candidate to the nearest non-candidate school of
+      the same grade band (elementary, K-8, middle, alternative). A rough lower bound on how
+      far displaced families would have to travel — actual PPS reassignment may differ. Bars
+      are labeled with the nearest receiving school.
+    </p>
+    <div class="panel chart-card"><div id="plot-transport" style="height: 460px;"></div></div>
+  </section>
+
   <section style="display:none;">
     <h2>Outperformers and underperformers</h2>
     <p class="note">
@@ -465,6 +476,7 @@
       case "pct_0_1": return (Number(val) * 100).toFixed(1) + "%";
       case "usd": return "$" + Number(val).toLocaleString();
       case "ratio": return Number(val).toFixed(4);
+      case "miles": return Number(val).toFixed(2) + " mi";
       case "year": return Number(val).toFixed(0);
       case "bool": return val === true || val === "True" || val === 1
         ? '<span class="badge yes">yes</span>'
@@ -724,6 +736,58 @@
     ], layout, { displayModeBar: false, responsive: true });
   })();
 
+  // ---------- TRANSPORTATION IMPACT BARS ----------
+  (function () {
+    const cands = schools.filter(s => isCand(s) && s.nearest_alt_school_mi != null);
+    cands.sort((a, b) => b.nearest_alt_school_mi - a.nearest_alt_school_mi);
+    const labels = cands.map(s => `${s.school_name}  (#${s.closure_rank})`);
+    const dists = cands.map(s => s.nearest_alt_school_mi);
+    const median = (() => {
+      const s = [...dists].sort((x, y) => x - y);
+      return s.length % 2 ? s[(s.length - 1) / 2] : (s[s.length / 2 - 1] + s[s.length / 2]) / 2;
+    })();
+    function renderTransport() {
+      const mobile = window.innerWidth < 700;
+      const trace = {
+        type: "bar", orientation: "h",
+        x: dists,
+        y: labels,
+        marker: { color: COLOR_CAND, line: { width: 0.5, color: "#0e1115" } },
+        text: cands.map(s => mobile
+          ? `${s.nearest_alt_school_mi.toFixed(2)} mi`
+          : `${s.nearest_alt_school_mi.toFixed(2)} mi → ${s.nearest_alt_school_name}`),
+        textposition: "outside",
+        textfont: { size: mobile ? 9 : 10, color: "#e6edf3" },
+        cliponaxis: false,
+        customdata: cands.map(s => [s.nearest_alt_school_name, s.level]),
+        hovertemplate: "<b>%{y}</b><br>%{x:.2f} mi to %{customdata[0]}<br>Level: %{customdata[1]}<extra></extra>",
+      };
+      Plotly.react("plot-transport", [trace], Object.assign(baseLayout(), {
+        margin: mobile
+          ? { l: 130, r: 80, t: 20, b: 40 }
+          : { l: 220, r: 320, t: 20, b: 40 },
+        xaxis: { title: "Miles to nearest same-level non-candidate school",
+          gridcolor: "#30363d", zerolinecolor: "#30363d" },
+        yaxis: { automargin: false, tickfont: { size: mobile ? 9 : 10 } },
+        showlegend: false,
+        shapes: [{
+          type: "line", x0: median, x1: median,
+          y0: -0.5, y1: cands.length - 0.5,
+          line: { color: "#7d8590", width: 1, dash: "dash" },
+        }],
+        annotations: [{
+          x: median, y: cands.length - 0.5,
+          text: `candidate median ${median.toFixed(2)} mi`,
+          showarrow: false, yanchor: "bottom",
+          font: { size: 10, color: "#7d8590" },
+        }],
+      }), { displayModeBar: false, responsive: true });
+    }
+    renderTransport();
+    let t;
+    window.addEventListener("resize", () => { clearTimeout(t); t = setTimeout(renderTransport, 150); });
+  })();
+
   // ---------- OUTPERFORMER / UNDERPERFORMER BARS ----------
   (function () {
     const withRes = schools.filter(s => s.prof_residual != null);
@@ -881,7 +945,7 @@
           td.innerHTML = `${v}${rankBadge}`;
         } else {
           td.innerHTML = fmt(v, m.fmt);
-          if (["int", "usd", "ratio", "pct_0_1", "pct_0_100", "year"].includes(m.fmt)) {
+          if (["int", "usd", "ratio", "pct_0_1", "pct_0_100", "year", "miles"].includes(m.fmt)) {
             td.classList.add("numeric");
           }
         }
