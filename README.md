@@ -39,6 +39,7 @@ python3 -m http.server -d web 8000
 | [Metro RLIS](https://rlisdiscovery.oregonmetro.gov/) | Supplementary regional housing | 2024 |
 | [Portland BDS / PortlandMaps](https://www.portlandmaps.com/) | Residential building permits (2022+) | 2022 – present |
 | [City of Portland — School Boundaries](https://services.arcgis.com/) | PPS attendance polygons (ArcGIS FeatureServer) | 2024-25 |
+| [PPS Dual Language Immersion + focus-option pages](https://www.pps.net/departments/dual-language/current-dli-programs) | Per-school DLI languages (5) + K-8 focus options (Arts, Environmental, STEAM, TAG, Alt) | 2026-04 |
 | [Willamette Week 2026-03-18](https://www.wweek.com/news/schools/2026/03/18/heres-what-pps-will-consider-as-it-selects-schools-to-close/) | List of 15 lowest-enrollment schools (enrollment-based ranking) | 2026-03-18 |
 | [Metro 2045 Distributed Forecast](https://www.oregonmetro.gov/) (Ord. 21-1457) | Regional growth context (city/county only) | 2021 |
 

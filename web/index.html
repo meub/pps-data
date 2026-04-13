@@ -262,6 +262,21 @@
   </section>
 
   <section>
+    <h2>Access to programs — what closure would displace</h2>
+    <p class="note">
+      Specialized program offerings at each closure candidate. Closing a school that
+      hosts a Dual Language Immersion (DLI) program or a focus option severs that
+      pathway in its catchment — families pursuing it would have to transfer farther
+      or lose access entirely. Source: PPS Dual Language and Enrollment &amp; Transfer
+      pages (verified 2026-04).
+    </p>
+    <div class="panel" id="programs-card">
+      <div id="programs-summary" style="margin-bottom: 14px; color: #c9d1d9;"></div>
+      <table class="schools" id="programs-table" style="margin-top: 6px;"><thead></thead><tbody></tbody></table>
+    </div>
+  </section>
+
+  <section>
     <h2>Long-term sustainability — 7-year enrollment change (2018 → 2025)</h2>
     <p class="note">
       Total in-scope enrollment fell 20% over this window (median school -19%). Bars below
@@ -355,6 +370,14 @@
     <dl>
       <dt><a href="https://www.pps.net/Domain/219" target="_blank" rel="noopener">PPS Funded Programs</a></dt>
         <dd>Title I-A schoolwide designations, 2025-26.</dd>
+    </dl>
+
+    <h3>Specialized programs</h3>
+    <dl>
+      <dt><a href="https://www.pps.net/departments/dual-language/current-dli-programs" target="_blank" rel="noopener">PPS Dual Language Immersion (DLI) program list</a></dt>
+        <dd>Per-language host schools for Spanish, Chinese, Japanese, Russian, and Vietnamese DLI tracks (elementary, middle, high). Captured 2026-04 — re-verify annually.</dd>
+      <dt><a href="https://www.pps.net/departments/enrollment-transfer/enroll/explore-your-options/k-5-explore-your-options" target="_blank" rel="noopener">PPS K-5 focus options</a></dt>
+        <dd>K-8 focus-option / specialized-curriculum schools: Buckman Arts, Bridger Creative Science, Sunnyside Environmental, Winterhaven STEAM, Odyssey TAG, ACCESS, MLC.</dd>
     </dl>
 
     <h3>Housing &amp; neighborhood growth</h3>
@@ -811,6 +834,37 @@
     renderTransport();
     let t;
     window.addEventListener("resize", () => { clearTimeout(t); t = setTimeout(renderTransport, 150); });
+  })();
+
+  // ---------- ACCESS TO PROGRAMS ----------
+  (function () {
+    const cands = schools.filter(isCand)
+      .sort((a, b) => (a.closure_rank || 99) - (b.closure_rank || 99));
+    const withProgs = cands.filter(s => s.programs);
+    const summary = document.getElementById("programs-summary");
+    summary.innerHTML = `
+      <strong>${withProgs.length} of ${cands.length}</strong> closure candidates currently host
+      a specialized program. <strong>Lent</strong> hosts Spanish DLI (one of nine PPS Spanish DLI
+      elementaries) and <strong>Odyssey</strong> is a TAG / integrated-curriculum focus option.
+      The other 13 candidates are neighborhood schools without distinctive program offerings —
+      meaning closure would not directly cut off DLI or focus-option access.
+    `;
+    const t = document.getElementById("programs-table");
+    t.querySelector("thead").innerHTML = `
+      <tr>
+        <th>Rank</th>
+        <th>School</th>
+        <th>Programs</th>
+      </tr>
+    `;
+    const body = t.querySelector("tbody");
+    body.innerHTML = cands.map(s => `
+      <tr>
+        <td>${s.closure_rank ?? ""}</td>
+        <td>${s.school_name}</td>
+        <td>${s.programs ? `<span style="color:#f97e60;">${s.programs}</span>` : '<span style="color:#7d8590;">— neighborhood school</span>'}</td>
+      </tr>
+    `).join("");
   })();
 
   // ---------- LONG-TERM SUSTAINABILITY: 7yr ENROLLMENT TREND ----------

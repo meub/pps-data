@@ -130,6 +130,58 @@ SEISMIC_RETROFIT = {
     "Rose City Park": "planned_full",
 }
 
+# Specialized programs hosted at each PPS school. Two categories:
+#   1. Dual Language Immersion (DLI) — five languages, district-administered.
+#   2. Focus options — distinctive curricular models (Arts, Environmental,
+#      STEAM, accelerated/TAG, history-integrated, alternative).
+# Each value is a list of program tags. Sources:
+#   pps.net/departments/dual-language/current-dli-programs (DLI by language)
+#   pps.net/departments/enrollment-transfer/enroll/explore-your-options/k-5-explore-your-options
+# Captured 2026-04 — programs change between school years, re-verify annually.
+PROGRAMS = {
+    # Spanish DLI elementary
+    "Ainsworth Elementary School": ["Spanish DLI"],
+    "Atkinson Elementary School": ["Spanish DLI"],
+    "Beach Elementary School": ["Spanish DLI"],
+    "César Chávez K-8 School": ["Spanish DLI"],
+    "James John Elementary School": ["Spanish DLI"],
+    "Lent Elementary School": ["Spanish DLI"],
+    "Rigler Elementary School": ["Spanish DLI"],
+    "Scott Elementary School": ["Spanish DLI"],
+    "Sitton Elementary School": ["Spanish DLI"],
+    # Spanish DLI middle
+    "Beaumont Middle School": ["Spanish DLI"],
+    "George Middle School": ["Spanish DLI"],
+    "Kellogg Middle School": ["Spanish DLI"],
+    "Ockley Green Middle School": ["Spanish DLI"],
+    "West Sylvan Middle School": ["Spanish DLI"],
+    # Chinese DLI
+    "Clark Elementary School": ["Chinese DLI"],
+    "Dr. Martin Luther King Jr. School": ["Chinese DLI"],
+    "Woodstock Elementary School": ["Chinese DLI"],
+    "Harrison Park School": ["Chinese DLI"],
+    "Harriet Tubman Middle School": ["Chinese DLI"],
+    # Japanese DLI
+    "Richmond Elementary School": ["Japanese DLI"],
+    "Mt Tabor Middle School": ["Japanese DLI"],
+    # Russian DLI
+    "Kelly Elementary School": ["Russian DLI"],
+    "Lane Middle School": ["Russian DLI"],
+    # Vietnamese DLI
+    "Rose City Park": ["Vietnamese DLI"],
+    # Roseway Heights = Spanish + Vietnamese DLI middle feeder
+    "Roseway Heights School": ["Spanish DLI", "Vietnamese DLI"],
+    # Focus options
+    "Buckman Elementary School": ["Arts focus"],
+    "Bridger Creative Science School": ["Creative Science focus"],
+    "Sunnyside Environmental School": ["Environmental focus"],
+    "Winterhaven School": ["STEAM focus"],
+    "Odyssey Program (K-8)": ["TAG / integrated focus"],
+    "ACCESS Academy": ["TAG / accelerated focus"],
+    "Metropolitan Learning Center": ["Alternative K-12 focus"],
+}
+
+
 # Title I schoolwide schools, 2025-26 (from pps.net/departments/funded-programs/title-ia).
 # All PPS Title I designations are schoolwide model. Charter Title I schools
 # (Arthur Academy, Kairos) are excluded from our master (not PPS-operated).
@@ -293,6 +345,10 @@ SUPPLEMENTAL_SCHOOLS = [
         "latitude": 45.4783395,
         "longitude": -122.6753753,
         "is_closure_candidate": False,
+        "programs": "TAG / accelerated focus",
+        "has_dli": False,
+        "has_focus_option": True,
+        "dli_languages": None,
     },
 ]
 
@@ -350,6 +406,13 @@ def main():
     pps["is_urm_building"] = pps["School Name"].isin(URM_BUILDINGS)
     pps["urm_retrofit_cost_usd"] = pps["School Name"].map(URM_BUILDINGS)
     pps["seismic_retrofit_status"] = pps["School Name"].map(SEISMIC_RETROFIT)
+    pps["programs"] = pps["School Name"].map(lambda n: "; ".join(PROGRAMS.get(n, [])) or None)
+    pps["has_dli"] = pps["School Name"].map(
+        lambda n: any("DLI" in p for p in PROGRAMS.get(n, [])))
+    pps["has_focus_option"] = pps["School Name"].map(
+        lambda n: any("focus" in p for p in PROGRAMS.get(n, [])))
+    pps["dli_languages"] = pps["School Name"].map(
+        lambda n: "; ".join(p.replace(" DLI", "") for p in PROGRAMS.get(n, []) if "DLI" in p) or None)
     pps["enrollment_pct_change"] = (
         (pps["2025-26 Total Enrollment"] - pps["2024-25 Total Enrollment"])
         / pps["2024-25 Total Enrollment"]
@@ -372,6 +435,10 @@ def main():
         "urm_retrofit_cost_usd": None,
         "seismic_retrofit_status": None,
         "enrollment_pct_change": None,
+        "programs": "; ".join(PROGRAMS.get("Odyssey Program (K-8)", [])) or None,
+        "has_dli": False,
+        "has_focus_option": True,
+        "dli_languages": None,
     }
     pps = pd.concat([pps, pd.DataFrame([odyssey])], ignore_index=True)
 
@@ -519,6 +586,7 @@ def main():
         "street_address", "city", "zip_code", "latitude", "longitude",
         "is_closure_candidate", "closure_rank", "is_title_i",
         "is_urm_building", "urm_retrofit_cost_usd", "seismic_retrofit_status",
+        "programs", "has_dli", "dli_languages", "has_focus_option",
         "year_built", "square_feet", "construction_type_2009", "students_per_sqft",
         "enrollment_2024_25", "enrollment_2025_26", "enrollment_pct_change",
         "enrollment_2018", "enrollment_2019", "enrollment_2020",
