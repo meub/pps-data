@@ -261,6 +261,16 @@
     <div class="panel chart-card"><div id="plot-transport" style="height: 460px;"></div></div>
   </section>
 
+  <section>
+    <h2>Long-term sustainability — 7-year enrollment change (2018 → 2025)</h2>
+    <p class="note">
+      Total in-scope enrollment fell 20% over this window (median school -19%). Bars below
+      that baseline are losing students faster than the district overall; closure candidates
+      are highlighted. Source: NCES CCD fall 2018 + ODE fall 2025.
+    </p>
+    <div class="panel chart-card"><div id="plot-trend7yr" style="height: 1400px;"></div></div>
+  </section>
+
   <section style="display:none;">
     <h2>Outperformers and underperformers</h2>
     <p class="note">
@@ -801,6 +811,57 @@
     renderTransport();
     let t;
     window.addEventListener("resize", () => { clearTimeout(t); t = setTimeout(renderTransport, 150); });
+  })();
+
+  // ---------- LONG-TERM SUSTAINABILITY: 7yr ENROLLMENT TREND ----------
+  (function () {
+    const rows = schools.filter(s => s.enrollment_pct_change_7yr != null);
+    rows.sort((a, b) => a.enrollment_pct_change_7yr - b.enrollment_pct_change_7yr);  // most negative first
+    const districtPct = -0.204;  // see export_web.py: in-scope total -20.4%
+    function renderTrend() {
+      const mobile = window.innerWidth < 700;
+      const truncate = (name, n) => name.length > n ? name.slice(0, n - 1) + "…" : name;
+      const labels = rows.map(s => {
+        const base = mobile ? truncate(s.school_name, 18) : s.school_name;
+        return base + (isCand(s) ? `  (#${s.closure_rank})` : "");
+      });
+      const colors = rows.map(s => isCand(s) ? COLOR_CAND : COLOR_OTHER);
+      const trace = {
+        type: "bar", orientation: "h",
+        x: rows.map(s => s.enrollment_pct_change_7yr * 100),
+        y: labels,
+        marker: { color: colors, line: { width: 0.5, color: "#0e1115" } },
+        text: rows.map(s => (s.enrollment_pct_change_7yr * 100).toFixed(1) + "%"),
+        textposition: "outside",
+        textfont: { size: mobile ? 9 : 10, color: "#e6edf3" },
+        cliponaxis: false,
+        customdata: rows.map(s => [s.enrollment_2018, s.enrollment_2025_26]),
+        hovertemplate: "<b>%{y}</b><br>2018: %{customdata[0]}<br>2025: %{customdata[1]}<br>Change: %{x:.1f}%<extra></extra>",
+      };
+      Plotly.react("plot-trend7yr", [trace], Object.assign(baseLayout(), {
+        margin: mobile
+          ? { l: 140, r: 60, t: 20, b: 50 }
+          : { l: 240, r: 80, t: 20, b: 50 },
+        xaxis: { title: "Enrollment change 2018 → 2025 (%)",
+          gridcolor: "#30363d", zerolinecolor: "#7d8590" },
+        yaxis: { automargin: false, tickfont: { size: mobile ? 9 : 10 } },
+        showlegend: false,
+        shapes: [{
+          type: "line", x0: districtPct * 100, x1: districtPct * 100,
+          y0: -0.5, y1: rows.length - 0.5,
+          line: { color: "#7d8590", width: 1, dash: "dash" },
+        }],
+        annotations: [{
+          x: districtPct * 100, y: rows.length - 0.5,
+          text: `in-scope total ${(districtPct * 100).toFixed(1)}%`,
+          showarrow: false, yanchor: "bottom", xanchor: "left",
+          font: { size: 10, color: "#7d8590" },
+        }],
+      }), { displayModeBar: false, responsive: true });
+    }
+    renderTrend();
+    let t2;
+    window.addEventListener("resize", () => { clearTimeout(t2); t2 = setTimeout(renderTrend, 150); });
   })();
 
   // ---------- OUTPERFORMER / UNDERPERFORMER BARS ----------

@@ -31,7 +31,7 @@ python3 -m http.server -d web 8000
 | --- | --- | --- |
 | [Oregon ODE Fall Membership](https://www.ode.state.or.us/) | Enrollment by school (2024-25, 2025-26), race/ethnicity | 2025-26 |
 | [Oregon OSAS (PAGR)](https://www.ode.state.or.us/data/reportcard/reports.aspx) | ELA & math state-test proficiency | 2023-24, 2024-25 |
-| [NCES Common Core of Data](https://nces.ed.gov/ccd/) | Free/reduced lunch counts, geocoded addresses | 2022-23 |
+| [NCES Common Core of Data](https://nces.ed.gov/ccd/) | Free/reduced lunch counts, geocoded addresses, 2018-2023 enrollment history | 2018-2023 |
 | [US Dept of Ed CRDC](https://ocrdata.ed.gov/) | English learners, IDEA/SPED, chronic absenteeism (2020); counselor / social worker / psychologist / nurse FTE, OSS suspension instances, post-COVID chronic absenteeism (2021) | 2020, 2021 (both COVID-era) |
 | [KPFF Seismic Report 2009](https://bond.pps.net/) + [Holmes Engineering 2024](https://www.wweek.com/news/schools/2025/05/10/) | Year built, square footage, construction type, URM retrofit estimates | 2009 / 2024 |
 | [PPS Bond page](https://bond.pps.net/seismic-improvements) | Seismic retrofit status | 2025 |
@@ -53,6 +53,7 @@ scripts/
   fetch_affordable_pipeline.py  → data/raw/portland_affordable_pipeline.csv
   fetch_boundaries.py           → data/raw/pps_boundaries_{level}.geojson
   fetch_crdc_2021.py            → data/raw/pps_crdc_2021_agg.json
+  fetch_enrollment_history.py   → data/raw/pps_ccd_enrollment_history.json
   boundary_join.py              shared BoundaryIndex (point-in-polygon w/ haversine fallback)
   build_master.py               assemble data/pps_schools.csv
   merge_housing.py              + affordable_units / pipeline_* columns
@@ -77,6 +78,7 @@ python scripts/fetch_bds_permits.py
 python scripts/fetch_affordable_pipeline.py
 python scripts/fetch_boundaries.py
 python scripts/fetch_crdc_2021.py
+python scripts/fetch_enrollment_history.py
 
 # 2. Build master CSV:
 python scripts/build_master.py

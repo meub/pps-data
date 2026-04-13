@@ -66,6 +66,8 @@ META = {
     "n_permits_within_1mi_since_2022": {"label": "Permits (2022+)", "desc": "Number of residential building permits issued since 2022-01-01 inside the school's PPS attendance area. Permits = approved to build; not all reach completion.", "source": "Portland BDS via PortlandMaps", "fmt": "int"},
     "nearest_alt_school_mi": {"label": "Miles to nearest alt.", "desc": "Great-circle distance from this closure candidate to the nearest non-candidate school of the same grade band (elementary, k8, middle, or alternative). A rough proxy for transportation impact: families would have to travel at least this far if their school closes (district reassignment may differ).", "source": "Derived from NCES CCD coordinates", "fmt": "miles"},
     "nearest_alt_school_name": {"label": "Nearest alt. school", "desc": "Name of the closest non-candidate school of the same grade band.", "source": "Derived from NCES CCD coordinates", "fmt": "text"},
+    "enrollment_2018": {"label": "Enrollment 2018", "desc": "Fall 2018 enrollment (NCES CCD directory).", "source": "NCES CCD 2018", "fmt": "int"},
+    "enrollment_pct_change_7yr": {"label": "Enrollment Δ% 2018→2025", "desc": "7-year enrollment change from fall 2018 (NCES CCD) to fall 2025 (ODE). The in-scope set lost 20% over this window (median school -19%); schools well below that baseline are losing students faster than PPS as a whole.", "source": "Derived: NCES CCD 2018 + ODE 2025-26", "fmt": "pct_0_1"},
     "street_address": {"label": "Address", "desc": "Street address of the building.", "source": "NCES CCD + manual", "fmt": "text"},
     "latitude": {"label": "Latitude", "desc": "Geocoded latitude.", "source": "NCES CCD", "fmt": "text"},
     "longitude": {"label": "Longitude", "desc": "Geocoded longitude.", "source": "NCES CCD", "fmt": "text"},
@@ -77,6 +79,7 @@ TABLE_COLS = [
     "enrollment_2025_26", "enrollment_pct_change", "students_per_sqft",
     "year_built", "square_feet", "pct_ela_prof_2425", "pct_math_prof_2425",
     "is_urm_building", "seismic_retrofit_status", "is_title_i", "pct_bipoc",
+    "enrollment_pct_change_7yr",
     "pct_chronic_absent_2021", "support_staff_per_100",
     "pipeline_family_units_within_1mi", "affordable_units_within_1mi",
     "permits_units_within_1mi_since_2022",
@@ -143,6 +146,13 @@ SCATTERS = [
         "y": "avg_prof_2425",
         "subtitle": "Strong inverse relationship: schools where 1 in 3+ students were chronically absent post-COVID rarely exceed 30% proficiency now. Some candidates carry markedly higher chronic-absence rates than the district median.",
         "trendline": True,
+    },
+    {
+        "id": "enrollment_2018_vs_change",
+        "title": "7-year enrollment change vs. current size (2018 → 2025)",
+        "x": "enrollment_2025_26",
+        "y": "enrollment_pct_change_7yr",
+        "subtitle": "Long-term sustainability check. The district as a whole is shrinking, but every closure candidate sits below the district trend — and several have lost a third or more of their students in seven years.",
     },
     {
         "id": "service_load_vs_enrollment",
@@ -227,6 +237,15 @@ def derive_columns(df):
     df["pca_y"] = pd.NA
     df.loc[cl_mask, "pca_x"] = coords[:, 0].round(3)
     df.loc[cl_mask, "pca_y"] = coords[:, 1].round(3)
+
+    # 7-year enrollment trend: 2018 (CCD) -> 2025-26 (ODE).
+    base = df["enrollment_2018"]
+    cur = df["enrollment_2025_26"]
+    valid = base.notna() & cur.notna() & (base > 0)
+    df["enrollment_pct_change_7yr"] = pd.NA
+    df.loc[valid, "enrollment_pct_change_7yr"] = (
+        (cur[valid] - base[valid]) / base[valid]
+    ).round(4)
 
     # Transportation impact: haversine miles from each closure candidate to the
     # nearest non-candidate school of the same grade band.

@@ -11,6 +11,7 @@ CCD = ROOT / "data/raw/pps_ccd_directory_2022.json"
 FACILITY = ROOT / "data/pps_facility_2009.csv"
 CRDC = ROOT / "data/raw/pps_crdc_agg.json"
 CRDC_2021 = ROOT / "data/raw/pps_crdc_2021_agg.json"
+CCD_HISTORY = ROOT / "data/raw/pps_ccd_enrollment_history.json"
 OSAS_ELA_25 = ROOT / "data/raw/pagr_schools_ela_all_2425.xlsx"
 OSAS_MATH_25 = ROOT / "data/raw/pagr_schools_math_all_2425.xlsx"
 OSAS_ELA_24 = ROOT / "data/raw/pagr_schools_ela_all_2324.xlsx"
@@ -446,6 +447,15 @@ def main():
     pps["chronic_absent_2021"] = pps["nces_school_id"].map(c21["chronic_absent"])
     pps["enrollment_crdc_2021"] = pps["nces_school_id"].map(c21["enrollment"])
 
+    # NCES CCD historical enrollment 2018-2023 (per-school totals from the
+    # directory endpoint). Combined with ODE 2024-25/2025-26 this gives an
+    # 8-year window for the long-term-sustainability analysis.
+    with open(CCD_HISTORY) as f:
+        hist = json.load(f)
+    for year_str, year_map in hist.items():
+        col = f"enrollment_{year_str}"
+        pps[col] = pps["nces_school_id"].map(year_map)
+
     # Derived FRL rates. CCD 2022 enrollment is closer in time to FRL counts
     # than 2025-26 enrollment, so use it when available.
     base_enroll = pps["ccd_enrollment_2022"].fillna(pps["2025-26 Total Enrollment"])
@@ -511,6 +521,8 @@ def main():
         "is_urm_building", "urm_retrofit_cost_usd", "seismic_retrofit_status",
         "year_built", "square_feet", "construction_type_2009", "students_per_sqft",
         "enrollment_2024_25", "enrollment_2025_26", "enrollment_pct_change",
+        "enrollment_2018", "enrollment_2019", "enrollment_2020",
+        "enrollment_2021", "enrollment_2022", "enrollment_2023",
         "ccd_enrollment_2022",
         "pct_ela_prof_2425", "pct_math_prof_2425",
         "pct_ela_prof_2324", "pct_math_prof_2324",
