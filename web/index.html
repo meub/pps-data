@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>PPS Closure Candidates — Data Explorer</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
   integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
@@ -113,8 +116,8 @@
   .methodology dl { max-width: 820px; margin: 0; }
   .methodology dt { color: var(--fg); font-weight: 500; margin-top: 10px; }
   .methodology dd { margin: 2px 0 0; color: var(--muted); }
-  .methodology a, footer a { color: var(--accent); text-decoration: underline; }
-  .methodology a:hover, footer a:hover { color: var(--fg); }
+  .methodology a { color: var(--accent); text-decoration: underline; }
+  .methodology a:hover { color: var(--fg); }
   .method-layout { display: flex; gap: 40px; align-items: flex-start; }
   .method-body { flex: 1 1 auto; min-width: 0; }
   .method-sidebar { flex: 0 0 300px; position: sticky; top: 16px; }
@@ -127,13 +130,23 @@
   .vintage-card td.src { color: var(--fg); }
   .vintage-card td.year { color: var(--muted); text-align: right;
     font-variant-numeric: tabular-nums; white-space: nowrap; padding-left: 12px; }
-  .vintage-card .stale { color: #e3b341; }
+  .vintage-card td.year.stale, .vintage-card .stale { color: #e3b341; }
   .vintage-card .legend { margin-top: 14px; padding-top: 12px;
     border-top: 1px dashed var(--border); color: var(--muted); font-size: 12px; }
   @media (max-width: 1100px) { .method-layout { flex-direction: column; }
     .method-sidebar { flex-basis: auto; width: 100%; position: static; } }
-  footer { padding: 24px 32px 40px; border-top: 1px solid var(--border);
-    color: var(--muted); font-size: 12.5px; text-align: center; }
+  .contribute { padding: 28px 32px 40px; border-top: 1px solid var(--border); }
+  .contribute-grid { max-width: 820px; margin: 0 auto; display: grid;
+    grid-template-columns: 1fr 1fr; gap: 16px; }
+  .contribute-card { background: var(--panel); border: 1px solid var(--border);
+    border-radius: 8px; padding: 18px 20px; }
+  .contribute-card h3 { font-size: 12px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.6px; color: var(--muted); margin: 0 0 8px; }
+  .contribute-card p { margin: 0 0 10px; color: var(--fg); font-size: 14px; line-height: 1.5; }
+  .contribute-card a { color: var(--accent); text-decoration: underline;
+    font-size: 14px; word-break: break-all; }
+  .contribute-card a:hover { color: var(--fg); }
+  @media (max-width: 720px) { .contribute-grid { grid-template-columns: 1fr; } }
 
   @media (max-width: 1000px) { .charts { grid-template-columns: 1fr; } }
 </style>
@@ -318,9 +331,9 @@
       Permits represent approvals, not completions — a permit may be issued but not built.
     </p>
     </div>
-    <aside class="method-sidebar" aria-label="Data vintage">
+    <aside class="method-sidebar" aria-label="Age of source data">
       <div class="vintage-card">
-        <h3>Data vintage</h3>
+        <h3>Age of source data</h3>
         <table>
           <tbody>
             <tr><td class="src">Enrollment (ODE)</td><td class="year">Fall 2025-26</td></tr>
@@ -332,7 +345,7 @@
             <tr><td class="src">Building square footage (KPFF)</td><td class="year stale">2009</td></tr>
             <tr><td class="src">Residential permits (BDS)</td><td class="year">2022 – 2026-04</td></tr>
             <tr><td class="src">Affordable housing (OAHI)</td><td class="year">2025</td></tr>
-            <tr><td class="src">Metro pop. forecast</td><td class="year">2021</td></tr>
+            <tr><td class="src">Metro pop. forecast</td><td class="year stale">2021</td></tr>
             <tr><td class="src">WW candidate ranking</td><td class="year">2026-03-18</td></tr>
             <tr><td class="src">Attendance boundaries</td><td class="year">~2023-24</td></tr>
           </tbody>
@@ -344,9 +357,20 @@
   </section>
 </main>
 
-<footer>
-  Made by <a href="https://alexmeub.com" target="_blank" rel="noopener">Alex Meub</a> with help from Claude Code.
-</footer>
+<section class="contribute">
+  <div class="contribute-grid">
+    <div class="contribute-card">
+      <h3>Source code</h3>
+      <p>This dashboard is open source. Review the data pipeline, open an issue, or submit a pull request on GitHub.</p>
+      <a href="https://github.com/meub/pps-closures" target="_blank" rel="noopener">github.com/meub/pps-closures</a>
+    </div>
+    <div class="contribute-card">
+      <h3>Errors, feedback, feature requests</h3>
+      <p>Spot something wrong? Have an idea for another view or data source? Get in touch.</p>
+      <a href="https://alexmeub.com/contact" target="_blank" rel="noopener">alexmeub.com/contact</a>
+    </div>
+  </div>
+</section>
 
 <div class="tt" id="tt"></div>
 
