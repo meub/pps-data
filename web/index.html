@@ -321,8 +321,8 @@
         <dd>2025-26 and 2024-25 school-level enrollment, race/ethnicity shares, grade-band.</dd>
       <dt><a href="https://educationdata.urban.org/documentation/" target="_blank" rel="noopener">NCES CCD (via Urban Institute Education Data API)</a></dt>
         <dd>School addresses, lat/lon, 2022 enrollment baseline, free/reduced meal counts, direct-certification counts.</dd>
-      <dt><a href="https://civilrightsdata.ed.gov/" target="_blank" rel="noopener">US Dept of Education Civil Rights Data Collection (CRDC, 2020)</a></dt>
-        <dd>Chronic absenteeism, English Learner (LEP), and IDEA/SPED counts. Note: 2020 COVID year may suppress some metrics.</dd>
+      <dt><a href="https://civilrightsdata.ed.gov/" target="_blank" rel="noopener">US Dept of Education Civil Rights Data Collection (CRDC, 2020 &amp; 2021)</a></dt>
+        <dd>Chronic absenteeism, English Learner (LEP), and IDEA/SPED counts (2020 file); plus 2021 (the 2020-21 school year): counselor, social-worker, psychologist, and nurse FTE; out-of-school suspension instances; chronic absenteeism with matching CRDC enrollment denominators. The 2025 collection (2023-24 SY) is not yet published.</dd>
     </dl>
 
     <h3>Academic performance</h3>
@@ -376,6 +376,20 @@
 
     <h3>Derived metrics</h3>
     <dl>
+      <dt>Student-experience metrics (CRDC 2021)</dt>
+        <dd>
+          PPS doesn't publish a per-school "student experience" composite, and the
+          obvious post-COVID source (Oregon's At-A-Glance "regular attenders %" and
+          teacher-experience tables) isn't available as a clean bulk download. As a
+          stand-in, three 2020-21 CRDC-derived rates are surfaced:
+          <em>support staff per 100 students</em>
+          (counselor + social worker + psychologist FTE ÷ 2020-21 enrollment × 100),
+          <em>chronic absenteeism rate</em> (students chronically absent ÷ 2020-21
+          enrollment), and <em>OSS per 100</em> (out-of-school suspension instances
+          ÷ 2020-21 enrollment × 100; counts events, not unique students).
+          Caveat: 2020-21 was the second pandemic year — chronic-absence rates were
+          unusually high district-wide and should be read as a floor on current rates.
+        </dd>
       <dt>Service load (weighted)</dt>
         <dd>
           A cost-weighted composite of three federally-tracked high-need shares:
@@ -429,6 +443,7 @@
             <tr><td class="src">Race/ethnicity (ODE)</td><td class="year">2025-26</td></tr>
             <tr><td class="src">Free/reduced meals (NCES)</td><td class="year stale">2022</td></tr>
             <tr><td class="src">LEP &amp; SPED (CRDC)</td><td class="year stale">2020</td></tr>
+            <tr><td class="src">Counselors / SW / suspensions (CRDC)</td><td class="year stale">2020-21</td></tr>
             <tr><td class="src">URM assessment (Holmes)</td><td class="year">2024</td></tr>
             <tr><td class="src">Building square footage (KPFF)</td><td class="year stale">2009</td></tr>
             <tr><td class="src">Residential permits (BDS)</td><td class="year">2022 – 2026-04</td></tr>

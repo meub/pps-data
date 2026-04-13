@@ -10,6 +10,7 @@ ODE = ROOT / "data/raw/fall_membership_2025_26.xlsx"
 CCD = ROOT / "data/raw/pps_ccd_directory_2022.json"
 FACILITY = ROOT / "data/pps_facility_2009.csv"
 CRDC = ROOT / "data/raw/pps_crdc_agg.json"
+CRDC_2021 = ROOT / "data/raw/pps_crdc_2021_agg.json"
 OSAS_ELA_25 = ROOT / "data/raw/pagr_schools_ela_all_2425.xlsx"
 OSAS_MATH_25 = ROOT / "data/raw/pagr_schools_math_all_2425.xlsx"
 OSAS_ELA_24 = ROOT / "data/raw/pagr_schools_ela_all_2324.xlsx"
@@ -428,6 +429,23 @@ def main():
     pps["pct_lep"] = (pps["crdc_lep_2020"] / pps["2025-26 Total Enrollment"]).round(4)
     pps["pct_idea"] = (pps["crdc_idea_2020"] / pps["2025-26 Total Enrollment"]).round(4)
 
+    # CRDC 2021 (2020-21 SY): wraparound staff FTE + suspension instances +
+    # post-COVID chronic absenteeism. Same NCES key as the 2020 file.
+    with open(CRDC_2021) as f:
+        c21 = json.load(f)
+    staff = c21["teachers_staff"]
+    pps["counselors_fte_2021"] = pps["nces_school_id"].map(
+        lambda n: (staff.get(str(n)) or {}).get("counselors_fte"))
+    pps["social_workers_fte_2021"] = pps["nces_school_id"].map(
+        lambda n: (staff.get(str(n)) or {}).get("social_workers_fte"))
+    pps["psychologists_fte_2021"] = pps["nces_school_id"].map(
+        lambda n: (staff.get(str(n)) or {}).get("psychologists_fte"))
+    pps["nurses_fte_2021"] = pps["nces_school_id"].map(
+        lambda n: (staff.get(str(n)) or {}).get("nurses_fte"))
+    pps["suspensions_2021"] = pps["nces_school_id"].map(c21["suspensions_instances"])
+    pps["chronic_absent_2021"] = pps["nces_school_id"].map(c21["chronic_absent"])
+    pps["enrollment_crdc_2021"] = pps["nces_school_id"].map(c21["enrollment"])
+
     # Derived FRL rates. CCD 2022 enrollment is closer in time to FRL counts
     # than 2025-26 enrollment, so use it when available.
     base_enroll = pps["ccd_enrollment_2022"].fillna(pps["2025-26 Total Enrollment"])
@@ -499,6 +517,9 @@ def main():
         "n_ela_participants_2425", "n_math_participants_2425",
         "crdc_lep_2020", "crdc_idea_2020", "crdc_chronic_absent_2020",
         "pct_lep", "pct_idea",
+        "counselors_fte_2021", "social_workers_fte_2021",
+        "psychologists_fte_2021", "nurses_fte_2021",
+        "suspensions_2021", "chronic_absent_2021", "enrollment_crdc_2021",
         "frl_free_lunch", "frl_reduced_lunch", "frl_direct_certification",
         "pct_free_lunch", "pct_frl", "pct_direct_cert",
         "pct_ai_an", "pct_asian", "pct_nhpi", "pct_black",

@@ -52,6 +52,11 @@ META = {
     "pct_bipoc": {"label": "% BIPOC", "desc": "Share of students identifying as any race/ethnicity other than White (1 − % White), 2025-26.", "source": "Derived from Oregon ODE", "fmt": "pct_0_1"},
     "avg_prof_2425": {"label": "Avg proficiency 24-25", "desc": "Average of % ELA + % Math meeting/exceeding (2024-25). Single number for cross-school performance comparison.", "source": "Derived from Oregon OSAS 2024-25", "fmt": "pct_0_100"},
     "service_load": {"label": "Service load (weighted)", "desc": "Cost-weighted composite: 1.0×% deep poverty + 2.5×% SPED + 1.5×% English learners. Weights approximate per-pupil cost ratios from weighted-student-funding formulas (Boston, Hawaii). A higher index means heavier per-student support load.", "source": "Derived: NCES CCD + CRDC", "fmt": "ratio"},
+    "support_staff_per_100": {"label": "Support staff per 100", "desc": "Counselor + social worker + psychologist FTE, per 100 students (denominator: 2020-21 CRDC enrollment). Reflects 2020-21 staffing — base allocations make smaller schools score higher per-pupil.", "source": "Derived: CRDC 2021 staff ÷ 2021 enrollment", "fmt": "ratio"},
+    "pct_chronic_absent_2021": {"label": "% chronic absent (21)", "desc": "Share of students who missed ≥10% of enrolled days in the 2020-21 school year. Post-COVID but still pandemic-era; treat as floor on current rates. Clamped at 100% — a few alternative schools' raw CRDC counts exceed point-in-time enrollment due to mid-year mobility.", "source": "Derived: CRDC 2021 ÷ CRDC 2021 enrollment", "fmt": "pct_0_1"},
+    "suspensions_per_100_2021": {"label": "OSS per 100", "desc": "Out-of-school suspension instances per 100 students (2020-21). Counts events not students; one student can be suspended multiple times.", "source": "Derived: CRDC 2021 ÷ CRDC 2021 enrollment", "fmt": "ratio"},
+    "counselors_fte_2021": {"label": "Counselor FTE", "desc": "Full-time-equivalent school counselors as reported to CRDC for 2020-21.", "source": "CRDC 2021", "fmt": "ratio"},
+    "social_workers_fte_2021": {"label": "Social worker FTE", "desc": "Full-time-equivalent school social workers as reported to CRDC for 2020-21.", "source": "CRDC 2021", "fmt": "ratio"},
     "prof_residual": {"label": "Proficiency residual", "desc": "Each school's avg proficiency minus what a linear fit on % BIPOC would predict. Positive = outperforms demographics; negative = underperforms.", "source": "Derived: OSAS 2024-25 + ODE", "fmt": "ratio"},
     "affordable_units_within_1mi": {"label": "Afford. units in catchment", "desc": "Total existing affordable housing units inside the school's PPS attendance area (or a 1-mile radius for schools without a published catchment).", "source": "OAHI + Metro RLIS", "fmt": "int"},
     "pipeline_affordable_units_within_1mi": {"label": "Pipeline afford. units", "desc": "Affordable units in projects currently in development inside the school's PPS attendance area (2023–2027).", "source": "OAHI", "fmt": "int"},
@@ -72,6 +77,7 @@ TABLE_COLS = [
     "enrollment_2025_26", "enrollment_pct_change", "students_per_sqft",
     "year_built", "square_feet", "pct_ela_prof_2425", "pct_math_prof_2425",
     "is_urm_building", "seismic_retrofit_status", "is_title_i", "pct_bipoc",
+    "pct_chronic_absent_2021", "support_staff_per_100",
     "pipeline_family_units_within_1mi", "affordable_units_within_1mi",
     "permits_units_within_1mi_since_2022",
 ]
@@ -131,6 +137,14 @@ SCATTERS = [
         "trendline": True,
     },
     {
+        "id": "chronic_absent_vs_prof",
+        "title": "Chronic absenteeism vs. avg proficiency (2020-21)",
+        "x": "pct_chronic_absent_2021",
+        "y": "avg_prof_2425",
+        "subtitle": "Strong inverse relationship: schools where 1 in 3+ students were chronically absent post-COVID rarely exceed 30% proficiency now. Some candidates carry markedly higher chronic-absence rates than the district median.",
+        "trendline": True,
+    },
+    {
         "id": "service_load_vs_enrollment",
         "title": "Weighted service load vs. enrollment",
         "x": "service_load",
@@ -165,6 +179,26 @@ def derive_columns(df):
     # weighted-student-funding (WSF) formulas: 1.0× base for deep poverty, ~2.5× for
     # SPED (IDEA average across tiers, Hawaii/Boston), ~1.5× for English Learner
     # (Boston/Hawaii ELL weight). Only valid when all three components are present.
+    # Student-experience metrics derived from CRDC 2021 (2020-21 SY).
+    enr21 = df["enrollment_crdc_2021"]
+    valid_enr = enr21.notna() & (enr21 > 0)
+    df["pct_chronic_absent_2021"] = pd.NA
+    # Clamp at 100%: alternative schools have mid-year mobility so cumulative
+    # CRDC counts can exceed point-in-time enrollment.
+    df.loc[valid_enr, "pct_chronic_absent_2021"] = (
+        (df.loc[valid_enr, "chronic_absent_2021"] / enr21[valid_enr]).clip(upper=1.0)
+    ).round(4)
+    df["suspensions_per_100_2021"] = pd.NA
+    df.loc[valid_enr, "suspensions_per_100_2021"] = (
+        df.loc[valid_enr, "suspensions_2021"] / enr21[valid_enr] * 100
+    ).round(2)
+    support_cols = ["counselors_fte_2021", "social_workers_fte_2021", "psychologists_fte_2021"]
+    support_total = df[support_cols].sum(axis=1, min_count=1)
+    df["support_staff_per_100"] = pd.NA
+    df.loc[valid_enr, "support_staff_per_100"] = (
+        support_total[valid_enr] / enr21[valid_enr] * 100
+    ).round(3)
+
     sl_mask = df[["pct_direct_cert", "pct_idea", "pct_lep"]].notna().all(axis=1)
     df["service_load"] = pd.NA
     df.loc[sl_mask, "service_load"] = (
