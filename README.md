@@ -1,5 +1,7 @@
 # PPS Closures
 
+**Live site: [ppsclosures.info](https://ppsclosures.info)**
+
 A data-driven explorer for the 74 Portland Public Schools (PPS) elementary, K-8, middle, and alternative schools that the district plans to narrow to a 5–10 school closure shortlist in November 2026.
 
 The dashboard gathers enrollment, building, demographic, academic, and neighborhood-housing data for every in-scope school, with an emphasis on the 15 lowest-enrollment schools that [*Willamette Week* listed](https://www.wweek.com/news/schools/2026/03/18/heres-what-pps-will-consider-as-it-selects-schools-to-close/) as potential candidates. PPS has not released its own shortlist.
