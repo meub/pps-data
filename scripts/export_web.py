@@ -79,7 +79,7 @@ META = {
 
 # Columns to surface in the default table (order matters).
 TABLE_COLS = [
-    "school_name", "level", "closure_rank",
+    "school_name", "level",
     "enrollment_2025_26", "enrollment_pct_change", "students_per_sqft",
     "year_built", "square_feet", "pct_ela_prof_2425", "pct_math_prof_2425",
     "is_urm_building", "seismic_retrofit_status", "is_title_i", "pct_bipoc",
@@ -152,18 +152,20 @@ SCATTERS = [
         "trendline": True,
     },
     {
+        "id": "support_staff_vs_direct_cert",
+        "title": "Student-support staff vs. deep poverty",
+        "x": "pct_direct_cert",
+        "y": "support_staff_per_100",
+        "subtitle": "Counselor + social worker + psychologist FTE per 100 students (CRDC 2020-21). Base allocations mean small schools score higher per-pupil by default — read with enrollment in mind. A high-poverty school well below the cloud has less per-pupil support than its peers. Alliance High School excluded as a staffing outlier (its alternative-program model carries a far higher per-pupil support ratio than the rest of the in-scope set).",
+        "trendline": True,
+        "exclude": ["Alliance High School"],
+    },
+    {
         "id": "enrollment_2018_vs_change",
         "title": "7-year enrollment change vs. current size (2018 → 2025)",
         "x": "enrollment_2025_26",
         "y": "enrollment_pct_change_7yr",
         "subtitle": "Long-term sustainability check. The in-scope set as a whole shrank ~20% over seven years; schools well below that line are losing students faster than the district overall.",
-    },
-    {
-        "id": "service_load_vs_enrollment",
-        "title": "Weighted service load vs. enrollment",
-        "x": "service_load",
-        "y": "enrollment_2025_26",
-        "subtitle": "Cost-weighted index: 1.0×% deep poverty + 2.5×% SPED + 1.5×% English learners (weights from WSF formulas). Top-right schools absorb the most per-student support load.",
     },
 ]
 

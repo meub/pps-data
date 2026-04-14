@@ -8,6 +8,11 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap">
+
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
   integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -36,7 +41,7 @@
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; background: var(--bg); color: var(--fg);
-    font: var(--fs-body)/1.55 -apple-system, "SF Pro Text", Helvetica, Arial, sans-serif;
+    font: var(--fs-body)/1.55 "Nunito Sans", -apple-system, "SF Pro Text", Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased; }
   html { scroll-behavior: smooth; }
 
@@ -59,7 +64,7 @@
     color: var(--fg); border-radius: 6px; padding: 6px 10px; font: inherit; cursor: pointer;
     margin-left: auto; }
   .nav-toggle:hover { border-color: var(--accent); }
-  @media (max-width: 940px) {
+  @media (max-width: 1000px) {
     .topnav-inner { padding: 0 16px; }
     .nav-toggle { display: inline-flex; align-items: center; gap: 6px; }
     .topnav nav { display: none; position: absolute; top: var(--nav-h); right: 0; left: 0;
@@ -95,6 +100,13 @@
   .hero-timeline .date { display: block; color: var(--fg); font-weight: 500; }
   .hero-timeline .what { display: block; color: var(--muted); margin-top: 1px; }
   @media (max-width: 900px) { .hero { flex-direction: column; } .hero-timeline { flex-basis: auto; width: 100%; } }
+  .hero-disclaimer { margin: 0 0 16px; padding: 10px 14px; border-radius: 6px;
+    border: 1px solid rgba(227,179,65,0.35); background: rgba(227,179,65,0.08);
+    color: var(--fg); font-size: var(--fs-small); line-height: 1.5;
+    border-left: 3px solid #e3b341; }
+  .hero-disclaimer strong { color: #e3b341; }
+  .hero-disclaimer a { color: var(--accent); text-decoration: underline; }
+  .hero-disclaimer a:hover { color: var(--fg); }
   main { padding: 24px 32px 80px; max-width: var(--max-w); margin: 0 auto; }
   section { margin-bottom: 40px; scroll-margin-top: calc(var(--nav-h) + 12px); }
   section > h2 { margin: 0 0 12px; font-size: var(--fs-h2); font-weight: 600;
@@ -246,7 +258,7 @@
 
 <div class="topnav">
   <div class="topnav-inner">
-    <a class="brand" href="#top"><span class="dot"></span>PPS Closures</a>
+    <a class="brand" href="#top"><span class="dot"></span>PPS Closures Data Explorer</a>
     <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 4h12M2 8h12M2 12h12"/></svg>
       Menu
@@ -265,12 +277,17 @@
 </div>
 
 <header id="top">
-  <h1>Portland Public School Closures Data Explorer</h1>
+  <div class="hero-disclaimer" role="note">
+    <strong>Unofficial.</strong> This is an independent personal project and is
+    <em>not</em> affiliated with, endorsed by, or produced by Portland Public Schools.
+    All data is compiled from public sources (see
+    <a href="#section-methodology">Methodology</a>).
+  </div>
   <div class="hero">
     <div class="hero-text">
       <p>
-        On <a href="https://www.wweek.com/news/schools/2026/03/10/pps-plans-to-close-several-schools-by-fall-2027/" target="_blank" rel="noopener">March 10, 2026</a>,
-        Superintendent Kimberlee Armstrong announced that PPS may close some number of its 74
+        On March 10, 2026,
+        Superintendent Kimberlee Armstrong announced that Portland Public Schools (PPS) may close some number of its 74
         elementary, K-8, middle, and alternative schools by fall 2027. The driver is a decade of
         declining enrollment (projected to fall another 13% by 2034-35) and a structural budget gap.
       </p>
@@ -292,7 +309,7 @@
       <ol>
         <li class="past">
           <span class="date">Mar 10, 2026</span>
-          <span class="what">Armstrong announces 5–10 closures</span>
+          <span class="what">Armstrong announces possibility of closures</span>
         </li>
         <li class="next">
           <span class="date">Nov 2026</span>
@@ -450,7 +467,7 @@
     <dl>
       <dt><a href="https://www.pps.net/departments/facilities-asset-management/school-buildings-conditions-and-characteristics/seismic-assessments" target="_blank" rel="noopener">KPFF Seismic Report (2009)</a></dt>
         <dd>Year built, square footage, and construction type for every building in the district. Note: square footage predates recent bond expansions.</dd>
-      <dt><a href="https://www.wweek.com/news/schools/2025/05/10/here-are-the-19-pps-elementary-and-middle-schools-in-unreinforced-masonry-buildings/" target="_blank" rel="noopener">Holmes Engineering URM Assessment (2024, via WW)</a></dt>
+      <dt>Holmes Engineering URM Assessment (2024)</dt>
         <dd>Unreinforced masonry classification and retrofit cost estimates for 18 PPS buildings.</dd>
       <dt><a href="https://bond.pps.net/" target="_blank" rel="noopener">PPS Bond — Seismic &amp; modernization</a></dt>
         <dd>Retrofit and modernization status (full, targeted, planned under 2025 bond).</dd>
@@ -492,10 +509,12 @@
     </p>
 
     <h3>Lowest-enrollment 15</h3>
-    <dl>
-      <dt><a href="https://www.wweek.com/news/schools/2026/03/18/heres-what-pps-will-consider-as-it-selects-schools-to-close/" target="_blank" rel="noopener">Willamette Week (2026-03-18)</a></dt>
-        <dd>The 15 lowest-enrollment in-scope schools, sorted by raw enrollment. Often discussed as a closure shortlist, but PPS has not published its own list — that is expected Nov 2026 with a board vote in Dec 2026.</dd>
-    </dl>
+    <p>
+      A descriptive subset: the 15 in-scope schools with the lowest raw fall 2025-26
+      enrollment, surfaced in several views for context. This is not a PPS-published
+      shortlist — the district is expected to release its own list in Nov 2026 with a
+      board vote in Dec 2026.
+    </p>
 
     <h3>Derived metrics</h3>
     <dl>
@@ -512,39 +531,6 @@
           ÷ 2020-21 enrollment × 100; counts events, not unique students).
           Caveat: 2020-21 was the second pandemic year — chronic-absence rates were
           unusually high district-wide and should be read as a floor on current rates.
-        </dd>
-      <dt>Service load (weighted)</dt>
-        <dd>
-          A cost-weighted composite of three federally-tracked high-need shares:
-          <code>1.0 × pct_direct_cert + 2.5 × pct_idea + 1.5 × pct_lep</code>.
-          The components are
-          students directly certified for free meals via SNAP/TANF/foster (deep poverty,
-          NCES CCD 2022),
-          students on IEPs under IDEA (CRDC 2020),
-          and students classified as English Learners (CRDC 2020).
-          The weights approximate the per-pupil cost multipliers commonly used in
-          weighted-student-funding (WSF) formulas, anchored on the
-          <a href="https://hawaiipublicschools.org/about/budget/weighted-student-formula/" target="_blank" rel="noopener">Hawaiʻi DOE Weighted Student Formula</a>
-          (one of the few statewide WSF systems with published weights) and the
-          <a href="https://reason.org/commentary/hawaiis-successful-experience-with-weighted-student-formula-has-improved-funding-equity/" target="_blank" rel="noopener">Reason Foundation review</a>
-          of WSF implementations: roughly ~1.0× base allocation for low-income students
-          (Hawaii's economically-disadvantaged weight has historically added 30–38%),
-          ~2.5× for the average SPED student (Hawaii's SPED weights vary by service
-          intensity and run from ~1.5× to 6×+ for the most intensive tiers), and ~1.5× for
-          English Learners (heavier as proficiency drops). These are conventional magnitudes,
-          not PPS-specific policy weights — PPS does not publish a WSF.
-        </dd>
-        <dd>
-          <strong>This is a quick composite, not a recognized standard.</strong> Established
-          frameworks differ in two ways: (1) <em>unduplicated counts</em> (e.g., California's
-          LCFF) count each student once even if they fall in multiple categories — public PPS
-          data doesn't include the overlap matrix needed to do that here, so this index
-          double-counts students who are e.g. low-income SPED English Learners; (2) <em>true
-          WSF dollar formulas</em> apply district-specific weights and base amounts. The
-          weights used here are reasonable district averages, not PPS-specific. The resulting
-          index is best interpreted as a relative ranking, not an absolute funding figure.
-          A value of 1.5, for instance, doesn't mean "1.5× base cost per student" — it means
-          this school is roughly 1.5× more service-heavy than a school whose composite is 1.0.
         </dd>
     </dl>
 
@@ -572,7 +558,6 @@
             <tr><td class="src">Residential permits (BDS)</td><td class="year">2022 – 2026-04</td></tr>
             <tr><td class="src">Affordable housing (OAHI)</td><td class="year">2025</td></tr>
             <tr><td class="src">Metro pop. forecast</td><td class="year stale">2021</td></tr>
-            <tr><td class="src">WW low-enrollment ranking</td><td class="year">2026-03-18</td></tr>
             <tr><td class="src">Attendance boundaries</td><td class="year">~2023-24</td></tr>
           </tbody>
         </table>
@@ -587,7 +572,7 @@
   <div class="contribute-grid">
     <div class="contribute-card">
       <h3>Source code</h3>
-      <p>This dashboard is open source. Review the data pipeline, open an issue, or submit a pull request on GitHub.</p>
+      <p>This dashboard is open source. Review the data pipeline, open an issue, or submit a PR on GitHub.</p>
       <a href="https://github.com/meub/pps-closures" target="_blank" rel="noopener">github.com/meub/pps-closures</a>
     </div>
     <div class="contribute-card">
@@ -728,7 +713,10 @@
     `;
     chartsEl.appendChild(card);
 
-    const all = schools.filter(s => s[cfg.x] != null && s[cfg.y] != null);
+    const excludeSet = new Set(cfg.exclude || []);
+    const all = schools.filter(s =>
+      s[cfg.x] != null && s[cfg.y] != null && !excludeSet.has(s.school_name)
+    );
     const traces = [{
       x: all.map(s => s[cfg.x]),
       y: all.map(s => s[cfg.y]),
@@ -742,7 +730,7 @@
 
     const layout = {
       paper_bgcolor: "#161b22", plot_bgcolor: "#161b22",
-      font: { color: "#e6edf3", size: 11 },
+      font: { color: "#e6edf3", size: 11, family: '"Nunito Sans", -apple-system, Helvetica, Arial, sans-serif' },
       margin: { l: 55, r: 10, t: 10, b: 45 },
       xaxis: { title: meta[cfg.x].label, gridcolor: "#30363d", zerolinecolor: "#30363d" },
       yaxis: { title: meta[cfg.y].label, gridcolor: "#30363d", zerolinecolor: "#30363d" },
@@ -751,7 +739,8 @@
     if (cfg.trendline) {
       const pts = schools.filter(s =>
         s[cfg.x] != null && s[cfg.y] != null &&
-        !Number.isNaN(Number(s[cfg.x])) && !Number.isNaN(Number(s[cfg.y]))
+        !Number.isNaN(Number(s[cfg.x])) && !Number.isNaN(Number(s[cfg.y])) &&
+        !excludeSet.has(s.school_name)
       );
       const n = pts.length;
       if (n >= 2) {
@@ -810,7 +799,7 @@
       };
       Plotly.react("plot-ranking", [trace], {
         paper_bgcolor: "#161b22", plot_bgcolor: "#161b22",
-        font: { color: "#e6edf3", size: 11 },
+        font: { color: "#e6edf3", size: 11, family: '"Nunito Sans", -apple-system, Helvetica, Arial, sans-serif' },
         margin: mobile
           ? { l: 130, r: 50, t: 20, b: 40 }
           : { l: 280, r: 140, t: 20, b: 40 },
@@ -852,7 +841,7 @@
   const COLOR_OTHER = "#58a6ff";
   const baseLayout = () => ({
     paper_bgcolor: "#161b22", plot_bgcolor: "#161b22",
-    font: { color: "#e6edf3", size: 11 },
+    font: { color: "#e6edf3", size: 11, family: '"Nunito Sans", -apple-system, Helvetica, Arial, sans-serif' },
     xaxis: { gridcolor: "#30363d", zerolinecolor: "#30363d" },
     yaxis: { gridcolor: "#30363d", zerolinecolor: "#30363d" },
   });
@@ -1196,7 +1185,7 @@
   const filterUrmEl = document.getElementById("filter-urm");
   const countEl = document.getElementById("count");
 
-  let sortCol = "closure_rank";
+  let sortCol = "enrollment_2025_26";
   let sortDir = 1;  // 1 = asc, -1 = desc
   let currentRows = [];  // filtered + sorted rows, kept in sync by renderRows()
 

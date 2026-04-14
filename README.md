@@ -2,9 +2,9 @@
 
 **Live site: [ppsclosures.info](https://ppsclosures.info)**
 
-A data-driven explorer for the 74 Portland Public Schools (PPS) elementary, K-8, middle, and alternative schools that the district plans to narrow to a 5–10 school closure shortlist in November 2026.
+A data-driven explorer for the 74 Portland Public Schools (PPS) elementary, K-8, middle, and alternative schools that the district plans to narrow to a closure shortlist in November 2026.
 
-The dashboard gathers enrollment, building, demographic, academic, and neighborhood-housing data for every in-scope school. The 15 lowest-enrollment schools — [as listed by *Willamette Week*](https://www.wweek.com/news/schools/2026/03/18/heres-what-pps-will-consider-as-it-selects-schools-to-close/) — are highlighted in several charts as a descriptive subset, not a closure prediction. PPS has not released its own shortlist (expected Nov 2026).
+The dashboard gathers enrollment, building, demographic, academic, and neighborhood-housing data for every in-scope school.
 
 ## Live site
 
@@ -19,8 +19,9 @@ python3 -m http.server -d web 8000
 
 ## What's in the dashboard
 
-- **Map** of every in-scope school, with the 15 lowest-enrollment schools highlighted.
-- **Ranking charts** for the 15 lowest-enrollment schools (enrollment, crowding, URM seismic risk, pipeline family units, recent permits).
+- **Map** of every in-scope school.
+- **Ranking charts** (enrollment, crowding, URM seismic risk, pipeline family units, recent permits).
+- **Trends chart** showing 7-year enrollment change (2018 → 2025) with per-school toggles.
 - **Scatter plots** comparing enrollment to crowding, math proficiency to poverty, enrollment change to nearby residential permits, and year-built to enrollment.
 - **Sortable table** of all 74 schools with column descriptions and source citations.
 - **Methodology** section documenting every source with vintage.
@@ -33,14 +34,13 @@ python3 -m http.server -d web 8000
 | [Oregon OSAS (PAGR)](https://www.ode.state.or.us/data/reportcard/reports.aspx) | ELA & math state-test proficiency | 2023-24, 2024-25 |
 | [NCES Common Core of Data](https://nces.ed.gov/ccd/) | Free/reduced lunch counts, geocoded addresses, 2018-2023 enrollment history | 2018-2023 |
 | [US Dept of Ed CRDC](https://ocrdata.ed.gov/) | English learners, IDEA/SPED, chronic absenteeism (2020); counselor / social worker / psychologist / nurse FTE, OSS suspension instances, post-COVID chronic absenteeism (2021) | 2020, 2021 (both COVID-era) |
-| [KPFF Seismic Report 2009](https://bond.pps.net/) + [Holmes Engineering 2024](https://www.wweek.com/news/schools/2025/05/10/) | Year built, square footage, construction type, URM retrofit estimates | 2009 / 2024 |
+| [KPFF Seismic Report 2009](https://bond.pps.net/) + Holmes Engineering 2024 | Year built, square footage, construction type, URM retrofit estimates | 2009 / 2024 |
 | [PPS Bond page](https://bond.pps.net/seismic-improvements) | Seismic retrofit status | 2025 |
 | [Oregon Affordable Housing Inventory (OAHI)](https://www.oregon.gov/ohcs/) | Existing + in-development subsidized housing | 2024 |
 | [Metro RLIS](https://rlisdiscovery.oregonmetro.gov/) | Supplementary regional housing | 2024 |
 | [Portland BDS / PortlandMaps](https://www.portlandmaps.com/) | Residential building permits (2022+) | 2022 – present |
 | [City of Portland — School Boundaries](https://services.arcgis.com/) | PPS attendance polygons (ArcGIS FeatureServer) | 2024-25 |
 | [PPS Dual Language Immersion + focus-option pages](https://www.pps.net/departments/dual-language/current-dli-programs) | Per-school DLI languages (5) + K-8 focus options (Arts, Environmental, STEAM, TAG, Alt) | 2026-04 |
-| [Willamette Week 2026-03-18](https://www.wweek.com/news/schools/2026/03/18/heres-what-pps-will-consider-as-it-selects-schools-to-close/) | List of 15 lowest-enrollment schools (enrollment-based ranking) | 2026-03-18 |
 | [Metro 2045 Distributed Forecast](https://www.oregonmetro.gov/) (Ord. 21-1457) | Regional growth context (city/county only) | 2021 |
 
 ## Project structure
@@ -100,7 +100,6 @@ Every "nearby" metric (affordable units, pipeline family units, residential perm
 
 ## Caveats
 
-- **The highlighted 15 are not a closure prediction.** They are *Willamette Week*'s enrollment-only ranking of the smallest in-scope schools, surfaced here as a descriptive subset. PPS has not published a shortlist; the district is expected to name one in **November 2026**.
 - **Academic performance is included for context** but is notably absent from the criteria PPS has discussed publicly.
 - **CRDC (LEP, SPED, chronic absenteeism) is from 2020** — a COVID-suppressed reporting year. Percentages are CRDC counts ÷ current enrollment.
 - **Square footage is from a 2009 inventory** and may predate bond-funded expansions.
@@ -116,3 +115,10 @@ Every "nearby" metric (affordable units, pipeline family units, residential perm
 ## Credits
 
 Built by [Alex Meub](https://alexmeub.com) with help from Claude Code.
+
+## License
+
+Released under the [MIT License](LICENSE). Copyright © 2026 Alex Meub. The
+code is freely reusable; data compiled in this repository comes from public
+sources cited in the [Data sources](#data-sources) table and remains subject
+to the terms of its original publishers.
