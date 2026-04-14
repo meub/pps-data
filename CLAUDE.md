@@ -7,8 +7,8 @@ locally — including regenerating `web/data.json` and committing — but
 stop short of deploying. The user batches deploys themselves.
 
 `./deploy.sh` syncs `web/index.html`, `web/data.json`, and the favicons to
-S3 bucket `ppsclosures.info` and invalidates CloudFront distribution
-`E37QSWDS20JF8U`. The script is gitignored since it contains infra IDs.
+S3 bucket `ppsdata.info` and invalidates CloudFront distribution
+`E1Y8ZR63ATQJ9S`. The script is gitignored since it contains infra IDs.
 
 Typical flow after a data or UI change:
 

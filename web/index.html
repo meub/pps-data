@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Portland Public School Closures Data Explorer</title>
+<title>Portland Public Schools Data Explorer</title>
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -260,7 +260,7 @@
 
 <div class="topnav">
   <div class="topnav-inner">
-    <a class="brand" href="#top"><span class="dot"></span>PPS Closures Data Explorer</a>
+    <a class="brand" href="#top"><span class="dot"></span>PPS Data Explorer</a>
     <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 4h12M2 8h12M2 12h12"/></svg>
       Menu
@@ -271,6 +271,7 @@
       <a href="#section-utilization">Utilization</a>
       <a href="#section-sustainability">Sustainability</a>
       <a href="#section-transport">Transportation</a>
+      <a href="#section-dli">DLI</a>
       <a href="#section-scatters">Scatters</a>
       <a href="#section-table">Table</a>
       <a href="#section-methodology">Methodology</a>
@@ -332,7 +333,7 @@
 
 <main>
   <section id="section-map">
-    <h2>Map — all 74 in-scope PPS schools</h2>
+    <h2>Map: all 74 in-scope PPS schools</h2>
     <p class="note">
       Each marker sized by 2025-26 enrollment. A purple ring indicates an unreinforced masonry (URM) building.
     </p>
@@ -340,18 +341,18 @@
   </section>
 
   <section id="section-trends">
-    <h2>Enrollment trends — every school, 2018 → 2025</h2>
+    <h2>Enrollment trends: every school, 2018 → 2025</h2>
     <p class="note">
       Each thin line is one school's enrollment indexed to its 2018 baseline (2018 = 100).
       A flat line means stable enrollment; lines sloping down are losing students.
       The bold orange line is the district-wide total. Use the search box below to find
       schools and check one or more to isolate them on the chart; hover a line to identify
-      it. Shows 70 of the 74 in-scope schools — 4 schools without complete 2018–2025
+      it. Shows 70 of the 74 in-scope schools (4 schools without complete 2018–2025
       history are omitted. Source: NCES CCD (2018–2023) + Oregon ODE (2024–2025).
     </p>
     <p class="note" style="margin-top: -6px;">
       <strong>Caveat:</strong> 19 schools had their attendance boundary or grade
-      configuration redrawn inside this window — via <em>DBRAC</em> (2018) or the
+      configuration redrawn inside this window; via <em>DBRAC</em> (2018) or the
       <em>Southeast Guiding Coalition</em> (SEGC, 2023). For those rows, some of the
       apparent enrollment change reflects catchment redraws rather than pure demand
       change. See the "Recent boundary change" column in the table below.
@@ -370,13 +371,13 @@
   <section id="section-utilization">
     <h2>All schools ranked by building utilization</h2>
     <p class="note">
-      Students per square foot — lower bars mean emptier buildings.
+      Students per square foot. Lower bars mean emptier buildings.
     </p>
     <div class="panel chart-card"><div id="plot-ranking" style="height: 1400px;"></div></div>
   </section>
 
   <section id="section-sustainability">
-    <h2>Long-term sustainability — 7-year enrollment change (2018 → 2025)</h2>
+    <h2>Long-term sustainability: 7-year enrollment change (2018 → 2025)</h2>
     <p class="note">
       Total in-scope enrollment fell 20% over this window (median school -19%). Bars below
       that baseline are losing students faster than the district overall. Source: NCES CCD fall
@@ -386,11 +387,11 @@
   </section>
 
   <section id="section-transport">
-    <h2>Transportation impact — miles to nearest same-level alternative</h2>
+    <h2>Transportation impact: miles to nearest same-level alternative</h2>
     <p class="note">
       Great-circle distance from each low-enrollment school to the nearest larger school
       of the same grade band (elementary, K-8, middle, alternative). A rough lower bound on
-      how far families would have to travel if their school were closed — actual PPS
+      how far families would have to travel if their school were closed; actual PPS
       reassignment may differ. Bars are labeled with the nearest alternative school.
     </p>
     <div class="panel chart-card"><div id="plot-transport" style="height: 460px;"></div></div>
@@ -400,12 +401,25 @@
     <h2>DLI vs. neighborhood enrollment at shared-building schools</h2>
     <p class="note">
       Every Dual Language Immersion program is a strand hosted inside a
-      neighborhood school — its students come from a district-wide lottery, not
+      neighborhood school; its students come from a district-wide lottery, not
       the catchment. This chart splits each host school's October 2025 headcount
       into mainstream/neighborhood (left) and DLI strand (right). Schools range
-      from single-strand hosts (Jefferson 4% DLI) to whole-school immersion
-      programs (Lent, Rigler, Richmond — 100%). Source: PPS Language Immersion
-      Enrollment Report 2025-26.
+      from single-strand hosts (Lane 8% DLI) to whole-school immersion programs
+      (Lent, Rigler, Richmond: 100%). Source: PPS Language Immersion Enrollment
+      Report 2025-26.
+    </p>
+    <p class="note">
+      <strong>Why this matters for closure decisions:</strong> total enrollment
+      at a shared-building school blends two distinct populations. The DLI strand
+      pulls students district-wide by lottery, so those seats are not
+      representative of neighborhood demand, and the mainstream cohort, which is
+      the actual catchment-based enrollment, can be a fraction of the posted
+      total. Closing one of these buildings affects two different
+      constituencies: the catchment families who lose their neighborhood school,
+      and the lottery families across the district who lose a DLI option. PPS
+      has named "access to programs" as one of its four closure-decision
+      factors; consolidating a DLI host also removes that program from its
+      current neighborhood unless the strand is explicitly relocated.
     </p>
     <div class="panel chart-card"><div id="plot-dli" style="height: 700px;"></div></div>
   </section>
@@ -431,14 +445,14 @@
     <p class="note">
       4 clusters from k-means on 11 standardized features (enrollment, trend, crowding,
       year, proficiency, deep poverty, BIPOC %, LEP/SPED, nearby permits and pipeline). Plotted
-      on the first two principal components — distance ≈ similarity. Diamond markers are
+      on the first two principal components; distance ≈ similarity. Diamond markers are
       the 15 lowest-enrollment schools; that subset spans three of the four clusters.
     </p>
     <div class="panel chart-card"><div id="plot-clusters" style="height: 520px;"></div></div>
   </section>
 
   <section id="section-table">
-    <h2>All schools — sortable table</h2>
+    <h2>All schools: sortable table</h2>
     <p class="note">Click a column header to sort. Hover the <span style="color: var(--muted);">i</span> next to each header for a definition and source.</p>
     <div class="panel">
       <div class="table-controls">
@@ -460,7 +474,7 @@
     <div class="method-body">
     <p>
       Each of the 74 rows is one PPS school in the closure-announcement scope
-      (elementary, K-8, middle, and alternative — PPS's 9 high schools are excluded per
+      (elementary, K-8, middle, and alternative; PPS's 9 high schools are excluded per
       the March 10 announcement). Columns are pulled from the sources below
       and joined on a mix of NCES school ID, Oregon ODE School Institution ID, and manual
       name mapping for recent renamings (e.g., Madison → McDaniel, Wilson → Wells-Barnett,
@@ -494,7 +508,7 @@
         <dd>Year built, square footage, and construction type for every building in the district. Note: square footage predates recent bond expansions.</dd>
       <dt>Holmes Engineering URM Assessment (2024)</dt>
         <dd>Unreinforced masonry classification and retrofit cost estimates for 18 PPS buildings.</dd>
-      <dt><a href="https://bond.pps.net/" target="_blank" rel="noopener">PPS Bond — Seismic &amp; modernization</a></dt>
+      <dt><a href="https://bond.pps.net/" target="_blank" rel="noopener">PPS Bond: Seismic &amp; modernization</a></dt>
         <dd>Retrofit and modernization status (full, targeted, planned under 2025 bond).</dd>
     </dl>
 
@@ -507,11 +521,11 @@
     <h3>Specialized programs</h3>
     <dl>
       <dt><a href="https://www.pps.net/departments/dual-language/current-dli-programs" target="_blank" rel="noopener">PPS Dual Language Immersion (DLI) program list</a></dt>
-        <dd>Per-language host schools for Spanish, Chinese, Japanese, Russian, and Vietnamese DLI tracks (elementary, middle, high). Captured 2026-04 — re-verify annually.</dd>
+        <dd>Per-language host schools for Spanish, Chinese, Japanese, Russian, and Vietnamese DLI tracks (elementary, middle, high). Captured 2026-04; re-verify annually.</dd>
       <dt><a href="https://www.pps.net/departments/enrollment-transfer/enroll/explore-your-options/k-5-explore-your-options" target="_blank" rel="noopener">PPS K-5 focus options</a></dt>
         <dd>K-8 focus-option / specialized-curriculum schools: Buckman Arts, Bridger Creative Science, Sunnyside Environmental, Winterhaven STEAM, Odyssey TAG, ACCESS, MLC.</dd>
       <dt><a href="https://www.pps.net/departments/research-assessment-and-accountability/data-and-reports/enrollment-reports-and-school-profiles" target="_blank" rel="noopener">PPS Language Immersion Enrollment Report (annual)</a></dt>
-        <dd>Per-school DLI-strand vs. non-strand headcounts from the district SIS (Synergy), October 2025 enrollment snapshot. Published annually by PPS Research, Assessment &amp; Accountability. The only source that separates immersion students from neighborhood students inside a shared-building school — ODE Fall Membership reports only the combined total.</dd>
+        <dd>Per-school DLI-strand vs. non-strand headcounts from the district SIS (Synergy), October 2025 enrollment snapshot. Published annually by PPS Research, Assessment &amp; Accountability. The only source that separates immersion students from neighborhood students inside a shared-building school; ODE Fall Membership reports only the combined total.</dd>
     </dl>
 
     <h3>Housing &amp; neighborhood growth</h3>
@@ -519,7 +533,7 @@
       <dt><a href="https://www.oregon.gov/ohcs/development/pages/housing-data-analysis.aspx" target="_blank" rel="noopener">Oregon Affordable Housing Inventory (OAHI)</a></dt>
         <dd>Existing and pipeline affordable housing projects with unit counts, bedroom mix, and status. Aggregated to each school using the school's PPS attendance boundary (point-in-polygon) rather than a fixed radius; schools without a published catchment (alternative, embedded, or focus-option programs) fall back to a 1-mile haversine radius.</dd>
       <dt><a href="https://gis-pdx.opendata.arcgis.com/datasets/PDX::residential-building-permits/about" target="_blank" rel="noopener">Portland BDS Residential Building Permits (via PortlandMaps)</a></dt>
-        <dd>4,144 permits issued 2022 – 2026-04 that created new residential units; 12,401 units total. Single-family, ADUs, and multifamily — market-rate and affordable combined. Attributed to each school by point-in-polygon against the PPS attendance boundary, with the same 1-mile fallback noted above.</dd>
+        <dd>4,144 permits issued 2022 – 2026-04 that created new residential units; 12,401 units total. Single-family, ADUs, and multifamily (market-rate and affordable combined). Attributed to each school by point-in-polygon against the PPS attendance boundary, with the same 1-mile fallback noted above.</dd>
       <dt><a href="https://hub.arcgis.com/datasets/Portland::school-boundaries" target="_blank" rel="noopener">City of Portland School Attendance Areas</a></dt>
         <dd>PPS attendance-area polygons (elementary/K-8, middle, high), retrieved from the City of Portland <code>School_Boundaries</code> FeatureServer layer and saved to <code>data/raw/pps_boundaries_*.geojson</code>.</dd>
     </dl>
@@ -530,7 +544,7 @@
       (Ord. 21-1457, adopted Feb 2021) projects City of Portland growing from 668,429 to 774,219 residents
       (+16%) by 2045, and unincorporated Multnomah County from 19,328 to 40,490 (+110%).
       Metro only publishes this forecast at city/county level (no tract or TAZ breakdown, and no
-      age bands), so it is not attached to individual schools here — it is background only. PSU
+      age bands), so it is not attached to individual schools here; it is background only. PSU
       Population Research Center explicitly does not forecast Multnomah County, so Metro is the
       only public long-horizon population forecast for the PPS footprint.
     </p>
@@ -539,7 +553,7 @@
     <p>
       A descriptive subset: the 15 in-scope schools with the lowest raw fall 2025-26
       enrollment, surfaced in several views for context. This is not a PPS-published
-      shortlist — the district is expected to release its own list in Nov 2026 with a
+      shortlist; the district is expected to release its own list in Nov 2026 with a
       board vote in Dec 2026.
     </p>
 
@@ -556,7 +570,7 @@
           <em>chronic absenteeism rate</em> (students chronically absent ÷ 2020-21
           enrollment), and <em>OSS per 100</em> (out-of-school suspension instances
           ÷ 2020-21 enrollment × 100; counts events, not unique students).
-          Caveat: 2020-21 was the second pandemic year — chronic-absence rates were
+          Caveat: 2020-21 was the second pandemic year; chronic-absence rates were
           unusually high district-wide and should be read as a floor on current rates.
         </dd>
     </dl>
@@ -564,9 +578,9 @@
     <h3>Caveats</h3>
     <p>
       Building square footage is from 2009 and may understate capacity at schools expanded under recent bonds.
-      CRDC LEP/IDEA counts are from 2020 (COVID year) and are divided by 2025-26 enrollment to derive shares — treat as approximate.
+      CRDC LEP/IDEA counts are from 2020 (COVID year) and are divided by 2025-26 enrollment to derive shares; treat as approximate.
       Free/reduced meal shares use 2022 counts over 2022 enrollment; post-2022 trends are not reflected.
-      Permits represent approvals, not completions — a permit may be issued but not built.
+      Permits represent approvals, not completions; a permit may be issued but not built.
     </p>
     </div>
     <aside class="method-sidebar" aria-label="Age of source data">
@@ -735,7 +749,7 @@
     card.className = "panel chart-card";
     card.innerHTML = `
       <h3>${cfg.title}</h3>
-      <p class="subtitle">x = ${meta[cfg.x].label} · y = ${meta[cfg.y].label} — ${cfg.subtitle}</p>
+      <p class="subtitle">x = ${meta[cfg.x].label} · y = ${meta[cfg.y].label} · ${cfg.subtitle}</p>
       <div class="chart-plot" id="plot-${cfg.id}"></div>
     `;
     chartsEl.appendChild(card);

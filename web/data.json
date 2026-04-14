@@ -6972,7 +6972,7 @@
     },
     "is_closure_candidate": {
       "label": "Low enrollment (WW)",
-      "desc": "One of the 15 lowest-enrollment schools listed by Willamette Week (2026-03-18). Often discussed as a closure shortlist, but PPS has not published its own list \u2014 that is expected Nov 2026, with a board vote in Dec 2026.",
+      "desc": "One of the 15 lowest-enrollment schools listed by Willamette Week (2026-03-18). Often discussed as a closure shortlist, but PPS has not published its own list; that is expected Nov 2026, with a board vote in Dec 2026.",
       "source": "Willamette Week",
       "fmt": "bool"
     },
@@ -7014,7 +7014,7 @@
     },
     "square_feet": {
       "label": "Square feet",
-      "desc": "Building square footage (2009 inventory \u2014 may predate recent bond expansions).",
+      "desc": "Building square footage (2009 inventory; may predate recent bond expansions).",
       "source": "KPFF Seismic Report 2009",
       "fmt": "int"
     },
@@ -7026,7 +7026,7 @@
     },
     "is_urm_building": {
       "label": "URM?",
-      "desc": "Unreinforced masonry \u2014 highest seismic risk category.",
+      "desc": "Unreinforced masonry: highest seismic risk category.",
       "source": "Holmes Engineering 2024, via WW 2025-05-10",
       "fmt": "bool"
     },
@@ -7068,7 +7068,7 @@
     },
     "pct_teacher_retention_2425": {
       "label": "% Teacher retention 24-25",
-      "desc": "Share of teachers who returned from the previous school year \u2014 a turnover signal. Low retention often reflects instability or chronic understaffing.",
+      "desc": "Share of teachers who returned from the previous school year; a turnover signal. Low retention often reflects instability or chronic understaffing.",
       "source": "Oregon ODE At-A-Glance 2024-25",
       "fmt": "pct_0_100"
     },
@@ -7104,7 +7104,7 @@
     },
     "crdc_chronic_absent_2020": {
       "label": "Chronic absent (CRDC)",
-      "desc": "Count of students chronically absent (missed \u226515 days). Based on 2020 COVID year \u2014 likely suppressed.",
+      "desc": "Count of students chronically absent (missed \u226515 days). Based on 2020 COVID year; likely suppressed.",
       "source": "US Dept of Ed CRDC 2020",
       "fmt": "int"
     },
@@ -7122,31 +7122,31 @@
     },
     "frl_free_lunch": {
       "label": "Free lunch (count)",
-      "desc": "Students eligible for free meals \u2014 raw count.",
+      "desc": "Students eligible for free meals (raw count).",
       "source": "NCES CCD 2022",
       "fmt": "int"
     },
     "frl_reduced_lunch": {
       "label": "Reduced lunch (count)",
-      "desc": "Students eligible for reduced-price meals \u2014 raw count.",
+      "desc": "Students eligible for reduced-price meals (raw count).",
       "source": "NCES CCD 2022",
       "fmt": "int"
     },
     "pct_free_lunch": {
       "label": "% Free lunch",
-      "desc": "Share of students on free meals (free \u00f7 2022 enrollment) \u2014 proxy for poverty.",
+      "desc": "Share of students on free meals (free \u00f7 2022 enrollment); proxy for poverty.",
       "source": "Derived: NCES CCD 2022",
       "fmt": "pct_0_1"
     },
     "pct_frl": {
       "label": "% FRL",
-      "desc": "Share of students eligible for free OR reduced-price meals \u2014 standard poverty proxy.",
+      "desc": "Share of students eligible for free OR reduced-price meals; standard poverty proxy.",
       "source": "Derived: NCES CCD 2022",
       "fmt": "pct_0_1"
     },
     "pct_direct_cert": {
       "label": "% Direct cert",
-      "desc": "Share directly certified for free meals via SNAP/TANF/foster \u2014 proxy for deep poverty.",
+      "desc": "Share directly certified for free meals via SNAP/TANF/foster; proxy for deep poverty.",
       "source": "Derived: NCES CCD 2022",
       "fmt": "pct_0_1"
     },
@@ -7212,13 +7212,13 @@
     },
     "support_staff_per_100": {
       "label": "Support staff per 100",
-      "desc": "Counselor + social worker + psychologist FTE, per 100 students (denominator: 2020-21 CRDC enrollment). Reflects 2020-21 staffing \u2014 base allocations make smaller schools score higher per-pupil.",
+      "desc": "Counselor + social worker + psychologist FTE, per 100 students (denominator: 2020-21 CRDC enrollment). Reflects 2020-21 staffing; base allocations make smaller schools score higher per-pupil.",
       "source": "Derived: CRDC 2021 staff \u00f7 2021 enrollment",
       "fmt": "ratio"
     },
     "pct_chronic_absent_2021": {
       "label": "% chronic absent (21)",
-      "desc": "Share of students who missed \u226510% of enrolled days in the 2020-21 school year. Post-COVID but still pandemic-era; treat as floor on current rates. Clamped at 100% \u2014 a few alternative schools' raw CRDC counts exceed point-in-time enrollment due to mid-year mobility.",
+      "desc": "Share of students who missed \u226510% of enrolled days in the 2020-21 school year. Post-COVID but still pandemic-era; treat as floor on current rates. Clamped at 100%; a few alternative schools' raw CRDC counts exceed point-in-time enrollment due to mid-year mobility.",
       "source": "Derived: CRDC 2021 \u00f7 CRDC 2021 enrollment",
       "fmt": "pct_0_1"
     },
@@ -7260,7 +7260,7 @@
     },
     "pipeline_family_units_within_1mi": {
       "label": "Pipeline family units",
-      "desc": "2+BR pipeline units inside the school's PPS attendance area \u2014 proxy for future families with kids.",
+      "desc": "2+BR pipeline units inside the school's PPS attendance area; proxy for future families with kids.",
       "source": "OAHI",
       "fmt": "int"
     },
@@ -7272,7 +7272,7 @@
     },
     "permits_units_within_1mi_since_2022": {
       "label": "Permitted units (2022+)",
-      "desc": "New residential units on building permits issued since 2022-01-01 inside the school's PPS attendance area \u2014 single-family, ADUs, and multifamily (all tenures). Schools without a published catchment fall back to a 1-mile radius.",
+      "desc": "New residential units on building permits issued since 2022-01-01 inside the school's PPS attendance area (single-family, ADUs, and multifamily) (all tenures). Schools without a published catchment fall back to a 1-mile radius.",
       "source": "Portland BDS via PortlandMaps",
       "fmt": "int"
     },
@@ -7302,7 +7302,7 @@
     },
     "programs": {
       "label": "Programs",
-      "desc": "Specialized programs hosted at this school. Captures Dual Language Immersion (DLI) language tracks plus K-8 focus options (Arts, Environmental, STEAM, Creative Science, TAG, Alternative). 'Access to programs' is one of the four PPS-announced closure-decision factors \u2014 closing a DLI host school would cut off that language pathway in its catchment.",
+      "desc": "Specialized programs hosted at this school. Captures Dual Language Immersion (DLI) language tracks plus K-8 focus options (Arts, Environmental, STEAM, Creative Science, TAG, Alternative). 'Access to programs' is one of the four PPS-announced closure-decision factors; closing a DLI host school would cut off that language pathway in its catchment.",
       "source": "PPS Dual Language + Enrollment & Transfer pages",
       "fmt": "text"
     },
@@ -7332,7 +7332,7 @@
     },
     "neighborhood_students_2526": {
       "label": "Neighborhood students 25-26",
-      "desc": "Total enrollment minus DLI-strand enrollment. At a DLI host school this is the mainstream/English-medium population \u2014 the cohort that would remain if the DLI program were relocated.",
+      "desc": "Total enrollment minus DLI-strand enrollment. At a DLI host school this is the mainstream/English-medium population; the cohort that would remain if the DLI program were relocated.",
       "source": "Derived: ODE \u2212 PPS Immersion Report",
       "fmt": "int"
     },
@@ -7384,6 +7384,7 @@
     "enrollment_pct_change_7yr",
     "recent_boundary_change",
     "programs",
+    "has_dli",
     "pct_dli_2526",
     "pct_chronic_absent_2021",
     "support_staff_per_100",
@@ -7401,7 +7402,7 @@
       "title": "Enrollment vs. building crowding",
       "x": "enrollment_2025_26",
       "y": "students_per_sqft",
-      "subtitle": "Schools with the smallest enrollment also tend to have the lowest students-per-square-foot \u2014 bottom-left = small + underused."
+      "subtitle": "Schools with the smallest enrollment also tend to have the lowest students-per-square-foot; bottom-left = small + underused."
     },
     {
       "id": "math_vs_frl",
@@ -7424,7 +7425,7 @@
       "title": "Enrollment change vs. nearby residential permits (2022+)",
       "x": "permits_units_within_1mi_since_2022",
       "y": "enrollment_pct_change",
-      "subtitle": "Schools losing students even while their neighborhood is actively being built \u2014 a signal worth weighing against current enrollment alone."
+      "subtitle": "Schools losing students even while their neighborhood is actively being built; a signal worth weighing against current enrollment alone."
     },
     {
       "id": "year_vs_students",
@@ -7438,7 +7439,7 @@
       "title": "Enrollment vs. % BIPOC students",
       "x": "enrollment_2025_26",
       "y": "pct_bipoc",
-      "subtitle": "Across PPS, smaller-enrollment schools do not serve a disproportionately BIPOC student body \u2014 the cloud is roughly flat."
+      "subtitle": "Across PPS, smaller-enrollment schools do not serve a disproportionately BIPOC student body; the cloud is roughly flat."
     },
     {
       "id": "urm_cost_vs_enrollment",
@@ -7461,7 +7462,7 @@
       "title": "Student-support staff vs. deep poverty",
       "x": "pct_direct_cert",
       "y": "support_staff_per_100",
-      "subtitle": "Counselor + social worker + psychologist FTE per 100 students (CRDC 2020-21). Base allocations mean small schools score higher per-pupil by default \u2014 read with enrollment in mind. A high-poverty school well below the cloud has less per-pupil support than its peers. Alliance High School excluded as a staffing outlier (its alternative-program model carries a far higher per-pupil support ratio than the rest of the in-scope set).",
+      "subtitle": "Counselor + social worker + psychologist FTE per 100 students (CRDC 2020-21). Base allocations mean small schools score higher per-pupil by default; read with enrollment in mind. A high-poverty school well below the cloud has less per-pupil support than its peers. Alliance High School excluded as a staffing outlier (its alternative-program model carries a far higher per-pupil support ratio than the rest of the in-scope set).",
       "trendline": true,
       "exclude": [
         "Alliance High School"

@@ -1,6 +1,6 @@
-# PPS Closures
+# PPS Data Explorer
 
-**Live site: [ppsclosures.info](https://ppsclosures.info)**
+**Live site: [ppsdata.info](https://ppsdata.info)**
 
 A data-driven explorer for the 74 Portland Public Schools (PPS) elementary, K-8, middle, and alternative schools that the district plans to narrow to a closure shortlist in November 2026.
 
