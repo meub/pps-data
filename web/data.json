@@ -6379,14 +6379,14 @@
       "fmt": "text"
     },
     "is_closure_candidate": {
-      "label": "Likely closure candidate",
-      "desc": "One of the 15 schools Willamette Week ranked as most likely to be closed (2026-03-18). PPS has not released its own shortlist \u2014 that is expected Nov 2026.",
+      "label": "Low enrollment (WW)",
+      "desc": "One of the 15 lowest-enrollment schools listed by Willamette Week (2026-03-18). Often discussed as a closure shortlist, but PPS has not published its own list \u2014 that is expected Nov 2026, with a board vote in Dec 2026.",
       "source": "Willamette Week",
       "fmt": "bool"
     },
     "closure_rank": {
-      "label": "WW rank",
-      "desc": "Willamette Week's published rank (1 = smallest), based solely on enrollment numbers. Not a PPS rank.",
+      "label": "WW low-enroll. rank",
+      "desc": "Willamette Week's enrollment-based rank within the bottom 15 (1 = smallest). Not a PPS rank or prediction.",
       "source": "Willamette Week",
       "fmt": "int"
     },
@@ -6662,13 +6662,13 @@
     },
     "nearest_alt_school_mi": {
       "label": "Miles to nearest alt.",
-      "desc": "Great-circle distance from this closure candidate to the nearest non-candidate school of the same grade band (elementary, k8, middle, or alternative). A rough proxy for transportation impact: families would have to travel at least this far if their school closes (district reassignment may differ).",
+      "desc": "Great-circle distance from this low-enrollment school to the nearest larger same-grade-band school (elementary, k8, middle, or alternative). A rough proxy for transportation impact if this school were closed; actual PPS reassignment may differ.",
       "source": "Derived from NCES CCD coordinates",
       "fmt": "miles"
     },
     "nearest_alt_school_name": {
       "label": "Nearest alt. school",
-      "desc": "Name of the closest non-candidate school of the same grade band.",
+      "desc": "Name of the closest larger school of the same grade band.",
       "source": "Derived from NCES CCD coordinates",
       "fmt": "text"
     },
@@ -6680,7 +6680,7 @@
     },
     "programs": {
       "label": "Programs",
-      "desc": "Specialized programs hosted at this school. Captures Dual Language Immersion (DLI) language tracks plus K-8 focus options (Arts, Environmental, STEAM, Creative Science, TAG, Alternative). 'Access to programs' is one of the four PPS-announced closure-decision factors \u2014 closing a DLI host school cuts off that language pathway in its catchment.",
+      "desc": "Specialized programs hosted at this school. Captures Dual Language Immersion (DLI) language tracks plus K-8 focus options (Arts, Environmental, STEAM, Creative Science, TAG, Alternative). 'Access to programs' is one of the four PPS-announced closure-decision factors \u2014 closing a DLI host school would cut off that language pathway in its catchment.",
       "source": "PPS Dual Language + Enrollment & Transfer pages",
       "fmt": "text"
     },
@@ -6756,7 +6756,7 @@
       "title": "Enrollment vs. building crowding",
       "x": "enrollment_2025_26",
       "y": "students_per_sqft",
-      "subtitle": "Closure candidates cluster in the bottom-left (small + underused buildings)."
+      "subtitle": "Schools with the smallest enrollment also tend to have the lowest students-per-square-foot \u2014 bottom-left = small + underused."
     },
     {
       "id": "math_vs_frl",
@@ -6779,21 +6779,21 @@
       "title": "Enrollment change vs. nearby residential permits (2022+)",
       "x": "permits_units_within_1mi_since_2022",
       "y": "enrollment_pct_change",
-      "subtitle": "Schools losing students while their neighborhood is actively being built warrant a closer look before closure."
+      "subtitle": "Schools losing students even while their neighborhood is actively being built \u2014 a signal worth weighing against current enrollment alone."
     },
     {
       "id": "year_vs_students",
       "title": "Year built vs. enrollment",
       "x": "year_built",
       "y": "enrollment_2025_26",
-      "subtitle": "Many candidates are mid-century buildings with low current enrollment."
+      "subtitle": "Many of the smaller-enrollment schools are mid-century buildings."
     },
     {
       "id": "enrollment_vs_bipoc",
       "title": "Enrollment vs. % BIPOC students",
       "x": "enrollment_2025_26",
       "y": "pct_bipoc",
-      "subtitle": "Do the 15 smallest-enrollment schools serve a disproportionately BIPOC student body compared with the rest of PPS?"
+      "subtitle": "Across PPS, smaller-enrollment schools do not serve a disproportionately BIPOC student body \u2014 the cloud is roughly flat."
     },
     {
       "id": "urm_cost_vs_enrollment",
@@ -6808,7 +6808,7 @@
       "title": "Chronic absenteeism vs. avg proficiency (2020-21)",
       "x": "pct_chronic_absent_2021",
       "y": "avg_prof_2425",
-      "subtitle": "Strong inverse relationship: schools where 1 in 3+ students were chronically absent post-COVID rarely exceed 30% proficiency now. Some candidates carry markedly higher chronic-absence rates than the district median.",
+      "subtitle": "Strong inverse relationship: schools where 1 in 3+ students were chronically absent post-COVID rarely exceed 30% proficiency now.",
       "trendline": true
     },
     {
@@ -6816,14 +6816,14 @@
       "title": "7-year enrollment change vs. current size (2018 \u2192 2025)",
       "x": "enrollment_2025_26",
       "y": "enrollment_pct_change_7yr",
-      "subtitle": "Long-term sustainability check. The district as a whole is shrinking, but every closure candidate sits below the district trend \u2014 and several have lost a third or more of their students in seven years."
+      "subtitle": "Long-term sustainability check. The in-scope set as a whole shrank ~20% over seven years; schools well below that line are losing students faster than the district overall."
     },
     {
       "id": "service_load_vs_enrollment",
       "title": "Weighted service load vs. enrollment",
       "x": "service_load",
       "y": "enrollment_2025_26",
-      "subtitle": "Cost-weighted index: 1.0\u00d7% deep poverty + 2.5\u00d7% SPED + 1.5\u00d7% English learners (weights from WSF formulas). Top-right schools absorb the most need; closing them concentrates services elsewhere."
+      "subtitle": "Cost-weighted index: 1.0\u00d7% deep poverty + 2.5\u00d7% SPED + 1.5\u00d7% English learners (weights from WSF formulas). Top-right schools absorb the most per-student support load."
     }
   ],
   "cluster_labels": {

@@ -4,7 +4,7 @@
 
 A data-driven explorer for the 74 Portland Public Schools (PPS) elementary, K-8, middle, and alternative schools that the district plans to narrow to a 5–10 school closure shortlist in November 2026.
 
-The dashboard gathers enrollment, building, demographic, academic, and neighborhood-housing data for every in-scope school, with an emphasis on the 15 lowest-enrollment schools that [*Willamette Week* listed](https://www.wweek.com/news/schools/2026/03/18/heres-what-pps-will-consider-as-it-selects-schools-to-close/) as potential candidates. PPS has not released its own shortlist.
+The dashboard gathers enrollment, building, demographic, academic, and neighborhood-housing data for every in-scope school. The 15 lowest-enrollment schools — [as listed by *Willamette Week*](https://www.wweek.com/news/schools/2026/03/18/heres-what-pps-will-consider-as-it-selects-schools-to-close/) — are highlighted in several charts as a descriptive subset, not a closure prediction. PPS has not released its own shortlist (expected Nov 2026).
 
 ## Live site
 
@@ -19,8 +19,8 @@ python3 -m http.server -d web 8000
 
 ## What's in the dashboard
 
-- **Map** of every in-scope school, color-coded by potential-candidate status.
-- **Ranking charts** for the 15 potential candidates (enrollment, crowding, URM seismic risk, pipeline family units, recent permits).
+- **Map** of every in-scope school, with the 15 lowest-enrollment schools highlighted.
+- **Ranking charts** for the 15 lowest-enrollment schools (enrollment, crowding, URM seismic risk, pipeline family units, recent permits).
 - **Scatter plots** comparing enrollment to crowding, math proficiency to poverty, enrollment change to nearby residential permits, and year-built to enrollment.
 - **Sortable table** of all 74 schools with column descriptions and source citations.
 - **Methodology** section documenting every source with vintage.
@@ -100,7 +100,7 @@ Every "nearby" metric (affordable units, pipeline family units, residential perm
 
 ## Caveats
 
-- **Potential closure list is unofficial.** The 15-school list is *Willamette Week*'s enrollment-only ranking; PPS has not published a shortlist. The district is expected to name one in **November 2026**.
+- **The highlighted 15 are not a closure prediction.** They are *Willamette Week*'s enrollment-only ranking of the smallest in-scope schools, surfaced here as a descriptive subset. PPS has not published a shortlist; the district is expected to name one in **November 2026**.
 - **Academic performance is included for context** but is notably absent from the criteria PPS has discussed publicly.
 - **CRDC (LEP, SPED, chronic absenteeism) is from 2020** — a COVID-suppressed reporting year. Percentages are CRDC counts ÷ current enrollment.
 - **Square footage is from a 2009 inventory** and may predate bond-funded expansions.

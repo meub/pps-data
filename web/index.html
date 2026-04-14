@@ -186,10 +186,11 @@
         board vote in Dec 2026.
       </p>
       <p>
-        This explorer gathers data to visualize these factors side-by-side for every PPS school,
-        with an emphasis on the 15 lowest-enrollment schools that <a href="https://www.wweek.com/news/schools/2026/03/18/heres-what-pps-will-consider-as-it-selects-schools-to-close/" target="_blank" rel="noopener">media has listed</a>
-        as potential candidates. Academic performance is included for context, though it is
-        notably absent from the criteria PPS has discussed publicly.
+        This explorer gathers data to visualize these factors side-by-side for every PPS school.
+        For reference, the 15 lowest-enrollment schools — <a href="https://www.wweek.com/news/schools/2026/03/18/heres-what-pps-will-consider-as-it-selects-schools-to-close/" target="_blank" rel="noopener">as listed by Willamette Week</a> —
+        are highlighted in several charts as a descriptive subset, not a closure prediction.
+        Academic performance is included for context, though it is notably absent from the
+        criteria PPS has discussed publicly.
       </p>
     </div>
     <aside class="hero-timeline" aria-label="Closure-decision timeline">
@@ -220,31 +221,32 @@
   <section>
     <h2>Map — all 74 in-scope PPS schools</h2>
     <p class="note">
-      Each marker sized by 2025-26 enrollment. Red = closure candidate, blue = other.
-      A red ring indicates an unreinforced masonry (URM) building.
+      Each marker sized by 2025-26 enrollment. Orange = one of the 15 lowest-enrollment schools
+      (per Willamette Week), blue = other. A red ring indicates an unreinforced masonry (URM) building.
     </p>
     <div class="panel"><div id="map"></div></div>
   </section>
 
   <section>
     <h2>Scatter plots</h2>
-    <p class="note">Closure candidates highlighted in orange. Click &amp; drag to zoom.</p>
+    <p class="note">All 74 in-scope schools, colored uniformly. Click &amp; drag to zoom.</p>
     <div class="charts" id="charts"></div>
   </section>
 
   <section>
     <h2>All schools ranked by building utilization</h2>
     <p class="note">
-      Students per square foot — lower bars mean emptier buildings. Closure candidates
-      (orange) should cluster at the bottom if the closure list tracks underutilization.
+      Students per square foot — lower bars mean emptier buildings. The 15 lowest-enrollment
+      schools (orange) cluster near the bottom; if PPS weights utilization in its decision,
+      these are the schools that score worst on it.
     </p>
     <div class="panel chart-card"><div id="plot-ranking" style="height: 1400px;"></div></div>
   </section>
 
   <section>
-    <h2>Building age — closure candidates vs. the rest</h2>
+    <h2>Building age — low-enrollment schools vs. the rest</h2>
     <p class="note">
-      Counts of schools by decade built. Low enrollment candidates skew newer on average
+      Counts of schools by decade built. The 15 lowest-enrollment schools skew newer on average
       (mean year built 1955) than the rest of the district (mean 1933).
     </p>
     <div class="panel chart-card"><div id="plot-year-hist" style="height: 360px;"></div></div>
@@ -253,10 +255,10 @@
   <section>
     <h2>Transportation impact — miles to nearest same-level alternative</h2>
     <p class="note">
-      Great-circle distance from each closure candidate to the nearest non-candidate school of
-      the same grade band (elementary, K-8, middle, alternative). A rough lower bound on how
-      far displaced families would have to travel — actual PPS reassignment may differ. Bars
-      are labeled with the nearest receiving school.
+      Great-circle distance from each low-enrollment school to the nearest larger school
+      of the same grade band (elementary, K-8, middle, alternative). A rough lower bound on
+      how far families would have to travel if their school were closed — actual PPS
+      reassignment may differ. Bars are labeled with the nearest alternative school.
     </p>
     <div class="panel chart-card"><div id="plot-transport" style="height: 460px;"></div></div>
   </section>
@@ -264,11 +266,11 @@
   <section>
     <h2>Access to programs — what closure would displace</h2>
     <p class="note">
-      Specialized program offerings at each closure candidate. Closing a school that
-      hosts a Dual Language Immersion (DLI) program or a focus option severs that
-      pathway in its catchment — families pursuing it would have to transfer farther
-      or lose access entirely. Source: PPS Dual Language and Enrollment &amp; Transfer
-      pages (verified 2026-04).
+      Specialized program offerings at each of the 15 lowest-enrollment schools.
+      Closing a school that hosts a Dual Language Immersion (DLI) program or a
+      focus option would sever that pathway in its catchment — families pursuing
+      it would have to transfer farther or lose access entirely. Source: PPS Dual
+      Language and Enrollment &amp; Transfer pages (verified 2026-04).
     </p>
     <div class="panel" id="programs-card">
       <div id="programs-summary" style="margin-bottom: 14px; color: #c9d1d9;"></div>
@@ -280,8 +282,8 @@
     <h2>Long-term sustainability — 7-year enrollment change (2018 → 2025)</h2>
     <p class="note">
       Total in-scope enrollment fell 20% over this window (median school -19%). Bars below
-      that baseline are losing students faster than the district overall; closure candidates
-      are highlighted. Source: NCES CCD fall 2018 + ODE fall 2025.
+      that baseline are losing students faster than the district overall; the 15 lowest-enrollment
+      schools are highlighted. Source: NCES CCD fall 2018 + ODE fall 2025.
     </p>
     <div class="panel chart-card"><div id="plot-trend7yr" style="height: 1400px;"></div></div>
   </section>
@@ -291,7 +293,7 @@
     <p class="note">
       Each bar is the school's gap between its actual average proficiency and what a linear
       fit on % BIPOC alone would predict. Positive = beating the demographic benchmark;
-      negative = falling below it. Closure candidates highlighted in orange.
+      negative = falling below it. The 15 lowest-enrollment schools highlighted in orange.
     </p>
     <div class="panel chart-card"><div id="plot-residuals" style="height: 720px;"></div></div>
   </section>
@@ -302,7 +304,7 @@
       4 clusters from k-means on 11 standardized features (enrollment, trend, crowding,
       year, proficiency, deep poverty, BIPOC %, LEP/SPED, nearby permits and pipeline). Plotted
       on the first two principal components — distance ≈ similarity. Diamond markers are
-      closure candidates; the candidate list spans three of the four clusters.
+      the 15 lowest-enrollment schools; that subset spans three of the four clusters.
     </p>
     <div class="panel chart-card"><div id="plot-clusters" style="height: 520px;"></div></div>
   </section>
@@ -313,7 +315,7 @@
     <div class="panel">
       <div class="table-controls">
         <input id="search" type="search" placeholder="Filter by school name…">
-        <label><input id="filter-cand" type="checkbox"> Closure candidates only</label>
+        <label><input id="filter-cand" type="checkbox"> Low-enrollment 15 only</label>
         <label><input id="filter-urm" type="checkbox"> URM buildings only</label>
         <span class="count" id="count"></span>
         <button id="csv-btn" class="csv-btn" type="button" title="Download the currently-filtered rows as CSV">Download CSV</button>
@@ -401,10 +403,10 @@
       only public long-horizon population forecast for the PPS footprint.
     </p>
 
-    <h3>Closure candidate list</h3>
+    <h3>Lowest-enrollment 15</h3>
     <dl>
       <dt><a href="https://www.wweek.com/news/schools/2026/03/18/heres-what-pps-will-consider-as-it-selects-schools-to-close/" target="_blank" rel="noopener">Willamette Week (2026-03-18)</a></dt>
-        <dd>The 15-school list from  WW derived from raw enrollment data. PPS's own shortlist is expected Nov 2026 with a board vote in Dec 2026.</dd>
+        <dd>The 15 lowest-enrollment in-scope schools, sorted by raw enrollment. Often discussed as a closure shortlist, but PPS has not published its own list — that is expected Nov 2026 with a board vote in Dec 2026.</dd>
     </dl>
 
     <h3>Derived metrics</h3>
@@ -482,7 +484,7 @@
             <tr><td class="src">Residential permits (BDS)</td><td class="year">2022 – 2026-04</td></tr>
             <tr><td class="src">Affordable housing (OAHI)</td><td class="year">2025</td></tr>
             <tr><td class="src">Metro pop. forecast</td><td class="year stale">2021</td></tr>
-            <tr><td class="src">WW candidate ranking</td><td class="year">2026-03-18</td></tr>
+            <tr><td class="src">WW low-enrollment ranking</td><td class="year">2026-03-18</td></tr>
             <tr><td class="src">Attendance boundaries</td><td class="year">~2023-24</td></tr>
           </tbody>
         </table>
@@ -583,7 +585,7 @@
       ["Pipeline family units (catchment)", fmt(s.pipeline_family_units_within_1mi, "int")],
       ["Permitted units 2022+ (catchment)", fmt(s.permits_units_within_1mi_since_2022, "int")],
     ];
-    const rankBadge = cand ? ` <span class="badge cand">candidate #${s.closure_rank}</span>` : "";
+    const rankBadge = cand ? ` <span class="badge cand">low-enroll #${s.closure_rank}</span>` : "";
     marker.bindPopup(
       `<div class="map-popup"><b>${s.school_name}${rankBadge}</b>` +
       `<div class="meta">${s.street_address || ""}</div>` +
@@ -604,21 +606,17 @@
     `;
     chartsEl.appendChild(card);
 
-    const cand = schools.filter(s => s.is_closure_candidate === true || s.is_closure_candidate === "True");
-    const other = schools.filter(s => !(s.is_closure_candidate === true || s.is_closure_candidate === "True"));
-
-    function trace(subset, name, color) {
-      return {
-        x: subset.map(s => s[cfg.x]),
-        y: subset.map(s => s[cfg.y]),
-        text: subset.map(s => s.school_name + (s.closure_rank ? ` (#${s.closure_rank})` : "")),
-        mode: "markers",
-        type: "scatter",
-        name,
-        marker: { size: 10, color, line: { width: 0.5, color: "#0e1115" }, opacity: 0.85 },
-        hovertemplate: "<b>%{text}</b><br>" + meta[cfg.x].label + ": %{x}<br>" + meta[cfg.y].label + ": %{y}<extra></extra>",
-      };
-    }
+    const all = schools.filter(s => s[cfg.x] != null && s[cfg.y] != null);
+    const traces = [{
+      x: all.map(s => s[cfg.x]),
+      y: all.map(s => s[cfg.y]),
+      text: all.map(s => s.school_name),
+      mode: "markers",
+      type: "scatter",
+      name: "PPS schools",
+      marker: { size: 10, color: "#58a6ff", line: { width: 0.5, color: "#0e1115" }, opacity: 0.85 },
+      hovertemplate: "<b>%{text}</b><br>" + meta[cfg.x].label + ": %{x}<br>" + meta[cfg.y].label + ": %{y}<extra></extra>",
+    }];
 
     const layout = {
       paper_bgcolor: "#161b22", plot_bgcolor: "#161b22",
@@ -626,14 +624,8 @@
       margin: { l: 55, r: 10, t: 10, b: 45 },
       xaxis: { title: meta[cfg.x].label, gridcolor: "#30363d", zerolinecolor: "#30363d" },
       yaxis: { title: meta[cfg.y].label, gridcolor: "#30363d", zerolinecolor: "#30363d" },
-      showlegend: true,
-      legend: { x: 1, xanchor: "right", y: 1,
-        bgcolor: "rgba(22,27,34,0.92)", bordercolor: "#30363d", borderwidth: 1 },
+      showlegend: false,
     };
-    const traces = [
-      trace(other, "Other schools", "#58a6ff"),
-      trace(cand, "Closure candidate", "#f97e60"),
-    ];
     if (cfg.trendline) {
       const pts = schools.filter(s =>
         s[cfg.x] != null && s[cfg.y] != null &&
@@ -770,7 +762,7 @@
           line: { color: COLOR_OTHER, width: 1.5, dash: "dash" } },
       ],
       annotations: [
-        { x: candMean, y: 1.02, yref: "paper", text: `cand. mean ${candMean.toFixed(0)}`,
+        { x: candMean, y: 1.02, yref: "paper", text: `low-enroll. mean ${candMean.toFixed(0)}`,
           showarrow: false, font: { size: 10, color: COLOR_CAND }, xanchor: "left" },
         { x: otherMean, y: 1.02, yref: "paper", text: `others mean ${otherMean.toFixed(0)}`,
           showarrow: false, font: { size: 10, color: COLOR_OTHER }, xanchor: "right" },
@@ -779,7 +771,7 @@
     Plotly.newPlot("plot-year-hist", [
       { x: other, type: "histogram", name: "Other schools", marker: { color: COLOR_OTHER },
         xbins: binsCfg, hovertemplate: "Decade %{x}<br>%{y} schools<extra></extra>" },
-      { x: cand, type: "histogram", name: "Closure candidate", marker: { color: COLOR_CAND },
+      { x: cand, type: "histogram", name: "Lowest-enrollment 15", marker: { color: COLOR_CAND },
         xbins: binsCfg, hovertemplate: "Decade %{x}<br>%{y} schools<extra></extra>" },
     ], layout, { displayModeBar: false, responsive: true });
   })();
@@ -814,7 +806,7 @@
         margin: mobile
           ? { l: 130, r: 80, t: 20, b: 40 }
           : { l: 220, r: 320, t: 20, b: 40 },
-        xaxis: { title: "Miles to nearest same-level non-candidate school",
+        xaxis: { title: "Miles to nearest same-level larger school",
           gridcolor: "#30363d", zerolinecolor: "#30363d" },
         yaxis: { automargin: false, tickfont: { size: mobile ? 9 : 10 } },
         showlegend: false,
@@ -825,7 +817,7 @@
         }],
         annotations: [{
           x: median, y: cands.length - 0.5,
-          text: `candidate median ${median.toFixed(2)} mi`,
+          text: `median ${median.toFixed(2)} mi`,
           showarrow: false, yanchor: "bottom",
           font: { size: 10, color: "#7d8590" },
         }],
@@ -843,11 +835,11 @@
     const withProgs = cands.filter(s => s.programs);
     const summary = document.getElementById("programs-summary");
     summary.innerHTML = `
-      <strong>${withProgs.length} of ${cands.length}</strong> closure candidates currently host
-      a specialized program. <strong>Lent</strong> hosts Spanish DLI (one of nine PPS Spanish DLI
-      elementaries) and <strong>Odyssey</strong> is a TAG / integrated-curriculum focus option.
-      The other 13 candidates are neighborhood schools without distinctive program offerings —
-      meaning closure would not directly cut off DLI or focus-option access.
+      <strong>${withProgs.length} of ${cands.length}</strong> low-enrollment schools currently
+      host a specialized program. <strong>Lent</strong> hosts Spanish DLI (one of nine PPS Spanish
+      DLI elementaries) and <strong>Odyssey</strong> is a TAG / integrated-curriculum focus
+      option. The other 13 are neighborhood schools without distinctive program offerings —
+      so closing them would not directly cut off DLI or focus-option access.
     `;
     const t = document.getElementById("programs-table");
     t.querySelector("thead").innerHTML = `
@@ -984,11 +976,11 @@
         traces.push({
           x: cands.map(s => s.pca_x), y: cands.map(s => s.pca_y),
           text: cands.map(s => s.school_name + ` (#${s.closure_rank})`),
-          mode: "markers", type: "scatter", name: legend + " · candidate",
+          mode: "markers", type: "scatter", name: legend + " · low-enroll.",
           legendgroup: `c${cid}`, showlegend: others.length === 0,
           marker: { size: 14, color: palette[cid], symbol: "diamond",
             line: { width: 1.5, color: "#f97e60" }, opacity: 0.95 },
-          hovertemplate: `<b>%{text}</b><br>${labelInfo.name} · closure candidate<extra></extra>`,
+          hovertemplate: `<b>%{text}</b><br>${labelInfo.name} · low-enrollment<extra></extra>`,
         });
       }
     });
