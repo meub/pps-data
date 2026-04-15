@@ -19,10 +19,15 @@ python3 -m http.server -d web 8000
 
 ## What's in the dashboard
 
-- **Map** of every in-scope school.
-- **Ranking charts** (enrollment, building utilization, URM seismic risk, pipeline family units, recent permits).
+- **Map** of every in-scope school (click to enable scroll-zoom).
 - **Trends chart** showing 7-year enrollment change (2018 → 2025) with per-school toggles.
-- **Scatter plots** comparing enrollment to building utilization, math proficiency to poverty, enrollment change to nearby residential permits, and year-built to enrollment.
+- **Utilization** ranking (enrollment vs. 2021 LRFP functional capacity) and URM seismic-risk ranking.
+- **Sustainability** ranking (pipeline family units + recent residential permits within each school's catchment).
+- **Transportation** ranking (bussed-students share) and safe-routes context.
+- **Ratios** ranking (students per teacher FTE, 2023 CCD).
+- **Ventilation** ranking (% of rooms below Lancet 3 ACH_e floor, colored by MERV-13 upgrade status).
+- **DLI & focus-option** section with strand-vs-non-strand headcounts and a collapsible "why this matters" note.
+- **Scatter plots**: enrollment vs. utilization, math proficiency vs. poverty, 7-yr enrollment change vs. nearby permits, year-built vs. enrollment, URM retrofit cost vs. enrollment, chronic absenteeism vs. poverty, support-staff FTE equity, students-per-teacher vs. enrollment, ACH_e median vs. year built.
 - **Sortable table** of all 74 schools with column descriptions and source citations.
 - **Methodology** section documenting every source with vintage.
 
@@ -33,7 +38,7 @@ python3 -m http.server -d web 8000
 | [Oregon ODE Fall Membership](https://www.ode.state.or.us/) | Enrollment by school (2024-25, 2025-26), race/ethnicity | 2025-26 |
 | [Oregon OSAS (PAGR)](https://www.ode.state.or.us/data/reportcard/reports.aspx) | ELA & math state-test proficiency | 2023-24, 2024-25 |
 | [Oregon ODE At-A-Glance source file](https://www.oregon.gov/ode/schools-and-districts/reportcards/reportcards/Pages/default.aspx) | Regular attenders %, experienced-teacher %, teacher retention %, class size | 2024-25 |
-| [NCES Common Core of Data](https://nces.ed.gov/ccd/) | Free/reduced lunch counts, geocoded addresses, 2018-2023 enrollment history | 2018-2023 |
+| [NCES Common Core of Data](https://nces.ed.gov/ccd/) | Free/reduced lunch counts, geocoded addresses, 2018-2023 enrollment history, 2023 teacher FTE (for students-per-teacher ratios) | 2018-2023 |
 | [US Dept of Ed CRDC](https://ocrdata.ed.gov/) | English learners, IDEA/SPED, chronic absenteeism (2020); counselor / social worker / psychologist / nurse FTE, OSS suspension instances, post-COVID chronic absenteeism (2021) | 2020, 2021 (both COVID-era) |
 | [KPFF Seismic Report 2009](https://bond.pps.net/) + Holmes Engineering 2024 | Year built, square footage, construction type, URM retrofit estimates | 2009 / 2024 |
 | [PPS Long-Range Facility Plan 2021 (Vol 1)](https://www.pps.net/cms/lib/OR01913224/Centricity/domain/219/lrfp/PPS-LRFP-Vol1-2021-Adopted.pdf) | Functional capacity per school (classrooms × station size minus set-asides, with PPS-defined utilization rates). Used for the building-utilization metric. | 2021 |
@@ -118,6 +123,7 @@ Every "nearby" metric (affordable units, pipeline family units, residential perm
 - **CRDC (LEP, SPED, chronic absenteeism) is from 2020** — a COVID-suppressed reporting year. Percentages are CRDC counts ÷ current enrollment.
 - **Square footage is from a 2009 inventory** and may predate bond-funded expansions.
 - **Building permits ≠ completions.** `permits_units_within_1mi_since_2022` counts approved units from 2022-01-01 forward, not occupied units.
+- **Ventilation data is from 2021** and reflects ASHRAE Total Effective ACH with HVAC only; portable HEPA units deployed in response to COVID are excluded. Some older buildings genuinely have rooms with near-zero mechanical ventilation (no rooftop supply, operable windows only).
 - **High schools are out of scope.** PPS's announced closure process covers elementary / K-8 / middle / alternative only. The master CSV keeps high schools for reference but `export_web.py` filters them out.
 
 ## Excluded from this repository
