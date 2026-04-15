@@ -18,6 +18,7 @@ OSAS_ELA_24 = ROOT / "data/raw/pagr_schools_ela_all_2324.xlsx"
 OSAS_MATH_24 = ROOT / "data/raw/pagr_schools_math_all_2324.xlsx"
 ODE_AAG = ROOT / "data/raw/ode_aag_schools_2425.csv"
 DLI_REPORT = ROOT / "data/raw/pps_immersion_details_2526.json"
+LRFP_CAPACITY = ROOT / "data/raw/pps_functional_capacity_2021.json"
 OUT = ROOT / "data/pps_schools.csv"
 
 # Closure candidates from WW article (3/18/2026). Keys are ODE school names.
@@ -388,6 +389,94 @@ FACILITY_NAME_MAP = {
 }
 
 
+# Master_name -> LRFP 2021 short name for functional capacity. ACCESS, Alliance,
+# MLC, Odyssey are embedded / alternative programs without their own building
+# entry in the LRFP tables; they stay null. Beverly Cleary operates both
+# Hollyrood and Fernwood campuses; per the LRFP note, its functional capacity
+# is the sum of both (handled below).
+LRFP_NAME_MAP = {
+    "Abernethy Elementary School": "ABERNETHY",
+    "Ainsworth Elementary School": "AINSWORTH",
+    "Alameda Elementary School": "ALAMEDA",
+    "Arleta Elementary School": "ARLETA",
+    "Astor Elementary School": "ASTOR",
+    "Atkinson Elementary School": "ATKINSON",
+    "Beach Elementary School": "BEACH",
+    "Beaumont Middle School": "BEAUMONT",
+    "Boise-Eliot Elementary School": "BOISE-ELIOT",
+    "Bridger Creative Science School": "BRIDGER",
+    "Bridlemile Elementary School": "BRIDLEMILE",
+    "Buckman Elementary School": "BUCKMAN",
+    "Capitol Hill Elementary School": "CAPITOL HILL",
+    "Chapman Elementary School": "CHAPMAN",
+    "Chief Joseph Elementary School": "CHIEF JOSEPH",
+    "Clark Elementary School": "CLARK",
+    "Creston Elementary School": "CRESTON",
+    "César Chávez K-8 School": "CHAVEZ",
+    "Dr. Martin Luther King Jr. School": "MLK JR",
+    "Duniway Elementary School": "DUNIWAY",
+    "Faubion Elementary School": "FAUBION",
+    "Forest Park Elementary School": "FOREST PARK",
+    "George Middle School": "GEORGE",
+    "Glencoe Elementary School": "GLENCOE",
+    "Gray Middle School": "GRAY",
+    "Grout Elementary School": "GROUT",
+    "Harriet Tubman Middle School": "TUBMAN",
+    "Harrison Park School": "HARRISON PARK",
+    "Hayhurst Elementary School": "HAYHURST",
+    "Hosford Middle School": "HOSFORD",
+    "Irvington Elementary School": "IRVINGTON",
+    "Jackson Middle School": "JACKSON",
+    "James John Elementary School": "JAMES JOHN",
+    "Kellogg Middle School": "KELLOGG",
+    "Kelly Elementary School": "KELLY",
+    "Lane Middle School": "LANE",
+    "Laurelhurst Elementary School": "LAURELHURST",
+    "Lee Elementary School": "LEE",
+    "Lent Elementary School": "LENT",
+    "Lewis Elementary School": "LEWIS",
+    "Llewellyn Elementary School": "LLEWELLYN",
+    "Maplewood Elementary School": "MAPLEWOOD",
+    "Markham Elementary School": "MARKHAM",
+    "Marysville Elementary School": "MARYSVILLE",
+    "Mt Tabor Middle School": "MT. TABOR",
+    "Ockley Green Middle School": "OCKLEY GREEN",
+    "Peninsula Elementary School": "PENINSULA",
+    "Richmond Elementary School": "RICHMOND",
+    "Rieke Elementary School": "RIEKE",
+    "Rigler Elementary School": "RIGLER",
+    "Rosa Parks Elementary School": "ROSA PARKS",
+    "Rose City Park": "ROSE CITY PARK",
+    "Roseway Heights School": "ROSEWAY HEIGHTS",
+    "Sabin Elementary School": "SABIN",
+    "Scott Elementary School": "SCOTT",
+    "Sellwood Middle School": "SELLWOOD",
+    "Sitton Elementary School": "SITTON",
+    "Skyline Elementary School": "SKYLINE",
+    "Stephenson Elementary School": "STEPHENSON",
+    "Sunnyside Environmental School": "SUNNYSIDE",
+    "Vernon Elementary School": "VERNON",
+    "Vestal Elementary School": "VESTAL",
+    "West Sylvan Middle School": "WEST SYLVAN",
+    "Whitman Elementary School": "WHITMAN",
+    "Winterhaven School": "WINTERHAVEN",
+    "Woodlawn Elementary School": "WOODLAWN",
+    "Woodmere Elementary School": "WOODMERE",
+    "Woodstock Elementary School": "WOODSTOCK",
+    "da Vinci Middle School": "DA VINCI",
+    # High schools (kept for reference; filtered from dashboard scope).
+    "Benson Polytechnic High School": "BENSON",
+    "Cleveland High School": "CLEVELAND",
+    "Franklin High School": "FRANKLIN",
+    "Grant High School": "GRANT",
+    "Ida B. Wells-Barnett High School": "WELLS-BARNETT",
+    "Jefferson High School": "JEFFERSON",
+    "Leodis V. McDaniel High School": "MCDANIEL",
+    "Lincoln High School": "LINCOLN",
+    "Roosevelt High School": "ROOSEVELT",
+}
+
+
 # Manual patches for schools missing from CCD 2022 (Clark opened post-2022;
 # Odyssey is an embedded program hosted at Hayhurst in 2024-25).
 MANUAL_LOCATION = {
@@ -554,10 +643,24 @@ def main():
     pps = pps.merge(fac, left_on="fac_match_name", right_on="school_name_2009", how="left")
     pps = pps.drop(columns=["fac_match_name", "school_name_2009"])
 
-    # Derived: students per sqft (2025-26 enrollment / 2009 sqft).
-    pps["students_per_sqft"] = (
-        pps["2025-26 Total Enrollment"] / pps["square_feet"]
-    ).round(5)
+    # Merge functional capacity from 2021 LRFP (Vol 1). PPS's own planning
+    # measure of how many students a building can educate, accounting for
+    # classroom count, modular rooms, and set-asides (SPED, art/music,
+    # computer labs, DLI co-location). Directly comparable to enrollment.
+    with open(LRFP_CAPACITY) as f:
+        lrfp_raw = json.load(f)
+    lrfp_cap = {r["name"]: r["functional_capacity"] for r in lrfp_raw}
+    pps["functional_capacity_2021"] = pps["School Name"].map(
+        lambda n: lrfp_cap.get(LRFP_NAME_MAP.get(n))
+    )
+    # Beverly Cleary spans two campuses per the LRFP's own note.
+    bc_cap = lrfp_cap.get("HOLLYROOD", 0) + lrfp_cap.get("FERNWOOD", 0)
+    pps.loc[pps["School Name"].str.strip() == "Beverly Cleary School",
+            "functional_capacity_2021"] = bc_cap or None
+
+    pps["utilization_pct_2526"] = (
+        pps["2025-26 Total Enrollment"] / pps["functional_capacity_2021"]
+    ).round(4)
 
     # Merge CRDC 2020: LEP, IDEA, chronic absenteeism counts.
     with open(CRDC) as f:
@@ -704,7 +807,8 @@ def main():
         "recent_boundary_change",
         "programs", "has_dli", "dli_languages", "has_focus_option",
         "dli_students_2526", "neighborhood_students_2526", "pct_dli_2526",
-        "year_built", "square_feet", "construction_type_2009", "students_per_sqft",
+        "year_built", "square_feet", "construction_type_2009",
+        "functional_capacity_2021", "utilization_pct_2526",
         "enrollment_2024_25", "enrollment_2025_26", "enrollment_pct_change",
         "enrollment_2018", "enrollment_2019", "enrollment_2020",
         "enrollment_2021", "enrollment_2022", "enrollment_2023",

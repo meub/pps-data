@@ -22,7 +22,8 @@ META = {
     "enrollment_2025_26": {"label": "Enrollment 25-26", "desc": "Total students, fall 2025.", "source": "Oregon ODE Fall Membership", "fmt": "int"},
     "enrollment_2024_25": {"label": "Enrollment 24-25", "desc": "Total students, fall 2024.", "source": "Oregon ODE Fall Membership", "fmt": "int"},
     "enrollment_pct_change": {"label": "Enrollment Δ% YoY", "desc": "Year-over-year enrollment change (2024-25 → 2025-26).", "source": "Derived from ODE", "fmt": "pct_0_1"},
-    "students_per_sqft": {"label": "Students / sqft", "desc": "Building crowding: 2025-26 enrollment ÷ 2009 KPFF square footage. Lower = more underused space.", "source": "Derived: ODE + KPFF 2009", "fmt": "ratio"},
+    "functional_capacity_2021": {"label": "Functional capacity", "desc": "PPS's planning number for how many students a building can educate: gross capacity (classrooms × student-station size by area) minus set-asides (SPED focus, art/music, computer lab, DLI co-location) and reduced by a configuration-specific utilization rate (85% at middle/high, higher at K-5/K-8), with further reductions for Title I and TSI/CSI schools. From the 2021 Long-Range Facility Plan.", "source": "PPS Long-Range Facility Plan 2021 (Vol 1)", "fmt": "int"},
+    "utilization_pct_2526": {"label": "Utilization 25-26", "desc": "2025-26 enrollment ÷ 2021 functional capacity. Below 50% is substantially underused; above 100% is overcrowded per PPS's own planning standard.", "source": "Derived: ODE 2025-26 ÷ LRFP 2021", "fmt": "pct_0_1"},
     "year_built": {"label": "Year built", "desc": "Year the main building was constructed.", "source": "KPFF Seismic Report 2009", "fmt": "year"},
     "square_feet": {"label": "Square feet", "desc": "Building square footage (2009 inventory; may predate recent bond expansions).", "source": "KPFF Seismic Report 2009", "fmt": "int"},
     "construction_type_2009": {"label": "Construction", "desc": "Structural type: URM (unreinforced masonry), LRCW (reinforced concrete wall), Wood, Concrete, Steel, Masonry.", "source": "KPFF 2009", "fmt": "text"},
@@ -88,7 +89,8 @@ META = {
 # Columns to surface in the default table (order matters).
 TABLE_COLS = [
     "school_name", "level",
-    "enrollment_2025_26", "enrollment_pct_change", "students_per_sqft",
+    "enrollment_2025_26", "enrollment_pct_change",
+    "functional_capacity_2021", "utilization_pct_2526",
     "year_built", "square_feet", "pct_ela_prof_2425", "pct_math_prof_2425",
     "is_urm_building", "seismic_retrofit_status", "is_title_i", "pct_bipoc",
     "enrollment_pct_change_7yr", "recent_boundary_change", "programs",
@@ -102,11 +104,11 @@ TABLE_COLS = [
 # Pre-defined scatter plots.
 SCATTERS = [
     {
-        "id": "enrollment_vs_sqft",
-        "title": "Enrollment vs. building crowding",
+        "id": "enrollment_vs_utilization",
+        "title": "Enrollment vs. building utilization",
         "x": "enrollment_2025_26",
-        "y": "students_per_sqft",
-        "subtitle": "Schools with the smallest enrollment also tend to have the lowest students-per-square-foot; bottom-left = small + underused.",
+        "y": "utilization_pct_2526",
+        "subtitle": "Utilization = current enrollment ÷ 2021 functional capacity. The closure shortlist (low-enrollment schools) clusters in the lower-left quadrant of underused buildings. Horizontal line at 100% marks PPS's own planning capacity.",
     },
     {
         "id": "math_vs_frl",
@@ -181,7 +183,7 @@ SCATTERS = [
 
 # Features used for k-means clustering + PCA projection.
 CLUSTER_FEATURES = [
-    "enrollment_2025_26", "enrollment_pct_change", "students_per_sqft",
+    "enrollment_2025_26", "enrollment_pct_change", "utilization_pct_2526",
     "year_built", "avg_prof_2425", "pct_direct_cert", "pct_bipoc",
     "pct_lep", "pct_idea",
     "permits_units_within_1mi_since_2022", "pipeline_family_units_within_1mi",

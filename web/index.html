@@ -121,6 +121,10 @@
   .map-popup b { display: block; font-size: 13px; margin-bottom: 4px; }
   .map-popup .meta { color: #57606a; font-size: 11.5px; }
   .map-popup .row { font-size: 12px; margin: 2px 0; }
+  .leaflet-popup-content, .leaflet-popup-content-wrapper,
+  .leaflet-tooltip, .leaflet-container {
+    font-family: "Nunito Sans", -apple-system, "SF Pro Text", Helvetica, Arial, sans-serif;
+  }
 
   /* Trends chart filter */
   .trends-controls { display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
@@ -255,6 +259,8 @@
     .contribute { padding: 24px 16px 32px; }
   }
 </style>
+<script data-goatcounter="https://a9n27kisdf.execute-api.us-east-1.amazonaws.com/count/ppsdata"
+        async src="count.js"></script>
 </head>
 <body>
 
@@ -371,7 +377,7 @@
   <section id="section-utilization">
     <h2>All schools ranked by building utilization</h2>
     <p class="note">
-      Students per square foot. Lower bars mean emptier buildings.
+      Current enrollment as a percentage of PPS's own functional capacity from the 2021 Long-Range Facility Plan. Functional capacity accounts for classroom count, modular rooms, and set-asides (SPED, art/music, DLI co-location), so it is a planning number PPS actually uses, not a raw square-footage estimate. The dashed line marks 100% capacity; schools under 50% are substantially underused.
     </p>
     <div class="panel chart-card"><div id="plot-ranking" style="height: 1400px;"></div></div>
   </section>
@@ -443,7 +449,7 @@
   <section style="display:none;">
     <h2>School archetypes (k-means + PCA)</h2>
     <p class="note">
-      4 clusters from k-means on 11 standardized features (enrollment, trend, crowding,
+      4 clusters from k-means on 11 standardized features (enrollment, trend, utilization,
       year, proficiency, deep poverty, BIPOC %, LEP/SPED, nearby permits and pipeline). Plotted
       on the first two principal components; distance ≈ similarity. Diamond markers are
       the 15 lowest-enrollment schools; that subset spans three of the four clusters.
@@ -504,6 +510,8 @@
 
     <h3>Buildings &amp; seismic</h3>
     <dl>
+      <dt><a href="https://www.pps.net/cms/lib/OR01913224/Centricity/domain/219/lrfp/PPS-LRFP-Vol1-2021-Adopted.pdf" target="_blank" rel="noopener">PPS Long-Range Facility Plan (2021, Vol 1)</a></dt>
+        <dd>Functional capacity per school (2021). PPS's planning number: gross capacity derived from classroom count and area, minus set-asides (SPED focus, art/music, computer lab, DLI co-location, etc.), with a configuration-specific utilization rate applied (85% at middle/high, higher at K-5/K-8) and further reductions at Title I and TSI/CSI schools.</dd>
       <dt><a href="https://www.pps.net/departments/facilities-asset-management/school-buildings-conditions-and-characteristics/seismic-assessments" target="_blank" rel="noopener">KPFF Seismic Report (2009)</a></dt>
         <dd>Year built, square footage, and construction type for every building in the district. Note: square footage predates recent bond expansions.</dd>
       <dt>Holmes Engineering URM Assessment (2024)</dt>
@@ -577,6 +585,7 @@
 
     <h3>Caveats</h3>
     <p>
+      Functional capacity is from the 2021 Long-Range Facility Plan and does not reflect post-2021 bond work or reconfigurations (Harrison Park's conversion to a middle school, Lincoln's rebuild, etc.).
       Building square footage is from 2009 and may understate capacity at schools expanded under recent bonds.
       CRDC LEP/IDEA counts are from 2020 (COVID year) and are divided by 2025-26 enrollment to derive shares; treat as approximate.
       Free/reduced meal shares use 2022 counts over 2022 enrollment; post-2022 trends are not reflected.
@@ -595,6 +604,7 @@
             <tr><td class="src">LEP &amp; SPED (CRDC)</td><td class="year stale">2020</td></tr>
             <tr><td class="src">Counselors / SW / suspensions (CRDC)</td><td class="year stale">2020-21</td></tr>
             <tr><td class="src">URM assessment (Holmes)</td><td class="year">2024</td></tr>
+            <tr><td class="src">Functional capacity (PPS LRFP)</td><td class="year">2021</td></tr>
             <tr><td class="src">Building square footage (KPFF)</td><td class="year stale">2009</td></tr>
             <tr><td class="src">Residential permits (BDS)</td><td class="year">2022 – 2026-04</td></tr>
             <tr><td class="src">Affordable housing (OAHI)</td><td class="year">2025</td></tr>
@@ -772,6 +782,7 @@
     const layout = {
       paper_bgcolor: "#161b22", plot_bgcolor: "#161b22",
       font: { color: "#e6edf3", size: 11, family: '"Nunito Sans", -apple-system, Helvetica, Arial, sans-serif' },
+      hoverlabel: { font: { family: '"Nunito Sans", -apple-system, Helvetica, Arial, sans-serif' } },
       margin: { l: 55, r: 10, t: 10, b: 45 },
       xaxis: { title: meta[cfg.x].label, gridcolor: "#30363d", zerolinecolor: "#30363d" },
       yaxis: { title: meta[cfg.y].label, gridcolor: "#30363d", zerolinecolor: "#30363d" },
@@ -811,10 +822,9 @@
 
   // ---------- RANKING BAR CHART ----------
   (function () {
-    const withVal = schools.filter(s => s.students_per_sqft != null);
-    withVal.sort((a, b) => a.students_per_sqft - b.students_per_sqft);
+    const withVal = schools.filter(s => s.utilization_pct_2526 != null);
+    withVal.sort((a, b) => a.utilization_pct_2526 - b.utilization_pct_2526);
     const isCand = s => s.is_closure_candidate === true || s.is_closure_candidate === "True";
-    const med = median(withVal.map(s => s.students_per_sqft));
 
     function renderRanking() {
       const mobile = window.innerWidth < 700;
@@ -823,42 +833,44 @@
       const trace = {
         type: "bar",
         orientation: "h",
-        x: withVal.map(s => s.students_per_sqft),
+        x: withVal.map(s => s.utilization_pct_2526 * 100),
         y: labels,
         marker: {
           color: "#58a6ff",
           line: { width: 0.5, color: "#0e1115" },
         },
         text: withVal.map(s => mobile
-          ? `${s.enrollment_2025_26}`
-          : `${s.enrollment_2025_26} students · ${(s.square_feet || 0).toLocaleString()} sqft`),
+          ? `${Math.round(s.utilization_pct_2526 * 100)}%`
+          : `${s.enrollment_2025_26} / ${s.functional_capacity_2021} (${Math.round(s.utilization_pct_2526 * 100)}%)`),
         textposition: "outside",
         textfont: { size: mobile ? 9 : 10, color: "#e6edf3" },
         cliponaxis: false,
-        customdata: withVal.map(s => [s.school_name, s.enrollment_2025_26, (s.square_feet || 0).toLocaleString()]),
-        hovertemplate: "<b>%{customdata[0]}</b><br>Students/sqft: %{x:.4f}<br>%{customdata[1]} students · %{customdata[2]} sqft<extra></extra>",
+        customdata: withVal.map(s => [s.school_name, s.enrollment_2025_26, s.functional_capacity_2021]),
+        hovertemplate: "<b>%{customdata[0]}</b><br>%{x:.0f}% utilized<br>%{customdata[1]} students / %{customdata[2]} capacity<extra></extra>",
       };
       Plotly.react("plot-ranking", [trace], {
         paper_bgcolor: "#161b22", plot_bgcolor: "#161b22",
         font: { color: "#e6edf3", size: 11, family: '"Nunito Sans", -apple-system, Helvetica, Arial, sans-serif' },
+        hoverlabel: { font: { family: '"Nunito Sans", -apple-system, Helvetica, Arial, sans-serif' } },
         margin: mobile
           ? { l: 130, r: 50, t: 20, b: 40 }
           : { l: 280, r: 140, t: 20, b: 40 },
         xaxis: {
-          title: mobile ? "Students per sqft" : "Students per square foot (2025-26 enrollment ÷ 2009 sqft)",
+          title: mobile ? "Utilization %" : "Utilization % (2025-26 enrollment ÷ 2021 functional capacity)",
           gridcolor: "#30363d", zerolinecolor: "#30363d",
+          ticksuffix: "%",
         },
         yaxis: { automargin: false, tickfont: { size: mobile ? 9 : 10 } },
         showlegend: false,
         shapes: [{
           type: "line",
-          x0: med, x1: med,
+          x0: 100, x1: 100,
           y0: -0.5, y1: withVal.length - 0.5,
           line: { color: "#7d8590", width: 1, dash: "dash" },
         }],
         annotations: [{
-          x: med, y: withVal.length - 0.5,
-          text: "district median", showarrow: false, yanchor: "bottom",
+          x: 100, y: withVal.length - 0.5,
+          text: "100% capacity", showarrow: false, yanchor: "bottom",
           font: { size: 10, color: "#7d8590" },
         }],
       }, { displayModeBar: false, responsive: true });
@@ -880,9 +892,12 @@
   const isCand = s => s.is_closure_candidate === true || s.is_closure_candidate === "True";
   const COLOR_CAND = "#f97e60";
   const COLOR_OTHER = "#58a6ff";
+  const PLOT_FONT_FAMILY = '"Nunito Sans", -apple-system, Helvetica, Arial, sans-serif';
+  const PLOT_HOVERLABEL = { font: { family: PLOT_FONT_FAMILY } };
   const baseLayout = () => ({
     paper_bgcolor: "#161b22", plot_bgcolor: "#161b22",
-    font: { color: "#e6edf3", size: 11, family: '"Nunito Sans", -apple-system, Helvetica, Arial, sans-serif' },
+    font: { color: "#e6edf3", size: 11, family: PLOT_FONT_FAMILY },
+    hoverlabel: PLOT_HOVERLABEL,
     xaxis: { gridcolor: "#30363d", zerolinecolor: "#30363d" },
     yaxis: { gridcolor: "#30363d", zerolinecolor: "#30363d" },
   });

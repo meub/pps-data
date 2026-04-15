@@ -1,0 +1,569 @@
+[
+  {
+    "name": "AINSWORTH",
+    "level": "elementary",
+    "classrooms": 23,
+    "modular_classrooms": 4,
+    "functional_capacity": 636
+  },
+  {
+    "name": "IRVINGTON",
+    "level": "elementary",
+    "classrooms": 30,
+    "modular_classrooms": 0,
+    "functional_capacity": 547
+  },
+  {
+    "name": "RICHMOND",
+    "level": "elementary",
+    "classrooms": 29,
+    "modular_classrooms": 0,
+    "functional_capacity": 723
+  },
+  {
+    "name": "LEE",
+    "level": "elementary",
+    "classrooms": 23,
+    "modular_classrooms": 1,
+    "functional_capacity": 443
+  },
+  {
+    "name": "ABERNETHY",
+    "level": "elementary",
+    "classrooms": 21,
+    "modular_classrooms": 2,
+    "functional_capacity": 522
+  },
+  {
+    "name": "MLK JR",
+    "level": "elementary",
+    "classrooms": 34,
+    "modular_classrooms": 0,
+    "functional_capacity": 635
+  },
+  {
+    "name": "LEWIS",
+    "level": "elementary",
+    "classrooms": 19,
+    "modular_classrooms": 0,
+    "functional_capacity": 444
+  },
+  {
+    "name": "BEACH",
+    "level": "elementary",
+    "classrooms": 29,
+    "modular_classrooms": 3,
+    "functional_capacity": 750
+  },
+  {
+    "name": "LLEWELLYN",
+    "level": "elementary",
+    "classrooms": 20,
+    "modular_classrooms": 3,
+    "functional_capacity": 528
+  },
+  {
+    "name": "WOODMERE",
+    "level": "elementary",
+    "classrooms": 19,
+    "modular_classrooms": 4,
+    "functional_capacity": 473
+  },
+  {
+    "name": "ROSE CITY PARK",
+    "level": "elementary",
+    "classrooms": 27,
+    "modular_classrooms": 0,
+    "functional_capacity": 636
+  },
+  {
+    "name": "HOLLYROOD",
+    "level": "elementary",
+    "classrooms": 9,
+    "modular_classrooms": 0,
+    "functional_capacity": 228
+  },
+  {
+    "name": "DUNIWAY",
+    "level": "elementary",
+    "classrooms": 25,
+    "modular_classrooms": 0,
+    "functional_capacity": 552
+  },
+  {
+    "name": "MARYSVILLE",
+    "level": "elementary",
+    "classrooms": 25,
+    "modular_classrooms": 0,
+    "functional_capacity": 533
+  },
+  {
+    "name": "WOODSTOCK",
+    "level": "elementary",
+    "classrooms": 28,
+    "modular_classrooms": 0,
+    "functional_capacity": 648
+  },
+  {
+    "name": "WOODLAWN",
+    "level": "elementary",
+    "classrooms": 28,
+    "modular_classrooms": 3,
+    "functional_capacity": 644
+  },
+  {
+    "name": "ALAMEDA",
+    "level": "elementary",
+    "classrooms": 31,
+    "modular_classrooms": 2,
+    "functional_capacity": 792
+  },
+  {
+    "name": "ARLETA",
+    "level": "elementary",
+    "classrooms": 29,
+    "modular_classrooms": 0,
+    "functional_capacity": 696
+  },
+  {
+    "name": "CAPITOL HILL",
+    "level": "elementary",
+    "classrooms": 18,
+    "modular_classrooms": 1,
+    "functional_capacity": 456
+  },
+  {
+    "name": "PENINSULA",
+    "level": "elementary",
+    "classrooms": 28,
+    "modular_classrooms": 0,
+    "functional_capacity": 613
+  },
+  {
+    "name": "CHAPMAN",
+    "level": "elementary",
+    "classrooms": 24,
+    "modular_classrooms": 3,
+    "functional_capacity": 618
+  },
+  {
+    "name": "RIGLER",
+    "level": "elementary",
+    "classrooms": 21,
+    "modular_classrooms": 8,
+    "functional_capacity": 589
+  },
+  {
+    "name": "MARKHAM",
+    "level": "elementary",
+    "classrooms": 26,
+    "modular_classrooms": 0,
+    "functional_capacity": 588
+  },
+  {
+    "name": "CRESTON",
+    "level": "elementary",
+    "classrooms": 27,
+    "modular_classrooms": 0,
+    "functional_capacity": 558
+  },
+  {
+    "name": "MAPLEWOOD",
+    "level": "elementary",
+    "classrooms": 14,
+    "modular_classrooms": 6,
+    "functional_capacity": 467
+  },
+  {
+    "name": "LENT",
+    "level": "elementary",
+    "classrooms": 28,
+    "modular_classrooms": 3,
+    "functional_capacity": 707
+  },
+  {
+    "name": "GROUT",
+    "level": "elementary",
+    "classrooms": 27,
+    "modular_classrooms": 0,
+    "functional_capacity": 510
+  },
+  {
+    "name": "ROSA PARKS",
+    "level": "elementary",
+    "classrooms": 26,
+    "modular_classrooms": 0,
+    "functional_capacity": 594
+  },
+  {
+    "name": "SCOTT",
+    "level": "elementary",
+    "classrooms": 27,
+    "modular_classrooms": 2,
+    "functional_capacity": 643
+  },
+  {
+    "name": "WHITMAN",
+    "level": "elementary",
+    "classrooms": 24,
+    "modular_classrooms": 0,
+    "functional_capacity": 493
+  },
+  {
+    "name": "SITTON",
+    "level": "elementary",
+    "classrooms": 22,
+    "modular_classrooms": 2,
+    "functional_capacity": 467
+  },
+  {
+    "name": "VESTAL",
+    "level": "elementary",
+    "classrooms": 23,
+    "modular_classrooms": 3,
+    "functional_capacity": 554
+  },
+  {
+    "name": "BRIDLEMILE",
+    "level": "elementary",
+    "classrooms": 25,
+    "modular_classrooms": 1,
+    "functional_capacity": 645
+  },
+  {
+    "name": "RIEKE",
+    "level": "elementary",
+    "classrooms": 13,
+    "modular_classrooms": 6,
+    "functional_capacity": 492
+  },
+  {
+    "name": "KELLY",
+    "level": "elementary",
+    "classrooms": 37,
+    "modular_classrooms": 0,
+    "functional_capacity": 670
+  },
+  {
+    "name": "BUCKMAN",
+    "level": "elementary",
+    "classrooms": 28,
+    "modular_classrooms": 0,
+    "functional_capacity": 654
+  },
+  {
+    "name": "HAYHURST",
+    "level": "elementary",
+    "classrooms": 22,
+    "modular_classrooms": 0,
+    "functional_capacity": 546
+  },
+  {
+    "name": "GLENCOE",
+    "level": "elementary",
+    "classrooms": 25,
+    "modular_classrooms": 1,
+    "functional_capacity": 600
+  },
+  {
+    "name": "JAMES JOHN",
+    "level": "elementary",
+    "classrooms": 26,
+    "modular_classrooms": 0,
+    "functional_capacity": 513
+  },
+  {
+    "name": "STEPHENSON",
+    "level": "elementary",
+    "classrooms": 20,
+    "modular_classrooms": 0,
+    "functional_capacity": 552
+  },
+  {
+    "name": "ATKINSON",
+    "level": "elementary",
+    "classrooms": 25,
+    "modular_classrooms": 0,
+    "functional_capacity": 567
+  },
+  {
+    "name": "BRIDGER",
+    "level": "elementary",
+    "classrooms": 19,
+    "modular_classrooms": 6,
+    "functional_capacity": 561
+  },
+  {
+    "name": "SABIN",
+    "level": "elementary",
+    "classrooms": 26,
+    "modular_classrooms": 4,
+    "functional_capacity": 559
+  },
+  {
+    "name": "FOREST PARK",
+    "level": "elementary",
+    "classrooms": 11,
+    "modular_classrooms": 10,
+    "functional_capacity": 546
+  },
+  {
+    "name": "CHIEF JOSEPH",
+    "level": "elementary",
+    "classrooms": 17,
+    "modular_classrooms": 2,
+    "functional_capacity": 499
+  },
+  {
+    "name": "BOISE-ELIOT",
+    "level": "elementary",
+    "classrooms": 34,
+    "modular_classrooms": 0,
+    "functional_capacity": 651
+  },
+  {
+    "name": "EAST SYLVAN",
+    "level": "k8",
+    "classrooms": 10,
+    "modular_classrooms": 0,
+    "functional_capacity": 174
+  },
+  {
+    "name": "WINTERHAVEN",
+    "level": "k8",
+    "classrooms": 13,
+    "modular_classrooms": 1,
+    "functional_capacity": 261
+  },
+  {
+    "name": "FAUBION",
+    "level": "k8",
+    "classrooms": 43,
+    "modular_classrooms": 0,
+    "functional_capacity": 710
+  },
+  {
+    "name": "LAURELHURST",
+    "level": "k8",
+    "classrooms": 22,
+    "modular_classrooms": 8,
+    "functional_capacity": 657
+  },
+  {
+    "name": "VERNON",
+    "level": "k8",
+    "classrooms": 25,
+    "modular_classrooms": 4,
+    "functional_capacity": 579
+  },
+  {
+    "name": "CLARK",
+    "level": "k8",
+    "classrooms": 22,
+    "modular_classrooms": 0,
+    "functional_capacity": 495
+  },
+  {
+    "name": "SUNNYSIDE",
+    "level": "k8",
+    "classrooms": 24,
+    "modular_classrooms": 2,
+    "functional_capacity": 546
+  },
+  {
+    "name": "FERNWOOD",
+    "level": "k8",
+    "classrooms": 26,
+    "modular_classrooms": 0,
+    "functional_capacity": 555
+  },
+  {
+    "name": "CHAVEZ",
+    "level": "k8",
+    "classrooms": 29,
+    "modular_classrooms": 2,
+    "functional_capacity": 589
+  },
+  {
+    "name": "SKYLINE",
+    "level": "k8",
+    "classrooms": 14,
+    "modular_classrooms": 0,
+    "functional_capacity": 282
+  },
+  {
+    "name": "ASTOR",
+    "level": "k8",
+    "classrooms": 21,
+    "modular_classrooms": 4,
+    "functional_capacity": 559
+  },
+  {
+    "name": "MT. TABOR",
+    "level": "middle",
+    "classrooms": 31,
+    "modular_classrooms": 0,
+    "functional_capacity": 682
+  },
+  {
+    "name": "KELLOGG",
+    "level": "middle",
+    "classrooms": 33,
+    "modular_classrooms": 0,
+    "functional_capacity": 803
+  },
+  {
+    "name": "HOSFORD",
+    "level": "middle",
+    "classrooms": 32,
+    "modular_classrooms": 0,
+    "functional_capacity": 696
+  },
+  {
+    "name": "JACKSON",
+    "level": "middle",
+    "classrooms": 40,
+    "modular_classrooms": 0,
+    "functional_capacity": 908
+  },
+  {
+    "name": "SELLWOOD",
+    "level": "middle",
+    "classrooms": 30,
+    "modular_classrooms": 0,
+    "functional_capacity": 683
+  },
+  {
+    "name": "ROSEWAY HEIGHTS",
+    "level": "middle",
+    "classrooms": 39,
+    "modular_classrooms": 0,
+    "functional_capacity": 803
+  },
+  {
+    "name": "WEST SYLVAN",
+    "level": "middle",
+    "classrooms": 40,
+    "modular_classrooms": 0,
+    "functional_capacity": 987
+  },
+  {
+    "name": "OCKLEY GREEN",
+    "level": "middle",
+    "classrooms": 31,
+    "modular_classrooms": 3,
+    "functional_capacity": 689
+  },
+  {
+    "name": "GRAY",
+    "level": "middle",
+    "classrooms": 26,
+    "modular_classrooms": 0,
+    "functional_capacity": 622
+  },
+  {
+    "name": "BEAUMONT",
+    "level": "middle",
+    "classrooms": 34,
+    "modular_classrooms": 0,
+    "functional_capacity": 701
+  },
+  {
+    "name": "DA VINCI",
+    "level": "middle",
+    "classrooms": 25,
+    "modular_classrooms": 6,
+    "functional_capacity": 714
+  },
+  {
+    "name": "TUBMAN",
+    "level": "middle",
+    "classrooms": 33,
+    "modular_classrooms": 0,
+    "functional_capacity": 732
+  },
+  {
+    "name": "GEORGE",
+    "level": "middle",
+    "classrooms": 31,
+    "modular_classrooms": 0,
+    "functional_capacity": 617
+  },
+  {
+    "name": "LANE",
+    "level": "middle",
+    "classrooms": 39,
+    "modular_classrooms": 0,
+    "functional_capacity": 770
+  },
+  {
+    "name": "HARRISON PARK",
+    "level": "middle",
+    "classrooms": 39,
+    "modular_classrooms": 0,
+    "functional_capacity": 1006
+  },
+  {
+    "name": "GRANT",
+    "level": "high",
+    "classrooms": 74,
+    "modular_classrooms": 0,
+    "functional_capacity": 1686
+  },
+  {
+    "name": "FRANKLIN",
+    "level": "high",
+    "classrooms": 74,
+    "modular_classrooms": 0,
+    "functional_capacity": 1744
+  },
+  {
+    "name": "ROOSEVELT",
+    "level": "high",
+    "classrooms": 61,
+    "modular_classrooms": 0,
+    "functional_capacity": 1320
+  },
+  {
+    "name": "WELLS-BARNETT",
+    "level": "high",
+    "classrooms": 76,
+    "modular_classrooms": 0,
+    "functional_capacity": 1872
+  },
+  {
+    "name": "CLEVELAND",
+    "level": "high",
+    "classrooms": 75,
+    "modular_classrooms": 2,
+    "functional_capacity": 1859
+  },
+  {
+    "name": "LINCOLN",
+    "level": "high",
+    "classrooms": 76,
+    "modular_classrooms": 0,
+    "functional_capacity": 1867
+  },
+  {
+    "name": "MCDANIEL",
+    "level": "high",
+    "classrooms": 77,
+    "modular_classrooms": 0,
+    "functional_capacity": 1739
+  },
+  {
+    "name": "BENSON",
+    "level": "high",
+    "classrooms": 86,
+    "modular_classrooms": 0,
+    "functional_capacity": 2203
+  },
+  {
+    "name": "JEFFERSON",
+    "level": "high",
+    "classrooms": 74,
+    "modular_classrooms": 0,
+    "functional_capacity": 1817
+  }
+]

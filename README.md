@@ -20,9 +20,9 @@ python3 -m http.server -d web 8000
 ## What's in the dashboard
 
 - **Map** of every in-scope school.
-- **Ranking charts** (enrollment, crowding, URM seismic risk, pipeline family units, recent permits).
+- **Ranking charts** (enrollment, building utilization, URM seismic risk, pipeline family units, recent permits).
 - **Trends chart** showing 7-year enrollment change (2018 → 2025) with per-school toggles.
-- **Scatter plots** comparing enrollment to crowding, math proficiency to poverty, enrollment change to nearby residential permits, and year-built to enrollment.
+- **Scatter plots** comparing enrollment to building utilization, math proficiency to poverty, enrollment change to nearby residential permits, and year-built to enrollment.
 - **Sortable table** of all 74 schools with column descriptions and source citations.
 - **Methodology** section documenting every source with vintage.
 
@@ -36,6 +36,7 @@ python3 -m http.server -d web 8000
 | [NCES Common Core of Data](https://nces.ed.gov/ccd/) | Free/reduced lunch counts, geocoded addresses, 2018-2023 enrollment history | 2018-2023 |
 | [US Dept of Ed CRDC](https://ocrdata.ed.gov/) | English learners, IDEA/SPED, chronic absenteeism (2020); counselor / social worker / psychologist / nurse FTE, OSS suspension instances, post-COVID chronic absenteeism (2021) | 2020, 2021 (both COVID-era) |
 | [KPFF Seismic Report 2009](https://bond.pps.net/) + Holmes Engineering 2024 | Year built, square footage, construction type, URM retrofit estimates | 2009 / 2024 |
+| [PPS Long-Range Facility Plan 2021 (Vol 1)](https://www.pps.net/cms/lib/OR01913224/Centricity/domain/219/lrfp/PPS-LRFP-Vol1-2021-Adopted.pdf) | Functional capacity per school (classrooms × station size minus set-asides, with PPS-defined utilization rates). Used for the building-utilization metric. | 2021 |
 | [PPS Bond page](https://bond.pps.net/seismic-improvements) | Seismic retrofit status | 2025 |
 | [Oregon Affordable Housing Inventory (OAHI)](https://www.oregon.gov/ohcs/) | Existing + in-development subsidized housing | 2024 |
 | [Metro RLIS](https://rlisdiscovery.oregonmetro.gov/) | Supplementary regional housing | 2024 |
@@ -59,6 +60,7 @@ scripts/
   fetch_enrollment_history.py   → data/raw/pps_ccd_enrollment_history.json
   fetch_ode_aag.py              → data/raw/ode_aag_schools_2425.csv
   fetch_dli_report.py           → data/raw/pps_immersion_details_2526.{pdf,json}
+  parse_lrfp_capacity.py        → data/raw/pps_functional_capacity_2021.json
   boundary_join.py              shared BoundaryIndex (point-in-polygon w/ haversine fallback)
   build_master.py               assemble data/pps_schools.csv
   merge_housing.py              + affordable_units / pipeline_* columns
@@ -86,6 +88,7 @@ python scripts/fetch_crdc_2021.py
 python scripts/fetch_enrollment_history.py
 python scripts/fetch_ode_aag.py
 python scripts/fetch_dli_report.py
+python scripts/parse_lrfp_capacity.py  # reads data/raw/LRFP_Vol1_2021.pdf (checked in)
 
 # 2. Build master CSV:
 python scripts/build_master.py
