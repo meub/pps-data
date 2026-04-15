@@ -12,6 +12,7 @@ FACILITY = ROOT / "data/pps_facility_2009.csv"
 CRDC = ROOT / "data/raw/pps_crdc_agg.json"
 CRDC_2021 = ROOT / "data/raw/pps_crdc_2021_agg.json"
 CCD_HISTORY = ROOT / "data/raw/pps_ccd_enrollment_history.json"
+CCD_TEACHERS = ROOT / "data/raw/pps_ccd_teachers_2023.json"
 OSAS_ELA_25 = ROOT / "data/raw/pagr_schools_ela_all_2425.xlsx"
 OSAS_MATH_25 = ROOT / "data/raw/pagr_schools_math_all_2425.xlsx"
 OSAS_ELA_24 = ROOT / "data/raw/pagr_schools_ela_all_2324.xlsx"
@@ -677,6 +678,8 @@ def main():
     with open(CRDC_2021) as f:
         c21 = json.load(f)
     staff = c21["teachers_staff"]
+    pps["teachers_fte_2021"] = pps["nces_school_id"].map(
+        lambda n: (staff.get(str(n)) or {}).get("teachers_fte"))
     pps["counselors_fte_2021"] = pps["nces_school_id"].map(
         lambda n: (staff.get(str(n)) or {}).get("counselors_fte"))
     pps["social_workers_fte_2021"] = pps["nces_school_id"].map(
@@ -688,6 +691,9 @@ def main():
     pps["suspensions_2021"] = pps["nces_school_id"].map(c21["suspensions_instances"])
     pps["chronic_absent_2021"] = pps["nces_school_id"].map(c21["chronic_absent"])
     pps["enrollment_crdc_2021"] = pps["nces_school_id"].map(c21["enrollment"])
+    pps["students_per_teacher_2021"] = (
+        pps["enrollment_crdc_2021"] / pps["teachers_fte_2021"]
+    ).round(2)
 
     # NCES CCD historical enrollment 2018-2023 (per-school totals from the
     # directory endpoint). Combined with ODE 2024-25/2025-26 this gives an
@@ -697,6 +703,16 @@ def main():
     for year_str, year_map in hist.items():
         col = f"enrollment_{year_str}"
         pps[col] = pps["nces_school_id"].map(year_map)
+
+    # CCD 2023 teacher FTE → student/teacher ratio (vs 2023 CCD enrollment,
+    # same-year comparison). Urban Institute /schools/ccd/directory/2023/.
+    with open(CCD_TEACHERS) as f:
+        ccd_teachers = json.load(f)
+    pps["teachers_fte_2023"] = pps["nces_school_id"].map(
+        lambda n: ccd_teachers.get(str(n)))
+    pps["students_per_teacher_2023"] = (
+        pps["enrollment_2023"] / pps["teachers_fte_2023"]
+    ).round(2)
 
     # Derived FRL rates. CCD 2022 enrollment is closer in time to FRL counts
     # than 2025-26 enrollment, so use it when available.
@@ -820,6 +836,8 @@ def main():
         "pct_teacher_retention_2425", "class_size_2425",
         "crdc_lep_2020", "crdc_idea_2020", "crdc_chronic_absent_2020",
         "pct_lep", "pct_idea",
+        "teachers_fte_2021", "students_per_teacher_2021",
+        "teachers_fte_2023", "students_per_teacher_2023",
         "counselors_fte_2021", "social_workers_fte_2021",
         "psychologists_fte_2021", "nurses_fte_2021",
         "suspensions_2021", "chronic_absent_2021", "enrollment_crdc_2021",
