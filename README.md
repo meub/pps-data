@@ -102,7 +102,7 @@ python scripts/fetch_dli_report.py
 python scripts/parse_lrfp_capacity.py  # reads data/raw/LRFP_Vol1_2021.pdf (checked in)
 python scripts/fetch_pps_airflow.py    # ~270 MB of per-building airflow PDFs
 python scripts/parse_pps_airflow.py    # ~6 min: pdfplumber table extraction
-python scripts/parse_holmes_costs.py   # reads data/raw/holmes_2024_seismic.pdf (checked in)
+python scripts/parse_holmes_costs.py   # reads data/raw/holmes_2024_seismic.pdf (download separately, see below)
 
 # 2. Build master CSV:
 python scripts/build_master.py
@@ -134,6 +134,7 @@ Every "nearby" metric (affordable units, pipeline family units, residential perm
 
 - `.venv/` — Python virtualenv, regenerate locally.
 - `data/raw/LRFP_Vol2_2021.pdf` (134 MB) — PPS Long-Range Facility Plan Vol. 2, available on [bond.pps.net](https://bond.pps.net/).
+- `data/raw/holmes_2024_seismic.pdf` (51 MB) — Holmes 2024 PPS Seismic Assessment, available on [Google Drive](https://drive.google.com/file/d/1vN48MAzNDz1GvZ4pkSXRyAuiuNTWcnt7/view).
 - `data/raw/metro/` (336 MB) — Metro 2045 forecast .ppkx + extracted GDB, available on [oregonmetro.gov](https://www.oregonmetro.gov/).
 
 ## Credits

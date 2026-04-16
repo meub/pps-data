@@ -13,6 +13,7 @@ __pycache__/
 
 # Large source files over GitHub's 100MB limit (or that inflate the repo)
 data/raw/LRFP_Vol2_2021.pdf
+data/raw/holmes_2024_seismic.pdf
 data/raw/metro/
 data/raw/pps_airflow_pdfs/
 
