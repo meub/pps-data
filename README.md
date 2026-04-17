@@ -21,16 +21,19 @@ python3 -m http.server -d web 8000
 
 - **Map** of every in-scope school (click to enable scroll-zoom).
 - **Trends chart** showing 7-year enrollment change (2018 → 2025) with per-school toggles.
-- **Utilization** ranking (enrollment vs. 2021 LRFP functional capacity) and URM seismic-risk ranking.
-- **Sustainability** ranking (pipeline family units + recent residential permits within each school's catchment).
-- **Transportation** ranking (bussed-students share) and safe-routes context.
-- **Ratios** ranking (students per teacher FTE, 2023 CCD).
-- **Seismic** ranking (remaining retrofit cost per campus from Holmes 2024, colored by funding status: done / partial / planned / uncommitted; URM buildings flagged).
-- **Ventilation** ranking (% of rooms below Lancet 3 ACH_e floor, colored by MERV-13 upgrade status).
+- **Utilization** ranking (enrollment vs. 2021 LRFP functional capacity).
+- **Long-term sustainability** ranking (7-year enrollment change 2018 → 2025).
+- **Housing growth forecast** ranking — projected new residential units within each school's catchment by ~2035 (Metro BLI 2045 grid, area-weighted to catchment polygons).
+- **Seismic** ranking (remaining retrofit cost per campus from Holmes 2024, colored by funding status; URM buildings flagged).
+- **Transportation** ranking (distance to nearest same-level school for the 15 lowest-enrollment schools).
+- **Ratios** ranking (students per teacher FTE, Fall 2023 CCD).
 - **DLI & focus-option** section with strand-vs-non-strand headcounts and a collapsible "why this matters" note.
-- **Scatter plots**: enrollment vs. utilization, math proficiency vs. poverty, chronic absenteeism vs. poverty, support-staff FTE equity, students-per-teacher vs. enrollment.
-- **Sortable table** of all 74 schools with column descriptions and source citations.
+- **Scatter plots**: enrollment vs. utilization, math/avg proficiency vs. poverty, enrollment vs. % BIPOC, chronic absenteeism vs. proficiency, support-staff FTE equity, 7-year change vs. current size, students-per-teacher vs. enrollment.
+- **Sortable table** of all 74 schools with column descriptions and source citations; CSV export of the filtered rows.
 - **Methodology** section documenting every source with vintage.
+- **Feeder trees** on a standalone page at [`/feeders.html`](https://ppsdata.info/feeders.html) — elementary → middle → high school feeder chains, one tree per high school (Mermaid diagrams).
+
+Ranking charts render vertically on desktop and swap to horizontal bars on narrow screens (<700 px) so every school label stays legible.
 
 ## Data sources
 
@@ -53,6 +56,7 @@ python3 -m http.server -d web 8000
 | [PPS Dual Language Immersion + focus-option pages](https://www.pps.net/departments/dual-language/current-dli-programs) | Per-school DLI languages (5) + K-8 focus options (Arts, Environmental, STEAM, TAG, Alt) | 2026-04 |
 | [PPS Language Immersion Enrollment Report](https://www.pps.net/departments/research-assessment-and-accountability/data-and-reports/enrollment-reports-and-school-profiles) | Per-school DLI-strand vs. non-strand headcounts (SIS Synergy, annual PDF) | 2025-26 |
 | [Metro 2045 Distributed Forecast](https://www.oregonmetro.gov/) (Ord. 21-1457) | Regional growth context (city/county only) | 2021 |
+| [Portland Building Land Inventory — Metro BLI 2045 Housing Allocation](https://www.portlandmaps.com/od/rest/services/COP_OpenData_PlanningDevelopment/MapServer/88) | Grid-cell projected new residential units by ~2035 under current zoning (area-weighted to each school's catchment) | 2024 |
 
 ## Project structure
 
@@ -68,6 +72,7 @@ scripts/
   fetch_enrollment_history.py   → data/raw/pps_ccd_enrollment_history.json
   fetch_ode_aag.py              → data/raw/ode_aag_schools_2425.csv
   fetch_dli_report.py           → data/raw/pps_immersion_details_2526.{pdf,json}
+  fetch_metro_bli.py            → data/raw/metro_bli_housing_allocation.geojson
   parse_lrfp_capacity.py        → data/raw/pps_functional_capacity_2021.json
   fetch_pps_airflow.py          → data/raw/pps_airflow_pdfs/*.pdf + pps_airflow_index.json
   parse_pps_airflow.py          → data/raw/pps_airflow_stats.json
@@ -76,9 +81,11 @@ scripts/
   build_master.py               assemble data/pps_schools.csv
   merge_housing.py              + affordable_units / pipeline_* columns
   merge_permits.py              + permit columns
+  merge_bli_forecast.py         + bli_forecast_units_within_catchment (area-weighted from BLI grid)
   export_web.py                 → web/data.json (filters to the 74 in-scope schools)
 web/
   index.html              single-page dashboard
+  feeders.html            standalone elem→middle→HS feeder-tree diagrams (Mermaid)
   data.json               dashboard payload (generated)
 ```
 
@@ -99,6 +106,7 @@ python scripts/fetch_crdc_2021.py
 python scripts/fetch_enrollment_history.py
 python scripts/fetch_ode_aag.py
 python scripts/fetch_dli_report.py
+python scripts/fetch_metro_bli.py      # Metro BLI 2045 housing-allocation grid (~30 MB GeoJSON)
 python scripts/parse_lrfp_capacity.py  # reads data/raw/LRFP_Vol1_2021.pdf (checked in)
 python scripts/fetch_pps_airflow.py    # ~270 MB of per-building airflow PDFs
 python scripts/parse_pps_airflow.py    # ~6 min: pdfplumber table extraction
@@ -107,9 +115,10 @@ python scripts/parse_holmes_costs.py   # reads data/raw/holmes_2024_seismic.pdf 
 # 2. Build master CSV:
 python scripts/build_master.py
 
-# 3. Spatial joins (housing + permits into the master):
+# 3. Spatial joins (housing + permits + BLI forecast into the master):
 python scripts/merge_housing.py
 python scripts/merge_permits.py
+python scripts/merge_bli_forecast.py
 
 # 4. Export dashboard payload:
 python scripts/export_web.py
@@ -119,7 +128,9 @@ Each step is idempotent; rerun freely as sources refresh.
 
 ### Spatial-join methodology
 
-Every "nearby" metric (affordable units, pipeline family units, residential permits) is aggregated over the school's **PPS attendance polygon** rather than a 1-mile circle. Schools without a published catchment (ACCESS Academy, focus-option programs, some alternatives) fall back to a 1-mile haversine radius. `boundary_join.BoundaryIndex` handles the lookup and the name-alias table between ODE and the City's boundary feed.
+Every "nearby" metric (affordable units, pipeline family units, residential permits, BLI forecast units) is aggregated over the school's **PPS attendance polygon** rather than a 1-mile circle. Schools without a published catchment (ACCESS Academy, focus-option programs, some alternatives) fall back to a 1-mile haversine radius. `boundary_join.BoundaryIndex` handles the lookup and the name-alias table between ODE and the City's boundary feed.
+
+The BLI 2045 forecast grid is attributed by **area-weighted overlap**: for each grid cell intersecting a catchment, the fraction `intersection.area / cell.area` of that cell's `Forecast_Units_Prop` contributes to the school's total. See `scripts/merge_bli_forecast.py`.
 
 ## Caveats
 
@@ -136,6 +147,7 @@ Every "nearby" metric (affordable units, pipeline family units, residential perm
 - `data/raw/LRFP_Vol2_2021.pdf` (134 MB) — PPS Long-Range Facility Plan Vol. 2, available on [bond.pps.net](https://bond.pps.net/).
 - `data/raw/holmes_2024_seismic.pdf` (51 MB) — Holmes 2024 PPS Seismic Assessment, available on [Google Drive](https://drive.google.com/file/d/1vN48MAzNDz1GvZ4pkSXRyAuiuNTWcnt7/view).
 - `data/raw/metro/` (336 MB) — Metro 2045 forecast .ppkx + extracted GDB, available on [oregonmetro.gov](https://www.oregonmetro.gov/).
+- `data/raw/metro_bli_housing_allocation.geojson` (~30 MB) — Metro BLI 2045 housing-allocation grid, regenerated via `python scripts/fetch_metro_bli.py`.
 
 ## Credits
 
