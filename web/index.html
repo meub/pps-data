@@ -1069,22 +1069,65 @@
       .replace(/ K-8$/, "");
 
     function renderRanking() {
+      const el = document.getElementById("plot-ranking");
+      if (!el) return;
       const mobile = window.innerWidth < 700;
-      const xs = rows.map((_, i) => i);
-      const ys = rows.map(s => s.utilization_pct_2526 * 100);
-      const trace = {
-        type: "bar",
-        x: xs, y: ys,
-        text: rows.map(s => s.school_name),
-        textposition: "none",
+      el.style.height = mobile ? (rows.length * 18 + 80) + "px" : "620px";
+      const names = rows.map(s => shortName(s.school_name));
+      const values = rows.map(s => s.utilization_pct_2526 * 100);
+      const fullNames = rows.map(s => s.school_name);
+      const customdata = rows.map(s => [s.enrollment_2025_26, s.functional_capacity_2021]);
+      const trace = mobile ? {
+        type: "bar", orientation: "h",
+        x: values, y: names,
+        text: fullNames, textposition: "none",
         showlegend: false,
         marker: { color: "#58a6ff", line: { width: 0 } },
-        customdata: rows.map(s => [s.enrollment_2025_26, s.functional_capacity_2021]),
+        customdata,
+        hovertemplate: "<b>%{text}</b><br>" +
+          "Utilization: %{x:.0f}%<br>" +
+          "%{customdata[0]} students / %{customdata[1]} capacity<extra></extra>",
+      } : {
+        type: "bar",
+        x: rows.map((_, i) => i), y: values,
+        text: fullNames, textposition: "none",
+        showlegend: false,
+        marker: { color: "#58a6ff", line: { width: 0 } },
+        customdata,
         hovertemplate: "<b>%{text}</b><br>" +
           "Utilization: %{y:.0f}%<br>" +
           "%{customdata[0]} students / %{customdata[1]} capacity<extra></extra>",
       };
-      Plotly.react("plot-ranking", [trace], {
+      const layout = mobile ? {
+        paper_bgcolor: "#161b22", plot_bgcolor: "#161b22",
+        font: { color: "#e6edf3", size: 11, family: '"Nunito Sans", -apple-system, Helvetica, Arial, sans-serif' },
+        hoverlabel: { font: { family: '"Nunito Sans", -apple-system, Helvetica, Arial, sans-serif' } },
+        margin: { l: 130, r: 24, t: 40, b: 40 },
+        bargap: 0.2,
+        xaxis: {
+          title: "Utilization %",
+          gridcolor: "#30363d", zerolinecolor: "#30363d",
+          ticksuffix: "%", rangemode: "tozero", side: "top",
+          fixedrange: true,
+        },
+        yaxis: {
+          autorange: "reversed",
+          tickfont: { size: 9, color: "#e6edf3" },
+          automargin: true, showgrid: false, zeroline: false, fixedrange: true,
+        },
+        showlegend: false,
+        shapes: [{
+          type: "line", yref: "paper",
+          x0: 100, x1: 100, y0: 0, y1: 1,
+          line: { color: "#7d8590", width: 1, dash: "dash" },
+        }],
+        annotations: [{
+          yref: "paper", y: 1, x: 100,
+          text: "100% capacity",
+          showarrow: false, yanchor: "bottom", xanchor: "right",
+          font: { size: 10, color: "#7d8590" },
+        }],
+      } : {
         paper_bgcolor: "#161b22", plot_bgcolor: "#161b22",
         font: { color: "#e6edf3", size: 11, family: '"Nunito Sans", -apple-system, Helvetica, Arial, sans-serif' },
         hoverlabel: { font: { family: '"Nunito Sans", -apple-system, Helvetica, Arial, sans-serif' } },
@@ -1092,10 +1135,10 @@
         bargap: 0.15,
         xaxis: {
           tickmode: "array",
-          tickvals: xs,
-          ticktext: rows.map(s => shortName(s.school_name)),
+          tickvals: rows.map((_, i) => i),
+          ticktext: names,
           tickangle: -60,
-          tickfont: { size: mobile ? 8 : 9, color: "#e6edf3" },
+          tickfont: { size: 9, color: "#e6edf3" },
           showgrid: false, zeroline: false, fixedrange: true,
         },
         yaxis: {
@@ -1115,7 +1158,8 @@
           showarrow: false, yanchor: "bottom", xanchor: "right",
           font: { size: 10, color: "#7d8590" },
         }],
-      }, { displayModeBar: false, responsive: true });
+      };
+      Plotly.react("plot-ranking", [trace], layout, { displayModeBar: false, responsive: true });
     }
 
     renderRanking();
@@ -1402,23 +1446,39 @@
       .replace(/ K-8$/, "");
 
     function renderForecastRankBar() {
+      const el = document.getElementById("plot-forecast");
+      if (!el) return;
       const mobile = window.innerWidth < 700;
-      const xs = rows.map((_, i) => i);
-      const ys = rows.map(s => s.bli_forecast_units_within_catchment);
+      el.style.height = mobile ? (rows.length * 18 + 100) + "px" : "620px";
+      const names = rows.map(s => shortName(s.school_name));
+      const values = rows.map(s => s.bli_forecast_units_within_catchment);
+      const fullNames = rows.map(s => s.school_name);
       const COLOR_FALLBACK = "#2dd4bf";  // teal: 1-mi buffer fallback
       const colors = rows.map(s => FALLBACK_SCHOOLS.has(s.school_name) ? COLOR_FALLBACK : COLOR_OTHER);
-      const trace = {
-        type: "bar",
-        x: xs, y: ys,
-        text: rows.map(s => s.school_name),
-        textposition: "none",
+      const customdata = rows.map(s => [
+        FALLBACK_SCHOOLS.has(s.school_name) ? "1-mi buffer (no catchment)" : "PPS attendance area",
+        s.permits_units_within_1mi_since_2022 ?? 0,
+        s.enrollment_2025_26,
+      ]);
+      const trace = mobile ? {
+        type: "bar", orientation: "h",
+        x: values, y: names,
+        text: fullNames, textposition: "none",
         showlegend: false,
         marker: { color: colors, line: { width: 0 } },
-        customdata: rows.map(s => [
-          FALLBACK_SCHOOLS.has(s.school_name) ? "1-mi buffer (no catchment)" : "PPS attendance area",
-          s.permits_units_within_1mi_since_2022 ?? 0,
-          s.enrollment_2025_26,
-        ]),
+        customdata,
+        hovertemplate: "<b>%{text}</b><br>" +
+          "Forecast new units (~2035): %{x:,.0f}<br>" +
+          "Current enrollment: %{customdata[2]:,}<br>" +
+          "Permits since 2022: %{customdata[1]:,}<br>" +
+          "Geography: %{customdata[0]}<extra></extra>",
+      } : {
+        type: "bar",
+        x: rows.map((_, i) => i), y: values,
+        text: fullNames, textposition: "none",
+        showlegend: false,
+        marker: { color: colors, line: { width: 0 } },
+        customdata,
         hovertemplate: "<b>%{text}</b><br>" +
           "Forecast new units (~2035): %{y:,.0f}<br>" +
           "Current enrollment: %{customdata[2]:,}<br>" +
@@ -1431,15 +1491,31 @@
         { type: "bar", x: [null], y: [null], name: "1-mi buffer (no catchment)",
           marker: { color: COLOR_FALLBACK }, showlegend: true, hoverinfo: "skip" },
       ];
-      Plotly.react("plot-forecast", [trace, ...legendTraces], Object.assign(baseLayout(), {
+      const layout = mobile ? Object.assign(baseLayout(), {
+        margin: { l: 130, r: 24, t: 70, b: 40 },
+        bargap: 0.2,
+        xaxis: {
+          title: "Projected new units by ~2035",
+          gridcolor: "#30363d", zerolinecolor: "#30363d",
+          rangemode: "tozero", side: "top", fixedrange: true,
+        },
+        yaxis: {
+          autorange: "reversed",
+          tickfont: { size: 9, color: "#e6edf3" },
+          automargin: true, showgrid: false, zeroline: false, fixedrange: true,
+        },
+        showlegend: true,
+        legend: { orientation: "h", x: 1, y: 1, xref: "paper", yref: "container", xanchor: "right", yanchor: "top",
+          bgcolor: "rgba(0,0,0,0)", font: { size: 10, color: "#e6edf3" } },
+      }) : Object.assign(baseLayout(), {
         margin: { l: 60, r: 20, t: 60, b: 170 },
         bargap: 0.15,
         xaxis: {
           tickmode: "array",
-          tickvals: xs,
-          ticktext: rows.map(s => shortName(s.school_name)),
+          tickvals: rows.map((_, i) => i),
+          ticktext: names,
           tickangle: -60,
-          tickfont: { size: mobile ? 8 : 9, color: "#e6edf3" },
+          tickfont: { size: 9, color: "#e6edf3" },
           showgrid: false, zeroline: false, fixedrange: true,
         },
         yaxis: {
@@ -1450,7 +1526,8 @@
         showlegend: true,
         legend: { orientation: "h", x: 1, y: 1, xref: "paper", yref: "container", xanchor: "right", yanchor: "top",
           bgcolor: "rgba(0,0,0,0)", font: { size: 10, color: "#e6edf3" } },
-      }), { displayModeBar: false, responsive: true });
+      });
+      Plotly.react("plot-forecast", [trace, ...legendTraces], layout, { displayModeBar: false, responsive: true });
     }
 
     renderForecastRankBar();
@@ -1472,30 +1549,69 @@
       .replace(/ K-8$/, "");
 
     function renderRatio() {
+      const el = document.getElementById("plot-ratio");
+      if (!el) return;
       const mobile = window.innerWidth < 700;
-      const xs = rows.map((_, i) => i);
-      const ys = rows.map(s => s.students_per_teacher_2023);
-      const trace = {
-        type: "bar",
-        x: xs, y: ys,
-        text: rows.map(s => s.school_name),
-        textposition: "none",
+      el.style.height = mobile ? (rows.length * 18 + 80) + "px" : "620px";
+      const names = rows.map(s => shortName(s.school_name));
+      const values = rows.map(s => s.students_per_teacher_2023);
+      const fullNames = rows.map(s => s.school_name);
+      const customdata = rows.map(s => [s.enrollment_2023, s.teachers_fte_2023]);
+      const trace = mobile ? {
+        type: "bar", orientation: "h",
+        x: values, y: names,
+        text: fullNames, textposition: "none",
         showlegend: false,
         marker: { color: "#a371f7", line: { width: 0 } },
-        customdata: rows.map(s => [s.enrollment_2023, s.teachers_fte_2023]),
+        customdata,
+        hovertemplate: "<b>%{text}</b><br>" +
+          "%{customdata[0]} students / %{customdata[1]} teacher FTE<br>" +
+          "Ratio: %{x:.1f}<extra></extra>",
+      } : {
+        type: "bar",
+        x: rows.map((_, i) => i), y: values,
+        text: fullNames, textposition: "none",
+        showlegend: false,
+        marker: { color: "#a371f7", line: { width: 0 } },
+        customdata,
         hovertemplate: "<b>%{text}</b><br>" +
           "%{customdata[0]} students / %{customdata[1]} teacher FTE<br>" +
           "Ratio: %{y:.1f}<extra></extra>",
       };
-      Plotly.react("plot-ratio", [trace], Object.assign(baseLayout(), {
+      const layout = mobile ? Object.assign(baseLayout(), {
+        margin: { l: 130, r: 24, t: 40, b: 40 },
+        bargap: 0.2,
+        xaxis: {
+          title: "Students per teacher FTE (Fall 2023)",
+          gridcolor: "#30363d", zerolinecolor: "#30363d",
+          rangemode: "tozero", side: "top", fixedrange: true,
+        },
+        yaxis: {
+          autorange: "reversed",
+          tickfont: { size: 9, color: "#e6edf3" },
+          automargin: true, showgrid: false, zeroline: false, fixedrange: true,
+        },
+        showlegend: false,
+        shapes: [{
+          type: "line", yref: "paper",
+          x0: medianVal, x1: medianVal, y0: 0, y1: 1,
+          line: { color: "#7d8590", width: 1, dash: "dash" },
+        }],
+        annotations: [{
+          yref: "paper", y: 1, x: medianVal,
+          text: `median ${medianVal.toFixed(1)}`,
+          showarrow: false, yanchor: "bottom", xanchor: "left",
+          font: { size: 10, color: "#7d8590" },
+        }],
+      }) : Object.assign(baseLayout(), {
         margin: { l: 60, r: 20, t: 40, b: 170 },
         bargap: 0.15,
         xaxis: {
           tickmode: "array",
-          tickvals: xs,
-          ticktext: rows.map(s => shortName(s.school_name)),
+          tickvals: rows.map((_, i) => i),
+          ticktext: names,
           tickangle: -60,
-          tickfont: { size: mobile ? 8 : 9, color: "#e6edf3" },
+          tickfont: { size: 9, color: "#e6edf3" },
           showgrid: false, zeroline: false, fixedrange: true,
         },
         yaxis: {
@@ -1515,7 +1631,8 @@
           showarrow: false, yanchor: "bottom", xanchor: "right",
           font: { size: 10, color: "#7d8590" },
         }],
-      }), { displayModeBar: false, responsive: true });
+      });
+      Plotly.react("plot-ratio", [trace], layout, { displayModeBar: false, responsive: true });
     }
     renderRatio();
     let tR;
