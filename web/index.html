@@ -1732,7 +1732,7 @@
 
       const customdata = rows.map(s => [
         s.is_urm_building ? "Yes" : "No",
-        s.urm_retrofit_cost_usd,
+        s.urm_retrofit_cost_usd != null ? fmtUSD(s.urm_retrofit_cost_usd) : "—",
         s.seismic_retrofit_status || "none",
         hasPriorRetrofit(s) ? "Yes" : "No",
         s.retrofit_cost_remaining_usd,
@@ -1751,7 +1751,7 @@
         hovertemplate: "<b>%{y}</b><br>" +
           "Funded (2025 bond): %{x:$,.0f}<br>" +
           "Complete retrofit ROM: %{customdata[4]:$,.0f}<br>" +
-          "URM-only scope: %{customdata[1]:$,.0f}<br>" +
+          "URM-only scope: %{customdata[1]}<br>" +
           "URM building: %{customdata[0]}<br>" +
           "Prior retrofit work: %{customdata[3]}<br>" +
           "Status: %{customdata[2]}<extra></extra>",
@@ -1769,7 +1769,7 @@
         hovertemplate: "<b>%{y}</b><br>" +
           "Unfunded gap: %{x:$,.0f}<br>" +
           "Complete retrofit ROM: %{customdata[4]:$,.0f}<br>" +
-          "URM-only scope: %{customdata[1]:$,.0f}<br>" +
+          "URM-only scope: %{customdata[1]}<br>" +
           "URM building: %{customdata[0]}<br>" +
           "Prior retrofit work: %{customdata[3]}<br>" +
           "Status: %{customdata[2]}<extra></extra>",
