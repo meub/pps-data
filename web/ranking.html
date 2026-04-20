@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PPS School Ranking — Portland Public Schools Data Explorer</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap">
+
+<style>
+  :root {
+    --bg: #0e1115; --panel: #161b22; --border: #30363d; --fg: #e6edf3;
+    --muted: #7d8590; --accent: #2f81f7; --danger: #f97e60; --warn: #e3b341; --good: #7ee787;
+    --fs-h1: 32px; --fs-h2: 22px; --fs-h3: 16px;
+    --fs-body: 15px; --fs-note: 15px; --fs-small: 13px; --fs-micro: 12px;
+    --nav-h: 52px; --max-w: 1600px;
+  }
+  @media (max-width: 700px) {
+    :root { --fs-h1: 24px; --fs-h2: 18px; --fs-h3: 15px; --fs-body: 15px;
+      --fs-note: 14px; --fs-small: 12.5px; --fs-micro: 11.5px; --nav-h: 48px; }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--fg);
+    font: var(--fs-body)/1.55 "Nunito Sans", -apple-system, "SF Pro Text", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased; }
+
+  .topnav { position: sticky; top: 0; z-index: 1100; background: rgba(14,17,21,0.92);
+    backdrop-filter: saturate(140%) blur(8px); -webkit-backdrop-filter: saturate(140%) blur(8px);
+    border-bottom: 1px solid var(--border); }
+  .topnav-inner { max-width: var(--max-w); margin: 0 auto; padding: 0 24px;
+    height: var(--nav-h); display: flex; align-items: center; gap: 18px; }
+  .topnav .brand { font-weight: 600; font-size: 14px; letter-spacing: 0.2px;
+    color: var(--fg); text-decoration: none; white-space: nowrap;
+    display: inline-flex; align-items: center; }
+  .topnav .brand .dot { width: 8px; height: 8px; margin-right: 8px;
+    border-radius: 50%; background: var(--accent); flex-shrink: 0;
+    transform: translateY(-2px); }
+  .topnav .back { margin-left: auto; color: var(--muted); text-decoration: none; font-size: 13px;
+    padding: 6px 10px; border-radius: 6px; transition: color 0.15s, background 0.15s; }
+  .topnav .back:hover { color: var(--fg); background: rgba(255,255,255,0.04); }
+  @media (max-width: 1000px) { .topnav-inner { padding: 0 16px; } }
+
+  header { padding: 28px 32px 24px; border-bottom: 1px solid var(--border);
+    max-width: var(--max-w); margin: 0 auto; }
+  header h1 { margin: 0 0 8px; font-size: var(--fs-h1); font-weight: 600; line-height: 1.2; }
+  header p { margin: 0 0 10px; color: var(--muted); max-width: 820px; font-size: var(--fs-note); }
+  header p:last-of-type { margin-bottom: 0; }
+  header p a { color: var(--accent); text-decoration: underline; }
+  header p a:hover { color: var(--fg); }
+
+  main { padding: 24px 32px 80px; max-width: var(--max-w); margin: 0 auto; }
+  section { margin-bottom: 32px; }
+  section > h2 { margin: 0 0 12px; font-size: var(--fs-h2); font-weight: 600;
+    border-left: 3px solid var(--accent); padding-left: 10px; line-height: 1.25; }
+  section > p.note { color: var(--muted); margin: 0 0 14px; font-size: var(--fs-note); max-width: 900px; }
+
+  .panel { background: var(--panel); border: 1px solid var(--border);
+    border-radius: 6px; overflow: hidden; }
+  .panel-pad { padding: 16px 18px; }
+
+  .weights { display: grid; grid-template-columns: repeat(auto-fit, minmax(165px, 1fr)); gap: 12px; }
+  .weight { display: flex; flex-direction: column; gap: 4px;
+    background: #0d1117; border: 1px solid var(--border); border-radius: 6px;
+    padding: 10px 12px; }
+  .weight label { font-size: var(--fs-small); color: var(--fg); font-weight: 600;
+    display: flex; justify-content: space-between; align-items: baseline; gap: 6px; }
+  .weight .help { color: var(--muted); font-size: 11px; line-height: 1.35; }
+  .weight input[type="number"] { background: var(--panel); color: var(--fg);
+    border: 1px solid var(--border); border-radius: 4px; padding: 5px 7px;
+    font: inherit; font-size: var(--fs-small); width: 100%;
+    font-variant-numeric: tabular-nums; }
+  .weight input[type="number"]:focus { outline: none; border-color: var(--accent); }
+  .weight .unit { color: var(--muted); font-weight: 400; font-size: 11px; }
+
+  .controls-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+    margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--border);
+    font-size: var(--fs-small); color: var(--muted); }
+  .controls-row .sum { font-variant-numeric: tabular-nums; }
+  .controls-row .sum b { color: var(--fg); }
+  .controls-row .sum.warn b { color: var(--warn); }
+  .btn { background: #0d1117; color: var(--fg);
+    border: 1px solid var(--border); border-radius: 4px; padding: 5px 11px;
+    font-size: var(--fs-small); cursor: pointer; font-family: inherit; }
+  .btn:hover { background: #1b222b; border-color: var(--accent); color: var(--accent); }
+
+  .legend { display: flex; gap: 14px; flex-wrap: wrap; align-items: center;
+    color: var(--muted); font-size: var(--fs-small); margin: 4px 0 12px; }
+  .legend .sw { display: inline-block; width: 12px; height: 12px; border-radius: 2px;
+    margin-right: 6px; vertical-align: -2px; }
+  .legend .sw.cand { background: #3a2621; border: 1px solid var(--danger); }
+
+  .table-wrap { overflow: auto; max-height: calc(100vh - 140px); }
+  table.ranking { width: 100%; border-collapse: collapse; font-size: var(--fs-small); }
+  table.ranking th, table.ranking td { padding: 8px 10px; text-align: left;
+    border-bottom: 1px solid var(--border); white-space: nowrap; }
+  table.ranking th { font-weight: 600; font-size: var(--fs-small);
+    border-bottom: 2px solid var(--border); color: var(--fg);
+    background: #1b232c; }
+  table.ranking th.numeric, table.ranking td.numeric { text-align: right;
+    font-variant-numeric: tabular-nums; }
+
+  /* Per-cell backgrounds (not row) so sticky columns carry the right fill. */
+  table.ranking tbody td { background: var(--panel); }
+  table.ranking tbody tr:hover td { background: #1b222b; }
+  table.ranking tbody tr.candidate td { background: #201714; }
+  table.ranking tbody tr.candidate:hover td { background: #2c1d19; }
+
+  /* Freeze header row (each th, not thead — collapse + sticky thead drops borders) */
+  table.ranking thead th { position: sticky; top: 0; z-index: 3; }
+
+  /* Freeze rank (col 1, fixed 52px) and school name (col 2, left: 52px) */
+  table.ranking th:nth-child(1), table.ranking td:nth-child(1) {
+    position: sticky; left: 0; z-index: 2;
+    width: 52px; min-width: 52px; max-width: 52px; }
+  table.ranking th:nth-child(2), table.ranking td:nth-child(2) {
+    position: sticky; left: 52px; z-index: 2; }
+  /* Top-left corner cells need the highest z so they stay above everything */
+  table.ranking thead th:nth-child(1),
+  table.ranking thead th:nth-child(2) { z-index: 4; }
+
+  /* Divider shadow after the frozen column block */
+  table.ranking th:nth-child(2)::after,
+  table.ranking td:nth-child(2)::after {
+    content: ""; position: absolute; top: 0; bottom: 0; right: -6px; width: 6px;
+    border-left: 1px solid var(--border);
+    background: linear-gradient(to right, rgba(0,0,0,0.5), rgba(0,0,0,0));
+    pointer-events: none; }
+
+  table.ranking td.rank-cell { color: var(--muted); font-variant-numeric: tabular-nums;
+    font-weight: 600; text-align: right; }
+  table.ranking tr.candidate td.rank-cell { color: var(--danger); }
+  table.ranking td.score-cell { font-variant-numeric: tabular-nums; font-weight: 600;
+    color: var(--fg); }
+  table.ranking td.factor { font-variant-numeric: tabular-nums; color: var(--muted); }
+  table.ranking .pct { color: var(--muted); font-size: 11px; margin-left: 4px; }
+
+  .level-badge { display: inline-block; padding: 1px 7px; border-radius: 10px;
+    font-size: 11px; background: #1f2a3a; color: var(--fg); border: 1px solid var(--border); }
+  @media (max-width: 700px) {
+    header { padding: 20px 16px 18px; }
+    main { padding: 18px 16px 60px; }
+    .panel-pad { padding: 12px; }
+    table.ranking th, table.ranking td { padding: 7px 8px; }
+  }
+</style>
+<script data-goatcounter="https://a9n27kisdf.execute-api.us-east-1.amazonaws.com/count/ppsdata"
+        async src="count.js"></script>
+</head>
+<body>
+
+<div class="topnav">
+  <div class="topnav-inner">
+    <a class="brand" href="/"><span class="dot"></span>PPS Data Explorer</a>
+    <a class="back" href="/">← Back to dashboard</a>
+  </div>
+</div>
+
+<header>
+  <h1>Weighted ranking explorer</h1>
+  <p>
+    A configurable, relative ranking of the 74 in-scope PPS schools across nine
+    factors. Each school gets a 0–100 score per factor, and the final score is a
+    weighted blend — 100 means "tops on all factors you weighted," 0 means
+    "bottom on all of them." The bottom 8 are highlighted as illustrative
+    closure candidates. Weights below the inputs are normalized, so they don't
+    need to sum to 100.
+  </p>
+  <p>
+    <strong>Not a PPS ranking.</strong> This is a what-if tool for exploring how
+    different factor weights would reshuffle the list. Methodology is described
+    below the controls.
+  </p>
+</header>
+
+<main>
+  <section>
+    <h2>Factor weights</h2>
+    <p class="note">
+      Higher weight = bigger influence on the final ranking. Adjust any factor
+      between 0 and 100. Direction is pre-set per factor so a higher rank always
+      means "more likely to stay open" — e.g., <em>Seismic</em> ranks lower-cost
+      schools higher; <em>BIPOC</em> and <em>Title I</em> rank higher-share and
+      designated schools higher (equity protection).
+    </p>
+    <div class="panel panel-pad">
+      <div class="weights" id="weights"></div>
+      <div class="controls-row">
+        <span class="sum" id="weight-sum">Sum: <b>100</b></span>
+        <button class="btn" id="reset-btn" type="button">Reset to defaults</button>
+        <span style="margin-left:auto;">
+          <span class="legend" style="margin:0;"><span class="sw cand"></span>Bottom 8 (closure candidates)</span>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Ranking</h2>
+    <p class="note" id="ranking-summary"></p>
+    <div class="panel">
+      <div class="table-wrap">
+        <table class="ranking" id="ranking-table">
+          <thead></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Methodology</h2>
+    <p class="note">
+      <strong>Per-factor scoring.</strong> Each factor is mapped to a 0–100 score via
+      one of two methods. <em>Percentile rank</em> (most factors) sorts schools by
+      value, assigns a 0–100 percentile, and averages ties — this compresses
+      outliers and treats the distribution as ordinal. <em>Min-max linear</em>
+      (utilization) uses <code>(v − min) / (max − min) × 100</code>, so a school
+      at 30% utilization scores categorically lower than one at 60%, matching
+      how closure decisions actually weight the tails. Schools missing a value
+      get 50 (neutral) so they're neither rewarded nor penalized.
+    </p>
+    <p class="note">
+      <strong>Weighted score.</strong> Final score is
+      <code>Σ (w<sub>i</sub> × score<sub>i</sub>) / Σ w<sub>i</sub></code>, so
+      weights are normalized automatically. The table sorts by score descending;
+      the bottom 8 rows are flagged as illustrative closure candidates.
+    </p>
+    <p class="note">
+      <strong>Factor mapping.</strong>
+    </p>
+    <ul class="note" style="margin-top:-6px; padding-left: 22px;">
+      <li><strong>Utilization</strong> → 2025-26 enrollment ÷ 2021 functional capacity. <em>Min-max</em>, higher = higher score.</li>
+      <li><strong>Seismic</strong> → remaining retrofit cost (Holmes 2024). Lower = higher score.</li>
+      <li><strong>Bond Investment</strong> → composite of completed seismic retrofit status (full / targeted / planned) and post-2000 construction. Higher = higher score (protect recent investment).</li>
+      <li><strong>Isolation</strong> → haversine distance to the nearest PPS school at the same grade band (k-8s overlap both primary and secondary). Higher = more isolated = higher score.</li>
+      <li><strong>Boundary Change</strong> → any DBRAC 2018 or SEGC 2023 redraw. Yes = higher score (avoid re-redrawing same communities).</li>
+      <li><strong>Housing Growth</strong> → Metro 2045 BLI projected new housing units within catchment. Higher = higher score.</li>
+      <li><strong>DLI</strong> → has a Dual Language Immersion program. Yes = higher score.</li>
+      <li><strong>BIPOC</strong> → % BIPOC students. Higher = higher score (equity protection).</li>
+      <li><strong>Title I</strong> → Title I status. Yes = higher score (equity protection).</li>
+    </ul>
+  </section>
+</main>
+
+<script>
+const FACTORS = [
+  { id: "utilization", label: "Utilization", field: "utilization_pct_2526",
+    dir: 1, default: 25, method: "minmax",
+    fmt: v => v == null ? "—" : (v * 100).toFixed(0) + "%",
+    help: "Enrollment ÷ capacity. Min-max scaled (magnitude-preserving)." },
+  { id: "seismic", label: "Seismic", field: "retrofit_cost_remaining_usd",
+    dir: -1, default: 10, method: "percentile",
+    fmt: v => v == null ? "—" : v === 0 ? "$0" : "$" + (v / 1e6).toFixed(1) + "M",
+    help: "Retrofit cost remaining. Lower = higher rank." },
+  { id: "bond", label: "Bond Investment", field: "_bond_score",
+    dir: 1, default: 10, method: "percentile",
+    fmt: (v, s) => {
+      const parts = [];
+      const st = s.seismic_retrofit_status;
+      if (st === "full") parts.push("full retrofit");
+      else if (st === "targeted") parts.push("targeted retrofit");
+      else if (st === "planned_full") parts.push("planned full");
+      else if (st === "planned_targeted") parts.push("planned targeted");
+      if (s.year_built && s.year_built >= 2000) parts.push("built " + (s.year_built | 0));
+      return parts.length ? parts.join(" · ") : "—";
+    },
+    help: "Completed retrofit work + new construction. Higher = more recent bond investment." },
+  { id: "isolation", label: "Isolation", field: "_isolation_mi",
+    dir: 1, default: 10, method: "percentile",
+    fmt: v => v == null ? "—" : v.toFixed(1) + " mi",
+    help: "Distance to nearest PPS school at same grade band. Higher = more isolated." },
+  { id: "boundary", label: "Boundary Change", field: "_has_boundary_change",
+    dir: 1, default: 5, method: "percentile",
+    fmt: (v, s) => s.recent_boundary_change || "No",
+    help: "DBRAC 2018 / SEGC 2023 redraw. Yes = higher rank (avoid re-redraws)." },
+  { id: "housing", label: "Housing Growth", field: "bli_forecast_units_within_catchment",
+    dir: 1, default: 10, method: "percentile",
+    fmt: v => v == null ? "—" : Math.round(v).toLocaleString(),
+    help: "Metro 2045 BLI projected new units in catchment." },
+  { id: "dli", label: "DLI", field: "has_dli",
+    dir: 1, default: 10, method: "percentile",
+    fmt: v => v ? "Yes" : "No",
+    help: "Dual Language Immersion program." },
+  { id: "bipoc", label: "BIPOC", field: "pct_bipoc",
+    dir: 1, default: 10, method: "percentile",
+    fmt: v => v == null ? "—" : (v * 100).toFixed(0) + "%",
+    help: "% BIPOC. Higher = higher rank (equity)." },
+  { id: "title1", label: "Title I", field: "is_title_i",
+    dir: 1, default: 10, method: "percentile",
+    fmt: v => v ? "Yes" : "No",
+    help: "Title I designation (equity)." },
+];
+
+const CANDIDATE_COUNT = 8;
+const state = {};
+for (const f of FACTORS) state[f.id] = f.default;
+
+let SCHOOLS = [];
+
+function buildWeights() {
+  const el = document.getElementById("weights");
+  el.innerHTML = FACTORS.map(f => `
+    <div class="weight">
+      <label>
+        <span>${f.label}</span>
+        <span class="unit">%</span>
+      </label>
+      <input type="number" id="w-${f.id}" min="0" max="100" step="1" value="${state[f.id]}">
+      <div class="help">${f.help}</div>
+    </div>
+  `).join("");
+  for (const f of FACTORS) {
+    document.getElementById(`w-${f.id}`).addEventListener("input", (e) => {
+      let v = parseFloat(e.target.value);
+      if (!isFinite(v) || v < 0) v = 0;
+      if (v > 100) v = 100;
+      state[f.id] = v;
+      render();
+    });
+  }
+  document.getElementById("reset-btn").addEventListener("click", () => {
+    for (const f of FACTORS) {
+      state[f.id] = f.default;
+      document.getElementById(`w-${f.id}`).value = f.default;
+    }
+    render();
+  });
+}
+
+// Preprocess: derive composite fields used by some factors.
+function preprocess(schools) {
+  const R = 3959; // miles
+  const toRad = d => d * Math.PI / 180;
+  const sameBand = (a, b) => {
+    if (a === "elementary") return b === "elementary" || b === "k8";
+    if (a === "middle")     return b === "middle"     || b === "k8";
+    if (a === "k8")         return b === "elementary" || b === "middle" || b === "k8";
+    if (a === "alternative")return b === "alternative";
+    return b === a || b === "k8";
+  };
+  for (let i = 0; i < schools.length; i++) {
+    const s = schools[i];
+
+    // Recent bond investment: retrofit status + post-2000 construction.
+    let bond = 0;
+    const st = s.seismic_retrofit_status;
+    if (st === "full") bond += 10;
+    else if (st === "targeted") bond += 6;
+    else if (st === "planned_full") bond += 4;
+    else if (st === "planned_targeted") bond += 2;
+    if (s.year_built && s.year_built >= 2000) bond += 10;
+    else if (s.year_built && s.year_built >= 1990) bond += 4;
+    s._bond_score = bond;
+
+    s._has_boundary_change = s.recent_boundary_change ? 1 : 0;
+
+    // Geographic isolation: haversine distance to nearest in-scope school
+    // at same grade band (k8 overlaps both primary and secondary).
+    if (s.latitude == null || s.longitude == null) {
+      s._isolation_mi = null;
+      continue;
+    }
+    let minD = Infinity;
+    for (let j = 0; j < schools.length; j++) {
+      if (i === j) continue;
+      const t = schools[j];
+      if (!sameBand(s.level, t.level)) continue;
+      if (t.latitude == null || t.longitude == null) continue;
+      const dLat = toRad(t.latitude - s.latitude);
+      const dLng = toRad(t.longitude - s.longitude);
+      const a = Math.sin(dLat/2) ** 2 +
+        Math.cos(toRad(s.latitude)) * Math.cos(toRad(t.latitude)) *
+        Math.sin(dLng/2) ** 2;
+      const d = R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      if (d < minD) minD = d;
+    }
+    s._isolation_mi = isFinite(minD) ? minD : null;
+  }
+}
+
+// Min-max linear: preserves magnitude. Nulls → 50 (neutral).
+function minmaxScores(schools, factor) {
+  const n = schools.length;
+  const values = schools.map(s => s[factor.field]);
+  const valid = values.filter(v => v != null);
+  if (valid.length === 0) return new Array(n).fill(50);
+  const lo = Math.min(...valid), hi = Math.max(...valid);
+  if (hi === lo) return new Array(n).fill(50);
+  return values.map(v => {
+    if (v == null) return 50;
+    const norm = (v - lo) / (hi - lo);
+    return (factor.dir === 1 ? norm : 1 - norm) * 100;
+  });
+}
+
+// Return percentile (0-100) for each school on a given factor.
+// dir=1: higher raw value → higher percentile. dir=-1: inverted.
+// Ties → average percentile. Nulls → 50 (neutral/median).
+function percentiles(schools, factor) {
+  const n = schools.length;
+  const indexed = schools.map((s, i) => ({ i, v: s[factor.field] }));
+  const valid = indexed.filter(x => x.v !== null && x.v !== undefined);
+  const nulls = indexed.filter(x => x.v === null || x.v === undefined);
+  const cmp = factor.dir === 1
+    ? (a, b) => (a.v < b.v ? -1 : a.v > b.v ? 1 : 0)
+    : (a, b) => (a.v > b.v ? -1 : a.v < b.v ? 1 : 0);
+  valid.sort(cmp);
+  const pct = new Array(n).fill(50);
+  let i = 0;
+  while (i < valid.length) {
+    let j = i;
+    while (j < valid.length && valid[j].v === valid[i].v) j++;
+    // positions i..j-1 are tied (0-based); avg 0-based rank is (i + j - 1) / 2
+    const avgRank0 = (i + j - 1) / 2;
+    const denom = valid.length > 1 ? (valid.length - 1) : 1;
+    const p = (avgRank0 / denom) * 100;
+    for (let k = i; k < j; k++) pct[valid[k].i] = p;
+    i = j;
+  }
+  for (const x of nulls) pct[x.i] = 50;
+  return pct;
+}
+
+function compute() {
+  const weightSum = FACTORS.reduce((a, f) => a + (state[f.id] || 0), 0);
+  const pctByFactor = {};
+  for (const f of FACTORS) {
+    pctByFactor[f.id] = f.method === "minmax"
+      ? minmaxScores(SCHOOLS, f)
+      : percentiles(SCHOOLS, f);
+  }
+  const rows = SCHOOLS.map((s, i) => {
+    const factorPcts = {};
+    let score = 0;
+    for (const f of FACTORS) {
+      const p = pctByFactor[f.id][i];
+      factorPcts[f.id] = p;
+      score += (state[f.id] || 0) * p;
+    }
+    score = weightSum > 0 ? score / weightSum : 0;
+    return { school: s, factorPcts, score };
+  });
+  rows.sort((a, b) => b.score - a.score);
+  return { rows, weightSum };
+}
+
+function levelLabel(level) {
+  if (level === "elementary") return "Elementary";
+  if (level === "middle") return "Middle";
+  if (level === "k8") return "K-8";
+  if (level === "alternative") return "Alternative";
+  if (level === "other") return "Other";
+  return level || "—";
+}
+
+function renderHeader() {
+  const thead = document.querySelector("#ranking-table thead");
+  const factorHeaders = FACTORS
+    .map(f => `<th class="numeric" title="${f.help}">${f.label}</th>`)
+    .join("");
+  thead.innerHTML = `
+    <tr>
+      <th class="numeric">#</th>
+      <th>School</th>
+      <th>Level</th>
+      <th class="numeric">Score</th>
+      ${factorHeaders}
+    </tr>
+  `;
+}
+
+function renderBody(rows) {
+  const tbody = document.querySelector("#ranking-table tbody");
+  const n = rows.length;
+  const candidateStart = n - CANDIDATE_COUNT;
+  tbody.innerHTML = rows.map((r, i) => {
+    const isCand = i >= candidateStart;
+    const rank = i + 1;
+    const s = r.school;
+    const factorCells = FACTORS.map(f => {
+      const raw = s[f.field];
+      const pct = r.factorPcts[f.id];
+      return `<td class="numeric factor" title="${f.label}: score ${pct.toFixed(0)}">${f.fmt(raw, s)}<span class="pct">(${pct.toFixed(0)})</span></td>`;
+    }).join("");
+    return `
+      <tr class="${isCand ? "candidate" : ""}">
+        <td class="rank-cell">${rank}</td>
+        <td>${s.school_name}</td>
+        <td><span class="level-badge">${levelLabel(s.level)}</span></td>
+        <td class="numeric score-cell">${r.score.toFixed(1)}</td>
+        ${factorCells}
+      </tr>
+    `;
+  }).join("");
+}
+
+function renderSummary(rows, weightSum) {
+  const el = document.getElementById("ranking-summary");
+  const cands = rows.slice(rows.length - CANDIDATE_COUNT).map(r => r.school.school_name);
+  if (weightSum === 0) {
+    el.innerHTML = '<em>Set at least one weight above 0 to rank.</em>';
+    return;
+  }
+  el.innerHTML =
+    `Ranked ${rows.length} schools. Bottom 8: <strong>${cands.join(", ")}</strong>.`;
+}
+
+function updateSum() {
+  const sum = FACTORS.reduce((a, f) => a + (state[f.id] || 0), 0);
+  const el = document.getElementById("weight-sum");
+  el.innerHTML = `Sum: <b>${sum.toFixed(0)}</b> <span style="color:var(--muted);">(auto-normalized)</span>`;
+  el.classList.toggle("warn", sum === 0);
+}
+
+function render() {
+  updateSum();
+  const { rows, weightSum } = compute();
+  renderBody(rows);
+  renderSummary(rows, weightSum);
+}
+
+async function load() {
+  const res = await fetch("data.json");
+  const data = await res.json();
+  SCHOOLS = data.schools;
+  preprocess(SCHOOLS);
+  buildWeights();
+  renderHeader();
+  render();
+}
+
+load();
+</script>
+</body>
+</html>
