@@ -23,6 +23,7 @@ python3 -m http.server -d web 8000
 - **Trends chart** showing 7-year enrollment change (2018 → 2025) with per-school toggles.
 - **Utilization** ranking (enrollment vs. 2021 LRFP functional capacity).
 - **Long-term sustainability** ranking (7-year enrollment change 2018 → 2025).
+- **10-year enrollment forecast** ranking — per-school projected 2034-35 enrollment from PSU Population Research Center (Table 5.5, medium scenario), with low/high scenario bands derived by scaling each school's medium by the district-and-grade-band Low/Medium and High/Medium ratios.
 - **Housing growth forecast** ranking — projected new residential units within each school's catchment by ~2035 (Metro BLI 2045 grid, area-weighted to catchment polygons).
 - **Seismic** ranking (remaining retrofit cost per campus from Holmes 2024, colored by funding status; URM buildings flagged).
 - **Transportation** ranking (distance to nearest same-level school for the 15 lowest-enrollment schools).
@@ -57,6 +58,7 @@ Ranking charts render vertically on desktop and swap to horizontal bars on narro
 | [PPS Language Immersion Enrollment Report](https://www.pps.net/departments/research-assessment-and-accountability/data-and-reports/enrollment-reports-and-school-profiles) | Per-school DLI-strand vs. non-strand headcounts (SIS Synergy, annual PDF) | 2025-26 |
 | [Metro 2045 Distributed Forecast](https://www.oregonmetro.gov/) (Ord. 21-1457) | Regional growth context (city/county only) | 2021 |
 | [Portland Building Land Inventory — Metro BLI 2045 Housing Allocation](https://www.portlandmaps.com/od/rest/services/COP_OpenData_PlanningDevelopment/MapServer/88) | Grid-cell projected new residential units by ~2035 under current zoning (area-weighted to each school's catchment) | 2024 |
+| [PSU Population Research Center — PPS Enrollment Forecasts 2025-26 to 2034-35](https://resources.finalsite.net/images/v1759783181/ppsnet/xzghnbm55ogovbz4eisd/PPS_Forecast_2025.pdf) | Per-school 10-year enrollment forecast (Table 5.5, medium scenario); district-and-grade low/high scenarios (Tables 5.3, 5.4) used to derive per-school scenario bands | July 2025 |
 
 ## Project structure
 
@@ -73,6 +75,8 @@ scripts/
   fetch_ode_aag.py              → data/raw/ode_aag_schools_2425.csv
   fetch_dli_report.py           → data/raw/pps_immersion_details_2526.{pdf,json}
   fetch_metro_bli.py            → data/raw/metro_bli_housing_allocation.geojson
+  fetch_pps_enrollment_forecast.py → data/raw/pps_enrollment_forecast_2025.pdf
+  parse_pps_enrollment_forecast.py → data/raw/pps_enrollment_forecast.csv (Table 5.5 per-school)
   parse_lrfp_capacity.py        → data/raw/pps_functional_capacity_2021.json
   fetch_pps_airflow.py          → data/raw/pps_airflow_pdfs/*.pdf + pps_airflow_index.json
   parse_pps_airflow.py          → data/raw/pps_airflow_stats.json
@@ -82,6 +86,7 @@ scripts/
   merge_housing.py              + affordable_units / pipeline_* columns
   merge_permits.py              + permit columns
   merge_bli_forecast.py         + bli_forecast_units_within_catchment (area-weighted from BLI grid)
+  merge_pps_enrollment_forecast.py + enrollment_forecast_2025_26..2034_35, _2034_35_low/high, pct_change_10yr (PRC medium + derived scenario bands)
   export_web.py                 → web/data.json (filters to the 74 in-scope schools)
 web/
   index.html              single-page dashboard
@@ -107,6 +112,8 @@ python scripts/fetch_enrollment_history.py
 python scripts/fetch_ode_aag.py
 python scripts/fetch_dli_report.py
 python scripts/fetch_metro_bli.py      # Metro BLI 2045 housing-allocation grid (~30 MB GeoJSON)
+python scripts/fetch_pps_enrollment_forecast.py  # PRC 10-year enrollment forecast PDF
+python scripts/parse_pps_enrollment_forecast.py  # Table 5.5 per-school → CSV
 python scripts/parse_lrfp_capacity.py  # reads data/raw/LRFP_Vol1_2021.pdf (checked in)
 python scripts/fetch_pps_airflow.py    # ~270 MB of per-building airflow PDFs
 python scripts/parse_pps_airflow.py    # ~6 min: pdfplumber table extraction
@@ -115,10 +122,11 @@ python scripts/parse_holmes_costs.py   # reads data/raw/holmes_2024_seismic.pdf 
 # 2. Build master CSV:
 python scripts/build_master.py
 
-# 3. Spatial joins (housing + permits + BLI forecast into the master):
+# 3. Spatial joins + per-school forecasts into the master:
 python scripts/merge_housing.py
 python scripts/merge_permits.py
 python scripts/merge_bli_forecast.py
+python scripts/merge_pps_enrollment_forecast.py
 
 # 4. Export dashboard payload:
 python scripts/export_web.py
@@ -138,6 +146,7 @@ The BLI 2045 forecast grid is attributed by **area-weighted overlap**: for each 
 - **CRDC (LEP, SPED, chronic absenteeism) is from 2020** — a COVID-suppressed reporting year. Percentages are CRDC counts ÷ current enrollment.
 - **Square footage is from a 2009 inventory** and may predate bond-funded expansions.
 - **Building permits ≠ completions.** `permits_units_within_1mi_since_2022` counts approved units from 2022-01-01 forward, not occupied units.
+- **Forecasts are not commitments.** The PRC 10-year enrollment forecast encodes July-2025 assumptions (net migration, K/1 capture rate, birth rates). PRC reports district-level accuracy only — 2024 district MAPE was 1.65% at one year, but Kindergarten alone was 8.4% off that year, and pandemic-era multi-year forecasts missed by 8-20% at 4-5 years. No per-school error analysis is published; Low/High bands in this dashboard are derived (PRC only publishes them at the district-and-grade level).
 - **Ventilation data is from 2021** and reflects ASHRAE Total Effective ACH with HVAC only; portable HEPA units deployed in response to COVID are excluded. Some older buildings genuinely have rooms with near-zero mechanical ventilation (no rooftop supply, operable windows only).
 - **High schools are out of scope.** PPS's announced closure process covers elementary / K-8 / middle / alternative only. The master CSV keeps high schools for reference but `export_web.py` filters them out.
 

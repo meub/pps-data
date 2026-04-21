@@ -326,9 +326,8 @@
       <a href="#section-trends">Trends</a>
       <a href="#section-utilization">Utilization</a>
       <a href="#section-sustainability">Sustainability</a>
-      <a href="#section-forecast">Forecast</a>
+      <a href="#section-enrollment-forecast">Enrollment</a>
       <a href="#section-seismic">Seismic</a>
-      <a href="#section-urm-retrofit">URM</a>
       <a href="#section-transport">Transportation</a>
       <a href="#section-ratios">Ratios</a>
       <a href="#section-dli">DLI</a>
@@ -457,6 +456,24 @@
       2018 + <a href="https://www.oregon.gov/ode/reports-and-data/students/Pages/Student-Enrollment-Reports.aspx" target="_blank" rel="noopener">ODE</a> fall 2025.
     </p>
     <div class="panel chart-card"><div id="plot-trend7yr" style="height: 1400px;"></div></div>
+  </section>
+
+  <section id="section-enrollment-forecast">
+    <h2>Projected enrollment, 2034-35 (PRC medium forecast)</h2>
+    <p class="note">
+      Per-school 10-year enrollment forecast from
+      <a href="https://resources.finalsite.net/images/v1759783181/ppsnet/xzghnbm55ogovbz4eisd/PPS_Forecast_2025.pdf" target="_blank" rel="noopener">PSU Population Research Center's 2025 report</a>
+      (Table 5.5, medium scenario). Each bar is one school's projected 2034-35 enrollment.
+      The faint range bars show the low/high scenario band: PRC only publishes low/high at the district-and-grade level, so each school's band is the medium × district Low/Medium and High/Medium ratios at its grade band (K-5: ×0.87/×1.22; 6-8: ×0.86/×1.07). Middle schools have narrower bands because the cohorts are already in the pipeline; elementaries depend more on K/1 recovery.
+      Districtwide, PRC expects enrollment to fall from 43,375 (2024-25) to 37,057 (2034-35 medium), a 13% decline.
+    </p>
+    <details class="note inline-expand">
+      <summary>Why this matters</summary>
+      <p>
+        Current utilization is a 2025 snapshot; closure decisions play out over 2027-2030+. PRC's 10-year forecast is the best public per-school answer to "how empty will this building be by then?" Schools where 2025 enrollment looks defensible but 2034 enrollment does not are the ones most exposed by a forward-looking analysis. Hosford (-41%), Sellwood (-34%), and Beverly Cleary (-30%) top that list.
+      </p>
+    </details>
+    <div class="panel chart-card"><div id="plot-enrollment-forecast" style="height: 620px;"></div></div>
   </section>
 
   <section id="section-forecast">
@@ -720,6 +737,35 @@
         <dd>PPS attendance-area polygons (elementary/K-8, middle, high), retrieved from the City of Portland <code>School_Boundaries</code> FeatureServer layer and saved to <code>data/raw/pps_boundaries_*.geojson</code>.</dd>
     </dl>
 
+    <h3>Enrollment forecast (PRC, 10-year)</h3>
+    <dl>
+      <dt><a href="https://resources.finalsite.net/images/v1759783181/ppsnet/xzghnbm55ogovbz4eisd/PPS_Forecast_2025.pdf" target="_blank" rel="noopener">PSU Population Research Center — Portland Public Schools Enrollment Forecasts 2025-26 to 2034-35 (July 2025)</a></dt>
+        <dd>
+          Per-school 10-year enrollment projection parsed from Table 5.5 (pages 37-40)
+          of PRC's annual forecast report. PRC uses a cohort-component model:
+          Grade Progression Ratios (GPR) extrapolate existing cohorts forward; Kindergarten
+          entry is modeled as age-eligible-population × capture rate with Lee-Carter
+          fertility/mortality trends and an autoregressive migration model. The per-school
+          table is published in the <strong>medium scenario only</strong>; Low and High
+          are published at the district-and-grade level (Tables 5.3 and 5.4).
+          We populate each school's 2025-26 through 2034-35 medium forecast,
+          derive a 10-year percent change from PRC's own 2024-25 historic baseline
+          (which differs from ODE at co-located programs like Hayhurst/Odyssey),
+          and compute a forward-looking utilization = 2034-35 forecast ÷ 2021 functional
+          capacity. Alliance High School is the only in-scope school PRC does not forecast.
+        </dd>
+      <dt>Low/high scenario bands (derived)</dt>
+        <dd>
+          PRC does not publish per-school low/high, so each school's scenario band
+          is estimated by scaling the medium forecast by the district-wide
+          Low/Medium and High/Medium ratios at its grade band. For 2034-35:
+          K-5 × 0.87 (low) / × 1.22 (high); 6-8 × 0.86 (low) / × 1.07 (high).
+          Middle schools have narrower bands because those cohorts are already
+          in the pipeline; elementaries depend on K/1 recovery, the biggest
+          scenario lever.
+        </dd>
+    </dl>
+
     <h3>Regional context (not attached per-school)</h3>
     <p>
       <a href="https://web.archive.org/web/20250320154548/https://www.oregonmetro.gov/sites/default/files/2023/08/29/2045-regional-population-housing-forecast-by-city-county.pdf" target="_blank" rel="noopener">Metro Council's 2045 Distributed Forecast</a>
@@ -727,8 +773,10 @@
       (+16%) by 2045, and unincorporated Multnomah County from 19,328 to 40,490 (+110%).
       Metro only publishes this forecast at city/county level (no tract or TAZ breakdown, and no
       age bands), so it is not attached to individual schools here; it is background only. PSU
-      Population Research Center explicitly does not forecast Multnomah County, so Metro is the
-      only public long-horizon population forecast for the PPS footprint.
+      Population Research Center's report covers PPS specifically (and is the source of the
+      10-year enrollment forecast above), but does <em>not</em> forecast Multnomah County
+      population, so Metro is the only public long-horizon <em>population</em> forecast for
+      the PPS footprint.
     </p>
 
     <h3>Lowest-enrollment 15</h3>
@@ -764,6 +812,7 @@
       CRDC LEP/IDEA counts are from 2020 (COVID year) and are divided by 2025-26 enrollment to derive shares; treat as approximate.
       Free/reduced meal shares use 2022 counts over 2022 enrollment; post-2022 trends are not reflected.
       Permits represent approvals, not completions; a permit may be issued but not built.
+      PRC per-school forecasts reflect July 2025 assumptions (net migration, K/1 capture rate, birth rates). PRC reports district-level forecast errors only (no per-school error analysis): the 2024 one-year mean absolute percent error across all grades was 1.65% (Table 4.3), but grade-level error was largest in Kindergarten (8.4% overestimate). Pandemic-era multi-year forecasts missed by up to 8-20% over 4-5 years (Table 4.4). Treat per-school medium forecasts as a central estimate with scenario uncertainty that is larger at the elementary level (K/1 is the biggest lever).
     </p>
     </div>
     <aside class="method-sidebar" aria-label="Age of source data">
@@ -783,6 +832,7 @@
             <tr><td class="src">Affordable housing (OAHI)</td><td class="year">2025</td></tr>
             <tr><td class="src">Metro pop. forecast</td><td class="year stale">2021</td></tr>
             <tr><td class="src">Attendance boundaries</td><td class="year">~2023-24</td></tr>
+            <tr><td class="src">Enrollment forecast (PRC)</td><td class="year">July 2025</td></tr>
           </tbody>
         </table>
         <div class="legend"><span class="stale">Amber</span> = older than 3 years; likely less accurate.</div>
@@ -1481,6 +1531,127 @@
     renderTrend();
     let t2;
     window.addEventListener("resize", () => { clearTimeout(t2); t2 = setTimeout(renderTrend, 150); });
+  })();
+
+  // ---------- PRC ENROLLMENT FORECAST 2034-35 ----------
+  (function () {
+    const rows = schools.filter(s => s.enrollment_forecast_2034_35 != null)
+      .slice().sort((a, b) => b.enrollment_forecast_2034_35 - a.enrollment_forecast_2034_35);
+    const shortName = (n) => n
+      .replace(/ Elementary School$/, "")
+      .replace(/ Middle School$/, "")
+      .replace(/ School$/, "")
+      .replace(/ K-8$/, "");
+
+    function renderEnrollmentForecast() {
+      const el = document.getElementById("plot-enrollment-forecast");
+      if (!el) return;
+      const mobile = window.innerWidth < 700;
+      el.style.height = mobile ? (rows.length * 18 + 80) + "px" : "620px";
+      const names = rows.map(s => shortName(s.school_name));
+      const fullNames = rows.map(s => s.school_name);
+      const med = rows.map(s => s.enrollment_forecast_2034_35);
+      const lo = rows.map(s => s.enrollment_forecast_2034_35_low);
+      const hi = rows.map(s => s.enrollment_forecast_2034_35_high);
+      const customdata = rows.map(s => [
+        s.prc_baseline_2024_25,
+        s.enrollment_forecast_pct_change_10yr == null ? null : (s.enrollment_forecast_pct_change_10yr * 100),
+        s.enrollment_forecast_2034_35_low,
+        s.enrollment_forecast_2034_35_high,
+      ]);
+
+      const barColor = "#f0883e"; // warm amber to distinguish from housing-forecast blue
+      const bandColor = "rgba(240, 136, 62, 0.22)";
+
+      if (mobile) {
+        // Horizontal orientation: medium bar with error_x spanning low/high.
+        const mainTrace = {
+          type: "bar", orientation: "h",
+          x: med, y: names,
+          text: fullNames, textposition: "none",
+          showlegend: false,
+          marker: { color: barColor, line: { width: 0 } },
+          error_x: {
+            type: "data", symmetric: false,
+            array: med.map((m, i) => hi[i] - m),
+            arrayminus: med.map((m, i) => m - lo[i]),
+            color: "#e6edf3", thickness: 1, width: 3,
+          },
+          customdata,
+          hovertemplate: "<b>%{text}</b><br>" +
+            "Forecast 2034-35 (medium): %{x:,.0f}<br>" +
+            "Scenario range: %{customdata[2]:,.0f} – %{customdata[3]:,.0f}<br>" +
+            "PRC baseline 2024-25: %{customdata[0]:,.0f}<br>" +
+            "10-yr change: %{customdata[1]:.1f}%<extra></extra>",
+        };
+        Plotly.react("plot-enrollment-forecast", [mainTrace], {
+          paper_bgcolor: "#161b22", plot_bgcolor: "#161b22",
+          font: { color: "#e6edf3", size: 11, family: '"Nunito Sans", -apple-system, Helvetica, Arial, sans-serif' },
+          hoverlabel: { font: { family: '"Nunito Sans", -apple-system, Helvetica, Arial, sans-serif' } },
+          margin: { l: 130, r: 24, t: 40, b: 40 },
+          bargap: 0.2,
+          xaxis: {
+            title: "Projected enrollment, 2034-35",
+            gridcolor: "#30363d", zerolinecolor: "#30363d",
+            rangemode: "tozero", side: "top", fixedrange: true,
+          },
+          yaxis: {
+            autorange: "reversed",
+            tickfont: { size: 9, color: "#e6edf3" },
+            automargin: true, showgrid: false, zeroline: false, fixedrange: true,
+          },
+          showlegend: false,
+        }, { displayModeBar: false, responsive: true });
+      } else {
+        // Desktop: vertical bars with error_y.
+        const mainTrace = {
+          type: "bar",
+          x: rows.map((_, i) => i), y: med,
+          text: fullNames, textposition: "none",
+          showlegend: false,
+          marker: { color: barColor, line: { width: 0 } },
+          error_y: {
+            type: "data", symmetric: false,
+            array: med.map((m, i) => hi[i] - m),
+            arrayminus: med.map((m, i) => m - lo[i]),
+            color: "#e6edf3", thickness: 1, width: 3,
+          },
+          customdata,
+          hovertemplate: "<b>%{text}</b><br>" +
+            "Forecast 2034-35 (medium): %{y:,.0f}<br>" +
+            "Scenario range: %{customdata[2]:,.0f} – %{customdata[3]:,.0f}<br>" +
+            "PRC baseline 2024-25: %{customdata[0]:,.0f}<br>" +
+            "10-yr change: %{customdata[1]:.1f}%<extra></extra>",
+        };
+        Plotly.react("plot-enrollment-forecast", [mainTrace], {
+          paper_bgcolor: "#161b22", plot_bgcolor: "#161b22",
+          font: { color: "#e6edf3", size: 11, family: '"Nunito Sans", -apple-system, Helvetica, Arial, sans-serif' },
+          hoverlabel: { font: { family: '"Nunito Sans", -apple-system, Helvetica, Arial, sans-serif' } },
+          margin: { l: 60, r: 20, t: 40, b: 170 },
+          bargap: 0.15,
+          xaxis: {
+            tickmode: "array",
+            tickvals: rows.map((_, i) => i),
+            ticktext: names,
+            tickangle: -60,
+            tickfont: { size: 9, color: "#e6edf3" },
+            showgrid: false, zeroline: false, fixedrange: true,
+          },
+          yaxis: {
+            title: "Projected enrollment, 2034-35 (error bars = low/high scenario)",
+            gridcolor: "#30363d", zerolinecolor: "#30363d",
+            rangemode: "tozero",
+          },
+          showlegend: false,
+        }, { displayModeBar: false, responsive: true });
+      }
+    }
+
+    renderEnrollmentForecast();
+    let tEF;
+    window.addEventListener("resize", () => {
+      clearTimeout(tEF); tEF = setTimeout(renderEnrollmentForecast, 150);
+    });
   })();
 
   // ---------- BLI HOUSING FORECAST: bar + scatter ----------

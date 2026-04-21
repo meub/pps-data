@@ -92,6 +92,21 @@ META = {
     "neighborhood_students_2526": {"label": "Neighborhood students 25-26", "desc": "Total enrollment minus DLI-strand enrollment. At a DLI host school this is the mainstream/English-medium population; the cohort that would remain if the DLI program were relocated.", "source": "Derived: ODE − PPS Immersion Report", "fmt": "int"},
     "pct_dli_2526": {"label": "% DLI 25-26", "desc": "Share of this school's students in a DLI strand. Ranges from ~4% at schools where a single DLI cohort visits (Jefferson) to 100% at whole-school DLI programs (Lent, Rigler, Richmond).", "source": "Derived: PPS Immersion Report ÷ ODE", "fmt": "pct_0_1"},
     "enrollment_pct_change_7yr": {"label": "Enrollment Δ% 2018→2025", "desc": "7-year enrollment change from fall 2018 (NCES CCD) to fall 2025 (ODE). The in-scope set lost 20% over this window (median school -19%); schools well below that baseline are losing students faster than PPS as a whole.", "source": "Derived: NCES CCD 2018 + ODE 2025-26", "fmt": "pct_0_1"},
+    "prc_baseline_2024_25": {"label": "PRC baseline 24-25", "desc": "PRC's own historic 2024-25 enrollment used as the base year for its 10-year forecast (Table 5.5, medium scenario). Usually matches ODE 2024-25, but differs at co-located programs — e.g. Hayhurst's PRC baseline is Hayhurst-proper only and excludes Odyssey K-8.", "source": "PSU Population Research Center 2025 (Table 5.5)", "fmt": "int"},
+    "enrollment_forecast_2025_26": {"label": "Forecast 25-26 (med.)", "desc": "PRC medium-scenario enrollment forecast for 2025-26 (per-school, all programs combined).", "source": "PSU Population Research Center 2025 (Table 5.5)", "fmt": "int"},
+    "enrollment_forecast_2026_27": {"label": "Forecast 26-27 (med.)", "desc": "PRC medium-scenario enrollment forecast for 2026-27.", "source": "PSU Population Research Center 2025 (Table 5.5)", "fmt": "int"},
+    "enrollment_forecast_2027_28": {"label": "Forecast 27-28 (med.)", "desc": "PRC medium-scenario enrollment forecast for 2027-28.", "source": "PSU Population Research Center 2025 (Table 5.5)", "fmt": "int"},
+    "enrollment_forecast_2028_29": {"label": "Forecast 28-29 (med.)", "desc": "PRC medium-scenario enrollment forecast for 2028-29.", "source": "PSU Population Research Center 2025 (Table 5.5)", "fmt": "int"},
+    "enrollment_forecast_2029_30": {"label": "Forecast 29-30 (med.)", "desc": "PRC medium-scenario enrollment forecast for 2029-30.", "source": "PSU Population Research Center 2025 (Table 5.5)", "fmt": "int"},
+    "enrollment_forecast_2030_31": {"label": "Forecast 30-31 (med.)", "desc": "PRC medium-scenario enrollment forecast for 2030-31 (5-year horizon).", "source": "PSU Population Research Center 2025 (Table 5.5)", "fmt": "int"},
+    "enrollment_forecast_2031_32": {"label": "Forecast 31-32 (med.)", "desc": "PRC medium-scenario enrollment forecast for 2031-32.", "source": "PSU Population Research Center 2025 (Table 5.5)", "fmt": "int"},
+    "enrollment_forecast_2032_33": {"label": "Forecast 32-33 (med.)", "desc": "PRC medium-scenario enrollment forecast for 2032-33.", "source": "PSU Population Research Center 2025 (Table 5.5)", "fmt": "int"},
+    "enrollment_forecast_2033_34": {"label": "Forecast 33-34 (med.)", "desc": "PRC medium-scenario enrollment forecast for 2033-34.", "source": "PSU Population Research Center 2025 (Table 5.5)", "fmt": "int"},
+    "enrollment_forecast_2034_35": {"label": "Forecast 34-35 (med.)", "desc": "PRC medium-scenario enrollment forecast for 2034-35 (10-year horizon). The closure argument hinges on future utilization, not current — this is the per-school number PRC published.", "source": "PSU Population Research Center 2025 (Table 5.5)", "fmt": "int"},
+    "enrollment_forecast_2034_35_low": {"label": "Forecast 34-35 (low)", "desc": "Low-scenario 2034-35 forecast. PRC only publishes Low/High at the district-and-grade level, so each school's band is the medium forecast × the district-wide Low/Medium ratio at its grade band (K-5 elementaries: ×0.869; 6-8 middle: ×0.859).", "source": "Derived: PRC Tables 5.3/5.5 (low × med ratio by grade band)", "fmt": "int"},
+    "enrollment_forecast_2034_35_high": {"label": "Forecast 34-35 (high)", "desc": "High-scenario 2034-35 forecast. PRC only publishes Low/High at the district-and-grade level, so each school's band is the medium forecast × the district-wide High/Medium ratio at its grade band (K-5 elementaries: ×1.221; 6-8 middle: ×1.075).", "source": "Derived: PRC Tables 5.4/5.5 (high × med ratio by grade band)", "fmt": "int"},
+    "enrollment_forecast_pct_change_10yr": {"label": "Forecast Δ% 10yr (24-25→34-35)", "desc": "Projected 10-year enrollment change from PRC's 2024-25 baseline to its 2034-35 medium-scenario forecast. Uses PRC's own historic baseline (not ODE) so co-located programs like Odyssey/Hayhurst net out correctly.", "source": "Derived: PRC 2025 medium scenario", "fmt": "pct_0_1"},
+    "utilization_pct_2034_35": {"label": "Forecast utilization 34-35", "desc": "Projected 2034-35 enrollment (PRC medium) ÷ 2021 functional capacity. A forward-looking counterpart to current utilization. Below 50% signals deeply underused by PPS's own planning standard — even if today's utilization is higher.", "source": "Derived: PRC 2025 ÷ LRFP 2021", "fmt": "pct_0_1"},
     "street_address": {"label": "Address", "desc": "Street address of the building.", "source": "NCES CCD + manual", "fmt": "text"},
     "latitude": {"label": "Latitude", "desc": "Geocoded latitude.", "source": "NCES CCD", "fmt": "text"},
     "longitude": {"label": "Longitude", "desc": "Geocoded longitude.", "source": "NCES CCD", "fmt": "text"},
@@ -105,7 +120,10 @@ TABLE_COLS = [
     "year_built", "square_feet", "pct_ela_prof_2425", "pct_math_prof_2425",
     "is_urm_building", "retrofit_cost_remaining_usd", "seismic_retrofit_status",
     "is_title_i", "pct_bipoc",
-    "enrollment_pct_change_7yr", "recent_boundary_change", "programs",
+    "enrollment_pct_change_7yr",
+    "enrollment_forecast_2034_35", "enrollment_forecast_pct_change_10yr",
+    "utilization_pct_2034_35",
+    "recent_boundary_change", "programs",
     "has_dli", "pct_dli_2526", "pct_chronic_absent_2021", "support_staff_per_100",
     "pct_regular_attenders_2425", "pct_experienced_teachers_2425",
     "pct_teacher_retention_2425", "class_size_2425", "students_per_teacher_2023",
@@ -169,6 +187,20 @@ SCATTERS = [
         "x": "enrollment_2025_26",
         "y": "enrollment_pct_change_7yr",
         "subtitle": "Long-term sustainability check. The in-scope set as a whole shrank ~20% over seven years; schools well below that line are losing students faster than the district overall.",
+    },
+    {
+        "id": "forecast_change_vs_size",
+        "title": "Projected 10-year enrollment change vs. current size",
+        "x": "enrollment_2025_26",
+        "y": "enrollment_forecast_pct_change_10yr",
+        "subtitle": "PSU's Population Research Center projects districtwide enrollment to fall from ~43k to ~37k by 2034-35 (medium scenario). Schools in the lower-left — already small today and projected to keep shrinking — are the ones where future-utilization pressure is most acute.",
+    },
+    {
+        "id": "forecast_utilization_vs_current",
+        "title": "Current vs. projected 2034-35 utilization",
+        "x": "utilization_pct_2526",
+        "y": "utilization_pct_2034_35",
+        "subtitle": "How underused each building gets by the end of PRC's 10-year forecast. The 45° line means 'holding steady'; below it means the building empties further. Below 50% is PPS's own threshold for 'substantially underused'.",
     },
     {
         "id": "ratio_vs_enrollment",
@@ -263,6 +295,16 @@ def derive_columns(df):
     df.loc[valid, "enrollment_pct_change_7yr"] = (
         (cur[valid] - base[valid]) / base[valid]
     ).round(4)
+
+    # Forward-looking utilization: PRC 2034-35 medium ÷ 2021 functional capacity.
+    if "enrollment_forecast_2034_35" in df.columns:
+        fut = df["enrollment_forecast_2034_35"]
+        cap = df["functional_capacity_2021"]
+        uvalid = fut.notna() & cap.notna() & (cap > 0)
+        df["utilization_pct_2034_35"] = pd.NA
+        df.loc[uvalid, "utilization_pct_2034_35"] = (
+            fut[uvalid] / cap[uvalid]
+        ).round(4)
 
     # Transportation impact: haversine miles from each closure candidate to the
     # nearest non-candidate school of the same grade band.

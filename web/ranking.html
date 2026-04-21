@@ -165,7 +165,7 @@
 <header>
   <h1>Weighted ranking explorer</h1>
   <p>
-    A configurable, relative ranking of the 74 in-scope PPS schools across nine
+    A configurable, relative ranking of the 74 in-scope PPS schools across ten
     factors. Each school gets a 0–100 score per factor, and the final score is a
     weighted blend — 100 means "tops on all factors you weighted," 0 means
     "bottom on all of them." The bottom 8 are highlighted as illustrative
@@ -237,6 +237,7 @@
     </p>
     <ul class="note" style="margin-top:-6px; padding-left: 22px;">
       <li><strong>Utilization</strong> → 2025-26 enrollment ÷ 2021 functional capacity. <em>Min-max</em>, higher = higher score.</li>
+      <li><strong>10-yr forecast</strong> → PRC's medium-scenario 2034-35 enrollment ÷ 2021 functional capacity. <em>Min-max</em>, higher = higher score. Forward-looking counterpart to current utilization; closure math hinges on 2034, not 2025.</li>
       <li><strong>Seismic</strong> → remaining retrofit cost (Holmes 2024). Lower = higher score.</li>
       <li><strong>Bond Investment</strong> → composite of completed seismic retrofit status (full / targeted / planned) and post-2000 construction. Higher = higher score (protect recent investment).</li>
       <li><strong>Isolation</strong> → haversine distance to the nearest PPS school at the same grade band (k-8s overlap both primary and secondary). Higher = more isolated = higher score.</li>
@@ -252,9 +253,18 @@
 <script>
 const FACTORS = [
   { id: "utilization", label: "Utilization", field: "utilization_pct_2526",
-    dir: 1, default: 25, method: "minmax",
+    dir: 1, default: 20, method: "minmax",
     fmt: v => v == null ? "—" : (v * 100).toFixed(0) + "%",
     help: "Enrollment ÷ capacity. Min-max scaled (magnitude-preserving)." },
+  { id: "forecast", label: "10-yr forecast", field: "utilization_pct_2034_35",
+    dir: 1, default: 15, method: "minmax",
+    fmt: (v, s) => {
+      if (v == null) return "—";
+      const chg = s.enrollment_forecast_pct_change_10yr;
+      const chgStr = chg == null ? "" : ` · ${(chg * 100).toFixed(0)}%Δ`;
+      return (v * 100).toFixed(0) + "%" + chgStr;
+    },
+    help: "Projected 2034-35 utilization (PRC medium forecast ÷ capacity). Min-max scaled. Higher = safer." },
   { id: "seismic", label: "Seismic", field: "retrofit_cost_remaining_usd",
     dir: -1, default: 10, method: "percentile",
     fmt: v => v == null ? "—" : v === 0 ? "$0" : "$" + (v / 1e6).toFixed(1) + "M",
