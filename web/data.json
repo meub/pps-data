@@ -965,8 +965,8 @@
       "pca_y": -0.5,
       "enrollment_pct_change_7yr": -0.0981,
       "utilization_pct_2034_35": 0.3703,
-      "nearest_alt_school_mi": 2.33,
-      "nearest_alt_school_name": "Woodlawn Elementary School"
+      "nearest_alt_school_mi": 1.79,
+      "nearest_alt_school_name": "Beach Elementary School"
     },
     {
       "school_name": "Chief Joseph Elementary School",
@@ -1086,8 +1086,8 @@
       "pca_y": -1.984,
       "enrollment_pct_change_7yr": -0.3101,
       "utilization_pct_2034_35": 0.501,
-      "nearest_alt_school_mi": 1.86,
-      "nearest_alt_school_name": "Woodlawn Elementary School"
+      "nearest_alt_school_mi": 1.06,
+      "nearest_alt_school_name": "Beach Elementary School"
     },
     {
       "school_name": "Lee Elementary School",
@@ -2543,7 +2543,7 @@
     },
     {
       "school_name": "Beach Elementary School",
-      "level": "k8",
+      "level": "elementary",
       "school_type": "Regular School",
       "ode_school_id": 830.0,
       "nces_school_id": 411004000873.0,

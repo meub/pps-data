@@ -693,7 +693,6 @@ SUPPLEMENTAL_SCHOOLS = [
 
 LEVEL_OVERRIDES = {
     "Astor Elementary School": "k8",
-    "Beach Elementary School": "k8",
     "Beverly Cleary School": "k8",
     "Bridger Creative Science School": "k8",
     "César Chávez K-8 School": "k8",
