@@ -28,5 +28,5 @@ framework-analysis.md
 scripts/analyze_title_i_history.py
 CLAUDE.md
 
-# Deploy script (contains S3 bucket + CloudFront distribution ID)
-deploy.sh
+# Deploy config (contains S3 bucket + CloudFront distribution ID); deploy.sh is only a shim
+deploy.env
