@@ -23,7 +23,7 @@ python3 -m http.server -d web 8000
 - **Trends chart** showing 7-year enrollment change (2018 → 2025) with per-school toggles.
 - **Utilization** ranking (enrollment vs. 2021 LRFP functional capacity).
 - **Long-term sustainability** ranking (7-year enrollment change 2018 → 2025).
-- **10-year enrollment forecast** ranking — per-school projected 2034-35 enrollment from PSU Population Research Center (Table 5.5, medium scenario), with low/high scenario bands derived by scaling each school's medium by the district-and-grade-band Low/Medium and High/Medium ratios.
+- **10-year enrollment forecast** ranking — per-school projected 2035-36 enrollment from PSU Population Research Center (Table 5.5, medium scenario), with low/high scenario bands derived by scaling each school's medium by the district-and-grade-band Low/Medium and High/Medium ratios.
 - **Housing growth forecast** ranking — projected new residential units within each school's catchment by ~2035 (Metro BLI 2045 grid, area-weighted to catchment polygons).
 - **Seismic** ranking (remaining retrofit cost per campus from Holmes 2024, colored by funding status; URM buildings flagged).
 - **Transportation** ranking (distance to nearest same-level school for the 15 lowest-enrollment schools).
@@ -48,7 +48,7 @@ Ranking charts render vertically on desktop and swap to horizontal bars on narro
 | [US Dept of Ed CRDC](https://ocrdata.ed.gov/) | English learners, IDEA/SPED, chronic absenteeism (2020); counselor / social worker / psychologist / nurse FTE, OSS suspension instances, post-COVID chronic absenteeism (2021) | 2020, 2021 (both COVID-era) |
 | [KPFF Seismic Report 2009](https://bond.pps.net/) | Year built, square footage, construction type | 2009 |
 | [Holmes Engineering 2024 PPS Seismic Assessment](https://bond.pps.net/) | Per-campus ROM retrofit cost (all ~80 sites), URM-only partial-retrofit cost, URM classification | 2024 |
-| [PPS Long-Range Facility Plan 2021 (Vol 1)](https://www.pps.net/cms/lib/OR01913224/Centricity/domain/219/lrfp/PPS-LRFP-Vol1-2021-Adopted.pdf) | Functional capacity per school (classrooms × station size minus set-asides, with PPS-defined utilization rates). Used for the building-utilization metric. | 2021 |
+| [PPS Long-Range Facility Plan 2021 (Vol 1)](https://www.pps.net/fs/resource-manager/view/84245cbd-4298-4803-8ba9-d26fb13a9c7a) | Functional capacity per school (classrooms × station size minus set-asides, with PPS-defined utilization rates). Used for the building-utilization metric. | 2021 |
 | [PPS Bond page](https://bond.pps.net/seismic-improvements) | Seismic retrofit status | 2025 |
 | [PPS Indoor Air Quality](https://www.pps.net/departments/risk-management/healthy-schools/indoor-air-quality) | Per-room airflow tests (Amerseco + Neudorfer Engineers, NEBB-certified) — ACH_e medians, % rooms below Lancet 3/6 ACH, MERV-13 filter status | 2021 |
 | [Oregon Affordable Housing Inventory (OAHI)](https://www.oregon.gov/ohcs/) | Existing + in-development subsidized housing | 2024 |
@@ -59,7 +59,7 @@ Ranking charts render vertically on desktop and swap to horizontal bars on narro
 | [PPS Language Immersion Enrollment Report](https://www.pps.net/departments/research-assessment-and-accountability/data-and-reports/enrollment-reports-and-school-profiles) | Per-school DLI-strand vs. non-strand headcounts (SIS Synergy, annual PDF) | 2025-26 |
 | [Metro 2045 Distributed Forecast](https://www.oregonmetro.gov/) (Ord. 21-1457) | Regional growth context (city/county only) | 2021 |
 | [Portland Building Land Inventory — Metro BLI 2045 Housing Allocation](https://www.portlandmaps.com/od/rest/services/COP_OpenData_PlanningDevelopment/MapServer/88) | Grid-cell projected new residential units by ~2035 under current zoning (area-weighted to each school's catchment) | 2024 |
-| [PSU Population Research Center — PPS Enrollment Forecasts 2025-26 to 2034-35](https://resources.finalsite.net/images/v1759783181/ppsnet/xzghnbm55ogovbz4eisd/PPS_Forecast_2025.pdf) | Per-school 10-year enrollment forecast (Table 5.5, medium scenario); district-and-grade low/high scenarios (Tables 5.3, 5.4) used to derive per-school scenario bands | July 2025 |
+| [PSU Population Research Center — PPS Enrollment Forecasts 2026-27 to 2035-36](https://resources.finalsite.net/images/v1785171463/ppsnet/ejdr22voeddvux8qwlob/PPS_Forecast_2026_27.pdf) | Per-school 10-year enrollment forecast (Table 5.5, medium scenario); district-and-grade low/high scenarios (Tables 5.3, 5.4) used to derive per-school scenario bands | July 2026 |
 
 ## Project structure
 
@@ -76,7 +76,7 @@ scripts/
   fetch_ode_aag.py              → data/raw/ode_aag_schools_2425.csv
   fetch_dli_report.py           → data/raw/pps_immersion_details_2526.{pdf,json}
   fetch_metro_bli.py            → data/raw/metro_bli_housing_allocation.geojson
-  fetch_pps_enrollment_forecast.py → data/raw/pps_enrollment_forecast_2025.pdf
+  fetch_pps_enrollment_forecast.py → data/raw/pps_enrollment_forecast_2026.pdf
   parse_pps_enrollment_forecast.py → data/raw/pps_enrollment_forecast.csv (Table 5.5 per-school)
   parse_lrfp_capacity.py        → data/raw/pps_functional_capacity_2021.json
   fetch_pps_airflow.py          → data/raw/pps_airflow_pdfs/*.pdf + pps_airflow_index.json
@@ -87,7 +87,7 @@ scripts/
   merge_housing.py              + affordable_units / pipeline_* columns
   merge_permits.py              + permit columns
   merge_bli_forecast.py         + bli_forecast_units_within_catchment (area-weighted from BLI grid)
-  merge_pps_enrollment_forecast.py + enrollment_forecast_2025_26..2034_35, _2034_35_low/high, pct_change_10yr (PRC medium + derived scenario bands)
+  merge_pps_enrollment_forecast.py + enrollment_forecast_2026_27..2035_36, _2035_36_low/high, pct_change_10yr (PRC medium + derived scenario bands)
   export_web.py                 → web/data.json (filters to the 74 in-scope schools)
 web/
   index.html              single-page dashboard

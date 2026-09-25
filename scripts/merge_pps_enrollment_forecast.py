@@ -1,19 +1,21 @@
-"""Merge the PRC 2025 per-school enrollment forecast (Table 5.5, medium
-scenario) into the master CSV.
+"""Merge the PRC per-school enrollment forecast (Table 5.5, medium
+scenario) into the master CSV. Currently the 2026 edition (2026-27 to
+2035-36); the years below derive from BASELINE_YEAR.
 
 Joins on school name. PRC uses short names (e.g. "MLC", "MLK Jr") which
 are mapped to the master's canonical names via NAME_MAP below. Programs
 other than Total are collapsed into the Total row per school.
 
-Adds to data/pps_schools.csv:
-  enrollment_forecast_2025_26 ... enrollment_forecast_2034_35   (10 cols)
-  enrollment_forecast_pct_change_10yr  (2024-25 baseline → 2034-35)
-  enrollment_forecast_2034_35_low  (district Low/Medium ratio × school's 2034 med)
-  enrollment_forecast_2034_35_high (district High/Medium ratio × school's 2034 med)
+Adds to data/pps_schools.csv (for the 2026 edition):
+  prc_baseline_2025_26  (PRC's own count for the baseline year)
+  enrollment_forecast_2026_27 ... enrollment_forecast_2035_36   (10 cols)
+  enrollment_forecast_pct_change_10yr  (2025-26 baseline → 2035-36)
+  enrollment_forecast_2035_36_low  (district Low/Medium ratio × school's horizon med)
+  enrollment_forecast_2035_36_high (district High/Medium ratio × school's horizon med)
 
 PRC publishes per-school forecasts in the Medium scenario only (Table 5.5).
 Tables 5.3/5.4 give Low/High at the district-and-grade level. We scale each
-school's 2034-35 medium forecast by the district-wide Low-over-Medium and
+school's horizon-year medium forecast by the district-wide Low-over-Medium and
 High-over-Medium ratios at its grade band (K-5 vs 6-8), giving a rough
 uncertainty band. Elementaries show wider bands than middle schools because
 K/1 cohort recovery is the biggest scenario lever.
@@ -37,37 +39,43 @@ NAME_MAP = {
     #   OLA, Other (incl. Charters)
 }
 
-FORECAST_YEARS = [
-    ("2025_26", "fcst_2025_26"),
-    ("2026_27", "fcst_2026_27"),
-    ("2027_28", "fcst_2027_28"),
-    ("2028_29", "fcst_2028_29"),
-    ("2029_30", "fcst_2029_30"),
-    ("2030_31", "fcst_2030_31"),
-    ("2031_32", "fcst_2031_32"),
-    ("2032_33", "fcst_2032_33"),
-    ("2033_34", "fcst_2033_34"),
-    ("2034_35", "fcst_2034_35"),
-]
+# Fall of PRC's last actual-enrollment year (must match LAST_HISTORIC_YEAR
+# in parse_pps_enrollment_forecast.py). Forecast runs 10 years after it.
+BASELINE_YEAR = 2025
+N_FORECAST = 10
 
-# District-wide 2034-35 grade-band totals from PRC Tables 5.2 (Medium),
-# 5.3 (Low), and 5.4 (High). Used to construct per-school low/high bands
-# by scaling each school's medium forecast by its band's ratio.
-PRC_2034_35_DISTRICT = {
+
+def _sy(fall: int) -> str:
+    """2025 -> '2025_26'."""
+    return f"{fall}_{(fall + 1) % 100:02d}"
+
+
+BASELINE = _sy(BASELINE_YEAR)
+FORECAST_YEARS = [
+    (_sy(y), f"fcst_{_sy(y)}")
+    for y in range(BASELINE_YEAR + 1, BASELINE_YEAR + 1 + N_FORECAST)
+]
+HORIZON = FORECAST_YEARS[-1][0]
+
+# District-wide horizon-year (2035-36) grade-band totals from PRC 2026
+# Tables 5.2 (Medium), 5.3 (Low), and 5.4 (High). Used to construct
+# per-school low/high bands by scaling each school's medium forecast by
+# its band's ratio. Update these with each new PRC edition.
+PRC_HORIZON_DISTRICT = {
     # (K-5): sum of K-2 + 3-5 from each table
-    "k5": {"low": 7702 + 7412, "med": 8488 + 8908, "high": 11079 + 10153},
+    "k5": {"low": 7695 + 7729, "med": 8195 + 8371, "high": 9500 + 8945},
     # (6-8)
-    "m68": {"low": 6774, "med": 7890, "high": 8479},
+    "m68": {"low": 7763, "med": 8650, "high": 9230},
 }
 
 
 def scenario_ratios(level: str) -> tuple[float, float]:
     """Return (low_over_med, high_over_med) for a given school level."""
     if level == "middle":
-        d = PRC_2034_35_DISTRICT["m68"]
+        d = PRC_HORIZON_DISTRICT["m68"]
     else:
         # elementary, k8, alternative, other — pooled K-5 ratio
-        d = PRC_2034_35_DISTRICT["k5"]
+        d = PRC_HORIZON_DISTRICT["k5"]
     return d["low"] / d["med"], d["high"] / d["med"]
 
 
@@ -118,14 +126,14 @@ def main() -> int:
     # Collapse duplicates (a school shouldn't appear twice as Total, but be safe
     # — e.g. the old "CreativeScience" and new "Bridger Creative Science" rows
     # both map to one master row; summing works because the old row is all zeros).
-    sum_cols = ["hist_2024_25"] + [col for _, col in FORECAST_YEARS]
+    sum_cols = [f"hist_{BASELINE}"] + [col for _, col in FORECAST_YEARS]
     collapsed = (
         totals.groupby("_master_name", as_index=False)[sum_cols].sum(min_count=1)
     )
 
     # Rename to final column names.
     rename = {src: f"enrollment_forecast_{suffix}" for suffix, src in FORECAST_YEARS}
-    rename["hist_2024_25"] = "prc_baseline_2024_25"
+    rename[f"hist_{BASELINE}"] = f"prc_baseline_{BASELINE}"
     collapsed = collapsed.rename(columns=rename)
     collapsed = collapsed.rename(columns={"_master_name": "school_name"})
 
@@ -133,29 +141,29 @@ def main() -> int:
     drop_cols = [
         c for c in master.columns
         if c.startswith("enrollment_forecast_")
-        or c == "prc_baseline_2024_25"
+        or c.startswith("prc_baseline_")
     ]
     if drop_cols:
         master = master.drop(columns=drop_cols)
 
     merged = master.merge(collapsed, on="school_name", how="left")
 
-    # Derived: 10-year percent change using PRC's own historic 2024-25 baseline
-    # (NOT the master's enrollment_2024_25). This matters for co-located
+    # Derived: 10-year percent change using PRC's own historic baseline-year
+    # count (NOT the master's ODE enrollment). This matters for co-located
     # programs like Odyssey-at-Hayhurst where master enrollment includes both
     # schools but PRC's forecast is Hayhurst-proper only.
-    baseline = merged["prc_baseline_2024_25"]
-    future = merged["enrollment_forecast_2034_35"]
+    baseline = merged[f"prc_baseline_{BASELINE}"]
+    future = merged[f"enrollment_forecast_{HORIZON}"]
     merged["enrollment_forecast_pct_change_10yr"] = (
         (future - baseline) / baseline
     ).where(baseline > 0)
 
-    # Low / High scenario bands for 2034-35: scale medium by district-wide
+    # Low / High scenario bands for the horizon year: scale medium by district-wide
     # Low-over-Medium and High-over-Medium ratios at the school's grade band.
     low_vals = []
     high_vals = []
     for _, row in merged.iterrows():
-        med = row.get("enrollment_forecast_2034_35")
+        med = row.get(f"enrollment_forecast_{HORIZON}")
         if pd.isna(med):
             low_vals.append(pd.NA)
             high_vals.append(pd.NA)
@@ -163,8 +171,8 @@ def main() -> int:
         lo_r, hi_r = scenario_ratios(row.get("level", ""))
         low_vals.append(round(med * lo_r))
         high_vals.append(round(med * hi_r))
-    merged["enrollment_forecast_2034_35_low"] = low_vals
-    merged["enrollment_forecast_2034_35_high"] = high_vals
+    merged[f"enrollment_forecast_{HORIZON}_low"] = low_vals
+    merged[f"enrollment_forecast_{HORIZON}_high"] = high_vals
 
     merged.to_csv(MASTER, index=False)
 
@@ -173,15 +181,15 @@ def main() -> int:
 
     # Summary: biggest projected declines among in-scope schools.
     in_scope = merged[merged["level"] != "high"].copy()
-    in_scope = in_scope.dropna(subset=["enrollment_forecast_2034_35"])
+    in_scope = in_scope.dropna(subset=[f"enrollment_forecast_{HORIZON}"])
     if "enrollment_forecast_pct_change_10yr" in in_scope.columns:
         worst = in_scope.nsmallest(10, "enrollment_forecast_pct_change_10yr")
-        print("\nBiggest projected declines by 2034-35 (in-scope):")
+        print(f"\nBiggest projected declines by {HORIZON} (in-scope):")
         print(
             worst[[
                 "school_name",
-                "enrollment_forecast_2025_26",
-                "enrollment_forecast_2034_35",
+                f"prc_baseline_{BASELINE}",
+                f"enrollment_forecast_{HORIZON}",
                 "enrollment_forecast_pct_change_10yr",
             ]].to_string(index=False)
         )

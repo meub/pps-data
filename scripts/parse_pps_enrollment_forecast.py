@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
-"""Parse Table 5.5 (per-school enrollment forecast) from the 2025 PRC PDF.
+"""Parse Table 5.5 (per-school enrollment forecast) from the PRC PDF.
 
 Source PDF:
-  data/raw/pps_enrollment_forecast_2025.pdf
+  data/raw/pps_enrollment_forecast_2026.pdf  (2026-27 to 2035-36 edition)
 
 Table 5.5 spans pages 37-40 in the PDF. Each row is:
-  Name | Type | Program | Grades | 2022-23 | 2023-24 | 2024-25 |
-  2025-26 | 2026-27 | 2027-28 | 2028-29 | 2029-30 |
-  2030-31 | 2031-32 | 2032-33 | 2033-34 | 2034-35
+  Name | Type | Program | Grades | 3 historic years | 10 forecast years
+
+Column years come from LAST_HISTORIC_YEAR below, so moving to next
+summer's edition means changing PDF and that one constant (and checking
+TABLE_PAGES still holds).
 
 Type ∈ {ES, MS, HS, K8, K12, G28, -}. Program ∈ {Total, Neighborhood,
 Mandarin, Spanish, Russian, Japanese, Vietnamese, PISA}. We parse all
@@ -27,16 +29,28 @@ from pathlib import Path
 import pdfplumber
 
 ROOT = Path(__file__).resolve().parent.parent
-PDF = ROOT / "data" / "raw" / "pps_enrollment_forecast_2025.pdf"
+PDF = ROOT / "data" / "raw" / "pps_enrollment_forecast_2026.pdf"
 OUT = ROOT / "data" / "raw" / "pps_enrollment_forecast.csv"
 
 TABLE_PAGES = (37, 38, 39, 40)  # 1-indexed
 TYPE_TOKENS = {"ES", "MS", "HS", "K8", "K12", "G28", "-"}
+# Fall of the last school year PRC reports as actual enrollment. The table
+# carries 3 historic years ending here, then 10 forecast years.
+LAST_HISTORIC_YEAR = 2025
+N_HISTORIC, N_FORECAST = 3, 10
+
+
+def _sy(fall: int) -> str:
+    """2025 -> '2025_26'."""
+    return f"{fall}_{(fall + 1) % 100:02d}"
+
+
 YEAR_COLS = [
-    "hist_2022_23", "hist_2023_24", "hist_2024_25",
-    "fcst_2025_26", "fcst_2026_27", "fcst_2027_28", "fcst_2028_29",
-    "fcst_2029_30", "fcst_2030_31", "fcst_2031_32", "fcst_2032_33",
-    "fcst_2033_34", "fcst_2034_35",
+    f"hist_{_sy(y)}"
+    for y in range(LAST_HISTORIC_YEAR - N_HISTORIC + 1, LAST_HISTORIC_YEAR + 1)
+] + [
+    f"fcst_{_sy(y)}"
+    for y in range(LAST_HISTORIC_YEAR + 1, LAST_HISTORIC_YEAR + 1 + N_FORECAST)
 ]
 
 # Rows we skip (summary lines, not schools)

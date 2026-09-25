@@ -1,15 +1,20 @@
 #!/usr/bin/env python3
-"""Fetch the 2025 PRC enrollment forecast PDF for Portland Public Schools.
+"""Fetch the 2026 PRC enrollment forecast PDF for Portland Public Schools.
 
 Source:
   Portland State University, Population Research Center (PRC)
-  "Portland Public Schools Enrollment Forecasts 2025-26 to 2034-35"
-  Published July 21, 2025 (appendix tables refreshed May 30, 2025).
+  "Portland Public Schools Enrollment Forecasts 2026-27 to 2035-36"
+  Published July 24, 2026 (appendix tables dated May 19, 2026).
+
+PRC publishes a new edition each summer. To move to the next one, update
+URL and OUT here, then the year constants in parse_ and
+merge_pps_enrollment_forecast.py. The 2025 edition stays in data/raw/
+as the historical record.
 
 URL is stable on PPS's finalsite CDN. Re-run with --force to re-download.
 
 Output:
-  data/raw/pps_enrollment_forecast_2025.pdf
+  data/raw/pps_enrollment_forecast_2026.pdf
 """
 from __future__ import annotations
 
@@ -19,10 +24,10 @@ import urllib.request
 from pathlib import Path
 
 URL = (
-    "https://resources.finalsite.net/images/v1759783181/ppsnet/"
-    "xzghnbm55ogovbz4eisd/PPS_Forecast_2025.pdf"
+    "https://resources.finalsite.net/images/v1785171463/ppsnet/"
+    "ejdr22voeddvux8qwlob/PPS_Forecast_2026_27.pdf"
 )
-OUT = Path(__file__).resolve().parent.parent / "data" / "raw" / "pps_enrollment_forecast_2025.pdf"
+OUT = Path(__file__).resolve().parent.parent / "data" / "raw" / "pps_enrollment_forecast_2026.pdf"
 
 
 def main() -> int:

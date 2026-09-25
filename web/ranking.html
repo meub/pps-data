@@ -237,7 +237,7 @@
     </p>
     <ul class="note" style="margin-top:-6px; padding-left: 22px;">
       <li><strong>Utilization</strong> → 2025-26 enrollment ÷ 2021 functional capacity. <em>Min-max</em>, higher = higher score.</li>
-      <li><strong>10-yr forecast</strong> → PRC's medium-scenario 2034-35 enrollment ÷ 2021 functional capacity. <em>Min-max</em>, higher = higher score. Forward-looking counterpart to current utilization; closure math hinges on 2034, not 2025.</li>
+      <li><strong>10-yr forecast</strong> → PRC's medium-scenario 2035-36 enrollment ÷ 2021 functional capacity. <em>Min-max</em>, higher = higher score. Forward-looking counterpart to current utilization; closure math hinges on 2034, not 2025.</li>
       <li><strong>Seismic</strong> → remaining retrofit cost (Holmes 2024). Lower = higher score.</li>
       <li><strong>Bond Investment</strong> → composite of completed seismic retrofit status (full / targeted / planned) and post-2000 construction. Higher = higher score (protect recent investment).</li>
       <li><strong>Isolation</strong> → haversine distance to the nearest PPS school at the same grade band (k-8s overlap both primary and secondary). Higher = more isolated = higher score.</li>
@@ -256,7 +256,7 @@ const FACTORS = [
     dir: 1, default: 20, method: "minmax",
     fmt: v => v == null ? "—" : (v * 100).toFixed(0) + "%",
     help: "Enrollment ÷ capacity. Min-max scaled (magnitude-preserving)." },
-  { id: "forecast", label: "10-yr forecast", field: "utilization_pct_2034_35",
+  { id: "forecast", label: "10-yr forecast", field: "utilization_pct_2035_36",
     dir: 1, default: 15, method: "minmax",
     fmt: (v, s) => {
       if (v == null) return "—";
@@ -264,7 +264,7 @@ const FACTORS = [
       const chgStr = chg == null ? "" : ` · ${(chg * 100).toFixed(0)}%Δ`;
       return (v * 100).toFixed(0) + "%" + chgStr;
     },
-    help: "Projected 2034-35 utilization (PRC medium forecast ÷ capacity). Min-max scaled. Higher = safer." },
+    help: "Projected 2035-36 utilization (PRC medium forecast ÷ capacity). Min-max scaled. Higher = safer." },
   { id: "seismic", label: "Seismic", field: "retrofit_cost_remaining_usd",
     dir: -1, default: 10, method: "percentile",
     fmt: v => v == null ? "—" : v === 0 ? "$0" : "$" + (v / 1e6).toFixed(1) + "M",
