@@ -317,7 +317,7 @@ DLI_NAME_MAP = {
 # Master_name -> PPS airflow index slug (data/raw/pps_airflow_index.json).
 # PPS publishes one 2021 NEBB-certified airflow report per building. Maps each
 # current school program to the airflow slug for the building it occupies.
-# Schools without entries (Alliance, Benson, Kellogg, McDaniel, Odyssey) either
+# Schools without entries (Alliance, Benson, Kellogg, McDaniel) either
 # weren't tested (new/modernized post-2021) or don't have a standalone report.
 # ACCESS + Rose City Park share the same RCP-building report. Beverly Cleary
 # picks Fernwood (its primary building); Hollyrood data is dropped here.
@@ -353,6 +353,7 @@ AIRFLOW_NAME_MAP = {
     "Harriet Tubman Middle School": "tubman",
     "Harrison Park School": "harrison_park",
     "Hayhurst Elementary School": "hayhurst",
+    "Odyssey Program (K-8)": "east_sylvan",
     "Hosford Middle School": "hosford",
     "Irvington Elementary School": "irvington",
     "Jackson Middle School": "jackson",
@@ -403,7 +404,7 @@ AIRFLOW_NAME_MAP = {
 }
 
 # Master_name -> Holmes 2024 PDF cover-page name. Schools not in Holmes
-# (ACCESS is at Vestal, Odyssey at Hayhurst, Forest Park recently rebuilt,
+# (ACCESS is at Vestal, Forest Park recently rebuilt,
 # Alliance admin-only) are left unmapped and get None for retrofit cost.
 # Beverly Cleary has two Holmes entries (Fernwood + Hollyrood) — handled below.
 # Clark + Bridger share the Creative Science / Clark campus in Holmes.
@@ -441,6 +442,7 @@ HOLMES_NAME_MAP = {
     "Harrison Park School": "Harrison Park",
     "Lane Middle School": "Lane",
     "Hayhurst Elementary School": "Hayhurst",
+    "Odyssey Program (K-8)": "East Sylvan",
     "Hosford Middle School": "Hosford",
     "Ida B. Wells-Barnett High School": "Ida B Wells",
     "Irvington Elementary School": "Irvington",
@@ -573,13 +575,14 @@ FACILITY_NAME_MAP = {
     "Woodstock Elementary School": "Woodstock Elementary",
     "da Vinci Middle School": "DaVinci",
     # Clark Elementary (opened post-2009 at former ACCESS site) — no 2009 row.
-    # Odyssey Program is embedded, no facility of its own.
+    "Odyssey Program (K-8)": "East Sylvan",
 }
 
 
 # Master_name -> LRFP 2021 short name for functional capacity. ACCESS, Alliance,
-# MLC, Odyssey are embedded / alternative programs without their own building
-# entry in the LRFP tables; they stay null. Beverly Cleary operates both
+# MLC are embedded / alternative programs without their own building entry in
+# the LRFP tables; they stay null. Odyssey is listed under its building,
+# EAST SYLVAN. Beverly Cleary operates both
 # Hollyrood and Fernwood campuses; per the LRFP note, its functional capacity
 # is the sum of both (handled below).
 LRFP_NAME_MAP = {
@@ -612,6 +615,7 @@ LRFP_NAME_MAP = {
     "Harriet Tubman Middle School": "TUBMAN",
     "Harrison Park School": "HARRISON PARK",
     "Hayhurst Elementary School": "HAYHURST",
+    "Odyssey Program (K-8)": "EAST SYLVAN",
     "Hosford Middle School": "HOSFORD",
     "Irvington Elementary School": "IRVINGTON",
     "Jackson Middle School": "JACKSON",
@@ -680,6 +684,39 @@ MANUAL_LOCATION = {
         "street_address": "1849 SW 58th Ave", "city": "Portland", "zip_code": "97221",
         "latitude": 45.5108, "longitude": -122.7375,
     },
+}
+
+# Odyssey moved out of Hayhurst into the East Sylvan building (1849 SW 58th
+# Ave) in fall 2016, but ODE and NCES still report Odyssey's students under
+# Hayhurst's institution ID. PPS's own counts split them, and each pair sums
+# to the combined ODE/NCES figure within 4 students, so we replace the
+# combined enrollment with PPS's split. Rates that pair a combined count with
+# a combined denominator (FRL, CRDC, teacher ratios) are left combined; see
+# DATA_NOTES. Column -> (Hayhurst, Odyssey, source).
+HAYHURST_ODYSSEY_SPLIT = {
+    "enrollment_2018": (390, 239, "PPS utilization workbook, ENROLLMENT tab, 2018-19"),
+    "enrollment_2019": (396, 244, "PPS utilization workbook, 2019-20"),
+    "enrollment_2020": (380, 244, "PPS utilization workbook, 2020-21"),
+    "enrollment_2021": (351, 219, "PPS utilization workbook, 2021-22"),
+    "enrollment_2022": (349, 225, "PSU PRC 2025 forecast, Table 5.5, 2022-23"),
+    "enrollment_2023": (335, 227, "PSU PRC 2026 forecast, Table 5.5, 2023-24"),
+    "2024-25 Total Enrollment": (314, 211, "PSU PRC 2026 forecast, Table 5.5"),
+    "2025-26 Total Enrollment": (290, 217, "PSU PRC 2026 forecast, Table 5.5"),
+}
+
+# Per-school caveats shown on the dashboard where a source mixes schools.
+DATA_NOTES = {
+    "Hayhurst Elementary School": (
+        "Enrollment and utilization use PPS's own count for Hayhurst alone. "
+        "State and federal data still report Odyssey's students under "
+        "Hayhurst, even though Odyssey has been in the East Sylvan building "
+        "since fall 2016, so Hayhurst's demographics, free-lunch, test-score, "
+        "attendance, staffing, and discipline figures include Odyssey."),
+    "Odyssey Program (K-8)": (
+        "Odyssey has been in the East Sylvan building since fall 2016. "
+        "Enrollment is PPS's own count. State and federal data report "
+        "Odyssey's students under Hayhurst, so Odyssey has no demographics, "
+        "test-score, or staffing figures of its own."),
 }
 
 
@@ -778,12 +815,9 @@ def main():
         lambda n: any("focus" in p for p in PROGRAMS.get(n, [])))
     pps["dli_languages"] = pps["School Name"].map(
         lambda n: "; ".join(p.replace(" DLI", "") for p in PROGRAMS.get(n, []) if "DLI" in p) or None)
-    pps["enrollment_pct_change"] = (
-        (pps["2025-26 Total Enrollment"] - pps["2024-25 Total Enrollment"])
-        / pps["2024-25 Total Enrollment"]
-    ).round(4)
 
-    # Add Odyssey Program manually — it's embedded in another PPS school in ODE data.
+    # Add Odyssey Program manually. ODE reports its students under Hayhurst;
+    # its enrollment is filled from HAYHURST_ODYSSEY_SPLIT below.
     odyssey = {
         "District Name": "Portland SD 1J",
         "School Institution ID": None,
@@ -791,7 +825,7 @@ def main():
         "School Type": "Program",
         "Virtual": None,
         "2024-25 Total Enrollment": None,
-        "2025-26 Total Enrollment": 217,  # from WW article
+        "2025-26 Total Enrollment": None,
         "level": "k8",
         "is_closure_candidate": True,
         "closure_rank": 5,
@@ -799,7 +833,6 @@ def main():
         "is_urm_building": False,
         "urm_retrofit_cost_usd": None,
         "seismic_retrofit_status": None,
-        "enrollment_pct_change": None,
         "programs": "; ".join(PROGRAMS.get("Odyssey Program (K-8)", [])) or None,
         "has_dli": False,
         "has_focus_option": True,
@@ -861,10 +894,6 @@ def main():
     pps.loc[pps["School Name"].str.strip() == "Beverly Cleary School",
             "functional_capacity_2021"] = bc_cap or None
 
-    pps["utilization_pct_2526"] = (
-        pps["2025-26 Total Enrollment"] / pps["functional_capacity_2021"]
-    ).round(4)
-
     # Merge the functional capacity recovered from PPS's operational School
     # Utilization Model workbook (2025 records request). This is a second PPS
     # source for the same measure, ~2021 vintage. Where it disagrees with the
@@ -891,9 +920,6 @@ def main():
     for col in MODEL_COLS:
         colmap = {r["school_name"]: r.get(col) for r in model_raw}
         pps[col] = pps["School Name"].map(colmap)
-    pps["utilization_model_2526"] = (
-        pps["2025-26 Total Enrollment"] / pps["functional_capacity_model"]
-    ).round(4)
 
     def _capacity_conflict(row):
         lrfp, model = row["functional_capacity_2021"], row["functional_capacity_model"]
@@ -967,6 +993,25 @@ def main():
         pps["enrollment_2023"] / pps["teachers_fte_2023"]
     ).round(2)
 
+    # Split Hayhurst/Odyssey enrollment. Must run after the CRDC and teacher
+    # ratios above, which pair combined counts with combined enrollment, and
+    # before anything derived from enrollment alone.
+    for col, (hay, ody, _source) in HAYHURST_ODYSSEY_SPLIT.items():
+        pps.loc[pps["School Name"] == "Hayhurst Elementary School", col] = hay
+        pps.loc[pps["School Name"] == "Odyssey Program (K-8)", col] = ody
+    pps["data_note"] = pps["School Name"].map(DATA_NOTES)
+
+    pps["enrollment_pct_change"] = (
+        (pps["2025-26 Total Enrollment"] - pps["2024-25 Total Enrollment"])
+        / pps["2024-25 Total Enrollment"]
+    ).round(4)
+    pps["utilization_pct_2526"] = (
+        pps["2025-26 Total Enrollment"] / pps["functional_capacity_2021"]
+    ).round(4)
+    pps["utilization_model_2526"] = (
+        pps["2025-26 Total Enrollment"] / pps["functional_capacity_model"]
+    ).round(4)
+
     # PPS 2021 airflow/ventilation survey (Amerseco + Neudorfer Engineers,
     # NEBB-certified). One report per building; we surface per-school ACH_e
     # medians and the fraction of rooms below the Lancet 3/6 ACH benchmarks.
@@ -1025,8 +1070,10 @@ def main():
     # than 2025-26 enrollment, so use it when available.
     base_enroll = pps["ccd_enrollment_2022"].fillna(pps["2025-26 Total Enrollment"])
     pps["pct_free_lunch"] = (pps["frl_free_lunch"] / base_enroll).round(4)
-    pps["pct_frl"] = ((pps["frl_free_lunch"].fillna(0) +
-                       pps["frl_reduced_lunch"].fillna(0)) / base_enroll).round(4)
+    # add(fill_value=0) keeps NaN only when both counts are missing, so a
+    # school with no FRL record (e.g. Odyssey) shows blank, not 0%.
+    pps["pct_frl"] = (pps["frl_free_lunch"].add(pps["frl_reduced_lunch"], fill_value=0)
+                      / base_enroll).round(4)
     pps["pct_direct_cert"] = (pps["frl_direct_certification"] / base_enroll).round(4)
 
     # Merge OSAS academic performance (ELA/Math proficiency, total pop).
@@ -1135,6 +1182,7 @@ def main():
         "functional_capacity_2021", "utilization_pct_2526",
         "functional_capacity_model", "utilization_model_2526",
         "capacity_source_conflict", "fc_model_approx", "capacity_conflict_note",
+        "data_note",
         "gross_capacity", "classrooms_total", "avg_classroom_sqft",
         "science_rooms", "art_music_rooms", "computer_rooms", "gym_rooms",
         "leased_classrooms", "lease_tenants",

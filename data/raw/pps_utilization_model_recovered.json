@@ -409,6 +409,27 @@
     "sprinkler_notes": "Standard Q sprinkler option: Corridors, stairwells, and exit pathways"
   },
   {
+    "school_name": "Odyssey Program (K-8)",
+    "wb_name": "EAST SYLVAN",
+    "site_id": "372",
+    "config": "K-8",
+    "functional_capacity_model": 174.0,
+    "fc_approx": false,
+    "n_years": 3,
+    "conflict_note": null,
+    "classrooms_total": 11,
+    "gross_capacity": 282,
+    "avg_classroom_sqft": 723,
+    "science_rooms": 0,
+    "art_music_rooms": 1,
+    "computer_rooms": 0,
+    "gym_rooms": 1,
+    "fully_sprinklered": false,
+    "k2_program": false,
+    "k2_program_expires": null,
+    "sprinkler_notes": "Standard Q sprinkler option: Corridors, stairwells, and exit pathways"
+  },
+  {
     "school_name": "Faubion Elementary School",
     "wb_name": "FAUBION",
     "site_id": "248",

@@ -149,9 +149,9 @@ def main() -> int:
     merged = master.merge(collapsed, on="school_name", how="left")
 
     # Derived: 10-year percent change using PRC's own historic baseline-year
-    # count (NOT the master's ODE enrollment). This matters for co-located
-    # programs like Odyssey-at-Hayhurst where master enrollment includes both
-    # schools but PRC's forecast is Hayhurst-proper only.
+    # count (NOT the master's ODE enrollment), so base year and forecast come
+    # from one source. ODE lumps Odyssey into Hayhurst; build_master.py splits
+    # them using these same PRC counts.
     baseline = merged[f"prc_baseline_{BASELINE}"]
     future = merged[f"enrollment_forecast_{HORIZON}"]
     merged["enrollment_forecast_pct_change_10yr"] = (

@@ -77,6 +77,7 @@ NAME_MAP = {
     "CRESTON": "Creston Elementary School",
     "DAVINCI": "da Vinci Middle School",
     "DUNIWAY": "Duniway Elementary School",
+    "EAST SYLVAN": "Odyssey Program (K-8)",  # Odyssey's building since fall 2016
     "FAUBION": "Faubion Elementary School",
     "FOREST PARK": "Forest Park Elementary School",
     "FRANKLIN": "Franklin High School",

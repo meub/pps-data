@@ -819,8 +819,8 @@
           rooms tested, median ACH_e without portable filters (the HVAC-only floor), the
           share of rooms below Lancet's 3 ACH lower bound and 6 ACH recommended classroom
           target, and whether a MERV-13 filter upgrade had been installed at test time.
-          Coverage: 74 of 83 roster buildings; omitted schools (Benson, McDaniel, Kellogg,
-          Alliance, Odyssey, ACCESS, Bridger Creative Science, Clark) were either
+          Coverage: 76 of 83 roster buildings; omitted schools (Benson, McDaniel, Kellogg,
+          Alliance, ACCESS, Bridger Creative Science, Clark) were either
           newly-modernized after the survey or don't have a standalone building report.
         </dd>
     </dl>
@@ -864,7 +864,7 @@
           are published at the district-and-grade level (Tables 5.3 and 5.4).
           We populate each school's 2026-27 through 2035-36 medium forecast,
           derive a 10-year percent change from PRC's own 2025-26 historic baseline
-          (which differs from ODE at co-located programs like Hayhurst/Odyssey),
+          (ODE reports Hayhurst and Odyssey together; PRC splits them),
           and compute a forward-looking utilization = 2035-36 forecast ÷ 2021 functional
           capacity. Alliance High School is the only in-scope school PRC does not forecast.
         </dd>
@@ -948,6 +948,7 @@
       Building square footage is from 2009 and may understate capacity at schools expanded under recent bonds.
       CRDC LEP/IDEA counts are from 2020 (COVID year) and are divided by 2025-26 enrollment to derive shares; treat as approximate.
       Free/reduced meal shares use 2022 counts over 2022 enrollment; post-2022 trends are not reflected.
+      State and federal data report Odyssey's students under Hayhurst, although Odyssey moved to the East Sylvan building in fall 2016. Enrollment and utilization for both use PPS's own split. Hayhurst's other state-reported figures still include Odyssey.
       Permits represent approvals, not completions; a permit may be issued but not built.
       PRC per-school forecasts reflect spring 2026 assumptions (net migration, K/1 capture rate, birth rates). PRC reports district-level forecast errors only (no per-school error analysis): the 2025 one-year mean absolute percent error across all grades was 1.37% (Table 4.3), but grade-level error was largest in Kindergarten (3.8% underestimate). Pandemic-era multi-year forecasts missed by up to 8-20% over 4-5 years (Table 4.4). Treat per-school medium forecasts as a central estimate with scenario uncertainty that is larger at the elementary level (K/1 is the biggest lever).
     </p>
@@ -1204,6 +1205,7 @@
     const popupHtml =
       `<div class="map-popup"><b>${s.school_name}</b>` +
       `<div class="meta">${s.street_address || ""}</div>` +
+      (s.data_note ? `<div class="meta">${s.data_note}</div>` : "") +
       sections.map(([title, rows]) =>
         `<h4>${title}</h4>` +
         rows.map(([k, v]) => `<div class="row"><b style="display:inline">${k}:</b> ${v}</div>`).join("")
