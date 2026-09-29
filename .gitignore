@@ -30,3 +30,7 @@ CLAUDE.md
 
 # Deploy config (contains S3 bucket + CloudFront distribution ID); deploy.sh is only a shim
 deploy.env
+
+# Scraped PPS rightsizing pages and videos (summarized in rightsizing-summary.md)
+data/raw/pps_rightsizing_pages/
+data/raw/pps_rightsizing_videos/
