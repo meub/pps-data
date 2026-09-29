@@ -666,15 +666,19 @@ LRFP_NAME_MAP = {
 
 
 # Manual patches for schools missing from CCD 2022 (Clark opened post-2022;
-# Odyssey is an embedded program hosted at Hayhurst in 2024-25).
+# Odyssey is an embedded program with no NCES record of its own). Odyssey used
+# to share Hayhurst's campus; its current site is 1849 SW 58th Ave. This must
+# be fixed here, not in data/pps_schools.csv: a May 2026 hand edit to the CSV
+# was silently reverted by the next rebuild, stacking Odyssey's map marker
+# under Hayhurst's.
 MANUAL_LOCATION = {
     "Clark Elementary School": {
         "street_address": "1231 SE 92nd Ave", "city": "Portland", "zip_code": "97216",
         "latitude": 45.5133327, "longitude": -122.5706442,
     },
     "Odyssey Program (K-8)": {
-        "street_address": "5037 SW Iowa St", "city": "Portland", "zip_code": "97221",
-        "latitude": 45.4804, "longitude": -122.729,
+        "street_address": "1849 SW 58th Ave", "city": "Portland", "zip_code": "97221",
+        "latitude": 45.5108, "longitude": -122.7375,
     },
 }
 
@@ -826,8 +830,7 @@ def main():
     pps = pps.merge(ccd, on="ccd_match_name", how="left")
     pps = pps.drop(columns=["ccd_match_name"])
 
-    # Patch schools missing from CCD 2022 (Clark opened post-2022; Odyssey is
-    # an embedded program hosted at Hayhurst).
+    # Patch schools missing from CCD 2022 (see MANUAL_LOCATION).
     for name, vals in MANUAL_LOCATION.items():
         for col, v in vals.items():
             pps.loc[pps["School Name"] == name, col] = v
