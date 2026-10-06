@@ -1085,17 +1085,6 @@
       PPS's board memo for the October 6, 2026 meeting, because the scenario comparison does not
       name them.
     </p>
-    <p>
-      Students per grade at receiving schools: a rough model that holds fall 2025 enrollment (ODE, by grade) fixed and moves
-      students the way each scenario says. Each closure sends its students to PPS's receiving schools, with immersion students
-      going where their program goes; K-8 schools that become K-5 send grades 6-8 to their middle school; immersion programs at
-      schools that stay open move with their students; and César Chávez's non-immersion K-5 students go to Rosa Parks (board
-      memo). Immersion counts by language come from PPS's October 2025 immersion report and are spread across grades in
-      proportion to each school's grade counts, since PPS does not publish them by grade. Sellwood's students are split evenly
-      between Hosford and Lane because PPS gives no split. Not included: attendance boundary changes (PPS has not published how
-      many students they move), enrollment decline before fall 2027, families who leave the district, and the size of programs
-      PPS does not publish (Creston's Deaf and Hard of Hearing program, Odyssey).
-    </p>
 
     <h3>Lowest-enrollment 15</h3>
     <p>
@@ -2228,7 +2217,9 @@
     // supports (no boundary changes, assumed Sellwood split). Flip to show.
     const SHOW_CAPACITY_TABLE = false;
     document.getElementById("rs-recv-panel").hidden = !(SHOW_RECV && SHOW_CAPACITY_TABLE);
-    document.getElementById("rs-grades-panel").hidden = !RS.model;  // public
+    // Hidden from the public page until the model handles per-grade splits
+    // and boundary changes; still viewable with ?dev=1.
+    document.getElementById("rs-grades-panel").hidden = !(SHOW_RECV && RS.model);
     const MODEL = RS.model;
     const MG = MODEL ? MODEL.grades : [];
     const K5N = 6;  // first six grades are K-5
