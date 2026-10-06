@@ -1946,18 +1946,52 @@
       },
     });
     new MapToggle({ position: "topright" }).addTo(rsMap);
-    // Arrowhead at the midpoint of a from->to line, pointing at "to". Web
-    // Mercator preserves angles, so a bearing computed at one zoom stays
-    // correct at every zoom.
-    function arrowAt(from, to, color) {
-      const pa = rsMap.project(from, 12), pb = rsMap.project(to, 12);
-      const deg = Math.atan2(pb.y - pa.y, pb.x - pa.x) * 180 / Math.PI;
-      const mid = L.latLng((from.lat + to.lat) / 2, (from.lng + to.lng) / 2);
-      return L.marker(mid, {
+    // Flow lines. A straight line can cross a school that sits between the
+    // two endpoints (e.g. Sellwood -> Lane runs over Duniway), so each path
+    // is checked against every other school in projected meters; if one is
+    // within CLEAR_M, the line becomes a quadratic curve bowed to whichever
+    // side clears it best, curving harder if needed. Geometry is computed in
+    // Web Mercator pixels at a fixed zoom; the projection is conformal, so
+    // the shape and the arrow angle hold at every zoom.
+    const CLEAR_M = 250, Z = 15;
+    const mPerPx = (lat) => 156543.03 * Math.cos(lat * Math.PI / 180) / Math.pow(2, Z);
+    function quad(p0, p1, p2, t) {
+      const u = 1 - t;
+      return L.point(u * u * p0.x + 2 * u * t * p1.x + t * t * p2.x, u * u * p0.y + 2 * u * t * p1.y + t * t * p2.y);
+    }
+    function flowGeometry(from, to, a, b) {
+      const p0 = rsMap.project(from, Z), p2 = rsMap.project(to, Z);
+      const clearPx = CLEAR_M / mPerPx(from.lat);
+      const others = schools.filter(s => s !== a && s !== b && s.latitude != null)
+        .map(s => rsMap.project([s.latitude, s.longitude], Z));
+      const clearance = (pts) => Math.min(Infinity, ...pts.flatMap(pt => others.map(o => pt.distanceTo(o))));
+      const sample = (p1) => Array.from({ length: 17 }, (_, i) => quad(p0, p1, p2, 0.1 + 0.8 * i / 16));
+      const mid = L.point((p0.x + p2.x) / 2, (p0.y + p2.y) / 2);
+      const dx = p2.x - p0.x, dy = p2.y - p0.y, len = Math.hypot(dx, dy) || 1;
+      const nx = -dy / len, ny = dx / len;
+      let best = { p1: mid, clear: clearance(sample(mid)) };
+      if (best.clear < clearPx) {
+        for (const k of [0.18, 0.3, 0.45]) {
+          for (const sign of [1, -1]) {
+            const p1 = L.point(mid.x + sign * k * len * nx, mid.y + sign * k * len * ny);
+            const c = clearance(sample(p1));
+            if (c > best.clear) best = { p1, clear: c };
+          }
+          if (best.clear >= clearPx) break;
+        }
+      }
+      const pts = Array.from({ length: 33 }, (_, i) => rsMap.unproject(quad(p0, best.p1, p2, i / 32), Z));
+      // Midpoint and tangent of the curve (for a quadratic, B'(0.5) = p2 - p0).
+      const arrowPos = rsMap.unproject(quad(p0, best.p1, p2, 0.5), Z);
+      const deg = Math.atan2(dy, dx) * 180 / Math.PI;
+      return { pts, arrowPos, deg };
+    }
+    function arrowMarker(geom, color) {
+      return L.marker(geom.arrowPos, {
         interactive: false, keyboard: false,
         icon: L.divIcon({
           className: "rs-arrow", iconSize: [18, 18], iconAnchor: [9, 9],
-          html: `<svg width="18" height="18" viewBox="0 0 18 18" style="transform:rotate(${deg}deg)">` +
+          html: `<svg width="18" height="18" viewBox="0 0 18 18" style="transform:rotate(${geom.deg}deg)">` +
                 `<path d="M3 3 L16 9 L3 15 L6 9 Z" fill="${color}" stroke="#0d1117" stroke-width="1.2" stroke-linejoin="round"/></svg>`,
         }),
       });
@@ -2011,21 +2045,23 @@
         RS.scenarios[scen].moves.forEach(mv => {
           const a = byName[mv.from], b = byName[mv.to];
           if (!a || !b || a === b || a.latitude == null || b.latitude == null) return;
-          L.polyline([ll(a), ll(b)], { color: COLOR.program_change, weight: 2.5, opacity: 0.9, dashArray: "4 5" })
+          const g = flowGeometry(ll(a), ll(b), a, b);
+          L.polyline(g.pts, { color: COLOR.program_change, weight: 2.5, opacity: 0.9, dashArray: "4 5" })
             .bindTooltip(esc(mv.text), { sticky: true }).addTo(layer);
-          arrowAt(ll(a), ll(b), COLOR.program_change).addTo(layer);
+          arrowMarker(g, COLOR.program_change).addTo(layer);
         });
       }
       RS.scenarios[scen].receivers.forEach(r => {
         const a = byName[r.from], b = byName[r.to];
         if (!a || !b || a.latitude == null || b.latitude == null) return;
         const tip = `${esc(short(r.from))} &rarr; ${esc(short(r.to))}: ${esc(flowText(r))}`;
-        L.polyline([ll(a), ll(b)], {
+        const g = flowGeometry(ll(a), ll(b), a, b);
+        L.polyline(g.pts, {
           color: COLOR.closes, weight: 3.5, opacity: 0.95, dashArray: isProgramFlow(r) ? "7 6" : null,
         }).addTo(layer);
         // Wide transparent twin so the hover target is bigger than the line.
-        L.polyline([ll(a), ll(b)], { weight: 14, opacity: 0 }).bindTooltip(tip, { sticky: true }).addTo(layer);
-        arrowAt(ll(a), ll(b), COLOR.closes).addTo(layer);
+        L.polyline(g.pts, { weight: 14, opacity: 0 }).bindTooltip(tip, { sticky: true }).addTo(layer);
+        arrowMarker(g, COLOR.closes).addTo(layer);
       });
       ensureHatch();
       const order = { other: 0, receives: 1, closes: 2 };
