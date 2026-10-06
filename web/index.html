@@ -511,7 +511,7 @@
     <div class="rs-grid">
       <div class="panel chart-card">
         <h3>What happens to the 74 schools</h3>
-        <p class="subtitle">Each school counted once, by its biggest change. "Receives students" means it takes in students from a closing school.</p>
+        <p class="subtitle">Each school counted once, by its biggest change. "Receives students" means it takes in students from a closing school, and takes priority over a school's other changes here; the map shows both.</p>
         <div id="plot-rs-outcomes" style="height: 220px;"></div>
       </div>
       <div class="panel chart-card">
@@ -535,6 +535,7 @@
       <div class="rs-legend" id="rs-legend">
         <span><span class="sw ring" style="background:var(--rs-close)"></span>Closes</span>
         <span><span class="sw ring" style="background:var(--rs-receive)"></span>Receives students from a closing school</span>
+        <span><span class="sw ring" style="background:repeating-linear-gradient(45deg, var(--rs-receive) 0 3px, #ffffff 3px 5px)"></span>Receives students and has a program or grade change</span>
         <span><span class="sw" style="background:repeating-linear-gradient(45deg, var(--rs-receive) 0 3px, #ffffff 3px 5px)"></span>Stays open, other change (boundary, program, or grades)</span>
         <span><span class="sw" style="background:var(--rs-receive)"></span>Stays open, no change</span>
         <span>Circle size: 2025-26 enrollment</span>
@@ -547,7 +548,7 @@
       <p class="rs-summary" id="rs-summary"></p>
       <table class="schools" id="rs-closing-table"></table>
     </div>
-    <div class="panel rs-recv" style="margin-top:16px;">
+    <div class="panel rs-recv" id="rs-recv-panel" style="margin-top:16px;" hidden>
       <h3>Receiving schools: does everyone fit, and how big are the classes?</h3>
       <p class="subtitle" id="rs-recv-sub">
         A rough model: this fall's students, moved the way each scenario says. Capacity is PPS's 2021 functional capacity.
@@ -2133,7 +2134,11 @@
             radius: r,
             color: role === "other" ? css("--rs-receive") : "#ffffff",
             weight: role === "other" ? 1 : 2.5,
-            fillColor: role === "other" && outcomeOf(s, scen) === "other" ? "url(#rs-hatch)" : ROLE_COLOR[role],
+            // Stripes mark a program or grade change and stack with the receiver
+            // ring, so a school that receives students and also changes (e.g.
+            // Sunnyside becoming K-5) shows both.
+            fillColor: (role === "other" && outcomeOf(s, scen) === "other")
+              || (role === "receives" && catOf(s, scen) === "program_change") ? "url(#rs-hatch)" : ROLE_COLOR[role],
             fillOpacity: 0.95,
           }).bindPopup(popupFor(s), { maxWidth: 340, minWidth: 260 })
             .bindTooltip(`${esc(short(s.school_name))}: ${role === "closes" ? "closes" : role === "receives" ? "receives students" : LABEL[catOf(s, scen)].toLowerCase()}`)
@@ -2184,7 +2189,10 @@
 
 
     // ---- receiving schools: capacity and estimated K-5 classes ----
-    const MODEL = RS.model;
+    // In development: shown only with ?dev=1 until it is ready to publish.
+    const SHOW_RECV = new URLSearchParams(location.search).has("dev");
+    document.getElementById("rs-recv-panel").hidden = !SHOW_RECV;
+    const MODEL = SHOW_RECV ? RS.model : null;
     const MG = MODEL ? MODEL.grades : [];
     const K5N = 6;  // first six grades are K-5
     const GRADE_LABEL = { k: "K", g1: "1", g2: "2", g3: "3", g4: "4", g5: "5", g6: "6", g7: "7", g8: "8" };

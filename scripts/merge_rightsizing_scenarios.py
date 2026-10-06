@@ -102,6 +102,15 @@ SCENARIO_B_RETAINED = {
     "Rose City Park": "Stays open with its neighborhood boundary and Vietnamese immersion program.",
     "Stephenson Elementary School": "Stays open with its current boundary and no proposed changes.",
 }
+# Changes in the board memo that the scenario PDF's lists leave out; they
+# apply to both scenarios (memo p. 2).
+MEMO_CHANGES = {
+    "Sunnyside Environmental School": (
+        # No semicolons: details are "; "-joined and split on display.
+        "Focus option ends: Sunnyside's environmental focus option is discontinued and it becomes a "
+        "neighborhood school with no new lottery transfers. Current lottery students may stay "
+        "through 5th grade (board memo)"),
+}
 RECEIVERS_SOURCE = ("PPS board memo, Rightsizing Update: Scenario Release, "
                     "October 6, 2026 board meeting")
 
@@ -173,6 +182,8 @@ def school_changes(scen: dict) -> dict[str, list[tuple[str, str]]]:
     for note in scen["notes"]:
         if note.startswith("The MLC"):
             ch.setdefault("Metropolitan Learning Center", []).append(("program_change", note))
+    for n, text in MEMO_CHANGES.items():
+        ch.setdefault(n, []).append(("program_change", text))
     for n in scen["boundary_changes"]:
         ch.setdefault(n, []).append(("boundary", "Attendance boundary changes"))
     return ch
