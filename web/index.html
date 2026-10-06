@@ -201,8 +201,11 @@
   .rs-flag.over { color: #ff7b72; }
   .rs-flag.near { color: #e3b341; }
   .rs-arrowtxt { color: var(--muted); padding: 0 3px; }
-  #rs-recv-detail { margin-top: 12px; }
-  #rs-recv-detail h4 { margin: 4px 0 6px; font-size: var(--fs-small); }
+  .rs-chev { display: inline-block; width: 14px; color: var(--accent); }
+  #rs-recv-table tr.rs-detail-row > td { background: #0d1117; padding: 10px 14px 14px 28px;
+    border-left: 3px solid var(--accent); }
+  #rs-recv-table tr.rs-detail-row h4 { margin: 0 0 6px; font-size: var(--fs-small); }
+  #rs-recv-table tr.rs-detail-row:hover td { background: #0d1117; }
   .rs-recv-notes p { font-size: var(--fs-small); }
   #map:not(.scroll-enabled)::after {
     content: "Click map to zoom with scroll wheel";
@@ -555,7 +558,6 @@
         <input type="range" id="rs-target" min="20" max="32" step="1" value="26">
       </div>
       <div style="overflow-x:auto;"><table class="schools" id="rs-recv-table"></table></div>
-      <div id="rs-recv-detail"></div>
       <details class="inline-expand rs-recv-notes"><summary>How this is estimated, and what it leaves out</summary>
         <p>Starts from ODE's fall 2025 counts by grade and moves students for each closure to PPS's receiving schools (October 6 board memo),
         each K-8 conversion's grades 6-8, each immersion program move, and César Chávez's non-immersion K-5 students to Rosa Parks.
@@ -2222,29 +2224,29 @@
       document.getElementById("rs-recv-sub").innerHTML =
         `A rough model: this fall's students, moved the way Scenario ${scen} says. ${rows.length} schools gain students; ` +
         `${over} would exceed PPS's 2021 functional capacity. K-5 classes are estimated per grade and per immersion strand, ` +
-        `at the class-size target below. Click a school for its grade-by-grade numbers.`;
+        `at the class-size target below. Click a school to expand its grade-by-grade numbers.`;
       document.getElementById("rs-recv-table").innerHTML =
         `<thead><tr><th>School</th><th>Gains students from</th><th>Students now ${arrowTxt} after</th><th>Capacity</th>` +
         `<th>Utilization now ${arrowTxt} after</th><th>K-5 classes now ${arrowTxt} after</th><th>Avg K-5 class now ${arrowTxt} after</th></tr></thead><tbody>` +
-        rows.map(x => `<tr data-name="${esc(x.name)}" class="${x.name === selectedRecv ? "sel" : ""}">` +
-          `<td>${esc(short(x.name))}</td>` +
+        rows.map(x => `<tr data-name="${esc(x.name)}" class="rs-recv-row${x.name === selectedRecv ? " sel" : ""}" aria-expanded="${x.name === selectedRecv}">` +
+          `<td><span class="rs-chev">${x.name === selectedRecv ? "&#9662;" : "&#9656;"}</span>${esc(short(x.name))}</td>` +
           `<td class="from">${x.r.inflows.map(esc).join("<br>")}</td>` +
           `<td>${Math.round(x.nb)}${arrowTxt}<b>${Math.round(x.na)}</b></td>` +
           `<td>${x.cap ? Math.round(x.cap) : "—"}</td>` +
           `<td>${x.cap ? Math.round(x.nb / x.cap * 100) + "%" : "—"}${arrowTxt}${utilCell(x.na, x.cap)}</td>` +
           `<td>${x.cb.classes || "—"}${arrowTxt}<b>${x.ca.classes || "—"}</b></td>` +
-          `<td>${x.cb.avg ? x.cb.avg.toFixed(1) : "—"}${arrowTxt}<b>${x.ca.avg ? x.ca.avg.toFixed(1) : "—"}</b></td></tr>`).join("") +
+          `<td>${x.cb.avg ? x.cb.avg.toFixed(1) : "—"}${arrowTxt}<b>${x.ca.avg ? x.ca.avg.toFixed(1) : "—"}</b></td></tr>` +
+          // Grade detail opens in place, directly under the clicked school.
+          (x.name === selectedRecv ? `<tr class="rs-detail-row"><td colspan="7">${recvDetail(x.name, target)}</td></tr>` : "")).join("") +
         `</tbody>`;
-      document.querySelectorAll("#rs-recv-table tbody tr").forEach(tr => tr.addEventListener("click", () => {
+      document.querySelectorAll("#rs-recv-table tbody tr.rs-recv-row").forEach(tr => tr.addEventListener("click", () => {
         selectedRecv = tr.dataset.name === selectedRecv ? null : tr.dataset.name;
         renderRecv();
       }));
-      renderRecvDetail(target);
     }
-    function renderRecvDetail(target) {
-      const el = document.getElementById("rs-recv-detail");
-      const r = selectedRecv && MODEL.scenarios[scen][selectedRecv];
-      if (!r || r.closes) { el.innerHTML = ""; return; }
+    function recvDetail(name, target) {
+      const r = MODEL.scenarios[scen][name];
+      if (!r || r.closes) return "";
       const strands = [...new Set([...Object.keys(r.before), ...Object.keys(r.after)])];
       const cell = (st, i) => {
         const parts = strands.filter(k => st[k] && Math.round(st[k][i]) > 0).map(k => `${Math.round(st[k][i])}${strands.length > 1 ? ` <span class="rs-arrowtxt">${esc(k)}</span>` : ""}`);
@@ -2253,7 +2255,7 @@
       const cls = (st, i) => strands.reduce((a, k) => { const n = st[k] ? Math.round(st[k][i]) : 0; return a + (n > 0 ? Math.ceil(n / target) : 0); }, 0);
       const tot = (st, i) => strands.reduce((a, k) => a + (st[k] ? Math.round(st[k][i]) : 0), 0);
       const gradeRows = MG.map((g, i) => ({ g, i })).filter(({ i }) => tot(r.before, i) + tot(r.after, i) > 0);
-      el.innerHTML = `<h4>${esc(short(selectedRecv))}, Scenario ${scen}: students by grade</h4>` +
+      return `<h4>${esc(short(name))}, Scenario ${scen}: students by grade</h4>` +
         `<div style="overflow-x:auto;"><table class="schools"><thead><tr><th>Grade</th><th>Students now</th><th>Students after</th>` +
         `<th>Classes now ${arrowTxt} after</th><th>Avg class now ${arrowTxt} after</th></tr></thead><tbody>` +
         gradeRows.map(({ g, i }) => {
