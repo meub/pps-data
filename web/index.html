@@ -207,6 +207,17 @@
   #rs-recv-table tr.rs-detail-row h4 { margin: 0 0 6px; font-size: var(--fs-small); }
   #rs-recv-table tr.rs-detail-row:hover td { background: #0d1117; }
   .rs-recv-notes p { font-size: var(--fs-small); }
+  .rs-grades { padding: 14px 16px; }
+  .rs-grades h3 { margin: 0 0 4px; font-size: var(--fs-h3); }
+  .rs-grades .subtitle { margin: 0 0 10px; color: var(--muted); font-size: var(--fs-small); max-width: 900px; }
+  .rs-grades-controls { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; font-size: var(--fs-small);
+    color: var(--muted); margin-bottom: 8px; }
+  .rs-grades-controls select { background: #0d1117; color: var(--fg); border: 1px solid var(--border);
+    border-radius: 4px; padding: 5px 8px; font: inherit; }
+  .rs-grades-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 16px; }
+  @media (max-width: 900px) { .rs-grades-grid { grid-template-columns: 1fr; } }
+  .rs-grade-classes { font-size: var(--fs-small); color: var(--fg); line-height: 1.6; }
+  .rs-steps-note, .rs-grades-caveat { color: var(--muted); font-size: var(--fs-small); margin: 6px 0 0; line-height: 1.45; }
   #map:not(.scroll-enabled)::after {
     content: "Click map to zoom with scroll wheel";
     position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%);
@@ -547,6 +558,28 @@
     <div class="panel" style="margin-top:16px; overflow-x:auto;">
       <p class="rs-summary" id="rs-summary"></p>
       <table class="schools" id="rs-closing-table"></table>
+    </div>
+    <div class="panel rs-grades" id="rs-grades-panel" style="margin-top:16px;" hidden>
+      <h3>Students per grade at a receiving school</h3>
+      <p class="subtitle">
+        How many students each grade would have after the merge, using this fall's enrollment and PPS's plan for who moves where.
+        PPS sets class sizes when it staffs schools, so classes are shown as a range across class-size targets of 22 to 28.
+      </p>
+      <div class="rs-grades-controls">
+        <label for="rs-grade-school">School:</label>
+        <select id="rs-grade-school"></select>
+        <span id="rs-grade-summary"></span>
+      </div>
+      <div class="rs-grades-grid">
+        <div><div id="plot-rs-grades" style="height: 340px;"></div><div id="rs-grade-classes" class="rs-grade-classes"></div></div>
+        <div>
+          <div id="plot-rs-steps" style="height: 300px;"></div>
+          <p class="rs-steps-note">Why class sizes jump: a grade is split into the fewest classes that stay at or under the target.
+          At a 26-student target, 52 students make 2 classes of 26, but 53 make 3 classes of about 18. Dots are this school's K-5 grades;
+          at schools with immersion strands, each strand is split into classes separately.</p>
+        </div>
+      </div>
+      <p class="rs-grades-caveat" id="rs-grades-caveat"></p>
     </div>
     <div class="panel rs-recv" id="rs-recv-panel" style="margin-top:16px;" hidden>
       <h3>Receiving schools: does everyone fit, and how big are the classes?</h3>
@@ -2192,6 +2225,7 @@
     // In development: shown only with ?dev=1 until it is ready to publish.
     const SHOW_RECV = new URLSearchParams(location.search).has("dev");
     document.getElementById("rs-recv-panel").hidden = !SHOW_RECV;
+    document.getElementById("rs-grades-panel").hidden = !SHOW_RECV;
     const MODEL = SHOW_RECV ? RS.model : null;
     const MG = MODEL ? MODEL.grades : [];
     const K5N = 6;  // first six grades are K-5
@@ -2276,7 +2310,106 @@
         }).join("") + `</tbody></table></div>`;
     }
     targetEl.addEventListener("input", renderRecv);
-    function renderAll() { renderMap(); renderTable(); renderRecv(); }
+
+    // ---- students per grade at one receiving school (dev) ----
+    const T_LO = 22, T_HI = 28, T_STEP = 26;
+    const gradeSel = document.getElementById("rs-grade-school");
+    let gradeSchool = "Chief Joseph Elementary School";
+    gradeSel.addEventListener("change", () => { gradeSchool = gradeSel.value; renderGrades(); });
+    function classesAt(st, i, t) {
+      return Object.values(st).reduce((a, v) => { const n = Math.round(v[i] || 0); return a + (n > 0 ? Math.ceil(n / t) : 0); }, 0);
+    }
+    const gradeTotal = (st, i) => Object.values(st).reduce((a, v) => a + Math.round(v[i] || 0), 0);
+    function rangeText(lo, hi, fmtN = (x) => x) {
+      return lo === hi ? `${fmtN(lo)}` : `${fmtN(Math.min(lo, hi))}-${fmtN(Math.max(lo, hi))}`;
+    }
+    function renderGrades() {
+      if (!MODEL) return;
+      const recv = Object.entries(MODEL.scenarios[scen])
+        .filter(([, r]) => !r.closes && sumStrands(r.after) > sumStrands(r.before) + 0.5)
+        .map(([n]) => n).sort((a, b) => short(a).localeCompare(short(b)));
+      if (!recv.includes(gradeSchool)) gradeSchool = recv[0];
+      gradeSel.innerHTML = recv.map(n => `<option value="${esc(n)}"${n === gradeSchool ? " selected" : ""}>${esc(short(n))}</option>`).join("");
+      const r = MODEL.scenarios[scen][gradeSchool];
+      const idx = MG.map((g, i) => i).filter(i => gradeTotal(r.before, i) + gradeTotal(r.after, i) > 0);
+      const labels = idx.map(i => i === 0 ? "K" : `Grade ${i}`);
+      const now = idx.map(i => gradeTotal(r.before, i)), after = idx.map(i => gradeTotal(r.after, i));
+      const strandsAfter = Object.keys(r.after).filter(k => sumStrands({ k: r.after[k] }) > 0.5);
+      const classTxt = idx.map(i => {
+        if (i >= K5N) return "middle grades: not estimated";
+        const cn = [classesAt(r.before, i, T_HI), classesAt(r.before, i, T_LO)];
+        const ca = [classesAt(r.after, i, T_HI), classesAt(r.after, i, T_LO)];
+        const avg = (st, c) => c ? gradeTotal(st, i) / c : 0;
+        return `${rangeText(cn[0], cn[1])} → <b>${rangeText(ca[0], ca[1])}</b> classes` +
+          ` <span style="color:#7d8590">(avg ${rangeText(Math.round(avg(r.after, ca[1])), Math.round(avg(r.after, ca[0])))})</span>`;
+      });
+      const mobile = window.innerWidth < 700;
+      const blue = css("--rs-receive"), gray = "#8b949e";
+      const seg = { type: "scatter", mode: "lines", hoverinfo: "skip", showlegend: false,
+        x: idx.flatMap((_, j) => [now[j], after[j], null]), y: labels.flatMap(l => [l, l, null]),
+        line: { color: "#30363d", width: 3 } };
+      const strandNote = (st, i) => Object.entries(st).filter(([, v]) => Math.round(v[i] || 0) > 0)
+        .map(([k, v]) => `${k}: ${Math.round(v[i])}`).join("<br>");
+      const dotNow = { type: "scatter", mode: "markers", name: "This fall", x: now, y: labels,
+        marker: { color: "#161b22", size: 11, line: { color: gray, width: 2.5 } },
+        customdata: idx.map(i => strandNote(r.before, i) || "none"),
+        hovertemplate: "%{y}, this fall: %{x}<br>%{customdata}<extra></extra>" };
+      const dotAfter = { type: "scatter", mode: "markers", name: "After the merge", x: after, y: labels,
+        marker: { color: blue, size: 12, line: { color: "#161b22", width: 2 } },
+        customdata: idx.map(i => strandNote(r.after, i) || "none"),
+        hovertemplate: "%{y}, after: %{x}<br>%{customdata}<extra></extra>" };
+      const xmax = Math.max(...after, ...now) * 1.08 + 5;
+      Plotly.react("plot-rs-grades", [seg, dotNow, dotAfter], {
+        paper_bgcolor: "#161b22", plot_bgcolor: "#161b22", font: PLOT_FONT,
+        hoverlabel: { font: { family: PLOT_FONT.family } },
+        margin: { l: 10, r: mobile ? 10 : 210, t: 56, b: 40 },
+        title: { text: `${esc(short(gradeSchool))}, Scenario ${scen}`, font: { size: 14 }, x: 0, xanchor: "left", y: 0.98, yanchor: "top" },
+        xaxis: { title: { text: "Students in the grade", font: { size: 11, color: "#7d8590" } }, range: [0, xmax],
+                 gridcolor: "#30363d", zeroline: false, fixedrange: true },
+        yaxis: { autorange: "reversed", automargin: true, fixedrange: true, tickfont: { size: 12 } },
+        legend: { orientation: "h", x: 0, y: 1.0, xanchor: "left", yanchor: "bottom" },
+        annotations: mobile ? [] : idx.map((_, j) => ({ xref: "paper", x: 1.02, xanchor: "left", y: labels[j], yref: "y",
+          text: classTxt[j], showarrow: false, font: { size: 11, color: "#e6edf3" }, align: "left" })),
+      }, { displayModeBar: false, responsive: true });
+      // On phones the right-margin labels don't fit; list the ranges under the chart instead.
+      document.getElementById("rs-grade-classes").innerHTML = mobile
+        ? idx.map((i, j) => `<div><b>${labels[j]}:</b> ${now[j]} → ${after[j]} students, ${classTxt[j]}</div>`).join("") : "";
+
+      // Step chart: average class size vs grade size at one target, with this school's K-5 grades.
+      const xs = Array.from({ length: 110 }, (_, k) => k + 10);
+      const avgAt = (n) => n / Math.ceil(n / T_STEP);
+      const k5 = idx.filter(i => i < K5N);
+      Plotly.react("plot-rs-steps", [
+        { type: "scatter", mode: "lines", x: xs, y: xs.map(avgAt), line: { color: "#6e7681", width: 2 },
+          hovertemplate: "%{x} students: %{y:.1f} per class<extra></extra>", showlegend: false },
+        { type: "scatter", mode: "markers", name: "This fall", x: k5.map(i => gradeTotal(r.before, i)), y: k5.map(i => avgAt(Math.max(1, gradeTotal(r.before, i)))),
+          marker: { color: "#161b22", size: 10, line: { color: gray, width: 2.5 } },
+          text: k5.map(i => i === 0 ? "K" : `Grade ${i}`), hovertemplate: "%{text}, this fall: %{x} students, %{y:.1f} per class<extra></extra>" },
+        { type: "scatter", mode: "markers", name: "After", x: k5.map(i => gradeTotal(r.after, i)), y: k5.map(i => avgAt(Math.max(1, gradeTotal(r.after, i)))),
+          marker: { color: blue, size: 11, line: { color: "#161b22", width: 2 } },
+          text: k5.map(i => i === 0 ? "K" : `Grade ${i}`), hovertemplate: "%{text}, after: %{x} students, %{y:.1f} per class<extra></extra>" },
+      ], {
+        paper_bgcolor: "#161b22", plot_bgcolor: "#161b22", font: PLOT_FONT, showlegend: false,
+        hoverlabel: { font: { family: PLOT_FONT.family } },
+        margin: { l: 50, r: 10, t: 30, b: 40 },
+        title: { text: `Average class size at a ${T_STEP}-student target`, font: { size: 13 }, x: 0, xanchor: "left" },
+        xaxis: { title: { text: "Students in the grade", font: { size: 11, color: "#7d8590" } }, range: [10, 120], gridcolor: "#30363d", zeroline: false, fixedrange: true },
+        yaxis: { title: { text: "Students per class", font: { size: 11, color: "#7d8590" } }, range: [10, 28], gridcolor: "#30363d", zeroline: false, fixedrange: true },
+      }, { displayModeBar: false, responsive: true });
+
+      const grew = sumStrands(r.after) - sumStrands(r.before);
+      document.getElementById("rs-grade-summary").innerHTML =
+        `${Math.round(sumStrands(r.before))} students now, about ${Math.round(sumStrands(r.after))} after (${grew >= 0 ? "+" : ""}${Math.round(grew)}). ` +
+        `Gains from: ${r.inflows.map(esc).join("; ")}.`;
+      const notes = [];
+      if (strandsAfter.length > 1) notes.push(`Immersion and neighborhood students are taught in separate classes, so classes are counted per strand (${strandsAfter.map(esc).join(", ")}); PPS publishes strand totals, not strands by grade, so the split by grade is estimated.`);
+      const s = byName[gradeSchool] || {};
+      if (catOf(s, scen) !== "none" && String(s[`rs_${scen.toLowerCase()}_detail`] || "").includes("Attendance boundary changes"))
+        notes.push(`${esc(short(gradeSchool))} also has an attendance boundary change, which this does not include, so its numbers may be high.`);
+      notes.push("Uses this fall's enrollment; changes start in fall 2027, and PPS projects continued decline. Does not include families who leave the district.");
+      document.getElementById("rs-grades-caveat").innerHTML = notes.join(" ");
+    }
+    function renderAll() { renderMap(); renderTable(); renderRecv(); renderGrades(); }
     document.querySelectorAll(".rs-toggle button").forEach(btn => btn.addEventListener("click", () => {
       scen = btn.dataset.rs;
       document.querySelectorAll(".rs-toggle button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.rs === scen)));
@@ -2284,7 +2417,7 @@
     }));
     renderDistrict(); renderOutcomes(); renderDiff(); renderAll();
     let tRS;
-    window.addEventListener("resize", () => { clearTimeout(tRS); tRS = setTimeout(() => { renderDistrict(); renderOutcomes(); }, 150); });
+    window.addEventListener("resize", () => { clearTimeout(tRS); tRS = setTimeout(() => { renderDistrict(); renderOutcomes(); renderGrades(); }, 150); });
   })();
 
   // ---------- PRC ENROLLMENT FORECAST 2035-36 ----------
