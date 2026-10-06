@@ -514,8 +514,8 @@
       <div class="rs-legend" id="rs-legend">
         <span><span class="sw" style="background:var(--rs-close)"></span>Closes</span>
         <span><span class="sw" style="background:var(--rs-receive)"></span>Receives students from a closing school</span>
-        <span><span class="sw" style="background:var(--rs-receive); border:2.5px solid var(--rs-program); box-sizing:border-box"></span>Stays open, other change</span>
-        <span><span class="sw" style="background:var(--rs-receive); border:2.5px solid var(--rs-none); box-sizing:border-box"></span>Stays open, no change</span>
+        <span><span class="sw" style="background:repeating-linear-gradient(45deg, var(--rs-receive) 0 3px, #ffffff 3px 5px); border:1.5px solid #161b22; box-sizing:border-box"></span>Stays open, other change (boundary, program, or grades)</span>
+        <span><span class="sw" style="background:var(--rs-receive); border:1.5px solid #ffffff; box-sizing:border-box"></span>Stays open, no change</span>
         <span>Circle size: 2025-26 enrollment</span>
         <span><span class="ln solid"></span>Neighborhood students go to</span>
         <span><span class="ln"></span>Program goes to (immersion, Deaf and Hard of Hearing)</span>
@@ -1970,9 +1970,20 @@
       if (catOf(s, scen) === "closes") return "closes";
       return sendersTo(s.school_name).length ? "receives" : "other";
     }
-    // Open schools are all solid blue so gray never reads as "closed".
-    // Schools that neither close nor receive students take their outline
-    // color from the outcome bars: green for another change, gray for none.
+    // Open schools are all blue so they read as "open" at a glance. Outlines
+    // proved too thin to tell apart, so "other change" uses a white diagonal
+    // hatch fill (an SVG pattern in the map's own <svg>); plain blue means no
+    // change. Receivers keep a dark outline and are also marked by arrows.
+    function ensureHatch() {
+      const svg = rsMap.getPanes().overlayPane.querySelector("svg");
+      if (!svg || svg.querySelector("#rs-hatch")) return;
+      const NS = "http://www.w3.org/2000/svg";
+      const defs = document.createElementNS(NS, "defs");
+      defs.innerHTML = `<pattern id="rs-hatch" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)">` +
+        `<rect width="6" height="6" fill="${css("--rs-receive")}"/>` +
+        `<line x1="0" y1="0" x2="0" y2="6" stroke="#ffffff" stroke-width="2.6"/></pattern>`;
+      svg.insertBefore(defs, svg.firstChild);
+    }
     const ROLE_COLOR = { closes: COLOR.closes, receives: css("--rs-receive"), other: css("--rs-receive") };
     function popupFor(s) {
       const role = roleOf(s);
@@ -2016,6 +2027,7 @@
         L.polyline([ll(a), ll(b)], { weight: 14, opacity: 0 }).bindTooltip(tip, { sticky: true }).addTo(layer);
         arrowAt(ll(a), ll(b), COLOR.closes).addTo(layer);
       });
+      ensureHatch();
       const order = { other: 0, receives: 1, closes: 2 };
       schools.filter(s => s.latitude != null)
         .sort((x, y) => order[roleOf(x)] - order[roleOf(y)])
@@ -2024,10 +2036,10 @@
           const r = Math.max(6, Math.min(26, Math.sqrt(s.enrollment_2025_26 || 100) * 0.62));
           L.circleMarker([s.latitude, s.longitude], {
             radius: r,
-            color: role !== "other" ? "#161b22"
-              : outcomeOf(s, scen) === "other" ? COLOR.program_change : COLOR.none,
-            weight: role === "other" ? 3 : 2,
-            fillColor: ROLE_COLOR[role], fillOpacity: 0.92,
+            color: role === "other" && outcomeOf(s, scen) === "none" ? "#ffffff" : "#161b22",
+            weight: 2,
+            fillColor: role === "other" && outcomeOf(s, scen) === "other" ? "url(#rs-hatch)" : ROLE_COLOR[role],
+            fillOpacity: 0.95,
           }).bindPopup(popupFor(s), { maxWidth: 340, minWidth: 260 })
             .bindTooltip(`${esc(short(s.school_name))}: ${role === "closes" ? "closes" : role === "receives" ? "receives students" : LABEL[catOf(s, scen)].toLowerCase()}`)
             .addTo(layer);
