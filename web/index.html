@@ -143,7 +143,7 @@
      palette's first three dark slots, validated all-pairs against the
      panel surface (#161b22) on 2026-10-05; "no change" is neutral context. */
   :root { --rs-close: #d95926; --rs-program: #199e70; --rs-boundary: #3987e5;
-    --rs-none: #6e7681; --rs-a: #3987e5; --rs-b: #199e70; }
+    --rs-none: #6e7681; --rs-a: #3987e5; --rs-b: #199e70; --rs-receive: #3987e5; }
   #rs-map { height: 560px; position: relative; }
   .rs-arrow { background: none; border: 0; }
   .rs-toggle { display: inline-flex; border: 1px solid var(--border); border-radius: 6px;
@@ -160,8 +160,11 @@
     font-size: var(--fs-small); color: var(--muted); border-top: 1px solid var(--border); }
   .rs-legend .sw { display: inline-block; width: 11px; height: 11px; border-radius: 50%;
     margin-right: 6px; vertical-align: -1px; }
-  .rs-legend .ln { display: inline-block; width: 18px; border-top: 3px dashed var(--rs-program);
+  .rs-legend .ln { display: inline-block; width: 18px; border-top: 3px dashed var(--rs-close);
     margin-right: 6px; vertical-align: 3px; }
+  .rs-legend .ln.solid { border-top-style: solid; }
+  .rs-legend .ln.moves { border-top-color: var(--rs-program); }
+  .rs-legend .rs-moves-opt { cursor: pointer; margin-left: auto; }
   .rs-tag { display: inline-block; padding: 1px 7px; border-radius: 10px; font-size: 12px;
     white-space: nowrap; border: 1px solid currentColor; }
   .rs-tag.closes { color: var(--rs-close); }
@@ -493,10 +496,11 @@
       <div id="rs-map"></div>
       <div class="rs-legend" id="rs-legend">
         <span><span class="sw" style="background:var(--rs-close)"></span>Closes</span>
-        <span><span class="sw" style="background:var(--rs-program)"></span>Program or grade change (moving out or receiving)</span>
-        <span><span class="sw" style="background:var(--rs-boundary)"></span>Attendance boundary change</span>
-        <span><span class="sw" style="background:var(--rs-none)"></span>No change</span>
-        <span><span class="ln"></span>&#9654; Program or grade moves in the arrow's direction</span>
+        <span><span class="sw" style="background:var(--rs-receive)"></span>Receives students from a closing school</span>
+        <span><span class="sw" style="background:var(--rs-none)"></span>Other schools</span>
+        <span><span class="ln solid"></span>Neighborhood students go to</span>
+        <span><span class="ln"></span>Program goes to (immersion, Deaf and Hard of Hearing)</span>
+        <label class="rs-moves-opt"><input type="checkbox" id="rs-show-moves"> Also show other program and grade-level moves <span class="ln moves" style="margin-left:4px"></span></label>
       </div>
     </div>
     <div class="panel" style="margin-top:16px; overflow-x:auto;">
@@ -993,7 +997,10 @@
       closes, then a program or grade-level change (moving out or receiving), then a boundary
       change. Program-move wording is kept as PPS wrote it; for example, PPS lists both
       &ldquo;Chavez 6&ndash;8 and Ockley Green MS to George MS&rdquo; and &ldquo;Faubion 6&ndash;8
-      to Ockley Green MS&rdquo; without saying which programs move.
+      to Ockley Green MS&rdquo; without saying which programs move. Receiving schools for each
+      closure, and the proposed splits where students divide between two schools, come from
+      PPS's board memo for the October 6, 2026 meeting, because the scenario comparison does not
+      name them.
     </p>
 
     <h3>Lowest-enrollment 15</h3>
@@ -1899,11 +1906,43 @@
       },
     });
     new MapToggle({ position: "topright" }).addTo(rsMap);
+    // Arrowhead at the midpoint of a from->to line, pointing at "to". Web
+    // Mercator preserves angles, so a bearing computed at one zoom stays
+    // correct at every zoom.
+    function arrowAt(from, to, color) {
+      const pa = rsMap.project(from, 12), pb = rsMap.project(to, 12);
+      const deg = Math.atan2(pb.y - pa.y, pb.x - pa.x) * 180 / Math.PI;
+      const mid = L.latLng((from.lat + to.lat) / 2, (from.lng + to.lng) / 2);
+      return L.marker(mid, {
+        interactive: false, keyboard: false,
+        icon: L.divIcon({
+          className: "rs-arrow", iconSize: [18, 18], iconAnchor: [9, 9],
+          html: `<svg width="18" height="18" viewBox="0 0 18 18" style="transform:rotate(${deg}deg)">` +
+                `<path d="M3 3 L16 9 L3 15 L6 9 Z" fill="${color}" stroke="#0d1117" stroke-width="1.2" stroke-linejoin="round"/></svg>`,
+        }),
+      });
+    }
+    const short = (n) => n.trim().replace(/ (Elementary|Middle) School$/, "").replace(/ K-8 School$/, "").replace(/ School$/, "");
+    const flowText = (r) => `${r.group}${r.share != null ? ` (${Math.round(r.share * 100)}%)` : ""}`;
+    const isProgramFlow = (r) => /immersion|Hearing/i.test(r.group);
+    function receiversOf(name) { return RS.scenarios[scen].receivers.filter(r => r.from === name); }
+    function sendersTo(name) { return RS.scenarios[scen].receivers.filter(r => r.to === name); }
+    function roleOf(s) {
+      if (catOf(s, scen) === "closes") return "closes";
+      return sendersTo(s.school_name).length ? "receives" : "other";
+    }
+    const ROLE_COLOR = { closes: COLOR.closes, receives: css("--rs-receive"), other: COLOR.none };
     function popupFor(s) {
+      const role = roleOf(s);
+      const goes = receiversOf(s.school_name), gets = sendersTo(s.school_name);
       const detail = s[`rs_${scen.toLowerCase()}_detail`];
+      // A closing school's own program moves are already under "Students go to".
+      const other = role === "closes" ? [] : (detail || "").split("; ").filter(d => d && d !== "Closes");
       return `<div class="map-popup"><b>${esc(s.school_name)}</b>` +
-        `<div class="meta">Scenario ${scen}: ${tag(catOf(s, scen))}</div>` +
-        (detail ? `<div class="row">${detail.split("; ").map(esc).join("<br>")}</div>` : "") +
+        `<div class="meta">Scenario ${scen}: ${role === "closes" ? tag("closes") : role === "receives" ? '<span class="rs-tag boundary">Receives students</span>' : tag(catOf(s, scen))}</div>` +
+        (goes.length ? `<h4>Students go to</h4>` + goes.map(r => `<div class="row">${esc(short(r.to))}: ${esc(flowText(r))}</div>`).join("") : "") +
+        (gets.length ? `<h4>Receives students from</h4>` + gets.map(r => `<div class="row">${esc(short(r.from))}: ${esc(flowText(r))}</div>`).join("") : "") +
+        (other.length ? `<h4>Other changes</h4><div class="row">${other.map(esc).join("<br>")}</div>` : "") +
         `<h4>This dashboard's data</h4>` +
         `<div class="row"><b style="display:inline">Enrollment 25-26:</b> ${fmt(s.enrollment_2025_26, "int")}</div>` +
         `<div class="row"><b style="display:inline">Utilization 25-26:</b> ${fmt(s.utilization_pct_2526, "pct_0_1")}</div>` +
@@ -1911,42 +1950,45 @@
         `<div class="row"><b style="display:inline">Year built:</b> ${fmt(s.year_built, "year")}</div>` +
         `<div class="row"><b style="display:inline">Seismic retrofit cost:</b> ${fmt(s.retrofit_cost_remaining_usd, "usd")}</div></div>`;
     }
+    const showMovesBox = document.getElementById("rs-show-moves");
     function renderMap() {
       layer.clearLayers();
-      RS.scenarios[scen].moves.forEach(mv => {
-        const a = byName[mv.from], b = byName[mv.to];
-        if (!a || !b || a === b || a.latitude == null || b.latitude == null) return;
-        const from = L.latLng(a.latitude, a.longitude), to = L.latLng(b.latitude, b.longitude);
-        L.polyline([from, to],
-          { color: COLOR.program_change, weight: 3, opacity: 0.95, dashArray: "7 5", interactive: false }).addTo(layer);
-        // Arrowhead at the midpoint, pointing at the receiving school. Web
-        // Mercator preserves angles, so the screen bearing computed at any
-        // zoom stays correct as the user zooms.
-        const pa = rsMap.project(from, 12), pb = rsMap.project(to, 12);
-        const deg = Math.atan2(pb.y - pa.y, pb.x - pa.x) * 180 / Math.PI;
-        const mid = L.latLng((from.lat + to.lat) / 2, (from.lng + to.lng) / 2);
-        L.marker(mid, {
-          interactive: false, keyboard: false,
-          icon: L.divIcon({
-            className: "rs-arrow", iconSize: [18, 18], iconAnchor: [9, 9],
-            html: `<svg width="18" height="18" viewBox="0 0 18 18" style="transform:rotate(${deg}deg)">` +
-                  `<path d="M3 3 L16 9 L3 15 L6 9 Z" fill="${COLOR.program_change}" stroke="#0d1117" stroke-width="1.2" stroke-linejoin="round"/></svg>`,
-          }),
+      const ll = (s) => L.latLng(s.latitude, s.longitude);
+      if (showMovesBox.checked) {
+        RS.scenarios[scen].moves.forEach(mv => {
+          const a = byName[mv.from], b = byName[mv.to];
+          if (!a || !b || a === b || a.latitude == null || b.latitude == null) return;
+          L.polyline([ll(a), ll(b)], { color: COLOR.program_change, weight: 2.5, opacity: 0.9, dashArray: "4 5" })
+            .bindTooltip(esc(mv.text), { sticky: true }).addTo(layer);
+          arrowAt(ll(a), ll(b), COLOR.program_change).addTo(layer);
+        });
+      }
+      RS.scenarios[scen].receivers.forEach(r => {
+        const a = byName[r.from], b = byName[r.to];
+        if (!a || !b || a.latitude == null || b.latitude == null) return;
+        const tip = `${esc(short(r.from))} &rarr; ${esc(short(r.to))}: ${esc(flowText(r))}`;
+        L.polyline([ll(a), ll(b)], {
+          color: COLOR.closes, weight: 3.5, opacity: 0.95, dashArray: isProgramFlow(r) ? "7 6" : null,
         }).addTo(layer);
+        // Wide transparent twin so the hover target is bigger than the line.
+        L.polyline([ll(a), ll(b)], { weight: 14, opacity: 0 }).bindTooltip(tip, { sticky: true }).addTo(layer);
+        arrowAt(ll(a), ll(b), COLOR.closes).addTo(layer);
       });
-      const order = { none: 0, boundary: 1, program_change: 2, closes: 3 };
+      const order = { other: 0, receives: 1, closes: 2 };
       schools.filter(s => s.latitude != null)
-        .sort((x, y) => order[catOf(x, scen)] - order[catOf(y, scen)])
+        .sort((x, y) => order[roleOf(x)] - order[roleOf(y)])
         .forEach(s => {
-          const c = catOf(s, scen);
+          const role = roleOf(s);
           const r = Math.max(6, Math.min(26, Math.sqrt(s.enrollment_2025_26 || 100) * 0.62));
           L.circleMarker([s.latitude, s.longitude], {
-            radius: r, color: "#161b22", weight: 2, fillColor: COLOR[c],
-            fillOpacity: c === "none" ? 0.45 : 0.88,
+            radius: role === "other" ? Math.min(r, 9) : r, color: "#161b22", weight: 2,
+            fillColor: ROLE_COLOR[role], fillOpacity: role === "other" ? 0.4 : 0.92,
           }).bindPopup(popupFor(s), { maxWidth: 340, minWidth: 260 })
-            .bindTooltip(`${esc(s.school_name)}: ${LABEL[c]}`).addTo(layer);
+            .bindTooltip(`${esc(short(s.school_name))}: ${role === "closes" ? "closes" : role === "receives" ? "receives students" : LABEL[catOf(s, scen)].toLowerCase()}`)
+            .addTo(layer);
         });
     }
+    showMovesBox.addEventListener("change", renderMap);
 
     // ---- closing-schools table (union of both scenarios) ----
     const median = (xs) => { const v = xs.filter(x => x != null).sort((a, b) => a - b); const m = Math.floor(v.length / 2);
@@ -1963,7 +2005,9 @@
         ["Forecast 35-36", s => fmt(s.enrollment_forecast_2035_36, "int")],
         ["Year built", s => fmt(s.year_built, "year")],
         ["Seismic retrofit cost", s => fmt(s.retrofit_cost_remaining_usd, "usd")],
-        [`Other changes in Scenario ${scen}`, s => esc((s[`rs_${scen.toLowerCase()}_detail`] || "").split("; ").filter(d => d !== "Closes").join("; ")) || "—"],
+        [`Students go to (Scenario ${scen})`, s => catOf(s, scen) === "closes"
+            ? receiversOf(s.school_name).map(r => `${esc(short(r.to))}: ${esc(flowText(r))}`).join("<br>")
+            : "Stays open"],
       ];
       document.getElementById("rs-closing-table").innerHTML =
         `<thead><tr>${cols.map(c => `<th>${c[0]}</th>`).join("")}</tr></thead><tbody>` +

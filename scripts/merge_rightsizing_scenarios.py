@@ -13,7 +13,8 @@ Adds to data/pps_schools.csv, for each scenario s in {a, b}:
   rs_{s}_detail    Every change touching the school, PPS's wording, "; "-joined.
 
 export_web.py also imports load_resolved() to emit the scenario payload
-(district measures plus resolved program-move pairs for the map).
+(district measures, receiving schools for each closure, and resolved
+program-move pairs for the map).
 """
 from __future__ import annotations
 
@@ -53,6 +54,50 @@ PPS_NAME_MAP = {
 
 CATEGORY_RANK = {"closes": 3, "program_change": 2, "boundary": 1}
 
+# Where each closing school's students go, from PPS's "Rightsizing Update
+# Scenario Release" board memo for the 2026-10-06 meeting (pp. 2-4) and the
+# matching slides 31-42 (data/raw/pps_rightsizing_board_2026-10-06/). The
+# scenario comparison PDF does not name receiving schools, so this is
+# transcribed by hand. Master names; share is PPS's proposed split where
+# given. Scenario B keeps Lewis, Rose City Park, and Stephenson open and
+# uses the same receivers for the other 11 (memo p. 3-4).
+CLOSURE_RECEIVERS = {
+    "Maplewood Elementary School": [
+        ("Hayhurst Elementary School", 0.7, "Neighborhood students"),
+        ("Rieke Elementary School", 0.3, "Neighborhood students")],
+    "Stephenson Elementary School": [
+        ("Markham Elementary School", 0.7, "Neighborhood students"),
+        ("Capitol Hill Elementary School", 0.3, "Neighborhood students")],
+    "Irvington Elementary School": [
+        ("Beverly Cleary School ", None, "K-5 students"),
+        ("Beaumont Middle School", None, "Middle school area")],
+    "Rose City Park": [
+        ("Scott Elementary School", None, "Neighborhood K-5 students"),
+        ("Vestal Elementary School", None, "Vietnamese immersion")],
+    "Buckman Elementary School": [
+        ("Abernethy Elementary School", 0.5, "Neighborhood students"),
+        ("Sunnyside Environmental School", 0.5, "Neighborhood students")],
+    "Creston Elementary School": [
+        ("Atkinson Elementary School", None, "Neighborhood K-5 students"),
+        ("Glencoe Elementary School", None, "Deaf and Hard of Hearing program")],
+    "Marysville Elementary School": [("Arleta Elementary School", None, "Neighborhood students")],
+    "Woodmere Elementary School": [("Whitman Elementary School", None, "Neighborhood students")],
+    "Lewis Elementary School": [("Duniway Elementary School", None, "Neighborhood students")],
+    "Sellwood Middle School": [
+        ("Hosford Middle School", None, "Llewellyn-area students"),
+        ("Lane Middle School", None, "Duniway- and Lewis-area students")],
+    "Beach Elementary School": [
+        ("Chief Joseph Elementary School", None, "Neighborhood K-5 students"),
+        ("César Chávez K-8 School", None, "Spanish immersion")],
+    "James John Elementary School": [
+        ("Sitton Elementary School", None, "Neighborhood K-5 students"),
+        ("César Chávez K-8 School", None, "Spanish immersion")],
+    "Peninsula Elementary School": [("Rosa Parks Elementary School", None, "Neighborhood students")],
+    "Sabin Elementary School": [("Dr. Martin Luther King Jr. School", None, "Neighborhood students")],
+}
+RECEIVERS_SOURCE = ("PPS board memo, Rightsizing Update: Scenario Release, "
+                    "October 6, 2026 board meeting")
+
 
 def resolve(name: str, master_names: set[str]) -> str:
     name = name.strip()
@@ -73,7 +118,7 @@ def load_resolved(master_names: set[str]) -> dict:
     """Scenario JSON with every school name resolved to its master name."""
     raw = json.loads(SCENARIOS.read_text())
     out = {"source": raw["source"], "thresholds": raw["thresholds"],
-           "district": raw["district"], "scenarios": {}}
+           "district": raw["district"], "receivers_source": RECEIVERS_SOURCE, "scenarios": {}}
     for scen, s in raw["scenarios"].items():
         moves = []
         for mv in s["program_moves"]:
@@ -84,8 +129,19 @@ def load_resolved(master_names: set[str]) -> dict:
             moves.append({"kind": "grade", "text": gc["text"], "program": None,
                           "from": resolve(gc["from"], master_names),
                           "to": resolve(gc["to"], master_names) if gc["to"] else None})
+        closing = [resolve(n, master_names) for n in s["closing"]]
+        missing = [n for n in closing if n not in CLOSURE_RECEIVERS]
+        if missing:
+            raise KeyError(f"Scenario {scen}: no receiving schools recorded for {missing}")
+        receivers = []
+        for n in closing:
+            for to, share, group in CLOSURE_RECEIVERS[n]:
+                if to not in master_names:
+                    raise KeyError(f"receiving school {to!r} not in master")
+                receivers.append({"from": n, "to": to, "share": share, "group": group})
         out["scenarios"][scen] = {
-            "closing": [resolve(n, master_names) for n in s["closing"]],
+            "closing": closing,
+            "receivers": receivers,
             "boundary_changes": [resolve(n, master_names) for n in s["boundary_changes"]],
             "moves": moves,
             "notes": s.get("notes", []),

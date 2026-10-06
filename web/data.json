@@ -12349,6 +12349,7 @@
         "status_quo": 0.44
       }
     },
+    "receivers_source": "PPS board memo, Rightsizing Update: Scenario Release, October 6, 2026 board meeting",
     "scenarios": {
       "A": {
         "closing": [
@@ -12366,6 +12367,146 @@
           "Sellwood Middle School",
           "Stephenson Elementary School",
           "Woodmere Elementary School"
+        ],
+        "receivers": [
+          {
+            "from": "Beach Elementary School",
+            "to": "Chief Joseph Elementary School",
+            "share": null,
+            "group": "Neighborhood K-5 students"
+          },
+          {
+            "from": "Beach Elementary School",
+            "to": "C\u00e9sar Ch\u00e1vez K-8 School",
+            "share": null,
+            "group": "Spanish immersion"
+          },
+          {
+            "from": "Buckman Elementary School",
+            "to": "Abernethy Elementary School",
+            "share": 0.5,
+            "group": "Neighborhood students"
+          },
+          {
+            "from": "Buckman Elementary School",
+            "to": "Sunnyside Environmental School",
+            "share": 0.5,
+            "group": "Neighborhood students"
+          },
+          {
+            "from": "Creston Elementary School",
+            "to": "Atkinson Elementary School",
+            "share": null,
+            "group": "Neighborhood K-5 students"
+          },
+          {
+            "from": "Creston Elementary School",
+            "to": "Glencoe Elementary School",
+            "share": null,
+            "group": "Deaf and Hard of Hearing program"
+          },
+          {
+            "from": "Irvington Elementary School",
+            "to": "Beverly Cleary School ",
+            "share": null,
+            "group": "K-5 students"
+          },
+          {
+            "from": "Irvington Elementary School",
+            "to": "Beaumont Middle School",
+            "share": null,
+            "group": "Middle school area"
+          },
+          {
+            "from": "James John Elementary School",
+            "to": "Sitton Elementary School",
+            "share": null,
+            "group": "Neighborhood K-5 students"
+          },
+          {
+            "from": "James John Elementary School",
+            "to": "C\u00e9sar Ch\u00e1vez K-8 School",
+            "share": null,
+            "group": "Spanish immersion"
+          },
+          {
+            "from": "Lewis Elementary School",
+            "to": "Duniway Elementary School",
+            "share": null,
+            "group": "Neighborhood students"
+          },
+          {
+            "from": "Maplewood Elementary School",
+            "to": "Hayhurst Elementary School",
+            "share": 0.7,
+            "group": "Neighborhood students"
+          },
+          {
+            "from": "Maplewood Elementary School",
+            "to": "Rieke Elementary School",
+            "share": 0.3,
+            "group": "Neighborhood students"
+          },
+          {
+            "from": "Marysville Elementary School",
+            "to": "Arleta Elementary School",
+            "share": null,
+            "group": "Neighborhood students"
+          },
+          {
+            "from": "Peninsula Elementary School",
+            "to": "Rosa Parks Elementary School",
+            "share": null,
+            "group": "Neighborhood students"
+          },
+          {
+            "from": "Rose City Park",
+            "to": "Scott Elementary School",
+            "share": null,
+            "group": "Neighborhood K-5 students"
+          },
+          {
+            "from": "Rose City Park",
+            "to": "Vestal Elementary School",
+            "share": null,
+            "group": "Vietnamese immersion"
+          },
+          {
+            "from": "Sabin Elementary School",
+            "to": "Dr. Martin Luther King Jr. School",
+            "share": null,
+            "group": "Neighborhood students"
+          },
+          {
+            "from": "Sellwood Middle School",
+            "to": "Hosford Middle School",
+            "share": null,
+            "group": "Llewellyn-area students"
+          },
+          {
+            "from": "Sellwood Middle School",
+            "to": "Lane Middle School",
+            "share": null,
+            "group": "Duniway- and Lewis-area students"
+          },
+          {
+            "from": "Stephenson Elementary School",
+            "to": "Markham Elementary School",
+            "share": 0.7,
+            "group": "Neighborhood students"
+          },
+          {
+            "from": "Stephenson Elementary School",
+            "to": "Capitol Hill Elementary School",
+            "share": 0.3,
+            "group": "Neighborhood students"
+          },
+          {
+            "from": "Woodmere Elementary School",
+            "to": "Whitman Elementary School",
+            "share": null,
+            "group": "Neighborhood students"
+          }
         ],
         "boundary_changes": [
           "Abernethy Elementary School",
@@ -12579,6 +12720,116 @@
           "Sabin Elementary School",
           "Sellwood Middle School",
           "Woodmere Elementary School"
+        ],
+        "receivers": [
+          {
+            "from": "Beach Elementary School",
+            "to": "Chief Joseph Elementary School",
+            "share": null,
+            "group": "Neighborhood K-5 students"
+          },
+          {
+            "from": "Beach Elementary School",
+            "to": "C\u00e9sar Ch\u00e1vez K-8 School",
+            "share": null,
+            "group": "Spanish immersion"
+          },
+          {
+            "from": "Buckman Elementary School",
+            "to": "Abernethy Elementary School",
+            "share": 0.5,
+            "group": "Neighborhood students"
+          },
+          {
+            "from": "Buckman Elementary School",
+            "to": "Sunnyside Environmental School",
+            "share": 0.5,
+            "group": "Neighborhood students"
+          },
+          {
+            "from": "Creston Elementary School",
+            "to": "Atkinson Elementary School",
+            "share": null,
+            "group": "Neighborhood K-5 students"
+          },
+          {
+            "from": "Creston Elementary School",
+            "to": "Glencoe Elementary School",
+            "share": null,
+            "group": "Deaf and Hard of Hearing program"
+          },
+          {
+            "from": "Irvington Elementary School",
+            "to": "Beverly Cleary School ",
+            "share": null,
+            "group": "K-5 students"
+          },
+          {
+            "from": "Irvington Elementary School",
+            "to": "Beaumont Middle School",
+            "share": null,
+            "group": "Middle school area"
+          },
+          {
+            "from": "James John Elementary School",
+            "to": "Sitton Elementary School",
+            "share": null,
+            "group": "Neighborhood K-5 students"
+          },
+          {
+            "from": "James John Elementary School",
+            "to": "C\u00e9sar Ch\u00e1vez K-8 School",
+            "share": null,
+            "group": "Spanish immersion"
+          },
+          {
+            "from": "Maplewood Elementary School",
+            "to": "Hayhurst Elementary School",
+            "share": 0.7,
+            "group": "Neighborhood students"
+          },
+          {
+            "from": "Maplewood Elementary School",
+            "to": "Rieke Elementary School",
+            "share": 0.3,
+            "group": "Neighborhood students"
+          },
+          {
+            "from": "Marysville Elementary School",
+            "to": "Arleta Elementary School",
+            "share": null,
+            "group": "Neighborhood students"
+          },
+          {
+            "from": "Peninsula Elementary School",
+            "to": "Rosa Parks Elementary School",
+            "share": null,
+            "group": "Neighborhood students"
+          },
+          {
+            "from": "Sabin Elementary School",
+            "to": "Dr. Martin Luther King Jr. School",
+            "share": null,
+            "group": "Neighborhood students"
+          },
+          {
+            "from": "Sellwood Middle School",
+            "to": "Hosford Middle School",
+            "share": null,
+            "group": "Llewellyn-area students"
+          },
+          {
+            "from": "Sellwood Middle School",
+            "to": "Lane Middle School",
+            "share": null,
+            "group": "Duniway- and Lewis-area students"
+          },
+          {
+            "from": "Woodmere Elementary School",
+            "to": "Whitman Elementary School",
+            "share": null,
+            "group": "Neighborhood students"
+          }
         ],
         "boundary_changes": [
           "Abernethy Elementary School",
