@@ -187,6 +187,23 @@
   .rs-diff-card p { margin: 3px 0 0; color: var(--fg); line-height: 1.4; }
   .rs-diff-card .facts { color: var(--muted); margin-top: 8px; }
   #rs-closing-table tr.muted-row td { opacity: 0.55; }
+  .rs-recv { padding: 14px 16px; }
+  .rs-recv h3 { margin: 0 0 4px; font-size: var(--fs-h3); }
+  .rs-recv .subtitle { margin: 0 0 10px; color: var(--muted); font-size: var(--fs-small); }
+  .rs-recv-controls { display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+    font-size: var(--fs-small); color: var(--muted); margin-bottom: 10px; }
+  .rs-recv-controls input[type="range"] { width: 200px; accent-color: var(--accent); }
+  #rs-recv-table tbody tr { cursor: pointer; }
+  #rs-recv-table tbody tr:hover td { background: rgba(255,255,255,0.03); }
+  #rs-recv-table tbody tr.sel td { background: rgba(47,129,247,0.10); }
+  #rs-recv-table td.from { white-space: normal; min-width: 220px; color: var(--muted); }
+  .rs-flag { font-size: 12px; font-weight: 600; white-space: nowrap; }
+  .rs-flag.over { color: #ff7b72; }
+  .rs-flag.near { color: #e3b341; }
+  .rs-arrowtxt { color: var(--muted); padding: 0 3px; }
+  #rs-recv-detail { margin-top: 12px; }
+  #rs-recv-detail h4 { margin: 4px 0 6px; font-size: var(--fs-small); }
+  .rs-recv-notes p { font-size: var(--fs-small); }
   #map:not(.scroll-enabled)::after {
     content: "Click map to zoom with scroll wheel";
     position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%);
@@ -526,6 +543,28 @@
     <div class="panel" style="margin-top:16px; overflow-x:auto;">
       <p class="rs-summary" id="rs-summary"></p>
       <table class="schools" id="rs-closing-table"></table>
+    </div>
+    <div class="panel rs-recv" style="margin-top:16px;">
+      <h3>Receiving schools: does everyone fit, and how big are the classes?</h3>
+      <p class="subtitle" id="rs-recv-sub">
+        A rough model: this fall's students, moved the way each scenario says. Capacity is PPS's 2021 functional capacity.
+        K-5 classes are estimated per grade and per immersion strand, at the class-size target below.
+      </p>
+      <div class="rs-recv-controls">
+        <label for="rs-target">Assumed K-5 class-size target: <b id="rs-target-val">26</b> students</label>
+        <input type="range" id="rs-target" min="20" max="32" step="1" value="26">
+      </div>
+      <div style="overflow-x:auto;"><table class="schools" id="rs-recv-table"></table></div>
+      <div id="rs-recv-detail"></div>
+      <details class="inline-expand rs-recv-notes"><summary>How this is estimated, and what it leaves out</summary>
+        <p>Starts from ODE's fall 2025 counts by grade and moves students for each closure to PPS's receiving schools (October 6 board memo),
+        each K-8 conversion's grades 6-8, each immersion program move, and César Chávez's non-immersion K-5 students to Rosa Parks.
+        Immersion strands use PPS's October 2025 immersion counts, spread across grades in proportion to each school's grade counts,
+        since PPS does not publish strands by grade. Sellwood's students are split evenly between Hosford and Lane because PPS gives no split.</p>
+        <p>Not modeled: attendance boundary changes (PPS has not published how many students they move, so a receiving school that also
+        loses area will look fuller here than it would be), the size of Creston's Deaf and Hard of Hearing program, Odyssey's move, blended
+        classes, and enrollment change after this year. Classes = each grade's students in each strand divided by the target, rounded up.</p>
+      </details>
     </div>
   </section>
 
@@ -2141,7 +2180,93 @@
         `Only ${smallClosing} of the 10 smallest elementary schools close; the other ${10 - smallClosing} stay open.`;
     }
 
-    function renderAll() { renderMap(); renderTable(); }
+
+    // ---- receiving schools: capacity and estimated K-5 classes ----
+    const MODEL = RS.model;
+    const MG = MODEL ? MODEL.grades : [];
+    const K5N = 6;  // first six grades are K-5
+    const GRADE_LABEL = { k: "K", g1: "1", g2: "2", g3: "3", g4: "4", g5: "5", g6: "6", g7: "7", g8: "8" };
+    const targetEl = document.getElementById("rs-target");
+    let selectedRecv = null;
+    const sumStrands = (st) => Object.values(st).reduce((a, v) => a + v.reduce((x, y) => x + y, 0), 0);
+    function k5Classes(st, target) {
+      let classes = 0, students = 0;
+      for (const v of Object.values(st)) for (let i = 0; i < K5N; i++) {
+        const n = Math.round(v[i]);
+        if (n > 0) { classes += Math.ceil(n / target); students += n; }
+      }
+      return { classes, students, avg: classes ? students / classes : null };
+    }
+    function utilCell(n, cap) {
+      if (!cap) return "—";
+      const u = n / cap;
+      const flag = u > 1 ? '<span class="rs-flag over">&#9650; Over capacity</span>'
+                 : u >= 0.9 ? '<span class="rs-flag near">&#9679; Near capacity</span>' : "";
+      return `${Math.round(u * 100)}% ${flag}`;
+    }
+    const arrowTxt = '<span class="rs-arrowtxt">&rarr;</span>';
+    function renderRecv() {
+      if (!MODEL) return;
+      const target = Number(targetEl.value);
+      document.getElementById("rs-target-val").textContent = target;
+      const rows = Object.entries(MODEL.scenarios[scen])
+        .filter(([, r]) => !r.closes && sumStrands(r.after) > sumStrands(r.before) + 0.5)
+        .map(([name, r]) => {
+          const s = byName[name] || {};
+          const cap = s.functional_capacity_2021;
+          const nb = sumStrands(r.before), na = sumStrands(r.after);
+          return { name, r, cap, nb, na, cb: k5Classes(r.before, target), ca: k5Classes(r.after, target) };
+        })
+        .sort((x, y) => (y.cap ? y.na / y.cap : 0) - (x.cap ? x.na / x.cap : 0));
+      const over = rows.filter(x => x.cap && x.na > x.cap).length;
+      document.getElementById("rs-recv-sub").innerHTML =
+        `A rough model: this fall's students, moved the way Scenario ${scen} says. ${rows.length} schools gain students; ` +
+        `${over} would exceed PPS's 2021 functional capacity. K-5 classes are estimated per grade and per immersion strand, ` +
+        `at the class-size target below. Click a school for its grade-by-grade numbers.`;
+      document.getElementById("rs-recv-table").innerHTML =
+        `<thead><tr><th>School</th><th>Gains students from</th><th>Students now ${arrowTxt} after</th><th>Capacity</th>` +
+        `<th>Utilization now ${arrowTxt} after</th><th>K-5 classes now ${arrowTxt} after</th><th>Avg K-5 class now ${arrowTxt} after</th></tr></thead><tbody>` +
+        rows.map(x => `<tr data-name="${esc(x.name)}" class="${x.name === selectedRecv ? "sel" : ""}">` +
+          `<td>${esc(short(x.name))}</td>` +
+          `<td class="from">${x.r.inflows.map(esc).join("<br>")}</td>` +
+          `<td>${Math.round(x.nb)}${arrowTxt}<b>${Math.round(x.na)}</b></td>` +
+          `<td>${x.cap ? Math.round(x.cap) : "—"}</td>` +
+          `<td>${x.cap ? Math.round(x.nb / x.cap * 100) + "%" : "—"}${arrowTxt}${utilCell(x.na, x.cap)}</td>` +
+          `<td>${x.cb.classes || "—"}${arrowTxt}<b>${x.ca.classes || "—"}</b></td>` +
+          `<td>${x.cb.avg ? x.cb.avg.toFixed(1) : "—"}${arrowTxt}<b>${x.ca.avg ? x.ca.avg.toFixed(1) : "—"}</b></td></tr>`).join("") +
+        `</tbody>`;
+      document.querySelectorAll("#rs-recv-table tbody tr").forEach(tr => tr.addEventListener("click", () => {
+        selectedRecv = tr.dataset.name === selectedRecv ? null : tr.dataset.name;
+        renderRecv();
+      }));
+      renderRecvDetail(target);
+    }
+    function renderRecvDetail(target) {
+      const el = document.getElementById("rs-recv-detail");
+      const r = selectedRecv && MODEL.scenarios[scen][selectedRecv];
+      if (!r || r.closes) { el.innerHTML = ""; return; }
+      const strands = [...new Set([...Object.keys(r.before), ...Object.keys(r.after)])];
+      const cell = (st, i) => {
+        const parts = strands.filter(k => st[k] && Math.round(st[k][i]) > 0).map(k => `${Math.round(st[k][i])}${strands.length > 1 ? ` <span class="rs-arrowtxt">${esc(k)}</span>` : ""}`);
+        return parts.join("<br>") || "—";
+      };
+      const cls = (st, i) => strands.reduce((a, k) => { const n = st[k] ? Math.round(st[k][i]) : 0; return a + (n > 0 ? Math.ceil(n / target) : 0); }, 0);
+      const tot = (st, i) => strands.reduce((a, k) => a + (st[k] ? Math.round(st[k][i]) : 0), 0);
+      const gradeRows = MG.map((g, i) => ({ g, i })).filter(({ i }) => tot(r.before, i) + tot(r.after, i) > 0);
+      el.innerHTML = `<h4>${esc(short(selectedRecv))}, Scenario ${scen}: students by grade</h4>` +
+        `<div style="overflow-x:auto;"><table class="schools"><thead><tr><th>Grade</th><th>Students now</th><th>Students after</th>` +
+        `<th>Classes now ${arrowTxt} after</th><th>Avg class now ${arrowTxt} after</th></tr></thead><tbody>` +
+        gradeRows.map(({ g, i }) => {
+          const k5 = i < K5N;
+          const cn = cls(r.before, i), ca = cls(r.after, i);
+          return `<tr><td>${GRADE_LABEL[g]}</td><td>${cell(r.before, i)}</td><td>${cell(r.after, i)}</td>` +
+            (k5 ? `<td>${cn || "—"}${arrowTxt}<b>${ca || "—"}</b></td>` +
+                  `<td>${cn ? (tot(r.before, i) / cn).toFixed(1) : "—"}${arrowTxt}<b>${ca ? (tot(r.after, i) / ca).toFixed(1) : "—"}</b></td>`
+                : `<td colspan="2" style="color:var(--muted)">Middle grades rotate between rooms; not estimated</td>`) + `</tr>`;
+        }).join("") + `</tbody></table></div>`;
+    }
+    targetEl.addEventListener("input", renderRecv);
+    function renderAll() { renderMap(); renderTable(); renderRecv(); }
     document.querySelectorAll(".rs-toggle button").forEach(btn => btn.addEventListener("click", () => {
       scen = btn.dataset.rs;
       document.querySelectorAll(".rs-toggle button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.rs === scen)));

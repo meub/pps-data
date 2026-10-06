@@ -19,6 +19,9 @@ JSON_PATH = ROOT / "data/raw/pps_immersion_details_2526.json"
 URL = "https://www.pps.net/fs/resource-manager/view/87c13af2-3974-4efd-930c-d897fae34e4f"
 
 
+DLI_LANGUAGES = ["Spanish", "Mandarin", "Japanese", "Russian", "Vietnamese"]
+
+
 def _split_count_pct(cell):
     """PDF cells like '287\n51%' → (287, 0.51). Empty/None → (None, None)."""
     if not cell or cell.strip() in ("", "-"):
@@ -56,11 +59,20 @@ def parse_pdf(pdf_path):
                         continue
                     dli_count, _ = _split_count_pct(row[4])
                     dli_pct = round(dli_count / total, 4) if dli_count and total else None
+                    # Columns 5-9 split the immersion total by language, in the
+                    # report's fixed order. Strands are taught as separate
+                    # classes, so the rightsizing class model needs them.
+                    by_lang = {}
+                    for col, lang in zip(range(5, 10), DLI_LANGUAGES):
+                        n, _ = _split_count_pct(row[col]) if len(row) > col else (None, None)
+                        if n:
+                            by_lang[lang] = n
                     rows.append({
                         "name": name,
                         "total_enrollment": total,
                         "dli_students": dli_count,
                         "dli_pct": dli_pct,
+                        "dli_by_language": by_lang,
                     })
     return rows
 

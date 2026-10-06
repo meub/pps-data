@@ -3,192 +3,291 @@
     "name": "Ainsworth",
     "total_enrollment": 560,
     "dli_students": 287,
-    "dli_pct": 0.5125
+    "dli_pct": 0.5125,
+    "dli_by_language": {
+      "Spanish": 287
+    }
   },
   {
     "name": "Atkinson",
     "total_enrollment": 366,
     "dli_students": 178,
-    "dli_pct": 0.4863
+    "dli_pct": 0.4863,
+    "dli_by_language": {
+      "Spanish": 178
+    }
   },
   {
     "name": "Beach",
     "total_enrollment": 288,
     "dli_students": 155,
-    "dli_pct": 0.5382
+    "dli_pct": 0.5382,
+    "dli_by_language": {
+      "Spanish": 155
+    }
   },
   {
     "name": "Beaumont",
     "total_enrollment": 416,
     "dli_students": 101,
-    "dli_pct": 0.2428
+    "dli_pct": 0.2428,
+    "dli_by_language": {
+      "Spanish": 101
+    }
   },
   {
     "name": "C\u00e9sar Ch\u00e1vez",
     "total_enrollment": 443,
     "dli_students": 300,
-    "dli_pct": 0.6772
+    "dli_pct": 0.6772,
+    "dli_by_language": {
+      "Spanish": 300
+    }
   },
   {
     "name": "Clark",
     "total_enrollment": 364,
     "dli_students": 91,
-    "dli_pct": 0.25
+    "dli_pct": 0.25,
+    "dli_by_language": {
+      "Mandarin": 91
+    }
   },
   {
     "name": "Cleveland",
     "total_enrollment": 1451,
     "dli_students": 115,
-    "dli_pct": 0.0793
+    "dli_pct": 0.0793,
+    "dli_by_language": {
+      "Mandarin": 115
+    }
   },
   {
     "name": "Franklin",
     "total_enrollment": 1780,
     "dli_students": 202,
-    "dli_pct": 0.1135
+    "dli_pct": 0.1135,
+    "dli_by_language": {
+      "Spanish": 173,
+      "Russian": 29
+    }
   },
   {
     "name": "George",
     "total_enrollment": 358,
     "dli_students": 109,
-    "dli_pct": 0.3045
+    "dli_pct": 0.3045,
+    "dli_by_language": {
+      "Spanish": 109
+    }
   },
   {
     "name": "Grant",
     "total_enrollment": 2074,
     "dli_students": 265,
-    "dli_pct": 0.1278
+    "dli_pct": 0.1278,
+    "dli_by_language": {
+      "Japanese": 265
+    }
   },
   {
     "name": "Harriet Tubman",
     "total_enrollment": 402,
     "dli_students": 48,
-    "dli_pct": 0.1194
+    "dli_pct": 0.1194,
+    "dli_by_language": {
+      "Mandarin": 48
+    }
   },
   {
     "name": "Harrison Park",
     "total_enrollment": 419,
     "dli_students": 111,
-    "dli_pct": 0.2649
+    "dli_pct": 0.2649,
+    "dli_by_language": {
+      "Mandarin": 111
+    }
   },
   {
     "name": "James John",
     "total_enrollment": 365,
     "dli_students": 133,
-    "dli_pct": 0.3644
+    "dli_pct": 0.3644,
+    "dli_by_language": {
+      "Spanish": 133
+    }
   },
   {
     "name": "Jefferson",
     "total_enrollment": 391,
     "dli_students": 14,
-    "dli_pct": 0.0358
+    "dli_pct": 0.0358,
+    "dli_by_language": {
+      "Mandarin": 14
+    }
   },
   {
     "name": "Kellogg",
     "total_enrollment": 531,
     "dli_students": 201,
-    "dli_pct": 0.3785
+    "dli_pct": 0.3785,
+    "dli_by_language": {
+      "Spanish": 201
+    }
   },
   {
     "name": "Kelly",
     "total_enrollment": 411,
     "dli_students": 143,
-    "dli_pct": 0.3479
+    "dli_pct": 0.3479,
+    "dli_by_language": {
+      "Russian": 143
+    }
   },
   {
     "name": "Lane",
     "total_enrollment": 447,
     "dli_students": 36,
-    "dli_pct": 0.0805
+    "dli_pct": 0.0805,
+    "dli_by_language": {
+      "Russian": 36
+    }
   },
   {
     "name": "Lent",
     "total_enrollment": 256,
     "dli_students": 256,
-    "dli_pct": 1.0
+    "dli_pct": 1.0,
+    "dli_by_language": {
+      "Spanish": 256
+    }
   },
   {
     "name": "Lincoln",
     "total_enrollment": 1647,
     "dli_students": 178,
-    "dli_pct": 0.1081
+    "dli_pct": 0.1081,
+    "dli_by_language": {
+      "Spanish": 178
+    }
   },
   {
     "name": "McDaniel",
     "total_enrollment": 1629,
     "dli_students": 239,
-    "dli_pct": 0.1467
+    "dli_pct": 0.1467,
+    "dli_by_language": {
+      "Spanish": 205,
+      "Vietnamese": 34
+    }
   },
   {
     "name": "MLK Jr",
     "total_enrollment": 319,
     "dli_students": 193,
-    "dli_pct": 0.605
+    "dli_pct": 0.605,
+    "dli_by_language": {
+      "Mandarin": 193
+    }
   },
   {
     "name": "Mt Tabor",
     "total_enrollment": 430,
     "dli_students": 222,
-    "dli_pct": 0.5163
+    "dli_pct": 0.5163,
+    "dli_by_language": {
+      "Japanese": 222
+    }
   },
   {
     "name": "Ockley Green",
     "total_enrollment": 460,
     "dli_students": 63,
-    "dli_pct": 0.137
+    "dli_pct": 0.137,
+    "dli_by_language": {
+      "Spanish": 63
+    }
   },
   {
     "name": "Richmond",
     "total_enrollment": 512,
     "dli_students": 512,
-    "dli_pct": 1.0
+    "dli_pct": 1.0,
+    "dli_by_language": {
+      "Japanese": 512
+    }
   },
   {
     "name": "Rigler",
     "total_enrollment": 289,
     "dli_students": 289,
-    "dli_pct": 1.0
+    "dli_pct": 1.0,
+    "dli_by_language": {
+      "Spanish": 289
+    }
   },
   {
     "name": "Roosevelt",
     "total_enrollment": 1419,
     "dli_students": 299,
-    "dli_pct": 0.2107
+    "dli_pct": 0.2107,
+    "dli_by_language": {
+      "Spanish": 299
+    }
   },
   {
     "name": "Rose City Park",
     "total_enrollment": 417,
     "dli_students": 207,
-    "dli_pct": 0.4964
+    "dli_pct": 0.4964,
+    "dli_by_language": {
+      "Vietnamese": 207
+    }
   },
   {
     "name": "Roseway Heights",
     "total_enrollment": 572,
     "dli_students": 157,
-    "dli_pct": 0.2745
+    "dli_pct": 0.2745,
+    "dli_by_language": {
+      "Spanish": 93,
+      "Vietnamese": 64
+    }
   },
   {
     "name": "Scott",
     "total_enrollment": 476,
     "dli_students": 222,
-    "dli_pct": 0.4664
+    "dli_pct": 0.4664,
+    "dli_by_language": {
+      "Spanish": 222
+    }
   },
   {
     "name": "Sitton",
     "total_enrollment": 345,
     "dli_students": 138,
-    "dli_pct": 0.4
+    "dli_pct": 0.4,
+    "dli_by_language": {
+      "Spanish": 138
+    }
   },
   {
     "name": "West Sylvan",
     "total_enrollment": 683,
     "dli_students": 116,
-    "dli_pct": 0.1698
+    "dli_pct": 0.1698,
+    "dli_by_language": {
+      "Spanish": 116
+    }
   },
   {
     "name": "Woodstock",
     "total_enrollment": 367,
     "dli_students": 190,
-    "dli_pct": 0.5177
+    "dli_pct": 0.5177,
+    "dli_by_language": {
+      "Mandarin": 190
+    }
   }
 ]

@@ -8,6 +8,7 @@ import pandas as pd
 from pathlib import Path
 
 from merge_rightsizing_scenarios import load_resolved
+from rightsizing_model import build as build_rightsizing_model
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
@@ -531,6 +532,8 @@ def main():
     for _, row in charter_df.iterrows():
         charters.append({c: clean_val(row[c]) for c in charter_df.columns})
 
+    rightsizing = load_resolved(set(df_all["school_name"]))
+    rightsizing["model"] = build_rightsizing_model(rightsizing, set(df_all["school_name"]))
     payload = {
         "schools": schools,
         "charters": charters,
@@ -543,7 +546,7 @@ def main():
         "n_candidates": int(df["is_closure_candidate"].sum()),
         "n_charters": len(charters),
         # PPS's lists name high schools too, so resolve against every row.
-        "rightsizing": load_resolved(set(df_all["school_name"])),
+        "rightsizing": rightsizing,
     }
     OUT_DATA.write_text(json.dumps(payload, indent=2, default=str))
     print(f"Wrote {len(schools)} schools + {len(charters)} charters to {OUT_DATA}")

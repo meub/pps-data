@@ -13024,6 +13024,3265 @@
           "grade_changes": 8
         }
       }
+    },
+    "model": {
+      "assumptions": {
+        "grade_distribution": "Strand totals spread across grades in proportion to each school's grade counts.",
+        "not_modeled": [
+          "Attendance boundary changes",
+          "Creston Deaf and Hard of Hearing program (size not published)",
+          "Odyssey's move to MLC (no grade counts)"
+        ]
+      },
+      "scenarios": {
+        "A": {
+          "Abernethy Elementary School": {
+            "before": {
+              "Neighborhood": [
+                43.0,
+                44.0,
+                37.0,
+                42.0,
+                47.0,
+                56.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                64.0,
+                64.0,
+                55.0,
+                63.0,
+                74.5,
+                90.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Buckman Elementary School: Neighborhood students"
+            ]
+          },
+          "Arleta Elementary School": {
+            "before": {
+              "Neighborhood": [
+                41.0,
+                29.0,
+                40.0,
+                36.0,
+                36.0,
+                48.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                87.0,
+                79.0,
+                83.0,
+                82.0,
+                91.0,
+                112.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Marysville Elementary School: Neighborhood students"
+            ]
+          },
+          "Atkinson Elementary School": {
+            "before": {
+              "Spanish": [
+                31.6,
+                24.8,
+                33.1,
+                30.2,
+                26.7,
+                31.6,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Neighborhood": [
+                33.4,
+                26.2,
+                34.9,
+                31.8,
+                28.3,
+                33.4,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                60.4,
+                59.2,
+                71.9,
+                72.8,
+                71.3,
+                71.4,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Creston Elementary School: Neighborhood K-5 students"
+            ]
+          },
+          "Beach Elementary School": {
+            "before": {
+              "Spanish": [
+                31.8,
+                19.4,
+                26.4,
+                25.3,
+                28.5,
+                23.7,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Neighborhood": [
+                27.2,
+                16.6,
+                22.6,
+                21.7,
+                24.5,
+                20.3,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {},
+            "closes": true,
+            "inflows": []
+          },
+          "Beaumont Middle School": {
+            "before": {
+              "Spanish": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                33.5,
+                35.0,
+                32.5
+              ],
+              "Neighborhood": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                104.5,
+                109.0,
+                101.5
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                168.5,
+                187.0,
+                163.5
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Beverly Cleary 6\u20138 to Beaumont MS",
+              "Irvington Elementary School: Middle school area"
+            ]
+          },
+          "Beverly Cleary School ": {
+            "before": {
+              "Neighborhood": [
+                40.0,
+                51.0,
+                37.0,
+                50.0,
+                50.0,
+                48.0,
+                64.0,
+                78.0,
+                62.0
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                75.0,
+                96.0,
+                82.0,
+                93.0,
+                96.0,
+                93.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Irvington Elementary School: K-5 students"
+            ]
+          },
+          "Boise-Eliot Elementary School": {
+            "before": {
+              "Neighborhood": [
+                53.0,
+                40.0,
+                54.0,
+                46.0,
+                48.0,
+                54.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                53.0,
+                40.0,
+                54.0,
+                46.0,
+                48.0,
+                54.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Mandarin": [
+                43.0,
+                30.3,
+                33.9,
+                34.5,
+                18.8,
+                32.7,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "MLK Jr. to Boise-Eliot/Humboldt"
+            ]
+          },
+          "Bridger Creative Science School": {
+            "before": {
+              "Neighborhood": [
+                46.0,
+                44.0,
+                42.0,
+                56.0,
+                69.0,
+                49.0,
+                41.0,
+                48.0,
+                51.0
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                46.0,
+                44.0,
+                42.0,
+                56.0,
+                69.0,
+                49.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": []
+          },
+          "Buckman Elementary School": {
+            "before": {
+              "Neighborhood": [
+                42.0,
+                40.0,
+                36.0,
+                42.0,
+                55.0,
+                68.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {},
+            "closes": true,
+            "inflows": []
+          },
+          "Capitol Hill Elementary School": {
+            "before": {
+              "Neighborhood": [
+                58.0,
+                40.0,
+                46.0,
+                67.0,
+                62.0,
+                56.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                70.3,
+                49.9,
+                63.1,
+                82.9,
+                74.3,
+                72.8,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Stephenson Elementary School: Neighborhood students"
+            ]
+          },
+          "Chief Joseph Elementary School": {
+            "before": {
+              "Neighborhood": [
+                38.0,
+                45.0,
+                49.0,
+                39.0,
+                38.0,
+                38.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                65.2,
+                61.6,
+                71.6,
+                60.7,
+                62.5,
+                58.3,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Beach Elementary School: Neighborhood K-5 students"
+            ]
+          },
+          "Clark Elementary School": {
+            "before": {
+              "Mandarin": [
+                15.0,
+                14.5,
+                14.5,
+                16.5,
+                15.5,
+                14.8,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Neighborhood": [
+                45.0,
+                43.5,
+                43.5,
+                49.5,
+                46.5,
+                44.2,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                45.0,
+                43.5,
+                43.5,
+                49.5,
+                46.5,
+                44.2,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": []
+          },
+          "Creston Elementary School": {
+            "before": {
+              "Neighborhood": [
+                27.0,
+                33.0,
+                37.0,
+                41.0,
+                43.0,
+                38.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {},
+            "closes": true,
+            "inflows": []
+          },
+          "C\u00e9sar Ch\u00e1vez K-8 School": {
+            "before": {
+              "Spanish": [
+                31.8,
+                30.5,
+                31.2,
+                37.2,
+                27.8,
+                26.4,
+                37.9,
+                36.6,
+                40.6
+              ],
+              "Neighborhood": [
+                15.2,
+                14.5,
+                14.8,
+                17.8,
+                13.2,
+                12.6,
+                18.1,
+                17.4,
+                19.4
+              ]
+            },
+            "after": {
+              "Spanish": [
+                107.1,
+                97.2,
+                99.3,
+                109.9,
+                103.2,
+                94.2,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Beach Elementary School: Spanish immersion",
+              "James John Elementary School: Spanish immersion",
+              "Spanish: Beach, James John, and Sitton to Cesar Chavez"
+            ]
+          },
+          "Dr. Martin Luther King Jr. School": {
+            "before": {
+              "Mandarin": [
+                43.0,
+                30.3,
+                33.9,
+                34.5,
+                18.8,
+                32.7,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Neighborhood": [
+                28.0,
+                19.7,
+                22.1,
+                22.5,
+                12.2,
+                21.3,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                65.0,
+                67.7,
+                72.1,
+                50.5,
+                72.2,
+                68.3,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Sabin Elementary School: Neighborhood students"
+            ]
+          },
+          "Duniway Elementary School": {
+            "before": {
+              "Neighborhood": [
+                57.0,
+                54.0,
+                63.0,
+                52.0,
+                80.0,
+                56.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                92.0,
+                98.0,
+                90.0,
+                105.0,
+                134.0,
+                105.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Lewis Elementary School: Neighborhood students"
+            ]
+          },
+          "Faubion Elementary School": {
+            "before": {
+              "Neighborhood": [
+                65.0,
+                58.0,
+                73.0,
+                66.0,
+                61.0,
+                54.0,
+                75.0,
+                77.0,
+                71.0
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                65.0,
+                58.0,
+                73.0,
+                66.0,
+                61.0,
+                54.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": []
+          },
+          "George Middle School": {
+            "before": {
+              "Spanish": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                36.2,
+                40.5,
+                31.7
+              ],
+              "Neighborhood": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                82.8,
+                92.5,
+                72.3
+              ]
+            },
+            "after": {
+              "Spanish": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                97.3,
+                97.2,
+                92.0
+              ],
+              "Neighborhood": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                100.8,
+                109.9,
+                91.7
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Chavez 6-8 to George",
+              "Chavez 6\u20138 and Ockley Green MS to George MS"
+            ]
+          },
+          "Harriet Tubman Middle School": {
+            "before": {
+              "Mandarin": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                19.6,
+                14.7,
+                13.9
+              ],
+              "Neighborhood": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                144.4,
+                108.3,
+                102.1
+              ]
+            },
+            "after": {
+              "Mandarin": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                19.6,
+                14.7,
+                13.9
+              ],
+              "Neighborhood": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                201.4,
+                174.3,
+                174.1
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Vernon 6\u20138 to Harriet Tubman MS"
+            ]
+          },
+          "Harrison Park School": {
+            "before": {
+              "Mandarin": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                38.1,
+                39.5,
+                33.6
+              ],
+              "Neighborhood": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                105.9,
+                109.5,
+                93.4
+              ]
+            },
+            "after": {
+              "Mandarin": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                38.1,
+                39.5,
+                33.6
+              ],
+              "Neighborhood": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                146.9,
+                157.5,
+                144.4
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Bridger Creative Science 6\u20138 to Harrison Park MS"
+            ]
+          },
+          "Hayhurst Elementary School": {
+            "before": {
+              "Neighborhood": [
+                41.0,
+                43.1,
+                49.8,
+                48.4,
+                53.8,
+                53.8,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                78.1,
+                68.3,
+                82.7,
+                88.3,
+                89.5,
+                84.6,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Maplewood Elementary School: Neighborhood students"
+            ]
+          },
+          "Hosford Middle School": {
+            "before": {
+              "Neighborhood": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                166.0,
+                184.0,
+                178.0
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                324.0,
+                340.0,
+                340.0
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Sellwood Middle School: Llewellyn-area students",
+              "Sunnyside Environmental 6\u20138 to Hosford MS"
+            ]
+          },
+          "Irvington Elementary School": {
+            "before": {
+              "Neighborhood": [
+                35.0,
+                45.0,
+                45.0,
+                43.0,
+                46.0,
+                45.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {},
+            "closes": true,
+            "inflows": []
+          },
+          "James John Elementary School": {
+            "before": {
+              "Spanish": [
+                21.5,
+                26.6,
+                18.6,
+                19.3,
+                23.0,
+                23.7,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Neighborhood": [
+                37.5,
+                46.4,
+                32.4,
+                33.7,
+                40.0,
+                41.3,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {},
+            "closes": true,
+            "inflows": []
+          },
+          "Lane Middle School": {
+            "before": {
+              "Russian": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                11.9,
+                12.0,
+                12.3
+              ],
+              "Neighborhood": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                136.1,
+                137.0,
+                140.7
+              ]
+            },
+            "after": {
+              "Russian": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                11.9,
+                12.0,
+                12.3
+              ],
+              "Neighborhood": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                230.1,
+                234.0,
+                232.7
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Sellwood Middle School: Duniway- and Lewis-area students"
+            ]
+          },
+          "Laurelhurst Elementary School": {
+            "before": {
+              "Neighborhood": [
+                42.0,
+                60.0,
+                57.0,
+                69.0,
+                68.0,
+                83.0,
+                75.0,
+                72.0,
+                88.0
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                42.0,
+                60.0,
+                57.0,
+                69.0,
+                68.0,
+                83.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": []
+          },
+          "Lent Elementary School": {
+            "before": {
+              "Spanish": [
+                43.0,
+                33.0,
+                40.0,
+                38.0,
+                46.0,
+                56.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {
+              "Spanish": [
+                74.6,
+                57.8,
+                73.1,
+                68.2,
+                72.7,
+                87.6,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Atkinson to Lent"
+            ]
+          },
+          "Lewis Elementary School": {
+            "before": {
+              "Neighborhood": [
+                35.0,
+                44.0,
+                27.0,
+                53.0,
+                54.0,
+                49.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {},
+            "closes": true,
+            "inflows": []
+          },
+          "Maplewood Elementary School": {
+            "before": {
+              "Neighborhood": [
+                53.0,
+                36.0,
+                47.0,
+                57.0,
+                51.0,
+                44.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {},
+            "closes": true,
+            "inflows": []
+          },
+          "Markham Elementary School": {
+            "before": {
+              "Neighborhood": [
+                60.0,
+                50.0,
+                50.0,
+                50.0,
+                65.0,
+                64.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                88.7,
+                73.1,
+                89.9,
+                87.1,
+                93.7,
+                103.2,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Stephenson Elementary School: Neighborhood students"
+            ]
+          },
+          "Marysville Elementary School": {
+            "before": {
+              "Neighborhood": [
+                46.0,
+                50.0,
+                43.0,
+                46.0,
+                55.0,
+                64.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {},
+            "closes": true,
+            "inflows": []
+          },
+          "Mt Tabor Middle School": {
+            "before": {
+              "Japanese": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                72.8,
+                72.3,
+                76.9
+              ],
+              "Neighborhood": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                68.2,
+                67.7,
+                72.1
+              ]
+            },
+            "after": {
+              "Japanese": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                72.8,
+                72.3,
+                76.9
+              ],
+              "Neighborhood": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                143.2,
+                139.7,
+                160.1
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Laurelhurst 6\u20138 to Mt. Tabor MS"
+            ]
+          },
+          "Ockley Green Middle School": {
+            "before": {
+              "Spanish": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                23.1,
+                20.1,
+                19.7
+              ],
+              "Neighborhood": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                145.9,
+                126.9,
+                124.3
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                220.9,
+                203.9,
+                195.3
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Faubion 6\u20138 to Ockley Green MS"
+            ]
+          },
+          "Peninsula Elementary School": {
+            "before": {
+              "Neighborhood": [
+                43.0,
+                38.0,
+                48.0,
+                42.0,
+                41.0,
+                27.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {},
+            "closes": true,
+            "inflows": []
+          },
+          "Rieke Elementary School": {
+            "before": {
+              "Neighborhood": [
+                43.0,
+                39.0,
+                44.0,
+                42.0,
+                46.0,
+                52.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                58.9,
+                49.8,
+                58.1,
+                59.1,
+                61.3,
+                65.2,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Maplewood Elementary School: Neighborhood students"
+            ]
+          },
+          "Rigler Elementary School": {
+            "before": {
+              "Spanish": [
+                50.0,
+                59.0,
+                60.0,
+                33.0,
+                49.0,
+                40.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {
+              "Spanish": [
+                85.4,
+                97.2,
+                97.3,
+                75.0,
+                84.0,
+                74.5,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Scott to Rigler"
+            ]
+          },
+          "Rosa Parks Elementary School": {
+            "before": {
+              "Neighborhood": [
+                23.0,
+                30.0,
+                24.0,
+                21.0,
+                32.0,
+                30.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                81.2,
+                82.5,
+                86.8,
+                80.8,
+                86.2,
+                69.6,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "C\u00e9sar Ch\u00e1vez non-immersion K-5 students to Rosa Parks (board memo)",
+              "Peninsula Elementary School: Neighborhood students"
+            ]
+          },
+          "Rose City Park": {
+            "before": {
+              "Vietnamese": [
+                26.8,
+                33.3,
+                30.8,
+                44.7,
+                34.3,
+                37.2,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Neighborhood": [
+                27.2,
+                33.7,
+                31.2,
+                45.3,
+                34.7,
+                37.8,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {},
+            "closes": true,
+            "inflows": []
+          },
+          "Roseway Heights School": {
+            "before": {
+              "Spanish": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                33.7,
+                30.6,
+                28.8
+              ],
+              "Vietnamese": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                23.2,
+                21.0,
+                19.8
+              ],
+              "Neighborhood": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                150.2,
+                136.4,
+                128.4
+              ]
+            },
+            "after": {
+              "Spanish": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                67.2,
+                65.5,
+                61.3
+              ],
+              "Vietnamese": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                23.2,
+                21.0,
+                19.8
+              ],
+              "Neighborhood": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                150.2,
+                136.4,
+                128.4
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Beaumont MS to Roseway Heights MS"
+            ]
+          },
+          "Sabin Elementary School": {
+            "before": {
+              "Neighborhood": [
+                37.0,
+                48.0,
+                50.0,
+                28.0,
+                60.0,
+                47.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {},
+            "closes": true,
+            "inflows": []
+          },
+          "Scott Elementary School": {
+            "before": {
+              "Spanish": [
+                35.4,
+                38.2,
+                37.3,
+                42.0,
+                35.0,
+                34.5,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Neighborhood": [
+                40.6,
+                43.8,
+                42.7,
+                48.0,
+                40.0,
+                39.5,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                67.7,
+                77.5,
+                73.9,
+                93.3,
+                74.8,
+                77.3,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Rose City Park: Neighborhood K-5 students"
+            ]
+          },
+          "Sellwood Middle School": {
+            "before": {
+              "Neighborhood": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                188.0,
+                194.0,
+                184.0
+              ]
+            },
+            "after": {},
+            "closes": true,
+            "inflows": []
+          },
+          "Sitton Elementary School": {
+            "before": {
+              "Spanish": [
+                22.0,
+                20.8,
+                23.2,
+                28.0,
+                24.0,
+                20.4,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Neighborhood": [
+                33.0,
+                31.2,
+                34.8,
+                42.0,
+                36.0,
+                30.6,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                70.5,
+                77.6,
+                67.2,
+                75.7,
+                76.0,
+                71.9,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "James John Elementary School: Neighborhood K-5 students"
+            ]
+          },
+          "Stephenson Elementary School": {
+            "before": {
+              "Neighborhood": [
+                41.0,
+                33.0,
+                57.0,
+                53.0,
+                41.0,
+                56.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {},
+            "closes": true,
+            "inflows": []
+          },
+          "Sunnyside Environmental School": {
+            "before": {
+              "Neighborhood": [
+                46.0,
+                50.0,
+                41.0,
+                52.0,
+                50.0,
+                53.0,
+                64.0,
+                59.0,
+                70.0
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                67.0,
+                70.0,
+                59.0,
+                73.0,
+                77.5,
+                87.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Buckman Elementary School: Neighborhood students"
+            ]
+          },
+          "Vernon Elementary School": {
+            "before": {
+              "Neighborhood": [
+                44.0,
+                55.0,
+                56.0,
+                62.0,
+                67.0,
+                60.0,
+                57.0,
+                66.0,
+                72.0
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                44.0,
+                55.0,
+                56.0,
+                62.0,
+                67.0,
+                60.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": []
+          },
+          "Vestal Elementary School": {
+            "before": {
+              "Neighborhood": [
+                53.0,
+                53.0,
+                43.0,
+                54.0,
+                42.0,
+                41.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                53.0,
+                53.0,
+                43.0,
+                54.0,
+                42.0,
+                41.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Vietnamese": [
+                26.8,
+                33.3,
+                30.8,
+                44.7,
+                34.3,
+                37.2,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Rose City Park: Vietnamese immersion"
+            ]
+          },
+          "Whitman Elementary School": {
+            "before": {
+              "Neighborhood": [
+                32.0,
+                33.0,
+                39.0,
+                28.0,
+                32.0,
+                29.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                63.0,
+                75.0,
+                76.0,
+                70.0,
+                68.0,
+                67.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Woodmere Elementary School: Neighborhood students"
+            ]
+          },
+          "Woodmere Elementary School": {
+            "before": {
+              "Neighborhood": [
+                31.0,
+                42.0,
+                37.0,
+                42.0,
+                36.0,
+                38.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {},
+            "closes": true,
+            "inflows": []
+          },
+          "Woodstock Elementary School": {
+            "before": {
+              "Mandarin": [
+                35.7,
+                26.4,
+                33.1,
+                27.4,
+                35.2,
+                31.6,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Neighborhood": [
+                33.3,
+                24.6,
+                30.9,
+                25.6,
+                32.8,
+                29.4,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {
+              "Mandarin": [
+                50.7,
+                40.9,
+                47.6,
+                43.9,
+                50.7,
+                46.3,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Neighborhood": [
+                33.3,
+                24.6,
+                30.9,
+                25.6,
+                32.8,
+                29.4,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Mandarin: Clark to Woodstock"
+            ]
+          }
+        },
+        "B": {
+          "Abernethy Elementary School": {
+            "before": {
+              "Neighborhood": [
+                43.0,
+                44.0,
+                37.0,
+                42.0,
+                47.0,
+                56.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                64.0,
+                64.0,
+                55.0,
+                63.0,
+                74.5,
+                90.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Buckman Elementary School: Neighborhood students"
+            ]
+          },
+          "Arleta Elementary School": {
+            "before": {
+              "Neighborhood": [
+                41.0,
+                29.0,
+                40.0,
+                36.0,
+                36.0,
+                48.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                87.0,
+                79.0,
+                83.0,
+                82.0,
+                91.0,
+                112.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Marysville Elementary School: Neighborhood students"
+            ]
+          },
+          "Atkinson Elementary School": {
+            "before": {
+              "Spanish": [
+                31.6,
+                24.8,
+                33.1,
+                30.2,
+                26.7,
+                31.6,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Neighborhood": [
+                33.4,
+                26.2,
+                34.9,
+                31.8,
+                28.3,
+                33.4,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                60.4,
+                59.2,
+                71.9,
+                72.8,
+                71.3,
+                71.4,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Creston Elementary School: Neighborhood K-5 students"
+            ]
+          },
+          "Beach Elementary School": {
+            "before": {
+              "Spanish": [
+                31.8,
+                19.4,
+                26.4,
+                25.3,
+                28.5,
+                23.7,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Neighborhood": [
+                27.2,
+                16.6,
+                22.6,
+                21.7,
+                24.5,
+                20.3,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {},
+            "closes": true,
+            "inflows": []
+          },
+          "Beaumont Middle School": {
+            "before": {
+              "Spanish": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                33.5,
+                35.0,
+                32.5
+              ],
+              "Neighborhood": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                104.5,
+                109.0,
+                101.5
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                168.5,
+                187.0,
+                163.5
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Beverly Cleary 6\u20138 to Beaumont MS",
+              "Irvington Elementary School: Middle school area"
+            ]
+          },
+          "Beverly Cleary School ": {
+            "before": {
+              "Neighborhood": [
+                40.0,
+                51.0,
+                37.0,
+                50.0,
+                50.0,
+                48.0,
+                64.0,
+                78.0,
+                62.0
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                75.0,
+                96.0,
+                82.0,
+                93.0,
+                96.0,
+                93.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Irvington Elementary School: K-5 students"
+            ]
+          },
+          "Boise-Eliot Elementary School": {
+            "before": {
+              "Neighborhood": [
+                53.0,
+                40.0,
+                54.0,
+                46.0,
+                48.0,
+                54.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                53.0,
+                40.0,
+                54.0,
+                46.0,
+                48.0,
+                54.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Mandarin": [
+                43.0,
+                30.3,
+                33.9,
+                34.5,
+                18.8,
+                32.7,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "MLK Jr. to Boise-Eliot/Humboldt"
+            ]
+          },
+          "Bridger Creative Science School": {
+            "before": {
+              "Neighborhood": [
+                46.0,
+                44.0,
+                42.0,
+                56.0,
+                69.0,
+                49.0,
+                41.0,
+                48.0,
+                51.0
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                46.0,
+                44.0,
+                42.0,
+                56.0,
+                69.0,
+                49.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": []
+          },
+          "Buckman Elementary School": {
+            "before": {
+              "Neighborhood": [
+                42.0,
+                40.0,
+                36.0,
+                42.0,
+                55.0,
+                68.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {},
+            "closes": true,
+            "inflows": []
+          },
+          "Chief Joseph Elementary School": {
+            "before": {
+              "Neighborhood": [
+                38.0,
+                45.0,
+                49.0,
+                39.0,
+                38.0,
+                38.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                65.2,
+                61.6,
+                71.6,
+                60.7,
+                62.5,
+                58.3,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Beach Elementary School: Neighborhood K-5 students"
+            ]
+          },
+          "Clark Elementary School": {
+            "before": {
+              "Mandarin": [
+                15.0,
+                14.5,
+                14.5,
+                16.5,
+                15.5,
+                14.8,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Neighborhood": [
+                45.0,
+                43.5,
+                43.5,
+                49.5,
+                46.5,
+                44.2,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                45.0,
+                43.5,
+                43.5,
+                49.5,
+                46.5,
+                44.2,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": []
+          },
+          "Creston Elementary School": {
+            "before": {
+              "Neighborhood": [
+                27.0,
+                33.0,
+                37.0,
+                41.0,
+                43.0,
+                38.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {},
+            "closes": true,
+            "inflows": []
+          },
+          "C\u00e9sar Ch\u00e1vez K-8 School": {
+            "before": {
+              "Spanish": [
+                31.8,
+                30.5,
+                31.2,
+                37.2,
+                27.8,
+                26.4,
+                37.9,
+                36.6,
+                40.6
+              ],
+              "Neighborhood": [
+                15.2,
+                14.5,
+                14.8,
+                17.8,
+                13.2,
+                12.6,
+                18.1,
+                17.4,
+                19.4
+              ]
+            },
+            "after": {
+              "Spanish": [
+                107.1,
+                97.2,
+                99.3,
+                109.9,
+                103.2,
+                94.2,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Beach Elementary School: Spanish immersion",
+              "James John Elementary School: Spanish immersion",
+              "Spanish: Beach, James John, and Sitton to Cesar Chavez"
+            ]
+          },
+          "Dr. Martin Luther King Jr. School": {
+            "before": {
+              "Mandarin": [
+                43.0,
+                30.3,
+                33.9,
+                34.5,
+                18.8,
+                32.7,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Neighborhood": [
+                28.0,
+                19.7,
+                22.1,
+                22.5,
+                12.2,
+                21.3,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                65.0,
+                67.7,
+                72.1,
+                50.5,
+                72.2,
+                68.3,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Sabin Elementary School: Neighborhood students"
+            ]
+          },
+          "Faubion Elementary School": {
+            "before": {
+              "Neighborhood": [
+                65.0,
+                58.0,
+                73.0,
+                66.0,
+                61.0,
+                54.0,
+                75.0,
+                77.0,
+                71.0
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                65.0,
+                58.0,
+                73.0,
+                66.0,
+                61.0,
+                54.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": []
+          },
+          "George Middle School": {
+            "before": {
+              "Spanish": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                36.2,
+                40.5,
+                31.7
+              ],
+              "Neighborhood": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                82.8,
+                92.5,
+                72.3
+              ]
+            },
+            "after": {
+              "Spanish": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                97.3,
+                97.2,
+                92.0
+              ],
+              "Neighborhood": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                100.8,
+                109.9,
+                91.7
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Chavez 6-8 to George",
+              "Chavez 6\u20138 and Ockley Green MS to George MS"
+            ]
+          },
+          "Harriet Tubman Middle School": {
+            "before": {
+              "Mandarin": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                19.6,
+                14.7,
+                13.9
+              ],
+              "Neighborhood": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                144.4,
+                108.3,
+                102.1
+              ]
+            },
+            "after": {
+              "Mandarin": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                19.6,
+                14.7,
+                13.9
+              ],
+              "Neighborhood": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                201.4,
+                174.3,
+                174.1
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Vernon 6\u20138 to Harriet Tubman MS"
+            ]
+          },
+          "Harrison Park School": {
+            "before": {
+              "Mandarin": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                38.1,
+                39.5,
+                33.6
+              ],
+              "Neighborhood": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                105.9,
+                109.5,
+                93.4
+              ]
+            },
+            "after": {
+              "Mandarin": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                38.1,
+                39.5,
+                33.6
+              ],
+              "Neighborhood": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                146.9,
+                157.5,
+                144.4
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Bridger Creative Science 6\u20138 to Harrison Park MS"
+            ]
+          },
+          "Hayhurst Elementary School": {
+            "before": {
+              "Neighborhood": [
+                41.0,
+                43.1,
+                49.8,
+                48.4,
+                53.8,
+                53.8,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                78.1,
+                68.3,
+                82.7,
+                88.3,
+                89.5,
+                84.6,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Maplewood Elementary School: Neighborhood students"
+            ]
+          },
+          "Hosford Middle School": {
+            "before": {
+              "Neighborhood": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                166.0,
+                184.0,
+                178.0
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                324.0,
+                340.0,
+                340.0
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Sellwood Middle School: Llewellyn-area students",
+              "Sunnyside Environmental 6\u20138 to Hosford MS"
+            ]
+          },
+          "Irvington Elementary School": {
+            "before": {
+              "Neighborhood": [
+                35.0,
+                45.0,
+                45.0,
+                43.0,
+                46.0,
+                45.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {},
+            "closes": true,
+            "inflows": []
+          },
+          "James John Elementary School": {
+            "before": {
+              "Spanish": [
+                21.5,
+                26.6,
+                18.6,
+                19.3,
+                23.0,
+                23.7,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Neighborhood": [
+                37.5,
+                46.4,
+                32.4,
+                33.7,
+                40.0,
+                41.3,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {},
+            "closes": true,
+            "inflows": []
+          },
+          "Lane Middle School": {
+            "before": {
+              "Russian": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                11.9,
+                12.0,
+                12.3
+              ],
+              "Neighborhood": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                136.1,
+                137.0,
+                140.7
+              ]
+            },
+            "after": {
+              "Russian": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                11.9,
+                12.0,
+                12.3
+              ],
+              "Neighborhood": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                230.1,
+                234.0,
+                232.7
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Sellwood Middle School: Duniway- and Lewis-area students"
+            ]
+          },
+          "Laurelhurst Elementary School": {
+            "before": {
+              "Neighborhood": [
+                42.0,
+                60.0,
+                57.0,
+                69.0,
+                68.0,
+                83.0,
+                75.0,
+                72.0,
+                88.0
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                42.0,
+                60.0,
+                57.0,
+                69.0,
+                68.0,
+                83.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": []
+          },
+          "Lent Elementary School": {
+            "before": {
+              "Spanish": [
+                43.0,
+                33.0,
+                40.0,
+                38.0,
+                46.0,
+                56.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {
+              "Spanish": [
+                74.6,
+                57.8,
+                73.1,
+                68.2,
+                72.7,
+                87.6,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Atkinson to Lent"
+            ]
+          },
+          "Maplewood Elementary School": {
+            "before": {
+              "Neighborhood": [
+                53.0,
+                36.0,
+                47.0,
+                57.0,
+                51.0,
+                44.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {},
+            "closes": true,
+            "inflows": []
+          },
+          "Marysville Elementary School": {
+            "before": {
+              "Neighborhood": [
+                46.0,
+                50.0,
+                43.0,
+                46.0,
+                55.0,
+                64.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {},
+            "closes": true,
+            "inflows": []
+          },
+          "Mt Tabor Middle School": {
+            "before": {
+              "Japanese": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                72.8,
+                72.3,
+                76.9
+              ],
+              "Neighborhood": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                68.2,
+                67.7,
+                72.1
+              ]
+            },
+            "after": {
+              "Japanese": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                72.8,
+                72.3,
+                76.9
+              ],
+              "Neighborhood": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                143.2,
+                139.7,
+                160.1
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Laurelhurst 6\u20138 to Mt. Tabor MS"
+            ]
+          },
+          "Ockley Green Middle School": {
+            "before": {
+              "Spanish": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                23.1,
+                20.1,
+                19.7
+              ],
+              "Neighborhood": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                145.9,
+                126.9,
+                124.3
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                220.9,
+                203.9,
+                195.3
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Faubion 6\u20138 to Ockley Green MS"
+            ]
+          },
+          "Peninsula Elementary School": {
+            "before": {
+              "Neighborhood": [
+                43.0,
+                38.0,
+                48.0,
+                42.0,
+                41.0,
+                27.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {},
+            "closes": true,
+            "inflows": []
+          },
+          "Rieke Elementary School": {
+            "before": {
+              "Neighborhood": [
+                43.0,
+                39.0,
+                44.0,
+                42.0,
+                46.0,
+                52.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                58.9,
+                49.8,
+                58.1,
+                59.1,
+                61.3,
+                65.2,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Maplewood Elementary School: Neighborhood students"
+            ]
+          },
+          "Rigler Elementary School": {
+            "before": {
+              "Spanish": [
+                50.0,
+                59.0,
+                60.0,
+                33.0,
+                49.0,
+                40.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {
+              "Spanish": [
+                85.4,
+                97.2,
+                97.3,
+                75.0,
+                84.0,
+                74.5,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Scott to Rigler"
+            ]
+          },
+          "Rosa Parks Elementary School": {
+            "before": {
+              "Neighborhood": [
+                23.0,
+                30.0,
+                24.0,
+                21.0,
+                32.0,
+                30.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                81.2,
+                82.5,
+                86.8,
+                80.8,
+                86.2,
+                69.6,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "C\u00e9sar Ch\u00e1vez non-immersion K-5 students to Rosa Parks (board memo)",
+              "Peninsula Elementary School: Neighborhood students"
+            ]
+          },
+          "Roseway Heights School": {
+            "before": {
+              "Spanish": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                33.7,
+                30.6,
+                28.8
+              ],
+              "Vietnamese": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                23.2,
+                21.0,
+                19.8
+              ],
+              "Neighborhood": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                150.2,
+                136.4,
+                128.4
+              ]
+            },
+            "after": {
+              "Spanish": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                67.2,
+                65.5,
+                61.3
+              ],
+              "Vietnamese": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                23.2,
+                21.0,
+                19.8
+              ],
+              "Neighborhood": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                150.2,
+                136.4,
+                128.4
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Beaumont MS to Roseway Heights MS"
+            ]
+          },
+          "Sabin Elementary School": {
+            "before": {
+              "Neighborhood": [
+                37.0,
+                48.0,
+                50.0,
+                28.0,
+                60.0,
+                47.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {},
+            "closes": true,
+            "inflows": []
+          },
+          "Scott Elementary School": {
+            "before": {
+              "Spanish": [
+                35.4,
+                38.2,
+                37.3,
+                42.0,
+                35.0,
+                34.5,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Neighborhood": [
+                40.6,
+                43.8,
+                42.7,
+                48.0,
+                40.0,
+                39.5,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                40.6,
+                43.8,
+                42.7,
+                48.0,
+                40.0,
+                39.5,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": []
+          },
+          "Sellwood Middle School": {
+            "before": {
+              "Neighborhood": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                188.0,
+                194.0,
+                184.0
+              ]
+            },
+            "after": {},
+            "closes": true,
+            "inflows": []
+          },
+          "Sitton Elementary School": {
+            "before": {
+              "Spanish": [
+                22.0,
+                20.8,
+                23.2,
+                28.0,
+                24.0,
+                20.4,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Neighborhood": [
+                33.0,
+                31.2,
+                34.8,
+                42.0,
+                36.0,
+                30.6,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                70.5,
+                77.6,
+                67.2,
+                75.7,
+                76.0,
+                71.9,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "James John Elementary School: Neighborhood K-5 students"
+            ]
+          },
+          "Sunnyside Environmental School": {
+            "before": {
+              "Neighborhood": [
+                46.0,
+                50.0,
+                41.0,
+                52.0,
+                50.0,
+                53.0,
+                64.0,
+                59.0,
+                70.0
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                67.0,
+                70.0,
+                59.0,
+                73.0,
+                77.5,
+                87.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Buckman Elementary School: Neighborhood students"
+            ]
+          },
+          "Vernon Elementary School": {
+            "before": {
+              "Neighborhood": [
+                44.0,
+                55.0,
+                56.0,
+                62.0,
+                67.0,
+                60.0,
+                57.0,
+                66.0,
+                72.0
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                44.0,
+                55.0,
+                56.0,
+                62.0,
+                67.0,
+                60.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": []
+          },
+          "Whitman Elementary School": {
+            "before": {
+              "Neighborhood": [
+                32.0,
+                33.0,
+                39.0,
+                28.0,
+                32.0,
+                29.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {
+              "Neighborhood": [
+                63.0,
+                75.0,
+                76.0,
+                70.0,
+                68.0,
+                67.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Woodmere Elementary School: Neighborhood students"
+            ]
+          },
+          "Woodmere Elementary School": {
+            "before": {
+              "Neighborhood": [
+                31.0,
+                42.0,
+                37.0,
+                42.0,
+                36.0,
+                38.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {},
+            "closes": true,
+            "inflows": []
+          },
+          "Woodstock Elementary School": {
+            "before": {
+              "Mandarin": [
+                35.7,
+                26.4,
+                33.1,
+                27.4,
+                35.2,
+                31.6,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Neighborhood": [
+                33.3,
+                24.6,
+                30.9,
+                25.6,
+                32.8,
+                29.4,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "after": {
+              "Mandarin": [
+                50.7,
+                40.9,
+                47.6,
+                43.9,
+                50.7,
+                46.3,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Neighborhood": [
+                33.3,
+                24.6,
+                30.9,
+                25.6,
+                32.8,
+                29.4,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "closes": false,
+            "inflows": [
+              "Mandarin: Clark to Woodstock"
+            ]
+          }
+        }
+      },
+      "grades": [
+        "k",
+        "g1",
+        "g2",
+        "g3",
+        "g4",
+        "g5",
+        "g6",
+        "g7",
+        "g8"
+      ]
     }
   }
 }
