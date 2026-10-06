@@ -2212,7 +2212,11 @@
     // ---- receiving schools: capacity and estimated K-5 classes ----
     // In development: shown only with ?dev=1 until it is ready to publish.
     const SHOW_RECV = new URLSearchParams(location.search).has("dev");
-    document.getElementById("rs-recv-panel").hidden = !SHOW_RECV;
+    // Capacity and class-estimate table: hidden everywhere for now, because its
+    // over-capacity flags and class counts look more certain than the model
+    // supports (no boundary changes, assumed Sellwood split). Flip to show.
+    const SHOW_CAPACITY_TABLE = false;
+    document.getElementById("rs-recv-panel").hidden = !(SHOW_RECV && SHOW_CAPACITY_TABLE);
     document.getElementById("rs-grades-panel").hidden = !SHOW_RECV;
     const MODEL = SHOW_RECV ? RS.model : null;
     const MG = MODEL ? MODEL.grades : [];
@@ -2238,7 +2242,7 @@
     }
     const arrowTxt = '<span class="rs-arrowtxt">&rarr;</span>';
     function renderRecv() {
-      if (!MODEL) return;
+      if (!MODEL || !SHOW_CAPACITY_TABLE) return;
       const target = Number(targetEl.value);
       document.getElementById("rs-target-val").textContent = target;
       const rows = Object.entries(MODEL.scenarios[scen])
