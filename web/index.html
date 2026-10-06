@@ -2316,7 +2316,7 @@
 
     // ---- students per grade at one receiving school (dev) ----
     const gradeSel = document.getElementById("rs-grade-school");
-    let gradeSchool = "Chief Joseph Elementary School";
+    let gradeSchool = "Abernethy Elementary School";  // default; a receiver in both scenarios
     gradeSel.addEventListener("change", () => { gradeSchool = gradeSel.value; renderGrades(); });
     const gradeTotal = (st, i) => Object.values(st).reduce((a, v) => a + Math.round(v[i] || 0), 0);
     function renderGrades() {
