@@ -12350,6 +12350,11 @@
       }
     },
     "receivers_source": "PPS board memo, Rightsizing Update: Scenario Release, October 6, 2026 board meeting",
+    "b_retained": {
+      "Lewis Elementary School": "Stays open and takes in part of Whitman's attendance area. Its middle school pathway still shifts to Brentwood.",
+      "Rose City Park": "Stays open with its neighborhood boundary and Vietnamese immersion program.",
+      "Stephenson Elementary School": "Stays open with its current boundary and no proposed changes."
+    },
     "scenarios": {
       "A": {
         "closing": [

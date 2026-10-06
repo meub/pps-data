@@ -173,6 +173,18 @@
   .rs-tag.none { color: var(--muted); border-color: var(--border); }
   #rs-closing-table td.detail { white-space: normal; min-width: 260px; color: var(--muted); }
   .rs-summary { color: var(--muted); font-size: var(--fs-small); margin: 10px 14px; }
+  .rs-diff { padding: 14px 16px; margin-bottom: 16px; }
+  .rs-diff h3 { margin: 0 0 4px; font-size: var(--fs-h3); }
+  .rs-diff .subtitle { margin: 0 0 12px; color: var(--muted); font-size: var(--fs-small); }
+  .rs-diff-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  @media (max-width: 900px) { .rs-diff-cards { grid-template-columns: 1fr; } }
+  .rs-diff-card { border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; font-size: var(--fs-small); }
+  .rs-diff-card b.name { display: block; font-size: 15px; margin-bottom: 6px; }
+  .rs-diff-card .lbl { color: var(--muted); font-weight: 600; text-transform: uppercase;
+    font-size: 11px; letter-spacing: 0.5px; margin-top: 8px; }
+  .rs-diff-card .lbl:first-of-type { margin-top: 0; }
+  .rs-diff-card p { margin: 3px 0 0; color: var(--fg); line-height: 1.4; }
+  .rs-diff-card .facts { color: var(--muted); margin-top: 8px; }
   #rs-closing-table tr.muted-row td { opacity: 0.55; }
   #map:not(.scroll-enabled)::after {
     content: "Click map to zoom with scroll wheel";
@@ -475,29 +487,34 @@
       These are drafts: the superintendent recommends a plan in November and the board votes in December.
       District-wide figures are PPS's own projections for 2031-32. School figures on this page are this dashboard's data.
     </p>
+    <div class="rs-grid">
+      <div class="panel chart-card">
+        <h3>What happens to the 74 schools</h3>
+        <p class="subtitle">Each school counted once, by its biggest change. "Receives students" means it takes in students from a closing school.</p>
+        <div id="plot-rs-outcomes" style="height: 220px;"></div>
+      </div>
+      <div class="panel chart-card">
+        <h3>Schools and students at a sustainable size in 2031-32</h3>
+        <p class="subtitle">PPS's projections. Sustainable means at least 360 students for K-5 and 500 for K-8 and middle schools.</p>
+        <div id="plot-rs-district" style="height: 220px;"></div>
+        <details class="inline-expand" style="margin-top:6px;"><summary>View all PPS measures as a table</summary><div id="rs-district-table"></div></details>
+      </div>
+    </div>
+    <div class="panel rs-diff">
+      <h3>The only difference: three schools stay open in Scenario B</h3>
+      <p class="subtitle">The other 11 closures, their receiving schools, and every program and grade-level move are the same in both scenarios.</p>
+      <div class="rs-diff-cards" id="rs-diff-cards"></div>
+    </div>
     <div class="rs-toggle" role="group" aria-label="Scenario">
       <button type="button" data-rs="A" aria-pressed="true">Scenario A: 14 closures</button>
       <button type="button" data-rs="B" aria-pressed="false">Scenario B: 11 closures</button>
-    </div>
-    <div class="rs-grid">
-      <div class="panel chart-card">
-        <h3 id="rs-funnel-title">From 74 schools to closures</h3>
-        <p class="subtitle">How many of the 74 in-scope schools each step touches. Closures in both scenarios are the shared core of the two drafts.</p>
-        <div id="plot-rs-funnel" style="height: 300px;"></div>
-      </div>
-      <div class="panel chart-card">
-        <h3>District-wide, side by side (PPS projections for 2031-32)</h3>
-        <p class="subtitle">Share of schools and students at or above PPS's sustainability thresholds: 360 students for K-5, 500 for K-8 and middle schools.</p>
-        <div id="plot-rs-district" style="height: 300px;"></div>
-        <details class="inline-expand" style="margin-top:6px;"><summary>View as table</summary><div id="rs-district-table"></div></details>
-      </div>
     </div>
     <div class="panel">
       <div id="rs-map"></div>
       <div class="rs-legend" id="rs-legend">
         <span><span class="sw" style="background:var(--rs-close)"></span>Closes</span>
         <span><span class="sw" style="background:var(--rs-receive)"></span>Receives students from a closing school</span>
-        <span><span class="sw" style="background:var(--rs-none)"></span>Other schools</span>
+        <span><span class="sw" style="background:rgba(57,135,229,0.22); border:1.5px solid var(--rs-receive); box-sizing:border-box"></span>Other schools (stay open)</span>
         <span><span class="ln solid"></span>Neighborhood students go to</span>
         <span><span class="ln"></span>Program goes to (immersion, Deaf and Hard of Hearing)</span>
         <label class="rs-moves-opt"><input type="checkbox" id="rs-show-moves"> Also show other program and grade-level moves <span class="ln moves" style="margin-left:4px"></span></label>
@@ -1805,6 +1822,7 @@
                     boundary: "Boundary change", none: "No change" };
     const PLOT_FONT = { color: "#e6edf3", size: 11, family: '"Nunito Sans", -apple-system, Helvetica, Arial, sans-serif' };
     const byName = Object.fromEntries(schools.map(s => [s.school_name, s]));
+    const short = (n) => n.trim().replace(/ (Elementary|Middle) School$/, "").replace(/ K-8 School$/, "").replace(/ School$/, "");
     const catOf = (s, scen) => s[`rs_${scen.toLowerCase()}_category`] || "none";
     const tag = (c) => `<span class="rs-tag ${c}">${LABEL[c]}</span>`;
     const esc = (t) => String(t).replace(/[&<>]/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[ch]));
@@ -1820,35 +1838,31 @@
       underserved_in_sustainable: "Historically underserved, in sustainable schools",
       sped_in_sustainable: "Special education, in sustainable schools",
       multilingual_in_sustainable: "Multilingual learners, in sustainable schools" };
+    // Two headline measures; the rest stay in the table view below.
+    const HEADLINE = [["students_above_threshold", "Students"], ["schools_above_threshold", "Schools"]];
     function renderDistrict() {
       const mobile = window.innerWidth < 700;
-      const ys = PCT_KEYS.map(k => SHORT[k]);
       const series = [
-        { key: "status_quo", name: "Status quo", color: "#8b949e", symbol: "circle-open" },
-        { key: "B", name: "Scenario B", color: css("--rs-b"), symbol: "circle" },
-        { key: "A", name: "Scenario A", color: css("--rs-a"), symbol: "circle" },
+        { key: "status_quo", name: "Status quo", color: "#6e7681" },
+        { key: "B", name: "Scenario B", color: css("--rs-b") },
+        { key: "A", name: "Scenario A", color: css("--rs-a") },
       ];
-      const range = {
-        type: "scatter", mode: "lines", hoverinfo: "skip", showlegend: false,
-        x: PCT_KEYS.flatMap(k => [D[k].status_quo * 100, Math.max(D[k].A, D[k].B) * 100, null]),
-        y: PCT_KEYS.flatMap(k => [SHORT[k], SHORT[k], null]),
-        line: { color: "#30363d", width: 2 },
-      };
-      const traces = [range, ...series.map(sr => ({
-        type: "scatter", mode: "markers", name: sr.name,
-        x: PCT_KEYS.map(k => D[k][sr.key] * 100), y: ys,
-        marker: { color: sr.color, size: 11, symbol: sr.symbol, line: { width: 2, color: sr.symbol === "circle" ? "#161b22" : sr.color } },
-        customdata: PCT_KEYS.map(k => D[k].label),
+      const traces = series.map(sr => ({
+        type: "bar", orientation: "h", name: sr.name,
+        y: HEADLINE.map(h => h[1]), x: HEADLINE.map(h => D[h[0]][sr.key] * 100),
+        marker: { color: sr.color, line: { color: "#161b22", width: 2 } },
+        text: HEADLINE.map(h => Math.round(D[h[0]][sr.key] * 100) + "%"),
+        textposition: "outside", textfont: { color: "#e6edf3", size: 12 }, cliponaxis: false,
         hovertemplate: `<b>${sr.name}</b><br>%{customdata}: %{x:.0f}%<extra></extra>`,
-      }))];
+        customdata: HEADLINE.map(h => D[h[0]].label),
+      }));
       Plotly.react("plot-rs-district", traces, {
-        paper_bgcolor: "#161b22", plot_bgcolor: "#161b22", font: PLOT_FONT,
+        paper_bgcolor: "#161b22", plot_bgcolor: "#161b22", font: PLOT_FONT, barmode: "group", bargap: 0.28, bargroupgap: 0.08,
         hoverlabel: { font: { family: PLOT_FONT.family } },
-        margin: { l: 10, r: 16, t: 8, b: mobile ? 70 : 40 },
-        xaxis: { range: [-3, 103], ticksuffix: "%", gridcolor: "#30363d", zeroline: false, fixedrange: true },
-        yaxis: { autorange: "reversed", automargin: true, fixedrange: true,
-                 tickfont: { size: mobile ? 9 : 11 } },
-        legend: { orientation: "h", x: 0.5, xanchor: "center", y: mobile ? -0.28 : -0.14, traceorder: "reversed" },
+        margin: { l: 10, r: 40, t: 4, b: 30 },
+        xaxis: { range: [0, 100], ticksuffix: "%", gridcolor: "#30363d", zeroline: false, fixedrange: true },
+        yaxis: { autorange: "reversed", automargin: true, fixedrange: true, tickfont: { size: 13 } },
+        legend: { orientation: "h", x: 0.5, xanchor: "center", y: mobile ? -0.32 : -0.2, traceorder: "reversed" },
       }, { displayModeBar: false, responsive: true });
     }
     document.getElementById("rs-district-table").innerHTML =
@@ -1857,31 +1871,55 @@
         ["A", "B", "status_quo"].map(k => `<td>${m.label.startsWith("Schools or sites") ? m[k] : Math.round(m[k] * 100) + "%"}</td>`).join("") +
         `</tr>`).join("") + `</tbody></table>`;
 
-    // ---- funnel: in-scope schools narrowing to closures ----
-    function renderFunnel() {
-      const touched = schools.filter(s => catOf(s, scen) !== "none").length;
-      const heavy = schools.filter(s => ["closes", "program_change"].includes(catOf(s, scen))).length;
-      const closes = schools.filter(s => catOf(s, scen) === "closes").length;
-      const both = schools.filter(s => catOf(s, "A") === "closes" && catOf(s, "B") === "closes").length;
-      const stages = [
-        ["In-scope schools", schools.length],
-        [`Any change in Scenario ${scen}`, touched],
-        ["Closes or has a program change", heavy],
-        [`Closes in Scenario ${scen}`, closes],
-        ["Closes in both scenarios", both],
+    // ---- outcome bars: every in-scope school counted once per scenario ----
+    function outcomeOf(s, sc) {
+      if (catOf(s, sc) === "closes") return "closes";
+      if (RS.scenarios[sc].receivers.some(r => r.to === s.school_name)) return "receives";
+      return catOf(s, sc) === "none" ? "none" : "other";
+    }
+    function renderOutcomes() {
+      const mobile = window.innerWidth < 700;
+      const groups = [
+        ["closes", "Closes", COLOR.closes],
+        ["receives", "Receives students", css("--rs-receive")],
+        ["other", "Other change", COLOR.program_change],
+        ["none", "No change", COLOR.none],
       ];
-      document.getElementById("rs-funnel-title").textContent = `From ${schools.length} schools to closures (Scenario ${scen})`;
-      Plotly.react("plot-rs-funnel", [{
-        type: "funnel", y: stages.map(s => s[0]), x: stages.map(s => s[1]),
-        textinfo: "value+percent initial", textfont: { color: "#e6edf3" },
-        marker: { color: stages.map((_, i) => i >= 3 ? COLOR.closes : css(scen === "A" ? "--rs-a" : "--rs-b")) },
-        connector: { line: { color: "#30363d", width: 1 }, fillcolor: "rgba(48,54,61,0.35)" },
-        hovertemplate: "%{y}: %{x} schools<extra></extra>",
-      }], {
-        paper_bgcolor: "#161b22", plot_bgcolor: "#161b22", font: PLOT_FONT,
-        margin: { l: 10, r: 10, t: 8, b: 8 },
-        yaxis: { automargin: true, fixedrange: true }, xaxis: { fixedrange: true },
+      const scens = ["Scenario B", "Scenario A"];
+      const traces = groups.map(([key, name, color]) => {
+        const counts = ["B", "A"].map(sc => schools.filter(s => outcomeOf(s, sc) === key).length);
+        return {
+          type: "bar", orientation: "h", name, y: scens, x: counts,
+          marker: { color, line: { color: "#161b22", width: 2 } },
+          text: counts.map(String), textposition: "inside", insidetextanchor: "middle",
+          textfont: { color: "#0d1117", size: 13 },
+          hovertemplate: `%{y}: %{x} schools ${name.toLowerCase()}<extra></extra>`,
+        };
+      });
+      Plotly.react("plot-rs-outcomes", traces, {
+        paper_bgcolor: "#161b22", plot_bgcolor: "#161b22", font: PLOT_FONT, barmode: "stack", bargap: 0.35,
+        hoverlabel: { font: { family: PLOT_FONT.family } },
+        margin: { l: 10, r: 10, t: 4, b: 30 },
+        xaxis: { range: [0, schools.length], showgrid: false, zeroline: false, fixedrange: true,
+                 title: { text: `${schools.length} in-scope schools`, font: { size: 11, color: "#7d8590" } } },
+        yaxis: { automargin: true, fixedrange: true, tickfont: { size: 13 } },
+        legend: { orientation: "h", x: 0.5, xanchor: "center", y: mobile ? -0.45 : -0.32, traceorder: "normal" },
       }, { displayModeBar: false, responsive: true });
+    }
+
+    // ---- callout: the three schools that only Scenario A closes ----
+    function renderDiff() {
+      const aOnly = schools.filter(s => catOf(s, "A") === "closes" && catOf(s, "B") !== "closes")
+        .sort((x, y) => x.school_name.localeCompare(y.school_name));
+      document.getElementById("rs-diff-cards").innerHTML = aOnly.map(s => {
+        const goes = RS.scenarios.A.receivers.filter(r => r.from === s.school_name)
+          .map(r => `${esc(short(r.to))}${r.share != null ? ` (${Math.round(r.share * 100)}%)` : ""}${/immersion|Hearing/i.test(r.group) ? ` for ${esc(r.group)}` : ""}`);
+        return `<div class="rs-diff-card"><b class="name">${esc(short(s.school_name))}</b>` +
+          `<div class="lbl">Scenario A</div><p>${tag("closes")} Students go to ${goes.join(" and ")}.</p>` +
+          `<div class="lbl">Scenario B</div><p>${esc(RS.b_retained[s.school_name] || "Stays open.")}</p>` +
+          `<div class="facts">${fmt(s.enrollment_2025_26, "int")} students this fall, ` +
+          `${fmt(s.utilization_pct_2526, "pct_0_1")} utilization, built ${fmt(s.year_built, "year")}.</div></div>`;
+      }).join("");
     }
 
     // ---- map: category per school, dashed lines for program/grade moves ----
@@ -1922,7 +1960,6 @@
         }),
       });
     }
-    const short = (n) => n.trim().replace(/ (Elementary|Middle) School$/, "").replace(/ K-8 School$/, "").replace(/ School$/, "");
     const flowText = (r) => `${r.group}${r.share != null ? ` (${Math.round(r.share * 100)}%)` : ""}`;
     const isProgramFlow = (r) => /immersion|Hearing/i.test(r.group);
     function receiversOf(name) { return RS.scenarios[scen].receivers.filter(r => r.from === name); }
@@ -1931,7 +1968,9 @@
       if (catOf(s, scen) === "closes") return "closes";
       return sendersTo(s.school_name).length ? "receives" : "other";
     }
-    const ROLE_COLOR = { closes: COLOR.closes, receives: css("--rs-receive"), other: COLOR.none };
+    // Open schools are all blue so gray never reads as "closed"; schools
+    // that receive students are solid, the rest a light translucent tint.
+    const ROLE_COLOR = { closes: COLOR.closes, receives: css("--rs-receive"), other: css("--rs-receive") };
     function popupFor(s) {
       const role = roleOf(s);
       const goes = receiversOf(s.school_name), gets = sendersTo(s.school_name);
@@ -1981,8 +2020,9 @@
           const role = roleOf(s);
           const r = Math.max(6, Math.min(26, Math.sqrt(s.enrollment_2025_26 || 100) * 0.62));
           L.circleMarker([s.latitude, s.longitude], {
-            radius: role === "other" ? Math.min(r, 9) : r, color: "#161b22", weight: 2,
-            fillColor: ROLE_COLOR[role], fillOpacity: role === "other" ? 0.4 : 0.92,
+            radius: role === "other" ? Math.min(r, 9) : r,
+            color: role === "other" ? css("--rs-receive") : "#161b22", weight: role === "other" ? 1.5 : 2,
+            fillColor: ROLE_COLOR[role], fillOpacity: role === "other" ? 0.22 : 0.92,
           }).bindPopup(popupFor(s), { maxWidth: 340, minWidth: 260 })
             .bindTooltip(`${esc(short(s.school_name))}: ${role === "closes" ? "closes" : role === "receives" ? "receives students" : LABEL[catOf(s, scen)].toLowerCase()}`)
             .addTo(layer);
@@ -2026,15 +2066,15 @@
         `Only ${smallClosing} of the 10 smallest elementary schools close; the other ${10 - smallClosing} stay open.`;
     }
 
-    function renderAll() { renderFunnel(); renderMap(); renderTable(); }
+    function renderAll() { renderMap(); renderTable(); }
     document.querySelectorAll(".rs-toggle button").forEach(btn => btn.addEventListener("click", () => {
       scen = btn.dataset.rs;
       document.querySelectorAll(".rs-toggle button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.rs === scen)));
       renderAll();
     }));
-    renderDistrict(); renderAll();
+    renderDistrict(); renderOutcomes(); renderDiff(); renderAll();
     let tRS;
-    window.addEventListener("resize", () => { clearTimeout(tRS); tRS = setTimeout(() => { renderDistrict(); renderFunnel(); }, 150); });
+    window.addEventListener("resize", () => { clearTimeout(tRS); tRS = setTimeout(() => { renderDistrict(); renderOutcomes(); }, 150); });
   })();
 
   // ---------- PRC ENROLLMENT FORECAST 2035-36 ----------

@@ -95,6 +95,13 @@ CLOSURE_RECEIVERS = {
     "Peninsula Elementary School": [("Rosa Parks Elementary School", None, "Neighborhood students")],
     "Sabin Elementary School": [("Dr. Martin Luther King Jr. School", None, "Neighborhood students")],
 }
+# What happens instead to the three schools Scenario B keeps open
+# (board memo p. 3).
+SCENARIO_B_RETAINED = {
+    "Lewis Elementary School": "Stays open and takes in part of Whitman's attendance area. Its middle school pathway still shifts to Brentwood.",
+    "Rose City Park": "Stays open with its neighborhood boundary and Vietnamese immersion program.",
+    "Stephenson Elementary School": "Stays open with its current boundary and no proposed changes.",
+}
 RECEIVERS_SOURCE = ("PPS board memo, Rightsizing Update: Scenario Release, "
                     "October 6, 2026 board meeting")
 
@@ -118,7 +125,8 @@ def load_resolved(master_names: set[str]) -> dict:
     """Scenario JSON with every school name resolved to its master name."""
     raw = json.loads(SCENARIOS.read_text())
     out = {"source": raw["source"], "thresholds": raw["thresholds"],
-           "district": raw["district"], "receivers_source": RECEIVERS_SOURCE, "scenarios": {}}
+           "district": raw["district"], "receivers_source": RECEIVERS_SOURCE,
+           "b_retained": SCENARIO_B_RETAINED, "scenarios": {}}
     for scen, s in raw["scenarios"].items():
         moves = []
         for mv in s["program_moves"]:
