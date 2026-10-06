@@ -151,6 +151,8 @@
     font: inherit; font-size: var(--fs-small); cursor: pointer; }
   .rs-toggle button + button { border-left: 1px solid var(--border); }
   .rs-toggle button[aria-pressed="true"] { background: rgba(47,129,247,0.16); color: var(--fg); }
+  .rs-map-toggle { margin: 10px 10px 0 0; background: #0d1117; box-shadow: 0 1px 4px rgba(0,0,0,0.4); }
+  .rs-map-toggle button[aria-pressed="true"] { background: #1f3a5f; }
   .rs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
   @media (max-width: 900px) { .rs-grid { grid-template-columns: 1fr; } }
   .rs-legend { display: flex; flex-wrap: wrap; gap: 6px 16px; padding: 10px 14px;
@@ -1880,6 +1882,22 @@
     rsMap.on("click", () => rsMap.scrollWheelZoom.enable());
     rsMap.getContainer().addEventListener("mouseleave", () => rsMap.scrollWheelZoom.disable());
     const layer = L.layerGroup().addTo(rsMap);
+    // Same A/B toggle inside the map, so a screenshot or a reader scrolled
+    // to the map always sees which scenario is drawn. Buttons share the
+    // .rs-toggle class, so the click handler below keeps both in sync.
+    const MapToggle = L.Control.extend({
+      onAdd() {
+        const div = L.DomUtil.create("div", "rs-toggle rs-map-toggle");
+        div.setAttribute("role", "group");
+        div.setAttribute("aria-label", "Scenario shown on map");
+        div.innerHTML = '<button type="button" data-rs="A" aria-pressed="true">Scenario A</button>' +
+                        '<button type="button" data-rs="B" aria-pressed="false">Scenario B</button>';
+        L.DomEvent.disableClickPropagation(div);
+        L.DomEvent.disableScrollPropagation(div);
+        return div;
+      },
+    });
+    new MapToggle({ position: "topright" }).addTo(rsMap);
     function popupFor(s) {
       const detail = s[`rs_${scen.toLowerCase()}_detail`];
       return `<div class="map-popup"><b>${esc(s.school_name)}</b>` +
@@ -1951,7 +1969,7 @@
     function renderAll() { renderFunnel(); renderMap(); renderTable(); }
     document.querySelectorAll(".rs-toggle button").forEach(btn => btn.addEventListener("click", () => {
       scen = btn.dataset.rs;
-      document.querySelectorAll(".rs-toggle button").forEach(b => b.setAttribute("aria-pressed", String(b === btn)));
+      document.querySelectorAll(".rs-toggle button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.rs === scen)));
       renderAll();
     }));
     renderDistrict(); renderAll();
