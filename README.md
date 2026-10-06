@@ -78,6 +78,8 @@ scripts/
   fetch_metro_bli.py            → data/raw/metro_bli_housing_allocation.geojson
   fetch_pps_enrollment_forecast.py → data/raw/pps_enrollment_forecast_2026.pdf
   parse_pps_enrollment_forecast.py → data/raw/pps_enrollment_forecast.csv (Table 5.5 per-school)
+  fetch_rightsizing_scenarios.py → data/raw/pps_rightsizing_scenarios_2026-10-04.pdf
+  parse_rightsizing_scenarios.py → data/raw/pps_rightsizing_scenarios.json (Scenarios A/B, district measures)
   parse_lrfp_capacity.py        → data/raw/pps_functional_capacity_2021.json
   fetch_pps_airflow.py          → data/raw/pps_airflow_pdfs/*.pdf + pps_airflow_index.json
   parse_pps_airflow.py          → data/raw/pps_airflow_stats.json
@@ -88,6 +90,7 @@ scripts/
   merge_permits.py              + permit columns
   merge_bli_forecast.py         + bli_forecast_units_within_catchment (area-weighted from BLI grid)
   merge_pps_enrollment_forecast.py + enrollment_forecast_2026_27..2035_36, _2035_36_low/high, pct_change_10yr (PRC medium + derived scenario bands)
+  merge_rightsizing_scenarios.py + rs_a/rs_b_category and _detail (PPS Oct 2026 Scenarios A/B per school)
   export_web.py                 → web/data.json (filters to the 74 in-scope schools)
 web/
   index.html              single-page dashboard
@@ -115,6 +118,8 @@ python scripts/fetch_dli_report.py
 python scripts/fetch_metro_bli.py      # Metro BLI 2045 housing-allocation grid (~30 MB GeoJSON)
 python scripts/fetch_pps_enrollment_forecast.py  # PRC 10-year enrollment forecast PDF
 python scripts/parse_pps_enrollment_forecast.py  # Table 5.5 per-school → CSV
+python scripts/fetch_rightsizing_scenarios.py    # PPS Oct 2026 scenario comparison PDF
+python scripts/parse_rightsizing_scenarios.py    # Scenarios A/B → JSON (checks PPS's printed counts)
 python scripts/parse_lrfp_capacity.py  # reads data/raw/LRFP_Vol1_2021.pdf (checked in)
 python scripts/fetch_pps_airflow.py    # ~270 MB of per-building airflow PDFs
 python scripts/parse_pps_airflow.py    # ~6 min: pdfplumber table extraction
@@ -128,6 +133,7 @@ python scripts/merge_housing.py
 python scripts/merge_permits.py
 python scripts/merge_bli_forecast.py
 python scripts/merge_pps_enrollment_forecast.py
+python scripts/merge_rightsizing_scenarios.py
 
 # 4. Export dashboard payload:
 python scripts/export_web.py

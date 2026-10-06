@@ -139,6 +139,35 @@
     border-radius: 6px; overflow: hidden; }
 
   #map { height: 600px; position: relative; }
+  /* Rightsizing scenarios. Category colors are the dataviz reference
+     palette's first three dark slots, validated all-pairs against the
+     panel surface (#161b22) on 2026-10-05; "no change" is neutral context. */
+  :root { --rs-close: #d95926; --rs-program: #199e70; --rs-boundary: #3987e5;
+    --rs-none: #6e7681; --rs-a: #3987e5; --rs-b: #199e70; }
+  #rs-map { height: 560px; position: relative; }
+  .rs-toggle { display: inline-flex; border: 1px solid var(--border); border-radius: 6px;
+    overflow: hidden; margin: 0 0 12px; }
+  .rs-toggle button { background: #0d1117; color: var(--muted); border: 0; padding: 7px 14px;
+    font: inherit; font-size: var(--fs-small); cursor: pointer; }
+  .rs-toggle button + button { border-left: 1px solid var(--border); }
+  .rs-toggle button[aria-pressed="true"] { background: rgba(47,129,247,0.16); color: var(--fg); }
+  .rs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  @media (max-width: 900px) { .rs-grid { grid-template-columns: 1fr; } }
+  .rs-legend { display: flex; flex-wrap: wrap; gap: 6px 16px; padding: 10px 14px;
+    font-size: var(--fs-small); color: var(--muted); border-top: 1px solid var(--border); }
+  .rs-legend .sw { display: inline-block; width: 11px; height: 11px; border-radius: 50%;
+    margin-right: 6px; vertical-align: -1px; }
+  .rs-legend .ln { display: inline-block; width: 18px; border-top: 3px dashed var(--rs-program);
+    margin-right: 6px; vertical-align: 3px; }
+  .rs-tag { display: inline-block; padding: 1px 7px; border-radius: 10px; font-size: 12px;
+    white-space: nowrap; border: 1px solid currentColor; }
+  .rs-tag.closes { color: var(--rs-close); }
+  .rs-tag.program_change { color: var(--rs-program); }
+  .rs-tag.boundary { color: var(--rs-boundary); }
+  .rs-tag.none { color: var(--muted); border-color: var(--border); }
+  #rs-closing-table td.detail { white-space: normal; min-width: 260px; color: var(--muted); }
+  .rs-summary { color: var(--muted); font-size: var(--fs-small); margin: 10px 14px; }
+  #rs-closing-table tr.muted-row td { opacity: 0.55; }
   #map:not(.scroll-enabled)::after {
     content: "Click map to zoom with scroll wheel";
     position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%);
@@ -326,6 +355,7 @@
       Menu
     </button>
     <nav id="primary-nav" aria-label="Sections">
+      <a href="#section-rightsizing">Scenarios</a>
       <a href="#section-map">Map</a>
       <a href="#section-trends">Trends</a>
       <a href="#section-utilization">Utilization</a>
@@ -346,8 +376,10 @@
 <header id="top">
   <div class="hero-disclaimer" role="note">
     <strong>Unofficial.</strong> The PPS Data Explorer compiles data for the
-    74 Portland Public Schools set to be narrowed to a closure shortlist in
-    November 2026. This is an independent personal project and is
+    74 Portland Public Schools under review in PPS's rightsizing process. PPS
+    released two draft closure scenarios on October 5, 2026 (see
+    <a href="#section-rightsizing">Scenarios</a>), and the board votes in
+    December. This is an independent personal project and is
     <em>not</em> affiliated with, endorsed by, or produced by Portland Public
     Schools. All data is compiled from public sources (see
     <a href="#section-methodology">Methodology</a>).
@@ -363,11 +395,18 @@
           declining enrollment (projected to fall another 14% by 2035-36) and a structural budget gap.
         </p>
         <p>
-          No formal criteria have been published for determining which schools might be selected,
-          but PPS and school board members have pointed to the following set of factors: current
-          enrollment, building utilization, seismic risk and building condition,
-          recent or planned bond investments, equity considerations, student experience, access to
-          programs, transportation, and long-term sustainability.
+          On October 5, 2026, PPS released two draft scenarios. Scenario A closes 14 schools and
+          Scenario B closes 11, with attendance boundary changes, program moves, and grade-level
+          changes at dozens more. Every Scenario B closure is also in Scenario A. Neither is final:
+          Superintendent Armstrong recommends a plan in November and the board votes in December.
+        </p>
+        <p>
+          PPS has also described how it is choosing. Its targets are about 360 students for a K-5
+          school and 500 for a K-8 or middle school. When two schools combine, it favors the building
+          in better condition. It also weighs operating costs, earthquake risk, travel distance,
+          keeping classmates together, possible consolidation of immersion programs, and a review
+          under its racial equity lens. PPS says no single measure, including utilization, decides
+          the outcome.
         </p>
         <p>
           This explorer gathers data to visualize these factors for every in-scope PPS school.
@@ -390,9 +429,13 @@
             <span class="date">Sep 15, 2026</span>
             <span class="what">Board sees framework for scoring scenarios</span>
           </li>
+          <li class="past">
+            <span class="date">Oct 5, 2026</span>
+            <span class="what">PPS releases Scenario A (14 closures) and Scenario B (11)</span>
+          </li>
           <li class="next">
-            <span class="date">Early Oct 2026</span>
-            <span class="what">Scenario lists naming schools published; board discussion planned Oct 6</span>
+            <span class="date">Oct 6, 2026</span>
+            <span class="what">Superintendent presents the scenarios to the board</span>
           </li>
           <li>
             <span class="date">Oct&ndash;Nov 2026</span>
@@ -400,7 +443,7 @@
           </li>
           <li>
             <span class="date">Nov 2026</span>
-            <span class="what">Superintendent's formal recommendation</span>
+            <span class="what">Superintendent's recommended plan</span>
           </li>
           <li>
             <span class="date">Early Dec 2026</span>
@@ -417,6 +460,48 @@
 </header>
 
 <main>
+  <section id="section-rightsizing">
+    <h2>PPS rightsizing scenarios (October 2026 drafts)</h2>
+    <p class="note">
+      On October 5, 2026, PPS released two draft scenarios for rightsizing the district, plus a status quo for comparison
+      (<a href="https://drive.google.com/file/d/1ueJVC-Jo6MRKw56Jedihc6YbVdBlSB2z/view" target="_blank" rel="noopener">PPS scenario comparison, updated October 4</a>).
+      Scenario A closes 14 schools and Scenario B closes 11. Every Scenario B closure is also in Scenario A.
+      These are drafts: the superintendent recommends a plan in November and the board votes in December.
+      District-wide figures are PPS's own projections for 2031-32. School figures on this page are this dashboard's data.
+    </p>
+    <div class="rs-toggle" role="group" aria-label="Scenario">
+      <button type="button" data-rs="A" aria-pressed="true">Scenario A: 14 closures</button>
+      <button type="button" data-rs="B" aria-pressed="false">Scenario B: 11 closures</button>
+    </div>
+    <div class="rs-grid">
+      <div class="panel chart-card">
+        <h3 id="rs-funnel-title">From 74 schools to closures</h3>
+        <p class="subtitle">How many of the 74 in-scope schools each step touches. Closures in both scenarios are the shared core of the two drafts.</p>
+        <div id="plot-rs-funnel" style="height: 300px;"></div>
+      </div>
+      <div class="panel chart-card">
+        <h3>District-wide, side by side (PPS projections for 2031-32)</h3>
+        <p class="subtitle">Share of schools and students at or above PPS's sustainability thresholds: 360 students for K-5, 500 for K-8 and middle schools.</p>
+        <div id="plot-rs-district" style="height: 300px;"></div>
+        <details class="inline-expand" style="margin-top:6px;"><summary>View as table</summary><div id="rs-district-table"></div></details>
+      </div>
+    </div>
+    <div class="panel">
+      <div id="rs-map"></div>
+      <div class="rs-legend" id="rs-legend">
+        <span><span class="sw" style="background:var(--rs-close)"></span>Closes</span>
+        <span><span class="sw" style="background:var(--rs-program)"></span>Program or grade change (moving out or receiving)</span>
+        <span><span class="sw" style="background:var(--rs-boundary)"></span>Attendance boundary change</span>
+        <span><span class="sw" style="background:var(--rs-none)"></span>No change</span>
+        <span><span class="ln"></span>Program or grade moves to</span>
+      </div>
+    </div>
+    <div class="panel" style="margin-top:16px; overflow-x:auto;">
+      <p class="rs-summary" id="rs-summary"></p>
+      <table class="schools" id="rs-closing-table"></table>
+    </div>
+  </section>
+
   <section id="section-map">
     <h2>Map: All 74 in-scope PPS schools with building utilization</h2>
     <p class="note">
@@ -893,12 +978,27 @@
       the PPS footprint.
     </p>
 
+    <h3>Rightsizing scenarios (PPS, October 2026)</h3>
+    <p>
+      Parsed from PPS's two-page scenario comparison (footer dated October 4, 2026, released
+      October 5). The district-wide measures are PPS's own projections for 2031-32 and are shown
+      as published. School-level changes come from PPS's lists of closures, attendance boundary
+      changes, program moves, and grade-level changes; the parser checks its counts against the
+      totals PPS prints beside each list. PPS uses short names, mapped to this dashboard's names
+      (Brentwood MS is Lane Middle School under its new name; Robert Gray MS is Gray Middle
+      School). Each school gets one category per scenario, the most disruptive that applies:
+      closes, then a program or grade-level change (moving out or receiving), then a boundary
+      change. Program-move wording is kept as PPS wrote it; for example, PPS lists both
+      &ldquo;Chavez 6&ndash;8 and Ockley Green MS to George MS&rdquo; and &ldquo;Faubion 6&ndash;8
+      to Ockley Green MS&rdquo; without saying which programs move.
+    </p>
+
     <h3>Lowest-enrollment 15</h3>
     <p>
       A descriptive subset: the 15 in-scope schools with the lowest raw fall 2025-26
       enrollment, surfaced in several views for context. This is not a PPS-published
-      shortlist; the district is expected to release its own list in Nov 2026 with a
-      board vote in Dec 2026.
+      list. PPS's own draft closure lists are the October 2026 scenarios in the
+      Scenarios section; the board votes in Dec 2026.
     </p>
 
     <h3>Derived metrics</h3>
@@ -971,6 +1071,7 @@
             <tr><td class="src">Metro pop. forecast</td><td class="year stale">2021</td></tr>
             <tr><td class="src">Attendance boundaries</td><td class="year">~2023-24</td></tr>
             <tr><td class="src">Enrollment forecast (PRC)</td><td class="year">July 2026</td></tr>
+            <tr><td class="src">Rightsizing scenarios (PPS)</td><td class="year">Oct 2026</td></tr>
           </tbody>
         </table>
         <div class="legend"><span class="stale">Amber</span> = older than 3 years; likely less accurate.</div>
@@ -1052,6 +1153,7 @@
       case "miles": return Number(val).toFixed(2) + " mi";
       case "minutes": return Number(val).toFixed(0) + " min";
       case "year": return Number(val).toFixed(0);
+      case "scenario": return `<span class="rs-tag ${val}">${{ closes: "Closes", program_change: "Program or grade change", boundary: "Boundary change" }[val] || val}</span>`;
       case "bool": return val === true || val === "True" || val === 1
         ? '<span class="badge yes">yes</span>'
         : '<span class="badge no">no</span>';
@@ -1680,6 +1782,181 @@
     renderTrend();
     let t2;
     window.addEventListener("resize", () => { clearTimeout(t2); t2 = setTimeout(renderTrend, 150); });
+  })();
+
+  // ---------- RIGHTSIZING SCENARIOS ----------
+  (function () {
+    const RS = data.rightsizing;
+    if (!RS || !document.getElementById("section-rightsizing")) return;
+    const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+    const COLOR = { closes: css("--rs-close"), program_change: css("--rs-program"),
+                    boundary: css("--rs-boundary"), none: css("--rs-none") };
+    const LABEL = { closes: "Closes", program_change: "Program or grade change",
+                    boundary: "Boundary change", none: "No change" };
+    const PLOT_FONT = { color: "#e6edf3", size: 11, family: '"Nunito Sans", -apple-system, Helvetica, Arial, sans-serif' };
+    const byName = Object.fromEntries(schools.map(s => [s.school_name, s]));
+    const catOf = (s, scen) => s[`rs_${scen.toLowerCase()}_category`] || "none";
+    const tag = (c) => `<span class="rs-tag ${c}">${LABEL[c]}</span>`;
+    const esc = (t) => String(t).replace(/[&<>]/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[ch]));
+    let scen = "A";
+
+    // ---- district comparison: dot plot, status quo as hollow baseline ----
+    const D = RS.district;
+    const PCT_KEYS = ["students_change_schools", "schools_above_threshold", "students_above_threshold",
+      "poverty_in_sustainable", "underserved_in_sustainable", "sped_in_sustainable", "multilingual_in_sustainable"];
+    const SHORT = { students_change_schools: "Students who change schools",
+      schools_above_threshold: "Schools above threshold", students_above_threshold: "Students in schools above threshold",
+      poverty_in_sustainable: "Students in poverty, in sustainable schools",
+      underserved_in_sustainable: "Historically underserved, in sustainable schools",
+      sped_in_sustainable: "Special education, in sustainable schools",
+      multilingual_in_sustainable: "Multilingual learners, in sustainable schools" };
+    function renderDistrict() {
+      const mobile = window.innerWidth < 700;
+      const ys = PCT_KEYS.map(k => SHORT[k]);
+      const series = [
+        { key: "status_quo", name: "Status quo", color: "#8b949e", symbol: "circle-open" },
+        { key: "B", name: "Scenario B", color: css("--rs-b"), symbol: "circle" },
+        { key: "A", name: "Scenario A", color: css("--rs-a"), symbol: "circle" },
+      ];
+      const range = {
+        type: "scatter", mode: "lines", hoverinfo: "skip", showlegend: false,
+        x: PCT_KEYS.flatMap(k => [D[k].status_quo * 100, Math.max(D[k].A, D[k].B) * 100, null]),
+        y: PCT_KEYS.flatMap(k => [SHORT[k], SHORT[k], null]),
+        line: { color: "#30363d", width: 2 },
+      };
+      const traces = [range, ...series.map(sr => ({
+        type: "scatter", mode: "markers", name: sr.name,
+        x: PCT_KEYS.map(k => D[k][sr.key] * 100), y: ys,
+        marker: { color: sr.color, size: 11, symbol: sr.symbol, line: { width: 2, color: sr.symbol === "circle" ? "#161b22" : sr.color } },
+        customdata: PCT_KEYS.map(k => D[k].label),
+        hovertemplate: `<b>${sr.name}</b><br>%{customdata}: %{x:.0f}%<extra></extra>`,
+      }))];
+      Plotly.react("plot-rs-district", traces, {
+        paper_bgcolor: "#161b22", plot_bgcolor: "#161b22", font: PLOT_FONT,
+        hoverlabel: { font: { family: PLOT_FONT.family } },
+        margin: { l: 10, r: 16, t: 8, b: mobile ? 70 : 40 },
+        xaxis: { range: [-3, 103], ticksuffix: "%", gridcolor: "#30363d", zeroline: false, fixedrange: true },
+        yaxis: { autorange: "reversed", automargin: true, fixedrange: true,
+                 tickfont: { size: mobile ? 9 : 11 } },
+        legend: { orientation: "h", x: 0.5, xanchor: "center", y: mobile ? -0.28 : -0.14, traceorder: "reversed" },
+      }, { displayModeBar: false, responsive: true });
+    }
+    document.getElementById("rs-district-table").innerHTML =
+      `<table class="schools"><thead><tr><th>Measure</th><th>Scenario A</th><th>Scenario B</th><th>Status quo</th></tr></thead><tbody>` +
+      Object.values(D).map(m => `<tr><td>${esc(m.label)}</td>` +
+        ["A", "B", "status_quo"].map(k => `<td>${m.label.startsWith("Schools or sites") ? m[k] : Math.round(m[k] * 100) + "%"}</td>`).join("") +
+        `</tr>`).join("") + `</tbody></table>`;
+
+    // ---- funnel: in-scope schools narrowing to closures ----
+    function renderFunnel() {
+      const touched = schools.filter(s => catOf(s, scen) !== "none").length;
+      const heavy = schools.filter(s => ["closes", "program_change"].includes(catOf(s, scen))).length;
+      const closes = schools.filter(s => catOf(s, scen) === "closes").length;
+      const both = schools.filter(s => catOf(s, "A") === "closes" && catOf(s, "B") === "closes").length;
+      const stages = [
+        ["In-scope schools", schools.length],
+        [`Any change in Scenario ${scen}`, touched],
+        ["Closes or has a program change", heavy],
+        [`Closes in Scenario ${scen}`, closes],
+        ["Closes in both scenarios", both],
+      ];
+      document.getElementById("rs-funnel-title").textContent = `From ${schools.length} schools to closures (Scenario ${scen})`;
+      Plotly.react("plot-rs-funnel", [{
+        type: "funnel", y: stages.map(s => s[0]), x: stages.map(s => s[1]),
+        textinfo: "value+percent initial", textfont: { color: "#e6edf3" },
+        marker: { color: stages.map((_, i) => i >= 3 ? COLOR.closes : css(scen === "A" ? "--rs-a" : "--rs-b")) },
+        connector: { line: { color: "#30363d", width: 1 }, fillcolor: "rgba(48,54,61,0.35)" },
+        hovertemplate: "%{y}: %{x} schools<extra></extra>",
+      }], {
+        paper_bgcolor: "#161b22", plot_bgcolor: "#161b22", font: PLOT_FONT,
+        margin: { l: 10, r: 10, t: 8, b: 8 },
+        yaxis: { automargin: true, fixedrange: true }, xaxis: { fixedrange: true },
+      }, { displayModeBar: false, responsive: true });
+    }
+
+    // ---- map: category per school, dashed lines for program/grade moves ----
+    const rsMap = L.map("rs-map", { scrollWheelZoom: false }).setView([45.535, -122.65], 12);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, attribution: "© OpenStreetMap" }).addTo(rsMap);
+    rsMap.on("click", () => rsMap.scrollWheelZoom.enable());
+    rsMap.getContainer().addEventListener("mouseleave", () => rsMap.scrollWheelZoom.disable());
+    const layer = L.layerGroup().addTo(rsMap);
+    function popupFor(s) {
+      const detail = s[`rs_${scen.toLowerCase()}_detail`];
+      return `<div class="map-popup"><b>${esc(s.school_name)}</b>` +
+        `<div class="meta">Scenario ${scen}: ${tag(catOf(s, scen))}</div>` +
+        (detail ? `<div class="row">${detail.split("; ").map(esc).join("<br>")}</div>` : "") +
+        `<h4>This dashboard's data</h4>` +
+        `<div class="row"><b style="display:inline">Enrollment 25-26:</b> ${fmt(s.enrollment_2025_26, "int")}</div>` +
+        `<div class="row"><b style="display:inline">Utilization 25-26:</b> ${fmt(s.utilization_pct_2526, "pct_0_1")}</div>` +
+        `<div class="row"><b style="display:inline">Forecast 35-36:</b> ${fmt(s.enrollment_forecast_2035_36, "int")}</div>` +
+        `<div class="row"><b style="display:inline">Year built:</b> ${fmt(s.year_built, "year")}</div>` +
+        `<div class="row"><b style="display:inline">Seismic retrofit cost:</b> ${fmt(s.retrofit_cost_remaining_usd, "usd")}</div></div>`;
+    }
+    function renderMap() {
+      layer.clearLayers();
+      RS.scenarios[scen].moves.forEach(mv => {
+        const a = byName[mv.from], b = byName[mv.to];
+        if (!a || !b || a === b || a.latitude == null || b.latitude == null) return;
+        L.polyline([[a.latitude, a.longitude], [b.latitude, b.longitude]],
+          { color: COLOR.program_change, weight: 3, opacity: 0.95, dashArray: "7 5", interactive: false }).addTo(layer);
+      });
+      const order = { none: 0, boundary: 1, program_change: 2, closes: 3 };
+      schools.filter(s => s.latitude != null)
+        .sort((x, y) => order[catOf(x, scen)] - order[catOf(y, scen)])
+        .forEach(s => {
+          const c = catOf(s, scen);
+          const r = Math.max(6, Math.min(26, Math.sqrt(s.enrollment_2025_26 || 100) * 0.62));
+          L.circleMarker([s.latitude, s.longitude], {
+            radius: r, color: "#161b22", weight: 2, fillColor: COLOR[c],
+            fillOpacity: c === "none" ? 0.45 : 0.88,
+          }).bindPopup(popupFor(s), { maxWidth: 340, minWidth: 260 })
+            .bindTooltip(`${esc(s.school_name)}: ${LABEL[c]}`).addTo(layer);
+        });
+    }
+
+    // ---- closing-schools table (union of both scenarios) ----
+    const median = (xs) => { const v = xs.filter(x => x != null).sort((a, b) => a - b); const m = Math.floor(v.length / 2);
+      return v.length ? (v.length % 2 ? v[m] : (v[m - 1] + v[m]) / 2) : null; };
+    function renderTable() {
+      const closing = schools.filter(s => catOf(s, "A") === "closes" || catOf(s, "B") === "closes")
+        .sort((a, b) => (a.enrollment_2025_26 || 0) - (b.enrollment_2025_26 || 0));
+      const cols = [
+        ["School", s => esc(s.school_name.trim())],
+        ["Scenario A", s => tag(catOf(s, "A"))],
+        ["Scenario B", s => tag(catOf(s, "B"))],
+        ["Enrollment 25-26", s => fmt(s.enrollment_2025_26, "int")],
+        ["Utilization 25-26", s => fmt(s.utilization_pct_2526, "pct_0_1")],
+        ["Forecast 35-36", s => fmt(s.enrollment_forecast_2035_36, "int")],
+        ["Year built", s => fmt(s.year_built, "year")],
+        ["Seismic retrofit cost", s => fmt(s.retrofit_cost_remaining_usd, "usd")],
+        [`Other changes in Scenario ${scen}`, s => esc((s[`rs_${scen.toLowerCase()}_detail`] || "").split("; ").filter(d => d !== "Closes").join("; ")) || "—"],
+      ];
+      document.getElementById("rs-closing-table").innerHTML =
+        `<thead><tr>${cols.map(c => `<th>${c[0]}</th>`).join("")}</tr></thead><tbody>` +
+        closing.map(s => `<tr class="${catOf(s, scen) === "closes" ? "" : "muted-row"}">` +
+          cols.map((c, i) => `<td${i === cols.length - 1 ? ' class="detail"' : ""}>${c[1](s)}</td>`).join("") + `</tr>`).join("") +
+        `</tbody>`;
+      const isK5 = s => s.level === "elementary";
+      const closingK5 = schools.filter(s => isK5(s) && catOf(s, scen) === "closes");
+      const openK5 = schools.filter(s => isK5(s) && catOf(s, scen) !== "closes");
+      const smallest = schools.filter(isK5).sort((a, b) => a.enrollment_2025_26 - b.enrollment_2025_26).slice(0, 10);
+      const smallClosing = smallest.filter(s => catOf(s, scen) === "closes").length;
+      document.getElementById("rs-summary").innerHTML =
+        `Schools that close in either scenario, smallest first. In Scenario ${scen}, closing elementary schools have a median of ` +
+        `${fmt(Math.round(median(closingK5.map(s => s.enrollment_2025_26))), "int")} students this fall, against ` +
+        `${fmt(Math.round(median(openK5.map(s => s.enrollment_2025_26))), "int")} for elementary schools that stay open. ` +
+        `Only ${smallClosing} of the 10 smallest elementary schools close; the other ${10 - smallClosing} stay open.`;
+    }
+
+    function renderAll() { renderFunnel(); renderMap(); renderTable(); }
+    document.querySelectorAll(".rs-toggle button").forEach(btn => btn.addEventListener("click", () => {
+      scen = btn.dataset.rs;
+      document.querySelectorAll(".rs-toggle button").forEach(b => b.setAttribute("aria-pressed", String(b === btn)));
+      renderAll();
+    }));
+    renderDistrict(); renderAll();
+    let tRS;
+    window.addEventListener("resize", () => { clearTimeout(tRS); tRS = setTimeout(() => { renderDistrict(); renderFunnel(); }, 150); });
   })();
 
   // ---------- PRC ENROLLMENT FORECAST 2035-36 ----------

@@ -1,0 +1,454 @@
+{
+  "source": {
+    "title": "Rightsizing: Comparing three scenarios",
+    "publisher": "Portland Public Schools",
+    "updated": "2026-10-04",
+    "released": "2026-10-05",
+    "projection_year": "2031-32",
+    "url": "https://drive.google.com/file/d/1ueJVC-Jo6MRKw56Jedihc6YbVdBlSB2z/view"
+  },
+  "thresholds": {
+    "k5": 360,
+    "k8_and_middle": 500,
+    "high": 1100
+  },
+  "district": {
+    "closures": {
+      "label": "Schools or sites that would close",
+      "A": 14,
+      "B": 11,
+      "status_quo": 0
+    },
+    "students_change_schools": {
+      "label": "Students who would change schools",
+      "A": 0.27,
+      "B": 0.24,
+      "status_quo": 0.0
+    },
+    "schools_above_threshold": {
+      "label": "Schools above the sustainability threshold",
+      "A": 0.67,
+      "B": 0.57,
+      "status_quo": 0.26
+    },
+    "students_above_threshold": {
+      "label": "Students attending a school above the threshold",
+      "A": 0.8,
+      "B": 0.73,
+      "status_quo": 0.48
+    },
+    "poverty_in_sustainable": {
+      "label": "Students Experiencing Poverty in Sustainable Schools",
+      "A": 0.81,
+      "B": 0.74,
+      "status_quo": 0.42
+    },
+    "underserved_in_sustainable": {
+      "label": "Historically Underserved Students in Sustainable Schools",
+      "A": 0.83,
+      "B": 0.78,
+      "status_quo": 0.46
+    },
+    "sped_in_sustainable": {
+      "label": "Students Receiving Special Education Services in Sustainable Schools",
+      "A": 0.77,
+      "B": 0.69,
+      "status_quo": 0.41
+    },
+    "multilingual_in_sustainable": {
+      "label": "Multilingual Learners in Sustainable Schools",
+      "A": 0.87,
+      "B": 0.77,
+      "status_quo": 0.44
+    }
+  },
+  "scenarios": {
+    "A": {
+      "closing": [
+        "Beach",
+        "Buckman",
+        "Creston",
+        "Irvington",
+        "James John",
+        "Lewis",
+        "Maplewood",
+        "Marysville",
+        "Peninsula",
+        "Rose City Park",
+        "Sabin",
+        "Sellwood MS",
+        "Stephenson",
+        "Woodmere"
+      ],
+      "closing_count": 14,
+      "notes": [
+        "The MLC (9–12) high school program also closes; students move to their neighborhood high school. It is not counted as a school closure."
+      ],
+      "boundary_changes": [
+        "Abernethy",
+        "Arleta",
+        "Astor",
+        "Atkinson",
+        "Beaumont MS",
+        "Beverly Cleary",
+        "Brentwood MS",
+        "Capitol Hill",
+        "Chief Joseph",
+        "Cleveland HS",
+        "Dr. Martin Luther King Jr.",
+        "Duniway",
+        "Faubion",
+        "Franklin HS",
+        "George MS",
+        "Harriet Tubman MS",
+        "Harrison Park MS",
+        "Hayhurst",
+        "Hosford MS",
+        "Jackson MS",
+        "Jefferson HS",
+        "Kellogg MS",
+        "Kelly",
+        "Lent",
+        "Lincoln HS",
+        "Llewellyn",
+        "Markham",
+        "McDaniel",
+        "Mt. Tabor MS",
+        "Ockley Green MS",
+        "Rieke",
+        "Robert Gray MS",
+        "Roosevelt HS",
+        "Rosa Parks",
+        "Scott",
+        "Sitton",
+        "Sunnyside Environmental",
+        "Whitman"
+      ],
+      "boundary_changes_count": 38,
+      "program_moves": [
+        {
+          "text": "Spanish: Beach, James John, and Sitton to Cesar Chavez",
+          "program": "Spanish",
+          "from": [
+            "Beach",
+            "James John",
+            "Sitton"
+          ],
+          "to": "Cesar Chavez"
+        },
+        {
+          "text": "Atkinson to Lent",
+          "program": null,
+          "from": [
+            "Atkinson"
+          ],
+          "to": "Lent"
+        },
+        {
+          "text": "Scott to Rigler",
+          "program": null,
+          "from": [
+            "Scott"
+          ],
+          "to": "Rigler"
+        },
+        {
+          "text": "Beaumont MS to Roseway Heights MS",
+          "program": null,
+          "from": [
+            "Beaumont MS"
+          ],
+          "to": "Roseway Heights MS"
+        },
+        {
+          "text": "Chavez 6–8 and Ockley Green MS to George MS",
+          "program": null,
+          "from": [
+            "Chavez 6–8",
+            "Ockley Green MS"
+          ],
+          "to": "George MS"
+        },
+        {
+          "text": "Vietnamese: Rose City Park to Vestal",
+          "program": "Vietnamese",
+          "from": [
+            "Rose City Park"
+          ],
+          "to": "Vestal"
+        },
+        {
+          "text": "Mandarin: Clark to Woodstock",
+          "program": "Mandarin",
+          "from": [
+            "Clark"
+          ],
+          "to": "Woodstock"
+        },
+        {
+          "text": "MLK Jr. to Boise-Eliot/Humboldt",
+          "program": null,
+          "from": [
+            "MLK Jr."
+          ],
+          "to": "Boise-Eliot/Humboldt"
+        },
+        {
+          "text": "Creston Deaf and Hard of Hearing to Glencoe",
+          "program": "Deaf and Hard of Hearing",
+          "from": [
+            "Creston"
+          ],
+          "to": "Glencoe"
+        },
+        {
+          "text": "Odyssey moves to the MLC site",
+          "program": null,
+          "from": [
+            "Odyssey"
+          ],
+          "to": "MLC"
+        }
+      ],
+      "program_moves_count": 13,
+      "grade_changes": [
+        {
+          "text": "Beverly Cleary 6–8 to Beaumont MS",
+          "from": "Beverly Cleary",
+          "grades": "6-8",
+          "to": "Beaumont MS"
+        },
+        {
+          "text": "Laurelhurst 6–8 to Mt. Tabor MS",
+          "from": "Laurelhurst",
+          "grades": "6-8",
+          "to": "Mt. Tabor MS"
+        },
+        {
+          "text": "Bridger Creative Science 6–8 to Harrison Park MS",
+          "from": "Bridger Creative Science",
+          "grades": "6-8",
+          "to": "Harrison Park MS"
+        },
+        {
+          "text": "Sunnyside Environmental 6–8 to Hosford MS",
+          "from": "Sunnyside Environmental",
+          "grades": "6-8",
+          "to": "Hosford MS"
+        },
+        {
+          "text": "Faubion 6–8 to Ockley Green MS",
+          "from": "Faubion",
+          "grades": "6-8",
+          "to": "Ockley Green MS"
+        },
+        {
+          "text": "Vernon 6–8 to Harriet Tubman MS",
+          "from": "Vernon",
+          "grades": "6-8",
+          "to": "Harriet Tubman MS"
+        },
+        {
+          "text": "Chavez 6-8 to George",
+          "from": "Chavez",
+          "grades": "6-8",
+          "to": "George"
+        },
+        {
+          "text": "MLC becomes K-8",
+          "from": "MLC",
+          "grades": null,
+          "to": null,
+          "becomes": "K-8"
+        }
+      ],
+      "grade_changes_count": 8
+    },
+    "B": {
+      "closing": [
+        "Beach",
+        "Buckman",
+        "Creston",
+        "Irvington",
+        "James John",
+        "Maplewood",
+        "Marysville",
+        "Peninsula",
+        "Sabin",
+        "Sellwood MS",
+        "Woodmere"
+      ],
+      "closing_count": 11,
+      "notes": [
+        "The MLC (9–12) high school program also closes; students move to their neighborhood high school. It is not counted as a school closure."
+      ],
+      "boundary_changes": [
+        "Abernethy",
+        "Arleta",
+        "Astor",
+        "Atkinson",
+        "Beaumont MS",
+        "Beverly Cleary",
+        "Brentwood MS",
+        "Chief Joseph",
+        "Cleveland HS",
+        "Dr. Martin Luther King Jr.",
+        "Faubion",
+        "Franklin HS",
+        "George MS",
+        "Harriet Tubman MS",
+        "Harrison Park MS",
+        "Hayhurst",
+        "Hosford MS",
+        "Jackson MS",
+        "Jefferson HS",
+        "Kellogg MS",
+        "Kelly",
+        "Lent",
+        "Lewis",
+        "Lincoln HS",
+        "McDaniel",
+        "Mt. Tabor MS",
+        "Ockley Green MS",
+        "Rieke",
+        "Robert Gray MS",
+        "Roosevelt HS",
+        "Rosa Parks",
+        "Sitton",
+        "Sunnyside Environmental",
+        "Whitman"
+      ],
+      "boundary_changes_count": 34,
+      "program_moves": [
+        {
+          "text": "Spanish: Beach, James John, and Sitton to Cesar Chavez",
+          "program": "Spanish",
+          "from": [
+            "Beach",
+            "James John",
+            "Sitton"
+          ],
+          "to": "Cesar Chavez"
+        },
+        {
+          "text": "Atkinson to Lent",
+          "program": null,
+          "from": [
+            "Atkinson"
+          ],
+          "to": "Lent"
+        },
+        {
+          "text": "Scott to Rigler",
+          "program": null,
+          "from": [
+            "Scott"
+          ],
+          "to": "Rigler"
+        },
+        {
+          "text": "Beaumont MS to Roseway Heights MS",
+          "program": null,
+          "from": [
+            "Beaumont MS"
+          ],
+          "to": "Roseway Heights MS"
+        },
+        {
+          "text": "Chavez 6–8 and Ockley Green MS to George MS",
+          "program": null,
+          "from": [
+            "Chavez 6–8",
+            "Ockley Green MS"
+          ],
+          "to": "George MS"
+        },
+        {
+          "text": "Mandarin: Clark to Woodstock",
+          "program": "Mandarin",
+          "from": [
+            "Clark"
+          ],
+          "to": "Woodstock"
+        },
+        {
+          "text": "MLK Jr. to Boise-Eliot/Humboldt",
+          "program": null,
+          "from": [
+            "MLK Jr."
+          ],
+          "to": "Boise-Eliot/Humboldt"
+        },
+        {
+          "text": "Creston Deaf and Hard of Hearing to Glencoe",
+          "program": "Deaf and Hard of Hearing",
+          "from": [
+            "Creston"
+          ],
+          "to": "Glencoe"
+        },
+        {
+          "text": "Odyssey moves to the MLC site",
+          "program": null,
+          "from": [
+            "Odyssey"
+          ],
+          "to": "MLC"
+        }
+      ],
+      "program_moves_count": 12,
+      "grade_changes": [
+        {
+          "text": "Beverly Cleary 6–8 to Beaumont MS",
+          "from": "Beverly Cleary",
+          "grades": "6-8",
+          "to": "Beaumont MS"
+        },
+        {
+          "text": "Laurelhurst 6–8 to Mt. Tabor MS",
+          "from": "Laurelhurst",
+          "grades": "6-8",
+          "to": "Mt. Tabor MS"
+        },
+        {
+          "text": "Bridger Creative Science 6–8 to Harrison Park MS",
+          "from": "Bridger Creative Science",
+          "grades": "6-8",
+          "to": "Harrison Park MS"
+        },
+        {
+          "text": "Sunnyside Environmental 6–8 to Hosford MS",
+          "from": "Sunnyside Environmental",
+          "grades": "6-8",
+          "to": "Hosford MS"
+        },
+        {
+          "text": "Faubion 6–8 to Ockley Green MS",
+          "from": "Faubion",
+          "grades": "6-8",
+          "to": "Ockley Green MS"
+        },
+        {
+          "text": "Vernon 6–8 to Harriet Tubman MS",
+          "from": "Vernon",
+          "grades": "6-8",
+          "to": "Harriet Tubman MS"
+        },
+        {
+          "text": "Chavez 6-8 to George",
+          "from": "Chavez",
+          "grades": "6-8",
+          "to": "George"
+        },
+        {
+          "text": "MLC becomes K-8",
+          "from": "MLC",
+          "grades": null,
+          "to": null,
+          "becomes": "K-8"
+        }
+      ],
+      "grade_changes_count": 8
+    }
+  }
+}

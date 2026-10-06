@@ -6,6 +6,8 @@ import urllib.request
 import numpy as np
 import pandas as pd
 from pathlib import Path
+
+from merge_rightsizing_scenarios import load_resolved
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
@@ -168,6 +170,10 @@ META = {
     "enrollment_forecast_2035_36_high": {"label": "Forecast 35-36 (high)", "desc": "High-scenario 2035-36 forecast. PRC only publishes Low/High at the district-and-grade level, so each school's band is the medium forecast × the district-wide High/Medium ratio at its grade band (K-5 elementaries: ×1.113; 6-8 middle: ×1.067).", "source": "Derived: PRC 2026 Tables 5.4/5.5 (high × med ratio by grade band)", "fmt": "int"},
     "enrollment_forecast_pct_change_10yr": {"label": "Forecast Δ% 10yr (25-26→35-36)", "desc": "Projected 10-year enrollment change from PRC's 2025-26 baseline to its 2035-36 medium-scenario forecast. Uses PRC's own historic baseline, not ODE's count, so the base year and forecast come from the same source.", "source": "Derived: PRC 2026 medium scenario", "fmt": "pct_0_1"},
     "utilization_pct_2035_36": {"label": "Forecast utilization 35-36", "desc": "Projected 2035-36 enrollment (PRC medium) ÷ 2021 functional capacity. A forward-looking counterpart to current utilization. Below 50% signals deeply underused by PPS's own planning standard, even if today's utilization is higher.", "source": "Derived: PRC 2026 ÷ LRFP 2021", "fmt": "pct_0_1"},
+    "rs_a_category": {"label": "Scenario A", "desc": "What happens to this school in PPS's rightsizing Scenario A (Oct 2026 draft, 14 closures): closes, a program or grade-level change (moving out or receiving), an attendance boundary change, or no change. When several apply, the most disruptive is shown.", "source": "PPS rightsizing scenarios, updated 2026-10-04", "fmt": "scenario"},
+    "rs_b_category": {"label": "Scenario B", "desc": "What happens to this school in PPS's rightsizing Scenario B (Oct 2026 draft, 11 closures). Same categories as Scenario A.", "source": "PPS rightsizing scenarios, updated 2026-10-04", "fmt": "scenario"},
+    "rs_a_detail": {"label": "Scenario A detail", "desc": "Every Scenario A change that names this school, in PPS's wording.", "source": "PPS rightsizing scenarios, updated 2026-10-04", "fmt": "text"},
+    "rs_b_detail": {"label": "Scenario B detail", "desc": "Every Scenario B change that names this school, in PPS's wording.", "source": "PPS rightsizing scenarios, updated 2026-10-04", "fmt": "text"},
     "street_address": {"label": "Address", "desc": "Street address of the building.", "source": "NCES CCD + manual", "fmt": "text"},
     "latitude": {"label": "Latitude", "desc": "Geocoded latitude.", "source": "NCES CCD", "fmt": "text"},
     "longitude": {"label": "Longitude", "desc": "Geocoded longitude.", "source": "NCES CCD", "fmt": "text"},
@@ -176,6 +182,7 @@ META = {
 # Columns to surface in the default table (order matters).
 TABLE_COLS = [
     "school_name", "level",
+    "rs_a_category", "rs_b_category",
     "enrollment_2025_26", "enrollment_pct_change",
     "enrollment_forecast_2026_27",
     "functional_capacity_2021", "utilization_pct_2526",
@@ -535,6 +542,8 @@ def main():
         "n_schools": len(schools),
         "n_candidates": int(df["is_closure_candidate"].sum()),
         "n_charters": len(charters),
+        # PPS's lists name high schools too, so resolve against every row.
+        "rightsizing": load_resolved(set(df_all["school_name"])),
     }
     OUT_DATA.write_text(json.dumps(payload, indent=2, default=str))
     print(f"Wrote {len(schools)} schools + {len(charters)} charters to {OUT_DATA}")
