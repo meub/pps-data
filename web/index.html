@@ -160,6 +160,7 @@
     font-size: var(--fs-small); color: var(--muted); border-top: 1px solid var(--border); }
   .rs-legend .sw { display: inline-block; width: 11px; height: 11px; border-radius: 50%;
     margin-right: 6px; vertical-align: -1px; }
+  .rs-legend .sw.ring { box-shadow: 0 0 0 2px #ffffff, 0 0 0 3.5px #0d1117; }
   .rs-legend .ln { display: inline-block; width: 18px; border-top: 3px dashed var(--rs-close);
     margin-right: 6px; vertical-align: 3px; }
   .rs-legend .ln.solid { border-top-style: solid; }
@@ -512,10 +513,10 @@
     <div class="panel">
       <div id="rs-map"></div>
       <div class="rs-legend" id="rs-legend">
-        <span><span class="sw" style="background:var(--rs-close)"></span>Closes</span>
-        <span><span class="sw" style="background:var(--rs-receive)"></span>Receives students from a closing school</span>
-        <span><span class="sw" style="background:repeating-linear-gradient(45deg, var(--rs-receive) 0 3px, #ffffff 3px 5px); border:1.5px solid #161b22; box-sizing:border-box"></span>Stays open, other change (boundary, program, or grades)</span>
-        <span><span class="sw" style="background:var(--rs-receive); border:1.5px solid #ffffff; box-sizing:border-box"></span>Stays open, no change</span>
+        <span><span class="sw ring" style="background:var(--rs-close)"></span>Closes</span>
+        <span><span class="sw ring" style="background:var(--rs-receive)"></span>Receives students from a closing school</span>
+        <span><span class="sw" style="background:repeating-linear-gradient(45deg, var(--rs-receive) 0 3px, #ffffff 3px 5px)"></span>Stays open, other change (boundary, program, or grades)</span>
+        <span><span class="sw" style="background:var(--rs-receive)"></span>Stays open, no change</span>
         <span>Circle size: 2025-26 enrollment</span>
         <span><span class="ln solid"></span>Neighborhood students go to</span>
         <span><span class="ln"></span>Program goes to (immersion, Deaf and Hard of Hearing)</span>
@@ -1946,38 +1947,44 @@
       },
     });
     new MapToggle({ position: "topright" }).addTo(rsMap);
-    // Flow lines. A straight line can cross a school that sits between the
-    // two endpoints (e.g. Sellwood -> Lane runs over Duniway), so each path
-    // is checked against every other school in projected meters; if one is
-    // within CLEAR_M, the line becomes a quadratic curve bowed to whichever
-    // side clears it best, curving harder if needed. Geometry is computed in
-    // Web Mercator pixels at a fixed zoom; the projection is conformal, so
-    // the shape and the arrow angle hold at every zoom.
-    const CLEAR_M = 250, Z = 15;
-    const mPerPx = (lat) => 156543.03 * Math.cos(lat * Math.PI / 180) / Math.pow(2, Z);
+    // Flow lines. A straight line can cross a school sitting between its
+    // endpoints (Sellwood -> Lane over Duniway, Stephenson -> Markham). School
+    // circles keep a fixed pixel radius, so overlap depends on zoom: each line
+    // is checked in the current zoom's pixels against every other school's
+    // drawn radius plus a margin, and becomes a quadratic curve bowed to the
+    // side that clears best (curving harder if needed). Lines are redrawn on
+    // every zoom, in their own pane beneath the school circles.
+    const LINE_MARGIN_PX = 6;
+    const radiusOf = (s) => Math.max(6, Math.min(26, Math.sqrt(s.enrollment_2025_26 || 100) * 0.62));
+    rsMap.createPane("rsFlows").style.zIndex = 390;  // below overlayPane (400), where circles draw
+    const flowLayer = L.layerGroup().addTo(rsMap);
     function quad(p0, p1, p2, t) {
       const u = 1 - t;
       return L.point(u * u * p0.x + 2 * u * t * p1.x + t * t * p2.x, u * u * p0.y + 2 * u * t * p1.y + t * t * p2.y);
     }
     function flowGeometry(from, to, a, b) {
+      const Z = rsMap.getZoom();
       const p0 = rsMap.project(from, Z), p2 = rsMap.project(to, Z);
-      const clearPx = CLEAR_M / mPerPx(from.lat);
       const others = schools.filter(s => s !== a && s !== b && s.latitude != null)
-        .map(s => rsMap.project([s.latitude, s.longitude], Z));
-      const clearance = (pts) => Math.min(Infinity, ...pts.flatMap(pt => others.map(o => pt.distanceTo(o))));
-      const sample = (p1) => Array.from({ length: 17 }, (_, i) => quad(p0, p1, p2, 0.1 + 0.8 * i / 16));
-      const mid = L.point((p0.x + p2.x) / 2, (p0.y + p2.y) / 2);
+        .map(s => ({ pt: rsMap.project([s.latitude, s.longitude], Z), r: radiusOf(s) + LINE_MARGIN_PX }));
+      // Worst gap between the curve and any other school's circle (< 0 = overlap).
+      const gap = (pts) => Math.min(Infinity, ...pts.flatMap(pt => others.map(o => pt.distanceTo(o.pt) - o.r)));
+      const ra = radiusOf(a), rb = radiusOf(b);
       const dx = p2.x - p0.x, dy = p2.y - p0.y, len = Math.hypot(dx, dy) || 1;
+      // Sample only the visible stretch between the endpoint circles.
+      const t0 = Math.min(0.45, ra / len), t1 = Math.max(0.55, 1 - rb / len);
+      const sample = (p1) => Array.from({ length: 25 }, (_, i) => quad(p0, p1, p2, t0 + (t1 - t0) * i / 24));
+      const mid = L.point((p0.x + p2.x) / 2, (p0.y + p2.y) / 2);
       const nx = -dy / len, ny = dx / len;
-      let best = { p1: mid, clear: clearance(sample(mid)) };
-      if (best.clear < clearPx) {
-        for (const k of [0.18, 0.3, 0.45]) {
+      let best = { p1: mid, gap: gap(sample(mid)) };
+      if (best.gap < 0) {
+        for (const k of [0.15, 0.25, 0.38, 0.5]) {
           for (const sign of [1, -1]) {
             const p1 = L.point(mid.x + sign * k * len * nx, mid.y + sign * k * len * ny);
-            const c = clearance(sample(p1));
-            if (c > best.clear) best = { p1, clear: c };
+            const g = gap(sample(p1));
+            if (g > best.gap) best = { p1, gap: g };
           }
-          if (best.clear >= clearPx) break;
+          if (best.gap >= 0) break;
         }
       }
       const pts = Array.from({ length: 33 }, (_, i) => rsMap.unproject(quad(p0, best.p1, p2, i / 32), Z));
@@ -2038,17 +2045,17 @@
         `<div class="row"><b style="display:inline">Seismic retrofit cost:</b> ${fmt(s.retrofit_cost_remaining_usd, "usd")}</div></div>`;
     }
     const showMovesBox = document.getElementById("rs-show-moves");
-    function renderMap() {
-      layer.clearLayers();
-      const ll = (s) => L.latLng(s.latitude, s.longitude);
+    const ll = (s) => L.latLng(s.latitude, s.longitude);
+    function renderFlows() {
+      flowLayer.clearLayers();
       if (showMovesBox.checked) {
         RS.scenarios[scen].moves.forEach(mv => {
           const a = byName[mv.from], b = byName[mv.to];
           if (!a || !b || a === b || a.latitude == null || b.latitude == null) return;
           const g = flowGeometry(ll(a), ll(b), a, b);
-          L.polyline(g.pts, { color: COLOR.program_change, weight: 2.5, opacity: 0.9, dashArray: "4 5" })
-            .bindTooltip(esc(mv.text), { sticky: true }).addTo(layer);
-          arrowMarker(g, COLOR.program_change).addTo(layer);
+          L.polyline(g.pts, { pane: "rsFlows", color: COLOR.program_change, weight: 2.5, opacity: 0.9, dashArray: "4 5" })
+            .bindTooltip(esc(mv.text), { sticky: true }).addTo(flowLayer);
+          arrowMarker(g, COLOR.program_change).addTo(flowLayer);
         });
       }
       RS.scenarios[scen].receivers.forEach(r => {
@@ -2057,31 +2064,46 @@
         const tip = `${esc(short(r.from))} &rarr; ${esc(short(r.to))}: ${esc(flowText(r))}`;
         const g = flowGeometry(ll(a), ll(b), a, b);
         L.polyline(g.pts, {
-          color: COLOR.closes, weight: 3.5, opacity: 0.95, dashArray: isProgramFlow(r) ? "7 6" : null,
-        }).addTo(layer);
+          pane: "rsFlows", color: COLOR.closes, weight: 3.5, opacity: 0.95, dashArray: isProgramFlow(r) ? "7 6" : null,
+        }).addTo(flowLayer);
         // Wide transparent twin so the hover target is bigger than the line.
-        L.polyline(g.pts, { weight: 14, opacity: 0 }).bindTooltip(tip, { sticky: true }).addTo(layer);
-        arrowMarker(g, COLOR.closes).addTo(layer);
+        L.polyline(g.pts, { pane: "rsFlows", weight: 14, opacity: 0 }).bindTooltip(tip, { sticky: true }).addTo(flowLayer);
+        arrowMarker(g, COLOR.closes).addTo(flowLayer);
       });
-      ensureHatch();
+    }
+    function renderMap() {
+      layer.clearLayers();
+      renderFlows();
       const order = { other: 0, receives: 1, closes: 2 };
       schools.filter(s => s.latitude != null)
         .sort((x, y) => order[roleOf(x)] - order[roleOf(y)])
         .forEach(s => {
           const role = roleOf(s);
-          const r = Math.max(6, Math.min(26, Math.sqrt(s.enrollment_2025_26 || 100) * 0.62));
+          const r = radiusOf(s);
+          // Closing and receiving schools get a double ring: a dark halo drawn
+          // underneath (shows on light tiles) and a white stroke on top (shows
+          // in the dark legend). Either color alone vanished on one of them.
+          if (role !== "other") {
+            L.circleMarker([s.latitude, s.longitude], {
+              radius: r + 2.5, stroke: false, fillColor: "#0d1117", fillOpacity: 0.9, interactive: false,
+            }).addTo(layer);
+          }
           L.circleMarker([s.latitude, s.longitude], {
             radius: r,
-            color: role === "other" && outcomeOf(s, scen) === "none" ? "#ffffff" : "#161b22",
-            weight: 2,
+            color: role === "other" ? css("--rs-receive") : "#ffffff",
+            weight: role === "other" ? 1 : 2.5,
             fillColor: role === "other" && outcomeOf(s, scen) === "other" ? "url(#rs-hatch)" : ROLE_COLOR[role],
             fillOpacity: 0.95,
           }).bindPopup(popupFor(s), { maxWidth: 340, minWidth: 260 })
             .bindTooltip(`${esc(short(s.school_name))}: ${role === "closes" ? "closes" : role === "receives" ? "receives students" : LABEL[catOf(s, scen)].toLowerCase()}`)
             .addTo(layer);
         });
+      // The stripe pattern must live in the circles' own <svg>, which exists
+      // only once the first circle is drawn; url() fills resolve after.
+      ensureHatch();
     }
-    showMovesBox.addEventListener("change", renderMap);
+    showMovesBox.addEventListener("change", renderFlows);
+    rsMap.on("zoomend", renderFlows);
 
     // ---- closing-schools table (union of both scenarios) ----
     const median = (xs) => { const v = xs.filter(x => x != null).sort((a, b) => a - b); const m = Math.floor(v.length / 2);
