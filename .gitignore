@@ -34,3 +34,6 @@ deploy.env
 # Scraped PPS rightsizing pages and videos (summarized in rightsizing-summary.md)
 data/raw/pps_rightsizing_pages/
 data/raw/pps_rightsizing_videos/
+
+# PPS Oct 2026 attendance-boundary map PDFs (~40 MB); memo, slides, and regional summaries are tracked
+data/raw/pps_rightsizing_board_2026-10-06/*Attendance_Boundaries*.pdf
