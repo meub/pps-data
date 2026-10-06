@@ -514,7 +514,8 @@
       <div class="rs-legend" id="rs-legend">
         <span><span class="sw" style="background:var(--rs-close)"></span>Closes</span>
         <span><span class="sw" style="background:var(--rs-receive)"></span>Receives students from a closing school</span>
-        <span><span class="sw" style="background:var(--rs-receive); border:2px solid #ffffff; box-sizing:border-box"></span>Other schools (stay open)</span>
+        <span><span class="sw" style="background:var(--rs-receive); border:2.5px solid var(--rs-program); box-sizing:border-box"></span>Stays open, other change</span>
+        <span><span class="sw" style="background:var(--rs-receive); border:2.5px solid var(--rs-none); box-sizing:border-box"></span>Stays open, no change</span>
         <span><span class="ln solid"></span>Neighborhood students go to</span>
         <span><span class="ln"></span>Program goes to (immersion, Deaf and Hard of Hearing)</span>
         <label class="rs-moves-opt"><input type="checkbox" id="rs-show-moves"> Also show other program and grade-level moves <span class="ln moves" style="margin-left:4px"></span></label>
@@ -1968,8 +1969,9 @@
       if (catOf(s, scen) === "closes") return "closes";
       return sendersTo(s.school_name).length ? "receives" : "other";
     }
-    // Open schools are all solid blue so gray never reads as "closed";
-    // a white outline marks the ones that don't receive students.
+    // Open schools are all solid blue so gray never reads as "closed".
+    // Schools that neither close nor receive students take their outline
+    // color from the outcome bars: green for another change, gray for none.
     const ROLE_COLOR = { closes: COLOR.closes, receives: css("--rs-receive"), other: css("--rs-receive") };
     function popupFor(s) {
       const role = roleOf(s);
@@ -2021,7 +2023,9 @@
           const r = Math.max(6, Math.min(26, Math.sqrt(s.enrollment_2025_26 || 100) * 0.62));
           L.circleMarker([s.latitude, s.longitude], {
             radius: role === "other" ? Math.min(r, 9) : r,
-            color: role === "other" ? "#ffffff" : "#161b22", weight: 2,
+            color: role !== "other" ? "#161b22"
+              : outcomeOf(s, scen) === "other" ? COLOR.program_change : COLOR.none,
+            weight: role === "other" ? 3 : 2,
             fillColor: ROLE_COLOR[role], fillOpacity: 0.92,
           }).bindPopup(popupFor(s), { maxWidth: 340, minWidth: 260 })
             .bindTooltip(`${esc(short(s.school_name))}: ${role === "closes" ? "closes" : role === "receives" ? "receives students" : LABEL[catOf(s, scen)].toLowerCase()}`)
