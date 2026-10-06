@@ -145,6 +145,7 @@
   :root { --rs-close: #d95926; --rs-program: #199e70; --rs-boundary: #3987e5;
     --rs-none: #6e7681; --rs-a: #3987e5; --rs-b: #199e70; }
   #rs-map { height: 560px; position: relative; }
+  .rs-arrow { background: none; border: 0; }
   .rs-toggle { display: inline-flex; border: 1px solid var(--border); border-radius: 6px;
     overflow: hidden; margin: 0 0 12px; }
   .rs-toggle button { background: #0d1117; color: var(--muted); border: 0; padding: 7px 14px;
@@ -495,7 +496,7 @@
         <span><span class="sw" style="background:var(--rs-program)"></span>Program or grade change (moving out or receiving)</span>
         <span><span class="sw" style="background:var(--rs-boundary)"></span>Attendance boundary change</span>
         <span><span class="sw" style="background:var(--rs-none)"></span>No change</span>
-        <span><span class="ln"></span>Program or grade moves to</span>
+        <span><span class="ln"></span>&#9654; Program or grade moves in the arrow's direction</span>
       </div>
     </div>
     <div class="panel" style="margin-top:16px; overflow-x:auto;">
@@ -1915,8 +1916,23 @@
       RS.scenarios[scen].moves.forEach(mv => {
         const a = byName[mv.from], b = byName[mv.to];
         if (!a || !b || a === b || a.latitude == null || b.latitude == null) return;
-        L.polyline([[a.latitude, a.longitude], [b.latitude, b.longitude]],
+        const from = L.latLng(a.latitude, a.longitude), to = L.latLng(b.latitude, b.longitude);
+        L.polyline([from, to],
           { color: COLOR.program_change, weight: 3, opacity: 0.95, dashArray: "7 5", interactive: false }).addTo(layer);
+        // Arrowhead at the midpoint, pointing at the receiving school. Web
+        // Mercator preserves angles, so the screen bearing computed at any
+        // zoom stays correct as the user zooms.
+        const pa = rsMap.project(from, 12), pb = rsMap.project(to, 12);
+        const deg = Math.atan2(pb.y - pa.y, pb.x - pa.x) * 180 / Math.PI;
+        const mid = L.latLng((from.lat + to.lat) / 2, (from.lng + to.lng) / 2);
+        L.marker(mid, {
+          interactive: false, keyboard: false,
+          icon: L.divIcon({
+            className: "rs-arrow", iconSize: [18, 18], iconAnchor: [9, 9],
+            html: `<svg width="18" height="18" viewBox="0 0 18 18" style="transform:rotate(${deg}deg)">` +
+                  `<path d="M3 3 L16 9 L3 15 L6 9 Z" fill="${COLOR.program_change}" stroke="#0d1117" stroke-width="1.2" stroke-linejoin="round"/></svg>`,
+          }),
+        }).addTo(layer);
       });
       const order = { none: 0, boundary: 1, program_change: 2, closes: 3 };
       schools.filter(s => s.latitude != null)
