@@ -1019,6 +1019,27 @@
     "sprinkler_notes": null
   },
   {
+    "school_name": "Metropolitan Learning Center",
+    "wb_name": "MLC",
+    "site_id": "154",
+    "config": "SPECIAL SERVICES",
+    "functional_capacity_model": 487.1,
+    "fc_approx": false,
+    "n_years": 3,
+    "conflict_note": null,
+    "classrooms_total": 22,
+    "gross_capacity": 600,
+    "avg_classroom_sqft": 868,
+    "science_rooms": 2,
+    "art_music_rooms": 0,
+    "computer_rooms": 0,
+    "gym_rooms": 1,
+    "fully_sprinklered": false,
+    "k2_program": true,
+    "k2_program_expires": 2027,
+    "sprinkler_notes": null
+  },
+  {
     "school_name": "Mt Tabor Middle School",
     "wb_name": "MT. TABOR",
     "site_id": "176",

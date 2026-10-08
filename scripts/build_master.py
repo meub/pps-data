@@ -942,6 +942,16 @@ def main():
 
     pps["capacity_conflict_note"] = pps.apply(_conflict_note, axis=1)
 
+    # The LRFP tables omit some buildings (e.g. MLC, an alternative program).
+    # Where the LRFP has no figure but PPS's utilization workbook does, use the
+    # workbook's capacity and record the source. Runs after the conflict check,
+    # which compares only schools with both figures.
+    fallback = pps["functional_capacity_2021"].isna() & pps["functional_capacity_model"].notna()
+    pps["capacity_source"] = None
+    pps.loc[pps["functional_capacity_2021"].notna(), "capacity_source"] = "LRFP 2021"
+    pps.loc[fallback, "capacity_source"] = "Utilization workbook"
+    pps.loc[fallback, "functional_capacity_2021"] = pps.loc[fallback, "functional_capacity_model"]
+
     # Merge CRDC 2020: LEP, IDEA, chronic absenteeism counts.
     with open(CRDC) as f:
         crdc = json.load(f)
@@ -1182,7 +1192,7 @@ def main():
         "functional_capacity_2021", "utilization_pct_2526",
         "functional_capacity_model", "utilization_model_2526",
         "capacity_source_conflict", "fc_model_approx", "capacity_conflict_note",
-        "data_note",
+        "capacity_source", "data_note",
         "gross_capacity", "classrooms_total", "avg_classroom_sqft",
         "science_rooms", "art_music_rooms", "computer_rooms", "gym_rooms",
         "leased_classrooms", "lease_tenants",

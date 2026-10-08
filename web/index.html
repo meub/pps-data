@@ -1321,7 +1321,7 @@
         ["Year built", fmt(s.year_built, "year")],
         ["Square feet", fmt(s.square_feet, "int")],
         ["Construction type", s.construction_type_2009 || "—"],
-        ["Functional capacity (2021)", fmt(s.functional_capacity_2021, "int")],
+        ["Functional capacity (2021)", fmt(s.functional_capacity_2021, "int") + (s.capacity_source === "Utilization workbook" ? " (PPS utilization workbook)" : "")],
         ["Utilization 25-26", fmt(s.utilization_pct_2526, "pct_0_1")],
         ["URM", fmt(s.is_urm_building, "bool")],
         ["URM retrofit cost", fmt(s.urm_retrofit_cost_usd, "usd")],
@@ -3287,6 +3287,10 @@
           if (col === "utilization_pct_2526"
               && (s.capacity_source_conflict === true || s.capacity_source_conflict === "True")) {
             addConflictFlag(td, s, v);
+          }
+          if (col === "functional_capacity_2021" && s.capacity_source === "Utilization workbook" && v != null) {
+            td.innerHTML += ' <span class="conflict-flag" style="color:var(--muted)">&dagger;</span>';
+            attachCellTip(td, "<b>Capacity from PPS's utilization workbook</b>PPS's 2021 Long-Range Facility Plan does not list this building, so this figure comes from PPS's operational utilization workbook (public-records request), about 2021 vintage.");
           }
           if (col === "gross_capacity" && v != null) attachCellTip(td, grossTip(s));
           if (col === "leased_classrooms" && s.lease_tenants) attachCellTip(td, leaseTip(s));
