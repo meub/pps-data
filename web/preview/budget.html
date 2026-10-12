@@ -88,7 +88,7 @@
   #plot-flow { height: 620px; }
   #plot-funds { height: 150px; }
   #plot-gap { height: 420px; }
-  #plot-enroll { height: 220px; }
+  #plot-enroll { height: 340px; }
   #plot-drivers { height: 360px; }
   .facts { color: var(--muted); font-size: var(--fs-small); max-width: 900px; margin: 14px 0 0; padding-left: 20px; }
   .facts li { margin-bottom: 6px; }
@@ -557,12 +557,14 @@
     // the year-to-year change.
     type: "bar", x: E.map(h => h.year), y: E.map(h => h.enrollment),
     marker: { color: BLUE, line: { color: SURFACE, width: 2 } },
-    text: E.map(h => h.enrollment.toLocaleString()), textposition: "outside", cliponaxis: false,
-    textfont: { ...FONT, size: 11 },
+    // Count on top, change from the year before beneath it.
+    text: E.map((h, i) => h.enrollment.toLocaleString() + (i ? `<br>${(h.enrollment - E[i - 1].enrollment).toLocaleString().replace("-", "−")}` : "")),
+    textposition: "outside", cliponaxis: false,
+    textfont: { ...FONT, size: 12 },
     hovertemplate: "%{x}: %{y:,} students<extra></extra>",
   }], {
     paper_bgcolor: SURFACE, plot_bgcolor: SURFACE, font: FONT,
-    margin: { l: 60, r: 16, t: 24, b: 34 }, bargap: 0.35,
+    margin: { l: 60, r: 16, t: 40, b: 34 }, bargap: 0.35,
     yaxis: { title: mobile() ? "" : "Students", rangemode: "tozero", gridcolor: GRID, zeroline: false,
       fixedrange: true, tickformat: "," },
     xaxis: { fixedrange: true },
