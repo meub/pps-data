@@ -377,7 +377,7 @@
     ? "$" + (k / 1000000).toFixed(2) + "B"
     : "$" + (k / 1000).toLocaleString(undefined, { maximumFractionDigits: k >= 100000 ? 0 : 1 }) + "M";
   const fmtUSD = (v) => "$" + Math.round(v).toLocaleString();
-  const pct = (part, whole) => Math.round(100 * part / whole) + "%";
+  const pct = (part, whole) => (100 * part / whole).toFixed(1) + "%";
   const total = D.general_fund_total;
 
   // ---- Tiles ----
@@ -503,18 +503,29 @@
     `Costs have grown faster than revenue. In 2023-24 and 2024-25 PPS spent more than it took in and ` +
     `covered the difference from savings, which fell from ${fmtM(H[0].reserve)} to ${fmtM(lastActual.reserve)}. ` +
     `For 2026-27 PPS closed a $56 million gap by cutting 336 positions. Its forecast shows the gap returning.`;
-  const line = (rows, key, color, dash, name, show) => ({
-    type: "scatter", mode: "lines+markers", x: rows.map(h => h.year), y: rows.map(h => h[key] / 1000),
-    name, showlegend: show, legendgroup: key,
-    line: { color, width: 2, dash }, marker: { size: 8, color, line: { color: SURFACE, width: 2 } },
-    customdata: rows.map(h => h.status),
-    hovertemplate: `${name}: $%{y:,.0f}M (%{customdata})<extra></extra>`,
-  });
+  // Solid line for actual and budget years, dotted line into the forecast.
+  // The dotted connector starts at 2026-27 so the line is continuous; it
+  // skips hover there so the unified tooltip doesn't list 2026-27 twice.
+  const yearSeries = (key, color, name, yOf, hoverText) => {
+    const point = (rows) => ({
+      type: "scatter", mode: "markers", x: rows.map(h => h.year), y: rows.map(yOf),
+      name, showlegend: false, legendgroup: key,
+      marker: { size: 8, color, line: { color: SURFACE, width: 2 } },
+      customdata: rows.map(hoverText), hovertemplate: `${name}: %{customdata}<extra></extra>`,
+    });
+    const actual = solid.filter(h => h[key] != null), ahead = fc.filter(h => h[key] != null);
+    const lineOf = (rows, dash, show) => ({
+      type: "scatter", mode: "lines", x: rows.map(h => h.year), y: rows.map(yOf),
+      name, showlegend: show, legendgroup: key, hoverinfo: "skip",
+      line: { color, width: 2, dash },
+    });
+    const traces = [lineOf(actual, "solid", true), point(actual)];
+    if (ahead.length > 1) traces.push(lineOf(ahead, "dot", false), point(ahead.filter(h => h.status === "forecast")));
+    return traces;
+  };
   const gapTraces = [
-    line(solid, "revenue", BLUE, "solid", "Revenue", true),
-    line(solid, "spending", ORANGE, "solid", "Spending", true),
-    line(fc, "revenue", BLUE, "dot", "Revenue", false),
-    line(fc, "spending", ORANGE, "dot", "Spending", false),
+    ...yearSeries("revenue", BLUE, "Revenue", h => h.revenue / 1000, h => `${fmtM(h.revenue)} (${h.status})`),
+    ...yearSeries("spending", ORANGE, "Spending", h => h.spending / 1000, h => `${fmtM(h.spending)} (${h.status})`),
   ];
   const gapAnn = H.filter(h => h.shortfall).map(h => ({
     x: h.year, y: h.spending / 1000, yshift: 16, showarrow: false,
@@ -560,23 +571,14 @@
   // ---- Cost drivers (indexed to 2022-23) ----
   const base = H[0];
   const idx = (h, k) => 100 * (h[k] / base[k] - 1);
-  const driverLine = (rows, k, color, dash, name, show, fmtVal) => ({
-    type: "scatter", mode: "lines+markers", x: rows.map(h => h.year), y: rows.map(h => idx(h, k)),
-    name, showlegend: show, legendgroup: k,
-    line: { color, width: 2, dash }, marker: { size: 8, color, line: { color: SURFACE, width: 2 } },
-    customdata: rows.map(h => [fmtVal(h[k]), h.status]),
-    hovertemplate: `${name}: %{y:+.0f}% (%{customdata[0]}, %{customdata[1]})<extra></extra>`,
-  });
-  const solidD = H.filter(h => h.status !== "forecast");
-  const fcD = H.filter(h => h.status === "forecast" || h.year === "2026-27");
-  const enrolled = H.filter(h => h.enrollment);
+  const signedPct = (v) => (v > 0 ? "+" : "") + v.toFixed(1) + "%";
   const toStudents = (v) => v.toLocaleString() + " students";
+  const driver = (k, color, name, fmtVal) => yearSeries(k, color, name, h => idx(h, k),
+    h => `${signedPct(idx(h, k))} (${fmtVal(h[k])}, ${h.status})`);
   const dTraces = [
-    driverLine(solidD, "benefits", ORANGE, "solid", "Benefits and payroll costs", true, fmtM),
-    driverLine(fcD, "benefits", ORANGE, "dot", "Benefits and payroll costs", false, fmtM),
-    driverLine(solidD, "salaries", BLUE, "solid", "Salaries", true, fmtM),
-    driverLine(fcD, "salaries", BLUE, "dot", "Salaries", false, fmtM),
-    driverLine(enrolled, "enrollment", AQUA, "solid", "Students", true, toStudents),
+    ...driver("benefits", ORANGE, "Benefits and payroll costs", fmtM),
+    ...driver("salaries", BLUE, "Salaries", fmtM),
+    ...driver("enrollment", AQUA, "Students", toStudents),
   ];
   Plotly.newPlot("plot-drivers", dTraces, {
     paper_bgcolor: SURFACE, plot_bgcolor: SURFACE, font: FONT,
@@ -591,7 +593,7 @@
       fillcolor: "rgba(255,255,255,0.035)", line: { width: 0 }, layer: "below" }],
   }, CONFIG);
   const y26 = H.find(h => h.year === "2026-27"), y27 = H.find(h => h.year === "2027-28");
-  const pctChg = (a, b) => Math.round(100 * (b / a - 1)) + "%";
+  const pctChg = (a, b) => (100 * (b / a - 1)).toFixed(1) + "%";
   document.getElementById("driver-facts").innerHTML = [
     `<b>Benefits grew ${pctChg(base.benefits, y26.benefits)}</b> from 2022-23 to 2026-27 (${fmtM(base.benefits)} to ${fmtM(y26.benefits)}). Salaries grew ${pctChg(base.salaries, y26.salaries)}. Students fell ${pctChg(base.enrollment, y26.enrollment).replace("-", "")}.`,
     `<b>Pensions.</b> PPS's PERS employer rate has risen from just over 4% to just over 20% of payroll, according to the superintendent's budget message. A charge to pay down the pension system's past shortfall alone adds 18.79% to every paycheck.`,
