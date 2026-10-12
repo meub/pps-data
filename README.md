@@ -92,10 +92,14 @@ scripts/
   merge_pps_enrollment_forecast.py + enrollment_forecast_2026_27..2035_36, _2035_36_low/high, pct_change_10yr (PRC medium + derived scenario bands)
   merge_rightsizing_scenarios.py + rs_a/rs_b_category and _detail (PPS Oct 2026 Scenarios A/B per school)
   export_web.py                 → web/data.json (filters to the 74 in-scope schools)
+  parse_budget_school_reports.py → data/raw/pps_budget_school_reports.json (2026-27 budget Vol 2, per-school $/student + enrollment; needs poppler's pdftotext)
+  export_budget.py              → web/budget.json (Vol 1 General Fund figures as cited constants + per-school data)
 web/
   index.html              single-page dashboard
   feeders.html            standalone elem→middle→HS feeder-tree diagrams (Mermaid)
   data.json               dashboard payload (generated)
+  budget.html             budget explainer: General Fund money in/out, yearly gap, cost per student vs size
+  budget.json             budget page payload (generated)
 ```
 
 ## Reproducing the pipeline
@@ -137,6 +141,10 @@ python scripts/merge_rightsizing_scenarios.py
 
 # 4. Export dashboard payload:
 python scripts/export_web.py
+
+# 5. Budget page (reads data/raw/pps_budget_2026-27_proposed_vol2.pdf; needs `brew install poppler`):
+python scripts/parse_budget_school_reports.py
+python scripts/export_budget.py
 ```
 
 Each step is idempotent; rerun freely as sources refresh.

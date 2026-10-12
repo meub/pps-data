@@ -1,0 +1,3314 @@
+{
+ "sources": {
+  "vol1": {
+   "title": "2026-27 Adopted Budget, Volume 1",
+   "publisher": "Portland Public Schools",
+   "url": "https://www.pps.net/departments/budget"
+  },
+  "vol2": {
+   "title": "2026-27 Proposed Budget, Volume 2: Individual School Reports (updated May 6, 2026)",
+   "publisher": "Portland Public Schools",
+   "url": "https://www.pps.net/departments/budget"
+  }
+ },
+ "general_fund_total": 862112,
+ "resources": [
+  {
+   "label": "Local property taxes",
+   "amount": 358223,
+   "note": "PPS's permanent tax rate of $5.28 per $1,000 of assessed value."
+  },
+  {
+   "label": "State School Fund and other state",
+   "amount": 317100,
+   "note": "Oregon's per-student school funding, weighted for students with higher needs."
+  },
+  {
+   "label": "Local option levy",
+   "amount": 103938,
+   "note": "A voter-approved extra property tax ($1.99 per $1,000), renewed in May 2024."
+  },
+  {
+   "label": "Carryover from last year",
+   "amount": 41000,
+   "note": "Money left at the end of 2025-26 (the beginning fund balance)."
+  },
+  {
+   "label": "Other local revenue",
+   "amount": 28701,
+   "note": "Fees, rentals, interest, and similar local income."
+  },
+  {
+   "label": "County education service district",
+   "amount": 9791,
+   "note": "Pass-through money from the Multnomah Education Service District."
+  },
+  {
+   "label": "Other",
+   "amount": 3359,
+   "note": "Federal money, transfers from other funds, and other small sources."
+  }
+ ],
+ "uses": [
+  {
+   "label": "Instruction",
+   "note": "Teachers, classroom aides, and classroom costs.",
+   "amount": 458888,
+   "children": [
+    {
+     "label": "Classroom teaching (K-12)",
+     "amount": 328846,
+     "codes": [
+      "1111",
+      "1113",
+      "1121",
+      "1122",
+      "1131",
+      "1132",
+      "1140",
+      "1100"
+     ]
+    },
+    {
+     "label": "Special education",
+     "amount": 79808,
+     "codes": [
+      "1220",
+      "1250",
+      "1260"
+     ]
+    },
+    {
+     "label": "Alternative education",
+     "amount": 30807,
+     "codes": [
+      "1280"
+     ]
+    },
+    {
+     "label": "English language learners",
+     "amount": 15450,
+     "codes": [
+      "1291"
+     ]
+    },
+    {
+     "label": "Other programs (gifted, summer school)",
+     "amount": 3977,
+     "codes": [
+      "1210",
+      "1271",
+      "1292",
+      "1299",
+      "1400"
+     ]
+    }
+   ]
+  },
+  {
+   "label": "Support services",
+   "note": "Everything that keeps schools running outside the classroom.",
+   "amount": 345021,
+   "children": [
+    {
+     "label": "Student support (counselors, social workers, etc.)",
+     "amount": 87615,
+     "codes": [
+      "2110",
+      "2120",
+      "2140",
+      "2150",
+      "2160",
+      "2190"
+     ]
+    },
+    {
+     "label": "Building operations and maintenance",
+     "amount": 72437,
+     "codes": [
+      "2540"
+     ]
+    },
+    {
+     "label": "Principals' offices",
+     "amount": 59397,
+     "codes": [
+      "2410",
+      "2490"
+     ]
+    },
+    {
+     "label": "Student transportation",
+     "amount": 47648,
+     "codes": [
+      "2550"
+     ]
+    },
+    {
+     "label": "Teacher support and libraries",
+     "amount": 30234,
+     "codes": [
+      "2210",
+      "2220",
+      "2230",
+      "2240"
+     ]
+    },
+    {
+     "label": "Central services (HR, tech, research)",
+     "amount": 26400,
+     "codes": [
+      "2610",
+      "2620",
+      "2630",
+      "2640",
+      "2660",
+      "2670",
+      "2690"
+     ]
+    },
+    {
+     "label": "Business and finance",
+     "amount": 10780,
+     "codes": [
+      "2510",
+      "2520",
+      "2570"
+     ]
+    },
+    {
+     "label": "School board and superintendent",
+     "amount": 10510,
+     "codes": [
+      "2310",
+      "2320"
+     ]
+    }
+   ]
+  },
+  {
+   "label": "Other",
+   "note": "Money set aside or moved to other PPS funds.",
+   "amount": 58202,
+   "children": [
+    {
+     "label": "Required reserve (contingency)",
+     "amount": 41056,
+     "codes": [
+      "6000"
+     ]
+    },
+    {
+     "label": "Transfers to other funds",
+     "amount": 14755,
+     "codes": [
+      "5200"
+     ]
+    },
+    {
+     "label": "Community services",
+     "amount": 2391,
+     "codes": [
+      "3300"
+     ]
+    }
+   ]
+  }
+ ],
+ "people_cost": 680515,
+ "fte": 4481.34,
+ "all_funds": [
+  {
+   "label": "General Fund (day-to-day operations)",
+   "amount": 862112
+  },
+  {
+   "label": "Construction and capital projects (mostly voter-approved bonds)",
+   "amount": 1382508
+  },
+  {
+   "label": "Debt payments (bonds and pension debt)",
+   "amount": 278876
+  },
+  {
+   "label": "Grants and other restricted money",
+   "amount": 223936
+  },
+  {
+   "label": "Insurance and internal services",
+   "amount": 21159
+  }
+ ],
+ "history": [
+  {
+   "year": "2022-23",
+   "status": "actual",
+   "revenue": 731234,
+   "spending": 724541,
+   "carryover": 98804,
+   "reserve": 105497,
+   "shortfall": null,
+   "enrollment": 44518
+  },
+  {
+   "year": "2023-24",
+   "status": "actual",
+   "revenue": 767878,
+   "spending": 787298,
+   "carryover": 105497,
+   "reserve": 86078,
+   "shortfall": null,
+   "enrollment": 43882
+  },
+  {
+   "year": "2024-25",
+   "status": "actual",
+   "revenue": 769756,
+   "spending": 811511,
+   "carryover": 86078,
+   "reserve": 44323,
+   "shortfall": null,
+   "enrollment": 43201
+  },
+  {
+   "year": "2025-26",
+   "status": "budget",
+   "revenue": 823580,
+   "spending": 827401,
+   "carryover": 45000,
+   "reserve": 41179,
+   "shortfall": null,
+   "enrollment": 42467
+  },
+  {
+   "year": "2026-27",
+   "status": "budget",
+   "revenue": 821112,
+   "spending": 821055,
+   "carryover": 41000,
+   "reserve": 41056,
+   "shortfall": null,
+   "enrollment": 41661
+  },
+  {
+   "year": "2027-28",
+   "status": "forecast",
+   "revenue": 835804,
+   "spending": 900269,
+   "carryover": 41056,
+   "reserve": 41790,
+   "shortfall": 65198,
+   "enrollment": null
+  },
+  {
+   "year": "2028-29",
+   "status": "forecast",
+   "revenue": 860460,
+   "spending": 901577,
+   "carryover": 41790,
+   "reserve": 43023,
+   "shortfall": 42349,
+   "enrollment": null
+  },
+  {
+   "year": "2029-30",
+   "status": "forecast",
+   "revenue": 873458,
+   "spending": 933802,
+   "carryover": 43023,
+   "reserve": 43673,
+   "shortfall": 60991,
+   "enrollment": null
+  }
+ ],
+ "schools": [
+  {
+   "name": "Rosa Parks",
+   "band": "K-5",
+   "school_type": "K-5 Title I",
+   "title_i": true,
+   "proficient_math_2425": 11,
+   "proficient_ela_2425": 17,
+   "pct_direct_cert_2425": 79,
+   "dollars_per_student": {
+    "2022_23": 16885,
+    "2023_24": 18403,
+    "2024_25": 18113,
+    "2025_26": 18327,
+    "2026_27": 16805
+   },
+   "students_per_fte": {
+    "2022_23": 5.0,
+    "2023_24": 4.1,
+    "2024_25": 3.9,
+    "2025_26": 3.9,
+    "2026_27": 4.5
+   },
+   "enrollment": {
+    "2021_22": 214,
+    "2022_23": 197,
+    "2023_24": 177,
+    "2024_25": 172,
+    "2025_26": 160,
+    "2026_27": 161,
+    "2027_28": 160,
+    "2028_29": 167
+   },
+   "master_name": "Rosa Parks Elementary School",
+   "rs_a": "boundary",
+   "rs_b": "boundary"
+  },
+  {
+   "name": "Woodmere",
+   "band": "K-5",
+   "school_type": "K-5 Title I",
+   "title_i": true,
+   "proficient_math_2425": 22,
+   "proficient_ela_2425": 28,
+   "pct_direct_cert_2425": 59,
+   "dollars_per_student": {
+    "2022_23": 13797,
+    "2023_24": 14790,
+    "2024_25": 15516,
+    "2025_26": 15336,
+    "2026_27": 14754
+   },
+   "students_per_fte": {
+    "2022_23": 5.2,
+    "2023_24": 5.4,
+    "2024_25": 5.3,
+    "2025_26": 5.8,
+    "2026_27": 6.2
+   },
+   "enrollment": {
+    "2021_22": 253,
+    "2022_23": 235,
+    "2023_24": 248,
+    "2024_25": 242,
+    "2025_26": 227,
+    "2026_27": 223,
+    "2027_28": 225,
+    "2028_29": 225
+   },
+   "master_name": "Woodmere Elementary School",
+   "rs_a": "closes",
+   "rs_b": "closes"
+  },
+  {
+   "name": "Whitman",
+   "band": "K-5",
+   "school_type": "K-5 Title I",
+   "title_i": true,
+   "proficient_math_2425": 21,
+   "proficient_ela_2425": 31,
+   "pct_direct_cert_2425": 64,
+   "dollars_per_student": {
+    "2022_23": 15410,
+    "2023_24": 14489,
+    "2024_25": 14366,
+    "2025_26": 14329,
+    "2026_27": 14650
+   },
+   "students_per_fte": {
+    "2022_23": 5.7,
+    "2023_24": 6.2,
+    "2024_25": 4.9,
+    "2025_26": 4.7,
+    "2026_27": 4.9
+   },
+   "enrollment": {
+    "2021_22": 152,
+    "2022_23": 153,
+    "2023_24": 180,
+    "2024_25": 198,
+    "2025_26": 194,
+    "2026_27": 199,
+    "2027_28": 208,
+    "2028_29": 218
+   },
+   "master_name": "Whitman Elementary School",
+   "rs_a": "boundary",
+   "rs_b": "boundary"
+  },
+  {
+   "name": "Sitton",
+   "band": "K-5",
+   "school_type": "K-5 (Spanish Immersion) Title I",
+   "title_i": true,
+   "proficient_math_2425": 39,
+   "proficient_ela_2425": 40,
+   "pct_direct_cert_2425": 60,
+   "dollars_per_student": {
+    "2022_23": 11503,
+    "2023_24": 13928,
+    "2024_25": 13049,
+    "2025_26": 13067,
+    "2026_27": 13636
+   },
+   "students_per_fte": {
+    "2022_23": 6.0,
+    "2023_24": 5.5,
+    "2024_25": 5.7,
+    "2025_26": 6.1,
+    "2026_27": 6.1
+   },
+   "enrollment": {
+    "2021_22": 307,
+    "2022_23": 346,
+    "2023_24": 335,
+    "2024_25": 339,
+    "2025_26": 345,
+    "2026_27": 341,
+    "2027_28": 336,
+    "2028_29": 323
+   },
+   "master_name": "Sitton Elementary School",
+   "rs_a": "program_change",
+   "rs_b": "program_change"
+  },
+  {
+   "name": "Marysville",
+   "band": "K-5",
+   "school_type": "K-5 TSI Title I",
+   "title_i": true,
+   "proficient_math_2425": 26,
+   "proficient_ela_2425": 36,
+   "pct_direct_cert_2425": 58,
+   "dollars_per_student": {
+    "2022_23": 13393,
+    "2023_24": 13737,
+    "2024_25": 14518,
+    "2025_26": 12859,
+    "2026_27": 13499
+   },
+   "students_per_fte": {
+    "2022_23": 5.6,
+    "2023_24": 5.7,
+    "2024_25": 6.0,
+    "2025_26": 6.9,
+    "2026_27": 7.0
+   },
+   "enrollment": {
+    "2021_22": 248,
+    "2022_23": 286,
+    "2023_24": 359,
+    "2024_25": 320,
+    "2025_26": 307,
+    "2026_27": 299,
+    "2027_28": 297,
+    "2028_29": 304
+   },
+   "master_name": "Marysville Elementary School",
+   "rs_a": "closes",
+   "rs_b": "closes"
+  },
+  {
+   "name": "Lee",
+   "band": "K-5",
+   "school_type": "K-5 Title I",
+   "title_i": true,
+   "proficient_math_2425": 42,
+   "proficient_ela_2425": 47,
+   "pct_direct_cert_2425": 45,
+   "dollars_per_student": {
+    "2022_23": 11036,
+    "2023_24": 12228,
+    "2024_25": 13794,
+    "2025_26": 13238,
+    "2026_27": 13472
+   },
+   "students_per_fte": {
+    "2022_23": 6.1,
+    "2023_24": 6.3,
+    "2024_25": 4.8,
+    "2025_26": 5.5,
+    "2026_27": 5.7
+   },
+   "enrollment": {
+    "2021_22": 236,
+    "2022_23": 276,
+    "2023_24": 288,
+    "2024_25": 257,
+    "2025_26": 251,
+    "2026_27": 255,
+    "2027_28": 248,
+    "2028_29": 251
+   },
+   "master_name": "Lee Elementary School",
+   "rs_a": null,
+   "rs_b": null
+  },
+  {
+   "name": "Boise-Eliot/Humboldt",
+   "band": "K-5",
+   "school_type": "K-5 TSI Title I",
+   "title_i": true,
+   "proficient_math_2425": 15,
+   "proficient_ela_2425": 20,
+   "pct_direct_cert_2425": 62,
+   "dollars_per_student": {
+    "2022_23": 14327,
+    "2023_24": 13578,
+    "2024_25": 13229,
+    "2025_26": 14090,
+    "2026_27": 13372
+   },
+   "students_per_fte": {
+    "2022_23": 5.2,
+    "2023_24": 5.4,
+    "2024_25": 5.8,
+    "2025_26": 5.7,
+    "2026_27": 6.1
+   },
+   "enrollment": {
+    "2021_22": 321,
+    "2022_23": 327,
+    "2023_24": 308,
+    "2024_25": 315,
+    "2025_26": 294,
+    "2026_27": 295,
+    "2027_28": 298,
+    "2028_29": 306
+   },
+   "master_name": "Boise-Eliot Elementary School",
+   "rs_a": "program_change",
+   "rs_b": "program_change"
+  },
+  {
+   "name": "James John",
+   "band": "K-5",
+   "school_type": "K-5 (Spanish Immersion) Title I",
+   "title_i": true,
+   "proficient_math_2425": 23,
+   "proficient_ela_2425": 33,
+   "pct_direct_cert_2425": 54,
+   "dollars_per_student": {
+    "2022_23": 12686,
+    "2023_24": 13446,
+    "2024_25": 12059,
+    "2025_26": 12705,
+    "2026_27": 13108
+   },
+   "students_per_fte": {
+    "2022_23": 5.9,
+    "2023_24": 6.5,
+    "2024_25": 7.7,
+    "2025_26": 7.5,
+    "2026_27": 8.0
+   },
+   "enrollment": {
+    "2021_22": 332,
+    "2022_23": 337,
+    "2023_24": 348,
+    "2024_25": 367,
+    "2025_26": 365,
+    "2026_27": 361,
+    "2027_28": 358,
+    "2028_29": 369
+   },
+   "master_name": "James John Elementary School",
+   "rs_a": "closes",
+   "rs_b": "closes"
+  },
+  {
+   "name": "Beach",
+   "band": "K-5",
+   "school_type": "K-5 (Spanish Immersion) Title I",
+   "title_i": true,
+   "proficient_math_2425": 50,
+   "proficient_ela_2425": 55,
+   "pct_direct_cert_2425": 34,
+   "dollars_per_student": {
+    "2022_23": 9203,
+    "2023_24": 10476,
+    "2024_25": 12711,
+    "2025_26": 12123,
+    "2026_27": 13011
+   },
+   "students_per_fte": {
+    "2022_23": 9.3,
+    "2023_24": 8.0,
+    "2024_25": 7.8,
+    "2025_26": 9.0,
+    "2026_27": 8.7
+   },
+   "enrollment": {
+    "2021_22": 351,
+    "2022_23": 346,
+    "2023_24": 325,
+    "2024_25": 295,
+    "2025_26": 288,
+    "2026_27": 284,
+    "2027_28": 280,
+    "2028_29": 284
+   },
+   "master_name": "Beach Elementary School",
+   "rs_a": "closes",
+   "rs_b": "closes"
+  },
+  {
+   "name": "Arleta",
+   "band": "K-5",
+   "school_type": "K-5 Title I",
+   "title_i": true,
+   "proficient_math_2425": 47,
+   "proficient_ela_2425": 47,
+   "pct_direct_cert_2425": 24,
+   "dollars_per_student": {
+    "2022_23": 10516,
+    "2023_24": 11169,
+    "2024_25": 12002,
+    "2025_26": 13693,
+    "2026_27": 12903
+   },
+   "students_per_fte": {
+    "2022_23": 6.5,
+    "2023_24": 6.9,
+    "2024_25": 7.3,
+    "2025_26": 7.0,
+    "2026_27": 7.3
+   },
+   "enrollment": {
+    "2021_22": 269,
+    "2022_23": 256,
+    "2023_24": 274,
+    "2024_25": 252,
+    "2025_26": 230,
+    "2026_27": 217,
+    "2027_28": 217,
+    "2028_29": 219
+   },
+   "master_name": "Arleta Elementary School",
+   "rs_a": "boundary",
+   "rs_b": "boundary"
+  },
+  {
+   "name": "Grout",
+   "band": "K-5",
+   "school_type": "K-5 Title I",
+   "title_i": true,
+   "proficient_math_2425": 53,
+   "proficient_ela_2425": 56,
+   "pct_direct_cert_2425": 51,
+   "dollars_per_student": {
+    "2022_23": 11033,
+    "2023_24": 12144,
+    "2024_25": 12785,
+    "2025_26": 12355,
+    "2026_27": 12871
+   },
+   "students_per_fte": {
+    "2022_23": 6.7,
+    "2023_24": 6.9,
+    "2024_25": 6.3,
+    "2025_26": 6.9,
+    "2026_27": 6.6
+   },
+   "enrollment": {
+    "2021_22": 340,
+    "2022_23": 316,
+    "2023_24": 302,
+    "2024_25": 294,
+    "2025_26": 327,
+    "2026_27": 305,
+    "2027_28": 298,
+    "2028_29": 295
+   },
+   "master_name": "Grout Elementary School",
+   "rs_a": null,
+   "rs_b": null
+  },
+  {
+   "name": "Clark",
+   "band": "K-5",
+   "school_type": "K-5 Title I",
+   "title_i": true,
+   "proficient_math_2425": 20,
+   "proficient_ela_2425": 23,
+   "pct_direct_cert_2425": 67,
+   "dollars_per_student": {
+    "2022_23": null,
+    "2023_24": 13584,
+    "2024_25": 13817,
+    "2025_26": 13065,
+    "2026_27": 12829
+   },
+   "students_per_fte": {
+    "2022_23": null,
+    "2023_24": 6.8,
+    "2024_25": 7.0,
+    "2025_26": 8.1,
+    "2026_27": 8.2
+   },
+   "enrollment": {
+    "2021_22": null,
+    "2022_23": null,
+    "2023_24": 341,
+    "2024_25": 331,
+    "2025_26": 364,
+    "2026_27": 366,
+    "2027_28": 365,
+    "2028_29": 360
+   },
+   "master_name": "Clark Elementary School",
+   "rs_a": "program_change",
+   "rs_b": "program_change"
+  },
+  {
+   "name": "Lent",
+   "band": "K-5",
+   "school_type": "K-5 (Spanish Immersion) Title I",
+   "title_i": true,
+   "proficient_math_2425": 37,
+   "proficient_ela_2425": 47,
+   "pct_direct_cert_2425": 46,
+   "dollars_per_student": {
+    "2022_23": 15213,
+    "2023_24": 14005,
+    "2024_25": 14161,
+    "2025_26": 13468,
+    "2026_27": 12812
+   },
+   "students_per_fte": {
+    "2022_23": 4.6,
+    "2023_24": 5.8,
+    "2024_25": 6.0,
+    "2025_26": 6.6,
+    "2026_27": 7.1
+   },
+   "enrollment": {
+    "2021_22": 277,
+    "2022_23": 251,
+    "2023_24": 273,
+    "2024_25": 256,
+    "2025_26": 256,
+    "2026_27": 253,
+    "2027_28": 256,
+    "2028_29": 268
+   },
+   "master_name": "Lent Elementary School",
+   "rs_a": "program_change",
+   "rs_b": "program_change"
+  },
+  {
+   "name": "Scott",
+   "band": "K-5",
+   "school_type": "K-5 (Spanish Immersion) Title I",
+   "title_i": true,
+   "proficient_math_2425": 37,
+   "proficient_ela_2425": 41,
+   "pct_direct_cert_2425": 51,
+   "dollars_per_student": {
+    "2022_23": 11291,
+    "2023_24": 11623,
+    "2024_25": 11885,
+    "2025_26": 11879,
+    "2026_27": 12764
+   },
+   "students_per_fte": {
+    "2022_23": 6.7,
+    "2023_24": 7.4,
+    "2024_25": 7.9,
+    "2025_26": 8.5,
+    "2026_27": 8.5
+   },
+   "enrollment": {
+    "2021_22": 429,
+    "2022_23": 453,
+    "2023_24": 500,
+    "2024_25": 494,
+    "2025_26": 476,
+    "2026_27": 477,
+    "2027_28": 479,
+    "2028_29": 469
+   },
+   "master_name": "Scott Elementary School",
+   "rs_a": "program_change",
+   "rs_b": "program_change"
+  },
+  {
+   "name": "Kelly",
+   "band": "K-5",
+   "school_type": "K-5 (Russian Immersion) Title I",
+   "title_i": true,
+   "proficient_math_2425": 29,
+   "proficient_ela_2425": 30,
+   "pct_direct_cert_2425": 67,
+   "dollars_per_student": {
+    "2022_23": 12569,
+    "2023_24": 12310,
+    "2024_25": 12334,
+    "2025_26": 12588,
+    "2026_27": 12271
+   },
+   "students_per_fte": {
+    "2022_23": 6.8,
+    "2023_24": 7.1,
+    "2024_25": 7.9,
+    "2025_26": 8.3,
+    "2026_27": 9.1
+   },
+   "enrollment": {
+    "2021_22": 372,
+    "2022_23": 356,
+    "2023_24": 376,
+    "2024_25": 385,
+    "2025_26": 411,
+    "2026_27": 414,
+    "2027_28": 404,
+    "2028_29": 407
+   },
+   "master_name": "Kelly Elementary School",
+   "rs_a": "boundary",
+   "rs_b": "boundary"
+  },
+  {
+   "name": "MLK Jr",
+   "band": "K-5",
+   "school_type": "K-5 (Mandarin Immersion) Title I",
+   "title_i": true,
+   "proficient_math_2425": 34,
+   "proficient_ela_2425": 39,
+   "pct_direct_cert_2425": 51,
+   "dollars_per_student": {
+    "2022_23": 14736,
+    "2023_24": 13926,
+    "2024_25": 12980,
+    "2025_26": 13676,
+    "2026_27": 12265
+   },
+   "students_per_fte": {
+    "2022_23": 6.2,
+    "2023_24": 6.1,
+    "2024_25": 5.2,
+    "2025_26": 5.3,
+    "2026_27": 5.8
+   },
+   "enrollment": {
+    "2021_22": 297,
+    "2022_23": 302,
+    "2023_24": 307,
+    "2024_25": 312,
+    "2025_26": 319,
+    "2026_27": 314,
+    "2027_28": 334,
+    "2028_29": 344
+   },
+   "master_name": "Dr. Martin Luther King Jr. School",
+   "rs_a": "program_change",
+   "rs_b": "program_change"
+  },
+  {
+   "name": "Buckman",
+   "band": "K-5",
+   "school_type": "K-5 (Arts Focus) Title I",
+   "title_i": true,
+   "proficient_math_2425": 44,
+   "proficient_ela_2425": 54,
+   "pct_direct_cert_2425": 36,
+   "dollars_per_student": {
+    "2022_23": 9358,
+    "2023_24": 10419,
+    "2024_25": 11350,
+    "2025_26": 13074,
+    "2026_27": 12261
+   },
+   "students_per_fte": {
+    "2022_23": 8.4,
+    "2023_24": 8.2,
+    "2024_25": 7.5,
+    "2025_26": 6.9,
+    "2026_27": 7.0
+   },
+   "enrollment": {
+    "2021_22": 400,
+    "2022_23": 395,
+    "2023_24": 371,
+    "2024_25": 308,
+    "2025_26": 283,
+    "2026_27": 260,
+    "2027_28": 247,
+    "2028_29": 249
+   },
+   "master_name": "Buckman Elementary School",
+   "rs_a": "closes",
+   "rs_b": "closes"
+  },
+  {
+   "name": "Abernethy",
+   "band": "K-5",
+   "school_type": "K-5",
+   "title_i": false,
+   "proficient_math_2425": 77,
+   "proficient_ela_2425": 82,
+   "pct_direct_cert_2425": 11,
+   "dollars_per_student": {
+    "2022_23": 9445,
+    "2023_24": 10048,
+    "2024_25": 10813,
+    "2025_26": 11286,
+    "2026_27": 12126
+   },
+   "students_per_fte": {
+    "2022_23": 10.3,
+    "2023_24": 9.7,
+    "2024_25": 10.2,
+    "2025_26": 9.8,
+    "2026_27": 10.1
+   },
+   "enrollment": {
+    "2021_22": 374,
+    "2022_23": 353,
+    "2023_24": 330,
+    "2024_25": 284,
+    "2025_26": 269,
+    "2026_27": 250,
+    "2027_28": 243,
+    "2028_29": 244
+   },
+   "master_name": "Abernethy Elementary School",
+   "rs_a": "boundary",
+   "rs_b": "boundary"
+  },
+  {
+   "name": "Vestal",
+   "band": "K-5",
+   "school_type": "K-5 Title I",
+   "title_i": true,
+   "proficient_math_2425": 31,
+   "proficient_ela_2425": 37,
+   "pct_direct_cert_2425": 43,
+   "dollars_per_student": {
+    "2022_23": 12640,
+    "2023_24": 14121,
+    "2024_25": 12416,
+    "2025_26": 12132,
+    "2026_27": 12042
+   },
+   "students_per_fte": {
+    "2022_23": 5.1,
+    "2023_24": 4.7,
+    "2024_25": 6.3,
+    "2025_26": 7.0,
+    "2026_27": 7.1
+   },
+   "enrollment": {
+    "2021_22": 207,
+    "2022_23": 232,
+    "2023_24": 228,
+    "2024_25": 257,
+    "2025_26": 283,
+    "2026_27": 290,
+    "2027_28": 308,
+    "2028_29": 305
+   },
+   "master_name": "Vestal Elementary School",
+   "rs_a": "program_change",
+   "rs_b": null
+  },
+  {
+   "name": "Peninsula",
+   "band": "K-5",
+   "school_type": "K-5 Title I",
+   "title_i": true,
+   "proficient_math_2425": 37,
+   "proficient_ela_2425": 51,
+   "pct_direct_cert_2425": 38,
+   "dollars_per_student": {
+    "2022_23": 12774,
+    "2023_24": 12729,
+    "2024_25": 13675,
+    "2025_26": 13776,
+    "2026_27": 12002
+   },
+   "students_per_fte": {
+    "2022_23": 5.3,
+    "2023_24": 5.7,
+    "2024_25": 5.5,
+    "2025_26": 5.7,
+    "2026_27": 6.6
+   },
+   "enrollment": {
+    "2021_22": 201,
+    "2022_23": 225,
+    "2023_24": 234,
+    "2024_25": 235,
+    "2025_26": 239,
+    "2026_27": 255,
+    "2027_28": 252,
+    "2028_29": 253
+   },
+   "master_name": "Peninsula Elementary School",
+   "rs_a": "closes",
+   "rs_b": "closes"
+  },
+  {
+   "name": "Lewis",
+   "band": "K-5",
+   "school_type": "K-5",
+   "title_i": false,
+   "proficient_math_2425": 59,
+   "proficient_ela_2425": 66,
+   "pct_direct_cert_2425": 22,
+   "dollars_per_student": {
+    "2022_23": 9109,
+    "2023_24": 10183,
+    "2024_25": 10673,
+    "2025_26": 11181,
+    "2026_27": 11836
+   },
+   "students_per_fte": {
+    "2022_23": 9.6,
+    "2023_24": 9.3,
+    "2024_25": 9.8,
+    "2025_26": 9.9,
+    "2026_27": 9.7
+   },
+   "enrollment": {
+    "2021_22": 337,
+    "2022_23": 320,
+    "2023_24": 298,
+    "2024_25": 264,
+    "2025_26": 259,
+    "2026_27": 244,
+    "2027_28": 225,
+    "2028_29": 208
+   },
+   "master_name": "Lewis Elementary School",
+   "rs_a": "closes",
+   "rs_b": "boundary"
+  },
+  {
+   "name": "Rigler",
+   "band": "K-5",
+   "school_type": "K-5 (Spanish Immersion) Title I",
+   "title_i": true,
+   "proficient_math_2425": 36,
+   "proficient_ela_2425": 36,
+   "pct_direct_cert_2425": 53,
+   "dollars_per_student": {
+    "2022_23": 14240,
+    "2023_24": 13681,
+    "2024_25": 12445,
+    "2025_26": 13783,
+    "2026_27": 11820
+   },
+   "students_per_fte": {
+    "2022_23": 5.7,
+    "2023_24": 6.5,
+    "2024_25": 7.7,
+    "2025_26": 7.5,
+    "2026_27": 8.8
+   },
+   "enrollment": {
+    "2021_22": 237,
+    "2022_23": 223,
+    "2023_24": 255,
+    "2024_25": 301,
+    "2025_26": 289,
+    "2026_27": 302,
+    "2027_28": 307,
+    "2028_29": 330
+   },
+   "master_name": "Rigler Elementary School",
+   "rs_a": "program_change",
+   "rs_b": "program_change"
+  },
+  {
+   "name": "Chapman",
+   "band": "K-5",
+   "school_type": "K-5 TSI Title I",
+   "title_i": true,
+   "proficient_math_2425": 40,
+   "proficient_ela_2425": 46,
+   "pct_direct_cert_2425": 52,
+   "dollars_per_student": {
+    "2022_23": 10715,
+    "2023_24": 11881,
+    "2024_25": 11335,
+    "2025_26": 12166,
+    "2026_27": 11779
+   },
+   "students_per_fte": {
+    "2022_23": 8.7,
+    "2023_24": 8.3,
+    "2024_25": 8.4,
+    "2025_26": 8.9,
+    "2026_27": 9.5
+   },
+   "enrollment": {
+    "2021_22": 341,
+    "2022_23": 350,
+    "2023_24": 344,
+    "2024_25": 349,
+    "2025_26": 330,
+    "2026_27": 336,
+    "2027_28": 318,
+    "2028_29": 325
+   },
+   "master_name": "Chapman Elementary School",
+   "rs_a": null,
+   "rs_b": null
+  },
+  {
+   "name": "Woodlawn",
+   "band": "K-5",
+   "school_type": "K-5 Title I",
+   "title_i": true,
+   "proficient_math_2425": 53,
+   "proficient_ela_2425": 52,
+   "pct_direct_cert_2425": 44,
+   "dollars_per_student": {
+    "2022_23": 11567,
+    "2023_24": 12598,
+    "2024_25": 12121,
+    "2025_26": 12434,
+    "2026_27": 11743
+   },
+   "students_per_fte": {
+    "2022_23": 6.3,
+    "2023_24": 6.4,
+    "2024_25": 6.8,
+    "2025_26": 7.0,
+    "2026_27": 7.4
+   },
+   "enrollment": {
+    "2021_22": 283,
+    "2022_23": 288,
+    "2023_24": 299,
+    "2024_25": 306,
+    "2025_26": 323,
+    "2026_27": 320,
+    "2027_28": 300,
+    "2028_29": 316
+   },
+   "master_name": "Woodlawn Elementary School",
+   "rs_a": null,
+   "rs_b": null
+  },
+  {
+   "name": "Rieke",
+   "band": "K-5",
+   "school_type": "K-5",
+   "title_i": false,
+   "proficient_math_2425": 83,
+   "proficient_ela_2425": 85,
+   "pct_direct_cert_2425": 15,
+   "dollars_per_student": {
+    "2022_23": 8766,
+    "2023_24": 10277,
+    "2024_25": 10844,
+    "2025_26": 11357,
+    "2026_27": 11617
+   },
+   "students_per_fte": {
+    "2022_23": 11.6,
+    "2023_24": 11.0,
+    "2024_25": 11.6,
+    "2025_26": 11.5,
+    "2026_27": 11.6
+   },
+   "enrollment": {
+    "2021_22": 313,
+    "2022_23": 300,
+    "2023_24": 288,
+    "2024_25": 278,
+    "2025_26": 264,
+    "2026_27": 255,
+    "2027_28": 252,
+    "2028_29": 272
+   },
+   "master_name": "Rieke Elementary School",
+   "rs_a": "boundary",
+   "rs_b": "boundary"
+  },
+  {
+   "name": "Irvington",
+   "band": "K-5",
+   "school_type": "K-5",
+   "title_i": false,
+   "proficient_math_2425": 58,
+   "proficient_ela_2425": 66,
+   "pct_direct_cert_2425": 20,
+   "dollars_per_student": {
+    "2022_23": 11936,
+    "2023_24": 12538,
+    "2024_25": 11753,
+    "2025_26": 11021,
+    "2026_27": 11609
+   },
+   "students_per_fte": {
+    "2022_23": 7.9,
+    "2023_24": 8.4,
+    "2024_25": 8.8,
+    "2025_26": 10.2,
+    "2026_27": 10.1
+   },
+   "enrollment": {
+    "2021_22": 248,
+    "2022_23": 228,
+    "2023_24": 235,
+    "2024_25": 249,
+    "2025_26": 259,
+    "2026_27": 251,
+    "2027_28": 243,
+    "2028_29": 239
+   },
+   "master_name": "Irvington Elementary School",
+   "rs_a": "closes",
+   "rs_b": "closes"
+  },
+  {
+   "name": "Woodstock",
+   "band": "K-5",
+   "school_type": "K-5 (Mandarin Immersion)",
+   "title_i": false,
+   "proficient_math_2425": 62,
+   "proficient_ela_2425": 64,
+   "pct_direct_cert_2425": 23,
+   "dollars_per_student": {
+    "2022_23": 8755,
+    "2023_24": 10580,
+    "2024_25": 11638,
+    "2025_26": 10958,
+    "2026_27": 11492
+   },
+   "students_per_fte": {
+    "2022_23": 11.7,
+    "2023_24": 10.4,
+    "2024_25": 10.1,
+    "2025_26": 10.2,
+    "2026_27": 10.3
+   },
+   "enrollment": {
+    "2021_22": 479,
+    "2022_23": 491,
+    "2023_24": 451,
+    "2024_25": 394,
+    "2025_26": 367,
+    "2026_27": 353,
+    "2027_28": 343,
+    "2028_29": 344
+   },
+   "master_name": "Woodstock Elementary School",
+   "rs_a": "program_change",
+   "rs_b": "program_change"
+  },
+  {
+   "name": "Creston",
+   "band": "K-5",
+   "school_type": "K-5",
+   "title_i": false,
+   "proficient_math_2425": 67,
+   "proficient_ela_2425": 66,
+   "pct_direct_cert_2425": 23,
+   "dollars_per_student": {
+    "2022_23": 10183,
+    "2023_24": 12686,
+    "2024_25": 12955,
+    "2025_26": 13428,
+    "2026_27": 11467
+   },
+   "students_per_fte": {
+    "2022_23": 8.7,
+    "2023_24": 7.8,
+    "2024_25": 8.0,
+    "2025_26": 8.1,
+    "2026_27": 8.8
+   },
+   "enrollment": {
+    "2021_22": 250,
+    "2022_23": 260,
+    "2023_24": 238,
+    "2024_25": 241,
+    "2025_26": 213,
+    "2026_27": 199,
+    "2027_28": 187,
+    "2028_29": 177
+   },
+   "master_name": "Creston Elementary School",
+   "rs_a": "closes",
+   "rs_b": "closes"
+  },
+  {
+   "name": "Maplewood",
+   "band": "K-5",
+   "school_type": "K-5",
+   "title_i": false,
+   "proficient_math_2425": 60,
+   "proficient_ela_2425": 62,
+   "pct_direct_cert_2425": 19,
+   "dollars_per_student": {
+    "2022_23": 9141,
+    "2023_24": 9787,
+    "2024_25": 10204,
+    "2025_26": 10826,
+    "2026_27": 11280
+   },
+   "students_per_fte": {
+    "2022_23": 10.3,
+    "2023_24": 9.9,
+    "2024_25": 9.2,
+    "2025_26": 8.9,
+    "2026_27": 9.4
+   },
+   "enrollment": {
+    "2021_22": 291,
+    "2022_23": 310,
+    "2023_24": 301,
+    "2024_25": 295,
+    "2025_26": 287,
+    "2026_27": 288,
+    "2027_28": 279,
+    "2028_29": 266
+   },
+   "master_name": "Maplewood Elementary School",
+   "rs_a": "closes",
+   "rs_b": "closes"
+  },
+  {
+   "name": "Chief Joseph",
+   "band": "K-5",
+   "school_type": "K-5",
+   "title_i": false,
+   "proficient_math_2425": 55,
+   "proficient_ela_2425": 63,
+   "pct_direct_cert_2425": 22,
+   "dollars_per_student": {
+    "2022_23": 10851,
+    "2023_24": 11382,
+    "2024_25": 11034,
+    "2025_26": 12724,
+    "2026_27": 11188
+   },
+   "students_per_fte": {
+    "2022_23": 8.8,
+    "2023_24": 9.1,
+    "2024_25": 10.0,
+    "2025_26": 9.3,
+    "2026_27": 10.1
+   },
+   "enrollment": {
+    "2021_22": 269,
+    "2022_23": 261,
+    "2023_24": 265,
+    "2024_25": 275,
+    "2025_26": 242,
+    "2026_27": 242,
+    "2027_28": 248,
+    "2028_29": 251
+   },
+   "master_name": "Chief Joseph Elementary School",
+   "rs_a": "boundary",
+   "rs_b": "boundary"
+  },
+  {
+   "name": "Rose City Park",
+   "band": "K-5",
+   "school_type": "K-5 (Vietnamese Immersion)",
+   "title_i": false,
+   "proficient_math_2425": 56,
+   "proficient_ela_2425": 53,
+   "pct_direct_cert_2425": 32,
+   "dollars_per_student": {
+    "2022_23": 9400,
+    "2023_24": 9920,
+    "2024_25": 10301,
+    "2025_26": 11106,
+    "2026_27": 11093
+   },
+   "students_per_fte": {
+    "2022_23": 10.2,
+    "2023_24": 10.0,
+    "2024_25": 10.9,
+    "2025_26": 11.1,
+    "2026_27": 11.3
+   },
+   "enrollment": {
+    "2021_22": 464,
+    "2022_23": 468,
+    "2023_24": 464,
+    "2024_25": 446,
+    "2025_26": 417,
+    "2026_27": 398,
+    "2027_28": 392,
+    "2028_29": 369
+   },
+   "master_name": "Rose City Park",
+   "rs_a": "closes",
+   "rs_b": null
+  },
+  {
+   "name": "Markham",
+   "band": "K-5",
+   "school_type": "K-5 Title I",
+   "title_i": true,
+   "proficient_math_2425": 54,
+   "proficient_ela_2425": 61,
+   "pct_direct_cert_2425": 38,
+   "dollars_per_student": {
+    "2022_23": 8414,
+    "2023_24": 9547,
+    "2024_25": 10607,
+    "2025_26": 9988,
+    "2026_27": 11053
+   },
+   "students_per_fte": {
+    "2022_23": 9.3,
+    "2023_24": 8.6,
+    "2024_25": 8.4,
+    "2025_26": 9.3,
+    "2026_27": 8.6
+   },
+   "enrollment": {
+    "2021_22": 424,
+    "2022_23": 426,
+    "2023_24": 402,
+    "2024_25": 341,
+    "2025_26": 339,
+    "2026_27": 327,
+    "2027_28": 315,
+    "2028_29": 325
+   },
+   "master_name": "Markham Elementary School",
+   "rs_a": "boundary",
+   "rs_b": null
+  },
+  {
+   "name": "Atkinson",
+   "band": "K-5",
+   "school_type": "K-5 (Spanish Immersion) Title I",
+   "title_i": true,
+   "proficient_math_2425": 54,
+   "proficient_ela_2425": 61,
+   "pct_direct_cert_2425": 32,
+   "dollars_per_student": {
+    "2022_23": 9480,
+    "2023_24": 9520,
+    "2024_25": 9911,
+    "2025_26": 11563,
+    "2026_27": 10949
+   },
+   "students_per_fte": {
+    "2022_23": 7.8,
+    "2023_24": 8.3,
+    "2024_25": 8.4,
+    "2025_26": 7.6,
+    "2026_27": 8.2
+   },
+   "enrollment": {
+    "2021_22": 342,
+    "2022_23": 337,
+    "2023_24": 366,
+    "2024_25": 373,
+    "2025_26": 366,
+    "2026_27": 358,
+    "2027_28": 366,
+    "2028_29": 379
+   },
+   "master_name": "Atkinson Elementary School",
+   "rs_a": "program_change",
+   "rs_b": "program_change"
+  },
+  {
+   "name": "Glencoe",
+   "band": "K-5",
+   "school_type": "K-5",
+   "title_i": false,
+   "proficient_math_2425": 75,
+   "proficient_ela_2425": 79,
+   "pct_direct_cert_2425": 17,
+   "dollars_per_student": {
+    "2022_23": 8617,
+    "2023_24": 9894,
+    "2024_25": 10096,
+    "2025_26": 10118,
+    "2026_27": 10907
+   },
+   "students_per_fte": {
+    "2022_23": 11.3,
+    "2023_24": 10.4,
+    "2024_25": 12.6,
+    "2025_26": 12.6,
+    "2026_27": 12.4
+   },
+   "enrollment": {
+    "2021_22": 373,
+    "2022_23": 394,
+    "2023_24": 372,
+    "2024_25": 356,
+    "2025_26": 339,
+    "2026_27": 328,
+    "2027_28": 314,
+    "2028_29": 295
+   },
+   "master_name": "Glencoe Elementary School",
+   "rs_a": "program_change",
+   "rs_b": "program_change"
+  },
+  {
+   "name": "Sabin",
+   "band": "K-5",
+   "school_type": "K-5",
+   "title_i": false,
+   "proficient_math_2425": 57,
+   "proficient_ela_2425": 65,
+   "pct_direct_cert_2425": 28,
+   "dollars_per_student": {
+    "2022_23": 9846,
+    "2023_24": 10739,
+    "2024_25": 11521,
+    "2025_26": 11552,
+    "2026_27": 10782
+   },
+   "students_per_fte": {
+    "2022_23": 7.4,
+    "2023_24": 6.8,
+    "2024_25": 7.4,
+    "2025_26": 7.4,
+    "2026_27": 8.0
+   },
+   "enrollment": {
+    "2021_22": 340,
+    "2022_23": 312,
+    "2023_24": 302,
+    "2024_25": 293,
+    "2025_26": 269,
+    "2026_27": 259,
+    "2027_28": 238,
+    "2028_29": 250
+   },
+   "master_name": "Sabin Elementary School",
+   "rs_a": "closes",
+   "rs_b": "closes"
+  },
+  {
+   "name": "Forest Park",
+   "band": "K-5",
+   "school_type": "K-5",
+   "title_i": false,
+   "proficient_math_2425": 78,
+   "proficient_ela_2425": 84,
+   "pct_direct_cert_2425": 6,
+   "dollars_per_student": {
+    "2022_23": 8203,
+    "2023_24": 9467,
+    "2024_25": 9725,
+    "2025_26": 11047,
+    "2026_27": 10700
+   },
+   "students_per_fte": {
+    "2022_23": 10.7,
+    "2023_24": 11.1,
+    "2024_25": 10.9,
+    "2025_26": 11.3,
+    "2026_27": 12.0
+   },
+   "enrollment": {
+    "2021_22": 333,
+    "2022_23": 328,
+    "2023_24": 321,
+    "2024_25": 303,
+    "2025_26": 264,
+    "2026_27": 260,
+    "2027_28": 261,
+    "2028_29": 261
+   },
+   "master_name": "Forest Park Elementary School",
+   "rs_a": null,
+   "rs_b": null
+  },
+  {
+   "name": "Llewellyn",
+   "band": "K-5",
+   "school_type": "K-5",
+   "title_i": false,
+   "proficient_math_2425": 76,
+   "proficient_ela_2425": 77,
+   "pct_direct_cert_2425": 13,
+   "dollars_per_student": {
+    "2022_23": 7906,
+    "2023_24": 10104,
+    "2024_25": 9890,
+    "2025_26": 10584,
+    "2026_27": 10690
+   },
+   "students_per_fte": {
+    "2022_23": 10.4,
+    "2023_24": 8.9,
+    "2024_25": 9.0,
+    "2025_26": 9.0,
+    "2026_27": 9.4
+   },
+   "enrollment": {
+    "2021_22": 395,
+    "2022_23": 415,
+    "2023_24": 393,
+    "2024_25": 373,
+    "2025_26": 345,
+    "2026_27": 333,
+    "2027_28": 312,
+    "2028_29": 304
+   },
+   "master_name": "Llewellyn Elementary School",
+   "rs_a": "boundary",
+   "rs_b": null
+  },
+  {
+   "name": "Stephenson",
+   "band": "K-5",
+   "school_type": "K-5",
+   "title_i": false,
+   "proficient_math_2425": 77,
+   "proficient_ela_2425": 78,
+   "pct_direct_cert_2425": 9,
+   "dollars_per_student": {
+    "2022_23": 8229,
+    "2023_24": 9691,
+    "2024_25": 9522,
+    "2025_26": 10932,
+    "2026_27": 10586
+   },
+   "students_per_fte": {
+    "2022_23": 10.5,
+    "2023_24": 10.1,
+    "2024_25": 9.7,
+    "2025_26": 9.8,
+    "2026_27": 10.0
+   },
+   "enrollment": {
+    "2021_22": 320,
+    "2022_23": 307,
+    "2023_24": 310,
+    "2024_25": 285,
+    "2025_26": 281,
+    "2026_27": 270,
+    "2027_28": 275,
+    "2028_29": 269
+   },
+   "master_name": "Stephenson Elementary School",
+   "rs_a": "closes",
+   "rs_b": null
+  },
+  {
+   "name": "Hayhurst",
+   "band": "K-5",
+   "school_type": "K-5",
+   "title_i": false,
+   "proficient_math_2425": 55,
+   "proficient_ela_2425": 60,
+   "pct_direct_cert_2425": 26,
+   "dollars_per_student": {
+    "2022_23": 7868,
+    "2023_24": 9615,
+    "2024_25": 10653,
+    "2025_26": 10596,
+    "2026_27": 10194
+   },
+   "students_per_fte": {
+    "2022_23": 8.6,
+    "2023_24": 8.4,
+    "2024_25": 7.8,
+    "2025_26": 7.9,
+    "2026_27": 8.3
+   },
+   "enrollment": {
+    "2021_22": 351,
+    "2022_23": 350,
+    "2023_24": 335,
+    "2024_25": 314,
+    "2025_26": 290,
+    "2026_27": 284,
+    "2027_28": 276,
+    "2028_29": 273
+   },
+   "master_name": "Hayhurst Elementary School",
+   "rs_a": "boundary",
+   "rs_b": "boundary"
+  },
+  {
+   "name": "Bridlemile",
+   "band": "K-5",
+   "school_type": "K-5",
+   "title_i": false,
+   "proficient_math_2425": 74,
+   "proficient_ela_2425": 78,
+   "pct_direct_cert_2425": 13,
+   "dollars_per_student": {
+    "2022_23": 7314,
+    "2023_24": 8813,
+    "2024_25": 9457,
+    "2025_26": 9263,
+    "2026_27": 9667
+   },
+   "students_per_fte": {
+    "2022_23": 10.8,
+    "2023_24": 10.1,
+    "2024_25": 9.5,
+    "2025_26": 10.2,
+    "2026_27": 10.8
+   },
+   "enrollment": {
+    "2021_22": 435,
+    "2022_23": 458,
+    "2023_24": 446,
+    "2024_25": 419,
+    "2025_26": 423,
+    "2026_27": 414,
+    "2027_28": 416,
+    "2028_29": 411
+   },
+   "master_name": "Bridlemile Elementary School",
+   "rs_a": null,
+   "rs_b": null
+  },
+  {
+   "name": "Capitol Hill",
+   "band": "K-5",
+   "school_type": "K-5",
+   "title_i": false,
+   "proficient_math_2425": 62,
+   "proficient_ela_2425": 68,
+   "pct_direct_cert_2425": 18,
+   "dollars_per_student": {
+    "2022_23": 8439,
+    "2023_24": 9192,
+    "2024_25": 10575,
+    "2025_26": 9867,
+    "2026_27": 9643
+   },
+   "students_per_fte": {
+    "2022_23": 11.8,
+    "2023_24": 11.5,
+    "2024_25": 10.9,
+    "2025_26": 11.8,
+    "2026_27": 12.9
+   },
+   "enrollment": {
+    "2021_22": 324,
+    "2022_23": 333,
+    "2023_24": 361,
+    "2024_25": 318,
+    "2025_26": 325,
+    "2026_27": 322,
+    "2027_28": 313,
+    "2028_29": 303
+   },
+   "master_name": "Capitol Hill Elementary School",
+   "rs_a": "boundary",
+   "rs_b": null
+  },
+  {
+   "name": "Ainsworth",
+   "band": "K-5",
+   "school_type": "K-5 (Spanish Immersion)",
+   "title_i": false,
+   "proficient_math_2425": 76,
+   "proficient_ela_2425": 79,
+   "pct_direct_cert_2425": 12,
+   "dollars_per_student": {
+    "2022_23": 7743,
+    "2023_24": 8498,
+    "2024_25": 9345,
+    "2025_26": 9754,
+    "2026_27": 9568
+   },
+   "students_per_fte": {
+    "2022_23": 12.0,
+    "2023_24": 12.1,
+    "2024_25": 11.8,
+    "2025_26": 12.0,
+    "2026_27": 13.4
+   },
+   "enrollment": {
+    "2021_22": 553,
+    "2022_23": 563,
+    "2023_24": 585,
+    "2024_25": 584,
+    "2025_26": 560,
+    "2026_27": 556,
+    "2027_28": 558,
+    "2028_29": 574
+   },
+   "master_name": "Ainsworth Elementary School",
+   "rs_a": null,
+   "rs_b": null
+  },
+  {
+   "name": "Duniway",
+   "band": "K-5",
+   "school_type": "K-5",
+   "title_i": false,
+   "proficient_math_2425": 72,
+   "proficient_ela_2425": 70,
+   "pct_direct_cert_2425": 8,
+   "dollars_per_student": {
+    "2022_23": 8188,
+    "2023_24": 9124,
+    "2024_25": 9116,
+    "2025_26": 9826,
+    "2026_27": 9333
+   },
+   "students_per_fte": {
+    "2022_23": 11.1,
+    "2023_24": 11.2,
+    "2024_25": 11.9,
+    "2025_26": 12.3,
+    "2026_27": 13.5
+   },
+   "enrollment": {
+    "2021_22": 436,
+    "2022_23": 422,
+    "2023_24": 409,
+    "2024_25": 387,
+    "2025_26": 362,
+    "2026_27": 364,
+    "2027_28": 342,
+    "2028_29": 352
+   },
+   "master_name": "Duniway Elementary School",
+   "rs_a": "boundary",
+   "rs_b": null
+  },
+  {
+   "name": "Richmond",
+   "band": "K-5",
+   "school_type": "K-5 (Japanese Immersion)",
+   "title_i": false,
+   "proficient_math_2425": 69,
+   "proficient_ela_2425": 74,
+   "pct_direct_cert_2425": 6,
+   "dollars_per_student": {
+    "2022_23": 7688,
+    "2023_24": 7787,
+    "2024_25": 8146,
+    "2025_26": 8969,
+    "2026_27": 8755
+   },
+   "students_per_fte": {
+    "2022_23": 13.1,
+    "2023_24": 13.6,
+    "2024_25": 14.4,
+    "2025_26": 14.0,
+    "2026_27": 14.9
+   },
+   "enrollment": {
+    "2021_22": 551,
+    "2022_23": 539,
+    "2023_24": 537,
+    "2024_25": 530,
+    "2025_26": 512,
+    "2026_27": 505,
+    "2027_28": 504,
+    "2028_29": 502
+   },
+   "master_name": "Richmond Elementary School",
+   "rs_a": null,
+   "rs_b": null
+  },
+  {
+   "name": "Alameda",
+   "band": "K-5",
+   "school_type": "K-5",
+   "title_i": false,
+   "proficient_math_2425": 81,
+   "proficient_ela_2425": 84,
+   "pct_direct_cert_2425": 6,
+   "dollars_per_student": {
+    "2022_23": 7680,
+    "2023_24": 8573,
+    "2024_25": 8738,
+    "2025_26": 8477,
+    "2026_27": 8639
+   },
+   "students_per_fte": {
+    "2022_23": 11.3,
+    "2023_24": 10.5,
+    "2024_25": 10.9,
+    "2025_26": 12.0,
+    "2026_27": 11.9
+   },
+   "enrollment": {
+    "2021_22": 525,
+    "2022_23": 538,
+    "2023_24": 521,
+    "2024_25": 496,
+    "2025_26": 513,
+    "2026_27": 504,
+    "2027_28": 502,
+    "2028_29": 507
+   },
+   "master_name": "Alameda Elementary School",
+   "rs_a": null,
+   "rs_b": null
+  },
+  {
+   "name": "César Chávez",
+   "band": "K-8",
+   "school_type": "K-8 (Spanish Immersion) TSI Title I",
+   "title_i": true,
+   "proficient_math_2425": 13,
+   "proficient_ela_2425": 21,
+   "pct_direct_cert_2425": 65,
+   "dollars_per_student": {
+    "2022_23": 12938,
+    "2023_24": 12333,
+    "2024_25": 13919,
+    "2025_26": 14370,
+    "2026_27": 14443
+   },
+   "students_per_fte": {
+    "2022_23": 6.6,
+    "2023_24": 7.3,
+    "2024_25": 6.9,
+    "2025_26": 7.3,
+    "2026_27": 7.8
+   },
+   "enrollment": {
+    "2021_22": 485,
+    "2022_23": 467,
+    "2023_24": 481,
+    "2024_25": 454,
+    "2025_26": 443,
+    "2026_27": 425,
+    "2027_28": 417,
+    "2028_29": 407
+   },
+   "master_name": "César Chávez K-8 School",
+   "rs_a": "program_change",
+   "rs_b": "program_change"
+  },
+  {
+   "name": "Skyline",
+   "band": "K-8",
+   "school_type": "K-8",
+   "title_i": false,
+   "proficient_math_2425": 63,
+   "proficient_ela_2425": 75,
+   "pct_direct_cert_2425": 13,
+   "dollars_per_student": {
+    "2022_23": 10643,
+    "2023_24": 12634,
+    "2024_25": 11380,
+    "2025_26": 12427,
+    "2026_27": 12962
+   },
+   "students_per_fte": {
+    "2022_23": 9.1,
+    "2023_24": 8.1,
+    "2024_25": 9.5,
+    "2025_26": 9.6,
+    "2026_27": 9.5
+   },
+   "enrollment": {
+    "2021_22": 205,
+    "2022_23": 215,
+    "2023_24": 218,
+    "2024_25": 226,
+    "2025_26": 207,
+    "2026_27": 206,
+    "2027_28": 200,
+    "2028_29": 202
+   },
+   "master_name": "Skyline Elementary School",
+   "rs_a": null,
+   "rs_b": null
+  },
+  {
+   "name": "Faubion",
+   "band": "K-8",
+   "school_type": "K-8 CSI Title I",
+   "title_i": true,
+   "proficient_math_2425": 17,
+   "proficient_ela_2425": 23,
+   "pct_direct_cert_2425": 56,
+   "dollars_per_student": {
+    "2022_23": 12603,
+    "2023_24": 13010,
+    "2024_25": 11916,
+    "2025_26": 12593,
+    "2026_27": 12843
+   },
+   "students_per_fte": {
+    "2022_23": 6.3,
+    "2023_24": 6.1,
+    "2024_25": 5.1,
+    "2025_26": 5.6,
+    "2026_27": 5.5
+   },
+   "enrollment": {
+    "2021_22": 627,
+    "2022_23": 615,
+    "2023_24": 571,
+    "2024_25": 589,
+    "2025_26": 600,
+    "2026_27": 586,
+    "2027_28": 580,
+    "2028_29": 615
+   },
+   "master_name": "Faubion Elementary School",
+   "rs_a": "program_change",
+   "rs_b": "program_change"
+  },
+  {
+   "name": "Astor",
+   "band": "K-8",
+   "school_type": "K-8",
+   "title_i": false,
+   "proficient_math_2425": 47,
+   "proficient_ela_2425": 55,
+   "pct_direct_cert_2425": 29,
+   "dollars_per_student": {
+    "2022_23": 10953,
+    "2023_24": 10813,
+    "2024_25": 10254,
+    "2025_26": 10828,
+    "2026_27": 11438
+   },
+   "students_per_fte": {
+    "2022_23": 7.8,
+    "2023_24": 8.2,
+    "2024_25": 8.6,
+    "2025_26": 8.7,
+    "2026_27": 9.5
+   },
+   "enrollment": {
+    "2021_22": 393,
+    "2022_23": 368,
+    "2023_24": 375,
+    "2024_25": 408,
+    "2025_26": 400,
+    "2026_27": 419,
+    "2027_28": 416,
+    "2028_29": 415
+   },
+   "master_name": "Astor Elementary School",
+   "rs_a": "boundary",
+   "rs_b": "boundary"
+  },
+  {
+   "name": "Odyssey",
+   "band": "K-8",
+   "school_type": "K-8",
+   "title_i": false,
+   "proficient_math_2425": 68,
+   "proficient_ela_2425": 73,
+   "pct_direct_cert_2425": 7,
+   "dollars_per_student": {
+    "2022_23": 9538,
+    "2023_24": 11290,
+    "2024_25": 11031,
+    "2025_26": 11367,
+    "2026_27": 11198
+   },
+   "students_per_fte": {
+    "2022_23": 10.1,
+    "2023_24": 8.4,
+    "2024_25": 9.5,
+    "2025_26": 10.3,
+    "2026_27": 11.0
+   },
+   "enrollment": {
+    "2021_22": 219,
+    "2022_23": 225,
+    "2023_24": 227,
+    "2024_25": 211,
+    "2025_26": 217,
+    "2026_27": 222,
+    "2027_28": 221,
+    "2028_29": 224
+   },
+   "master_name": "Odyssey Program (K-8)",
+   "rs_a": "program_change",
+   "rs_b": "program_change"
+  },
+  {
+   "name": "Beverly Cleary",
+   "band": "K-8",
+   "school_type": "K-8",
+   "title_i": false,
+   "proficient_math_2425": 71,
+   "proficient_ela_2425": 78,
+   "pct_direct_cert_2425": 11,
+   "dollars_per_student": {
+    "2022_23": 7759,
+    "2023_24": 9060,
+    "2024_25": 9100,
+    "2025_26": 10097,
+    "2026_27": 11039
+   },
+   "students_per_fte": {
+    "2022_23": 11.8,
+    "2023_24": 11.1,
+    "2024_25": 11.9,
+    "2025_26": 11.0,
+    "2026_27": 10.5
+   },
+   "enrollment": {
+    "2021_22": 657,
+    "2022_23": 604,
+    "2023_24": 560,
+    "2024_25": 535,
+    "2025_26": 480,
+    "2026_27": 466,
+    "2027_28": 436,
+    "2028_29": 420
+   },
+   "master_name": "Beverly Cleary School",
+   "rs_a": "program_change",
+   "rs_b": "program_change"
+  },
+  {
+   "name": "Bridger Creative Science",
+   "band": "K-8",
+   "school_type": "K-8",
+   "title_i": false,
+   "proficient_math_2425": 43,
+   "proficient_ela_2425": 56,
+   "pct_direct_cert_2425": 27,
+   "dollars_per_student": {
+    "2022_23": null,
+    "2023_24": 10515,
+    "2024_25": 10148,
+    "2025_26": 10983,
+    "2026_27": 10939
+   },
+   "students_per_fte": {
+    "2022_23": null,
+    "2023_24": 9.2,
+    "2024_25": 11.2,
+    "2025_26": 10.8,
+    "2026_27": 11.4
+   },
+   "enrollment": {
+    "2021_22": null,
+    "2022_23": null,
+    "2023_24": 515,
+    "2024_25": 474,
+    "2025_26": 446,
+    "2026_27": 454,
+    "2027_28": 443,
+    "2028_29": 435
+   },
+   "master_name": "Bridger Creative Science School",
+   "rs_a": "program_change",
+   "rs_b": "program_change"
+  },
+  {
+   "name": "Access",
+   "band": "K-8",
+   "school_type": "1-8",
+   "title_i": false,
+   "proficient_math_2425": 92,
+   "proficient_ela_2425": 93,
+   "pct_direct_cert_2425": 12,
+   "dollars_per_student": {
+    "2022_23": 8043,
+    "2023_24": 9865,
+    "2024_25": 10256,
+    "2025_26": 10646,
+    "2026_27": 10725
+   },
+   "students_per_fte": {
+    "2022_23": 11.0,
+    "2023_24": 10.6,
+    "2024_25": 11.2,
+    "2025_26": 11.9,
+    "2026_27": 12.1
+   },
+   "enrollment": {
+    "2021_22": 314,
+    "2022_23": 317,
+    "2023_24": 329,
+    "2024_25": 323,
+    "2025_26": 324,
+    "2026_27": 315,
+    "2027_28": 310,
+    "2028_29": 297
+   },
+   "master_name": "ACCESS Academy",
+   "rs_a": null,
+   "rs_b": null
+  },
+  {
+   "name": "Winterhaven",
+   "band": "K-8",
+   "school_type": "K-8 (STEM Focus)",
+   "title_i": false,
+   "proficient_math_2425": 87,
+   "proficient_ela_2425": 88,
+   "pct_direct_cert_2425": 18,
+   "dollars_per_student": {
+    "2022_23": 8616,
+    "2023_24": 10140,
+    "2024_25": 9963,
+    "2025_26": 9750,
+    "2026_27": 10653
+   },
+   "students_per_fte": {
+    "2022_23": 11.1,
+    "2023_24": 10.5,
+    "2024_25": 12.5,
+    "2025_26": 13.6,
+    "2026_27": 13.4
+   },
+   "enrollment": {
+    "2021_22": 292,
+    "2022_23": 313,
+    "2023_24": 316,
+    "2024_25": 322,
+    "2025_26": 316,
+    "2026_27": 315,
+    "2027_28": 311,
+    "2028_29": 312
+   },
+   "master_name": "Winterhaven School",
+   "rs_a": null,
+   "rs_b": null
+  },
+  {
+   "name": "Sunnyside Environmental",
+   "band": "K-8",
+   "school_type": "K-8 (Environmental Curriculum)",
+   "title_i": false,
+   "proficient_math_2425": 53,
+   "proficient_ela_2425": 61,
+   "pct_direct_cert_2425": 18,
+   "dollars_per_student": {
+    "2022_23": 9067,
+    "2023_24": 10612,
+    "2024_25": 10249,
+    "2025_26": 10090,
+    "2026_27": 10462
+   },
+   "students_per_fte": {
+    "2022_23": 11.0,
+    "2023_24": 10.4,
+    "2024_25": 11.1,
+    "2025_26": 11.7,
+    "2026_27": 12.1
+   },
+   "enrollment": {
+    "2021_22": 469,
+    "2022_23": 465,
+    "2023_24": 447,
+    "2024_25": 461,
+    "2025_26": 485,
+    "2026_27": 483,
+    "2027_28": 487,
+    "2028_29": 484
+   },
+   "master_name": "Sunnyside Environmental School",
+   "rs_a": "program_change",
+   "rs_b": "program_change"
+  },
+  {
+   "name": "Vernon",
+   "band": "K-8",
+   "school_type": "K-8",
+   "title_i": false,
+   "proficient_math_2425": 54,
+   "proficient_ela_2425": 56,
+   "pct_direct_cert_2425": 27,
+   "dollars_per_student": {
+    "2022_23": 8430,
+    "2023_24": 9614,
+    "2024_25": 10047,
+    "2025_26": 10741,
+    "2026_27": 10276
+   },
+   "students_per_fte": {
+    "2022_23": 11.8,
+    "2023_24": 11.5,
+    "2024_25": 11.5,
+    "2025_26": 11.8,
+    "2026_27": 12.9
+   },
+   "enrollment": {
+    "2021_22": 517,
+    "2022_23": 555,
+    "2023_24": 578,
+    "2024_25": 563,
+    "2025_26": 541,
+    "2026_27": 515,
+    "2027_28": 494,
+    "2028_29": 490
+   },
+   "master_name": "Vernon Elementary School",
+   "rs_a": "program_change",
+   "rs_b": "program_change"
+  },
+  {
+   "name": "Laurelhurst",
+   "band": "K-8",
+   "school_type": "K-8",
+   "title_i": false,
+   "proficient_math_2425": 69,
+   "proficient_ela_2425": 79,
+   "pct_direct_cert_2425": 12,
+   "dollars_per_student": {
+    "2022_23": 7744,
+    "2023_24": 9027,
+    "2024_25": 9690,
+    "2025_26": 9920,
+    "2026_27": 10022
+   },
+   "students_per_fte": {
+    "2022_23": 13.0,
+    "2023_24": 12.3,
+    "2024_25": 12.9,
+    "2025_26": 13.5,
+    "2026_27": 13.7
+   },
+   "enrollment": {
+    "2021_22": 649,
+    "2022_23": 674,
+    "2023_24": 659,
+    "2024_25": 656,
+    "2025_26": 610,
+    "2026_27": 574,
+    "2027_28": 585,
+    "2028_29": 569
+   },
+   "master_name": "Laurelhurst Elementary School",
+   "rs_a": "program_change",
+   "rs_b": "program_change"
+  },
+  {
+   "name": "George",
+   "band": "Middle",
+   "school_type": "6-8 (Spanish Immersion) Title I",
+   "title_i": true,
+   "proficient_math_2425": 14,
+   "proficient_ela_2425": 25,
+   "pct_direct_cert_2425": 70,
+   "dollars_per_student": {
+    "2022_23": 12198,
+    "2023_24": 14212,
+    "2024_25": 13171,
+    "2025_26": 15087,
+    "2026_27": 13290
+   },
+   "students_per_fte": {
+    "2022_23": 5.8,
+    "2023_24": 5.5,
+    "2024_25": 6.2,
+    "2025_26": 5.7,
+    "2026_27": 6.6
+   },
+   "enrollment": {
+    "2021_22": 385,
+    "2022_23": 387,
+    "2023_24": 367,
+    "2024_25": 404,
+    "2025_26": 358,
+    "2026_27": 377,
+    "2027_28": 390,
+    "2028_29": 404
+   },
+   "master_name": "George Middle School",
+   "rs_a": "program_change",
+   "rs_b": "program_change"
+  },
+  {
+   "name": "Lane",
+   "band": "Middle",
+   "school_type": "6-8 (Russian Immersion) Title I",
+   "title_i": true,
+   "proficient_math_2425": 23,
+   "proficient_ela_2425": 30,
+   "pct_direct_cert_2425": 57,
+   "dollars_per_student": {
+    "2022_23": 12348,
+    "2023_24": 12918,
+    "2024_25": 13821,
+    "2025_26": 12570,
+    "2026_27": 12281
+   },
+   "students_per_fte": {
+    "2022_23": 6.0,
+    "2023_24": 6.3,
+    "2024_25": 6.7,
+    "2025_26": 8.0,
+    "2026_27": 8.3
+   },
+   "enrollment": {
+    "2021_22": 363,
+    "2022_23": 336,
+    "2023_24": 391,
+    "2024_25": 418,
+    "2025_26": 447,
+    "2026_27": 427,
+    "2027_28": 419,
+    "2028_29": 407
+   },
+   "master_name": "Lane Middle School",
+   "rs_a": "boundary",
+   "rs_b": "boundary"
+  },
+  {
+   "name": "Harrison Park",
+   "band": "Middle",
+   "school_type": "6-8 (Mandarin Immersion) Title I",
+   "title_i": true,
+   "proficient_math_2425": 41,
+   "proficient_ela_2425": 49,
+   "pct_direct_cert_2425": 46,
+   "dollars_per_student": {
+    "2022_23": 10814,
+    "2023_24": 14878,
+    "2024_25": 14054,
+    "2025_26": 12283,
+    "2026_27": 12078
+   },
+   "students_per_fte": {
+    "2022_23": 7.4,
+    "2023_24": 6.7,
+    "2024_25": 8.2,
+    "2025_26": 9.6,
+    "2026_27": 10.5
+   },
+   "enrollment": {
+    "2021_22": 529,
+    "2022_23": 575,
+    "2023_24": 321,
+    "2024_25": 372,
+    "2025_26": 419,
+    "2026_27": 442,
+    "2027_28": 432,
+    "2028_29": 421
+   },
+   "master_name": "Harrison Park School",
+   "rs_a": "program_change",
+   "rs_b": "program_change"
+  },
+  {
+   "name": "Kellogg",
+   "band": "Middle",
+   "school_type": "6-8 (Spanish Immersion) Title I",
+   "title_i": true,
+   "proficient_math_2425": 35,
+   "proficient_ela_2425": 47,
+   "pct_direct_cert_2425": 44,
+   "dollars_per_student": {
+    "2022_23": 9658,
+    "2023_24": 9912,
+    "2024_25": 12178,
+    "2025_26": 12266,
+    "2026_27": 11815
+   },
+   "students_per_fte": {
+    "2022_23": 8.1,
+    "2023_24": 8.9,
+    "2024_25": 7.8,
+    "2025_26": 8.8,
+    "2026_27": 9.3
+   },
+   "enrollment": {
+    "2021_22": 684,
+    "2022_23": 661,
+    "2023_24": 677,
+    "2024_25": 594,
+    "2025_26": 531,
+    "2026_27": 515,
+    "2027_28": 509,
+    "2028_29": 488
+   },
+   "master_name": "Kellogg Middle School",
+   "rs_a": "boundary",
+   "rs_b": "boundary"
+  },
+  {
+   "name": "Roseway Heights",
+   "band": "Middle",
+   "school_type": "6-8 (Spanish and Vietnamese Immersion) CSI Title I",
+   "title_i": true,
+   "proficient_math_2425": 28,
+   "proficient_ela_2425": 39,
+   "pct_direct_cert_2425": 43,
+   "dollars_per_student": {
+    "2022_23": 10498,
+    "2023_24": 11893,
+    "2024_25": 11484,
+    "2025_26": 12608,
+    "2026_27": 11585
+   },
+   "students_per_fte": {
+    "2022_23": 8.4,
+    "2023_24": 8.2,
+    "2024_25": 9.1,
+    "2025_26": 8.9,
+    "2026_27": 10.1
+   },
+   "enrollment": {
+    "2021_22": 589,
+    "2022_23": 583,
+    "2023_24": 551,
+    "2024_25": 565,
+    "2025_26": 572,
+    "2026_27": 563,
+    "2027_28": 563,
+    "2028_29": 549
+   },
+   "master_name": "Roseway Heights School",
+   "rs_a": "program_change",
+   "rs_b": "program_change"
+  },
+  {
+   "name": "Harriet Tubman",
+   "band": "Middle",
+   "school_type": "6-8 (Mandarin Immersion) Title I",
+   "title_i": true,
+   "proficient_math_2425": 45,
+   "proficient_ela_2425": 47,
+   "pct_direct_cert_2425": 37,
+   "dollars_per_student": {
+    "2022_23": 13113,
+    "2023_24": 14518,
+    "2024_25": 15028,
+    "2025_26": 11934,
+    "2026_27": 11475
+   },
+   "students_per_fte": {
+    "2022_23": 6.3,
+    "2023_24": 6.1,
+    "2024_25": 6.9,
+    "2025_26": 9.1,
+    "2026_27": 9.9
+   },
+   "enrollment": {
+    "2021_22": 388,
+    "2022_23": 361,
+    "2023_24": 320,
+    "2024_25": 328,
+    "2025_26": 402,
+    "2026_27": 437,
+    "2027_28": 451,
+    "2028_29": 403
+   },
+   "master_name": "Harriet Tubman Middle School",
+   "rs_a": "program_change",
+   "rs_b": "program_change"
+  },
+  {
+   "name": "Ockley Green",
+   "band": "Middle",
+   "school_type": "6-8 (Spanish Immersion) CSI Title I",
+   "title_i": true,
+   "proficient_math_2425": 31,
+   "proficient_ela_2425": 35,
+   "pct_direct_cert_2425": 35,
+   "dollars_per_student": {
+    "2022_23": 9234,
+    "2023_24": 10345,
+    "2024_25": 12127,
+    "2025_26": 10902,
+    "2026_27": 11318
+   },
+   "students_per_fte": {
+    "2022_23": 8.4,
+    "2023_24": 8.4,
+    "2024_25": 8.3,
+    "2025_26": 10.2,
+    "2026_27": 10.8
+   },
+   "enrollment": {
+    "2021_22": 485,
+    "2022_23": 483,
+    "2023_24": 428,
+    "2024_25": 410,
+    "2025_26": 460,
+    "2026_27": 436,
+    "2027_28": 443,
+    "2028_29": 407
+   },
+   "master_name": "Ockley Green Middle School",
+   "rs_a": "program_change",
+   "rs_b": "program_change"
+  },
+  {
+   "name": "Beaumont",
+   "band": "Middle",
+   "school_type": "6-8 (Spanish Immersion)",
+   "title_i": false,
+   "proficient_math_2425": 61,
+   "proficient_ela_2425": 65,
+   "pct_direct_cert_2425": 23,
+   "dollars_per_student": {
+    "2022_23": 10079,
+    "2023_24": 11102,
+    "2024_25": 10902,
+    "2025_26": 11015,
+    "2026_27": 10903
+   },
+   "students_per_fte": {
+    "2022_23": 7.3,
+    "2023_24": 7.3,
+    "2024_25": 8.0,
+    "2025_26": 8.2,
+    "2026_27": 8.5
+   },
+   "enrollment": {
+    "2021_22": 467,
+    "2022_23": 448,
+    "2023_24": 434,
+    "2024_25": 435,
+    "2025_26": 416,
+    "2026_27": 414,
+    "2027_28": 409,
+    "2028_29": 388
+   },
+   "master_name": "Beaumont Middle School",
+   "rs_a": "program_change",
+   "rs_b": "program_change"
+  },
+  {
+   "name": "Mt Tabor",
+   "band": "Middle",
+   "school_type": "6-8 (Japanese Immersion)",
+   "title_i": false,
+   "proficient_math_2425": 63,
+   "proficient_ela_2425": 68,
+   "pct_direct_cert_2425": 16,
+   "dollars_per_student": {
+    "2022_23": 8423,
+    "2023_24": 10289,
+    "2024_25": 10049,
+    "2025_26": 10090,
+    "2026_27": 10440
+   },
+   "students_per_fte": {
+    "2022_23": 11.3,
+    "2023_24": 10.0,
+    "2024_25": 11.2,
+    "2025_26": 11.6,
+    "2026_27": 11.5
+   },
+   "enrollment": {
+    "2021_22": 645,
+    "2022_23": 607,
+    "2023_24": 503,
+    "2024_25": 467,
+    "2025_26": 430,
+    "2026_27": 415,
+    "2027_28": 406,
+    "2028_29": 411
+   },
+   "master_name": "Mt Tabor Middle School",
+   "rs_a": "program_change",
+   "rs_b": "program_change"
+  },
+  {
+   "name": "Gray",
+   "band": "Middle",
+   "school_type": "6-8 TSI",
+   "title_i": false,
+   "proficient_math_2425": 57,
+   "proficient_ela_2425": 71,
+   "pct_direct_cert_2425": 20,
+   "dollars_per_student": {
+    "2022_23": 7661,
+    "2023_24": 9136,
+    "2024_25": 10149,
+    "2025_26": 10083,
+    "2026_27": 10222
+   },
+   "students_per_fte": {
+    "2022_23": 11.7,
+    "2023_24": 10.5,
+    "2024_25": 10.7,
+    "2025_26": 11.4,
+    "2026_27": 11.4
+   },
+   "enrollment": {
+    "2021_22": 478,
+    "2022_23": 483,
+    "2023_24": 472,
+    "2024_25": 438,
+    "2025_26": 432,
+    "2026_27": 433,
+    "2027_28": 431,
+    "2028_29": 409
+   },
+   "master_name": "Gray Middle School",
+   "rs_a": "boundary",
+   "rs_b": "boundary"
+  },
+  {
+   "name": "da Vinci",
+   "band": "Middle",
+   "school_type": "6-8 (Arts Focus)",
+   "title_i": false,
+   "proficient_math_2425": 33,
+   "proficient_ela_2425": 65,
+   "pct_direct_cert_2425": 30,
+   "dollars_per_student": {
+    "2022_23": 8814,
+    "2023_24": 10633,
+    "2024_25": 10313,
+    "2025_26": 9997,
+    "2026_27": 10159
+   },
+   "students_per_fte": {
+    "2022_23": 11.0,
+    "2023_24": 9.2,
+    "2024_25": 10.4,
+    "2025_26": 11.1,
+    "2026_27": 11.8
+   },
+   "enrollment": {
+    "2021_22": 415,
+    "2022_23": 434,
+    "2023_24": 407,
+    "2024_25": 427,
+    "2025_26": 429,
+    "2026_27": 430,
+    "2027_28": 430,
+    "2028_29": 431
+   },
+   "master_name": "da Vinci Middle School",
+   "rs_a": null,
+   "rs_b": null
+  },
+  {
+   "name": "Hosford",
+   "band": "Middle",
+   "school_type": "6-8",
+   "title_i": false,
+   "proficient_math_2425": 51,
+   "proficient_ela_2425": 66,
+   "pct_direct_cert_2425": 25,
+   "dollars_per_student": {
+    "2022_23": 7733,
+    "2023_24": 9193,
+    "2024_25": 9091,
+    "2025_26": 9568,
+    "2026_27": 9765
+   },
+   "students_per_fte": {
+    "2022_23": 11.6,
+    "2023_24": 10.2,
+    "2024_25": 10.8,
+    "2025_26": 10.9,
+    "2026_27": 11.4
+   },
+   "enrollment": {
+    "2021_22": 629,
+    "2022_23": 566,
+    "2023_24": 517,
+    "2024_25": 537,
+    "2025_26": 528,
+    "2026_27": 524,
+    "2027_28": 476,
+    "2028_29": 439
+   },
+   "master_name": "Hosford Middle School",
+   "rs_a": "program_change",
+   "rs_b": "program_change"
+  },
+  {
+   "name": "Jackson",
+   "band": "Middle",
+   "school_type": "6-8 (Bernstein Artful Learning)",
+   "title_i": false,
+   "proficient_math_2425": 56,
+   "proficient_ela_2425": 67,
+   "pct_direct_cert_2425": 22,
+   "dollars_per_student": {
+    "2022_23": 7170,
+    "2023_24": 9079,
+    "2024_25": 8970,
+    "2025_26": 9612,
+    "2026_27": 9561
+   },
+   "students_per_fte": {
+    "2022_23": 10.7,
+    "2023_24": 9.7,
+    "2024_25": 10.4,
+    "2025_26": 11.2,
+    "2026_27": 11.4
+   },
+   "enrollment": {
+    "2021_22": 752,
+    "2022_23": 793,
+    "2023_24": 711,
+    "2024_25": 715,
+    "2025_26": 689,
+    "2026_27": 684,
+    "2027_28": 663,
+    "2028_29": 658
+   },
+   "master_name": "Jackson Middle School",
+   "rs_a": "boundary",
+   "rs_b": "boundary"
+  },
+  {
+   "name": "Sellwood",
+   "band": "Middle",
+   "school_type": "6-8",
+   "title_i": false,
+   "proficient_math_2425": 66,
+   "proficient_ela_2425": 71,
+   "pct_direct_cert_2425": 12,
+   "dollars_per_student": {
+    "2022_23": 7577,
+    "2023_24": 8872,
+    "2024_25": 8982,
+    "2025_26": 9321,
+    "2026_27": 9552
+   },
+   "students_per_fte": {
+    "2022_23": 12.5,
+    "2023_24": 12.2,
+    "2024_25": 13.0,
+    "2025_26": 12.8,
+    "2026_27": 12.5
+   },
+   "enrollment": {
+    "2021_22": 553,
+    "2022_23": 563,
+    "2023_24": 567,
+    "2024_25": 576,
+    "2025_26": 564,
+    "2026_27": 537,
+    "2027_28": 524,
+    "2028_29": 486
+   },
+   "master_name": "Sellwood Middle School",
+   "rs_a": "closes",
+   "rs_b": "closes"
+  },
+  {
+   "name": "West Sylvan",
+   "band": "Middle",
+   "school_type": "6-8 (Spanish Immersion)",
+   "title_i": false,
+   "proficient_math_2425": 63,
+   "proficient_ela_2425": 69,
+   "pct_direct_cert_2425": 16,
+   "dollars_per_student": {
+    "2022_23": 7197,
+    "2023_24": 8280,
+    "2024_25": 9326,
+    "2025_26": 8862,
+    "2026_27": 9113
+   },
+   "students_per_fte": {
+    "2022_23": 12.5,
+    "2023_24": 11.4,
+    "2024_25": 11.6,
+    "2025_26": 12.6,
+    "2026_27": 12.6
+   },
+   "enrollment": {
+    "2021_22": 727,
+    "2022_23": 759,
+    "2023_24": 722,
+    "2024_25": 670,
+    "2025_26": 683,
+    "2026_27": 655,
+    "2027_28": 691,
+    "2028_29": 644
+   },
+   "master_name": "West Sylvan Middle School",
+   "rs_a": null,
+   "rs_b": null
+  },
+  {
+   "name": "Metro. Learning Center",
+   "band": "Middle",
+   "school_type": "K-12 (Alternative Program)",
+   "title_i": false,
+   "proficient_math_2425": 45,
+   "proficient_ela_2425": 58,
+   "pct_direct_cert_2425": 21,
+   "dollars_per_student": {
+    "2022_23": 11796,
+    "2023_24": 13101,
+    "2024_25": 14232,
+    "2025_26": 16697,
+    "2026_27": 17163
+   },
+   "students_per_fte": {
+    "2022_23": 8.2,
+    "2023_24": 7.8,
+    "2024_25": 7.7,
+    "2025_26": 7.0,
+    "2026_27": 7.4
+   },
+   "enrollment": {
+    "2021_22": 341,
+    "2022_23": 348,
+    "2023_24": 336,
+    "2024_25": 319,
+    "2025_26": 275,
+    "2026_27": 266,
+    "2027_28": 245,
+    "2028_29": 232
+   },
+   "master_name": "Metropolitan Learning Center",
+   "rs_a": "program_change",
+   "rs_b": "program_change"
+  },
+  {
+   "name": "Alliance",
+   "band": "High",
+   "school_type": "9-12 (Alternative Program) CSI",
+   "title_i": false,
+   "proficient_math_2425": null,
+   "proficient_ela_2425": null,
+   "pct_direct_cert_2425": 38,
+   "dollars_per_student": {
+    "2022_23": 24642,
+    "2023_24": 26611,
+    "2024_25": 23551,
+    "2025_26": 22064,
+    "2026_27": 20910
+   },
+   "students_per_fte": {
+    "2022_23": 4.2,
+    "2023_24": 4.3,
+    "2024_25": 5.0,
+    "2025_26": 5.8,
+    "2026_27": 6.5
+   },
+   "enrollment": {
+    "2021_22": 169,
+    "2022_23": 195,
+    "2023_24": 193,
+    "2024_25": 201,
+    "2025_26": 217,
+    "2026_27": 217,
+    "2027_28": 217,
+    "2028_29": 217
+   },
+   "master_name": "Alliance High School",
+   "rs_a": null,
+   "rs_b": null
+  },
+  {
+   "name": "Jefferson",
+   "band": "High",
+   "school_type": "9-12 (Middle College Program) CSI Title I",
+   "title_i": true,
+   "proficient_math_2425": 15,
+   "proficient_ela_2425": 22,
+   "pct_direct_cert_2425": 55,
+   "dollars_per_student": {
+    "2022_23": 12000,
+    "2023_24": 14860,
+    "2024_25": 16415,
+    "2025_26": 18918,
+    "2026_27": 17438
+   },
+   "students_per_fte": {
+    "2022_23": 6.4,
+    "2023_24": 5.6,
+    "2024_25": 5.8,
+    "2025_26": 5.4,
+    "2026_27": 6.0
+   },
+   "enrollment": {
+    "2021_22": 588,
+    "2022_23": 607,
+    "2023_24": 525,
+    "2024_25": 459,
+    "2025_26": 391,
+    "2026_27": 403,
+    "2027_28": 547,
+    "2028_29": 798
+   },
+   "master_name": "Jefferson High School",
+   "rs_a": "boundary",
+   "rs_b": "boundary"
+  },
+  {
+   "name": "Roosevelt",
+   "band": "High",
+   "school_type": "9-12 (Advanced Placement, PSU Inquiry Partnership) CSI Title I",
+   "title_i": true,
+   "proficient_math_2425": 9,
+   "proficient_ela_2425": 29,
+   "pct_direct_cert_2425": 44,
+   "dollars_per_student": {
+    "2022_23": 9975,
+    "2023_24": 10638,
+    "2024_25": 11363,
+    "2025_26": 12141,
+    "2026_27": 12110
+   },
+   "students_per_fte": {
+    "2022_23": 9.0,
+    "2023_24": 8.8,
+    "2024_25": 9.1,
+    "2025_26": 9.0,
+    "2026_27": 9.1
+   },
+   "enrollment": {
+    "2021_22": 1376,
+    "2022_23": 1488,
+    "2023_24": 1457,
+    "2024_25": 1452,
+    "2025_26": 1419,
+    "2026_27": 1339,
+    "2027_28": 1312,
+    "2028_29": 1252
+   },
+   "master_name": "Roosevelt High School",
+   "rs_a": "boundary",
+   "rs_b": "boundary"
+  },
+  {
+   "name": "McDaniel",
+   "band": "High",
+   "school_type": "9-12 (Advanced Placement, AVID, STEM Programs)",
+   "title_i": false,
+   "proficient_math_2425": 24,
+   "proficient_ela_2425": 38,
+   "pct_direct_cert_2425": 41,
+   "dollars_per_student": {
+    "2022_23": 10102,
+    "2023_24": 10511,
+    "2024_25": 10659,
+    "2025_26": 11145,
+    "2026_27": 11450
+   },
+   "students_per_fte": {
+    "2022_23": 8.8,
+    "2023_24": 9.4,
+    "2024_25": 10.0,
+    "2025_26": 9.7,
+    "2026_27": 9.9
+   },
+   "enrollment": {
+    "2021_22": 1369,
+    "2022_23": 1443,
+    "2023_24": 1650,
+    "2024_25": 1686,
+    "2025_26": 1629,
+    "2026_27": 1587,
+    "2027_28": 1525,
+    "2028_29": 1474
+   },
+   "master_name": "Leodis V. McDaniel High School",
+   "rs_a": "boundary",
+   "rs_b": "boundary"
+  },
+  {
+   "name": "Benson",
+   "band": "High",
+   "school_type": "9-12 (Professional, Technical, Health Occupations)",
+   "title_i": false,
+   "proficient_math_2425": 25,
+   "proficient_ela_2425": 43,
+   "pct_direct_cert_2425": 32,
+   "dollars_per_student": {
+    "2022_23": 11936,
+    "2023_24": 12255,
+    "2024_25": 11747,
+    "2025_26": 11181,
+    "2026_27": 10832
+   },
+   "students_per_fte": {
+    "2022_23": 7.8,
+    "2023_24": 8.1,
+    "2024_25": 9.0,
+    "2025_26": 9.8,
+    "2026_27": 11.1
+   },
+   "enrollment": {
+    "2021_22": 895,
+    "2022_23": 827,
+    "2023_24": 818,
+    "2024_25": 896,
+    "2025_26": 1025,
+    "2026_27": 1114,
+    "2027_28": 1200,
+    "2028_29": 1216
+   },
+   "master_name": "Benson Polytechnic High School",
+   "rs_a": null,
+   "rs_b": null
+  },
+  {
+   "name": "Franklin",
+   "band": "High",
+   "school_type": "9-12 (Advanced Placement, Dual-Credit Courses)",
+   "title_i": false,
+   "proficient_math_2425": 17,
+   "proficient_ela_2425": 49,
+   "pct_direct_cert_2425": 32,
+   "dollars_per_student": {
+    "2022_23": 8721,
+    "2023_24": 9841,
+    "2024_25": 9640,
+    "2025_26": 9945,
+    "2026_27": 10431
+   },
+   "students_per_fte": {
+    "2022_23": 11.1,
+    "2023_24": 10.5,
+    "2024_25": 11.0,
+    "2025_26": 11.1,
+    "2026_27": 11.1
+   },
+   "enrollment": {
+    "2021_22": 2014,
+    "2022_23": 1968,
+    "2023_24": 1811,
+    "2024_25": 1809,
+    "2025_26": 1780,
+    "2026_27": 1733,
+    "2027_28": 1685,
+    "2028_29": 1605
+   },
+   "master_name": "Franklin High School",
+   "rs_a": "boundary",
+   "rs_b": "boundary"
+  },
+  {
+   "name": "Cleveland",
+   "band": "High",
+   "school_type": "9-12 (International Baccalaureate) TSI",
+   "title_i": false,
+   "proficient_math_2425": 42,
+   "proficient_ela_2425": 67,
+   "pct_direct_cert_2425": 17,
+   "dollars_per_student": {
+    "2022_23": 8765,
+    "2023_24": 9327,
+    "2024_25": 9418,
+    "2025_26": 9822,
+    "2026_27": 9846
+   },
+   "students_per_fte": {
+    "2022_23": 11.4,
+    "2023_24": 11.1,
+    "2024_25": 11.7,
+    "2025_26": 11.5,
+    "2026_27": 11.8
+   },
+   "enrollment": {
+    "2021_22": 1623,
+    "2022_23": 1547,
+    "2023_24": 1474,
+    "2024_25": 1422,
+    "2025_26": 1451,
+    "2026_27": 1421,
+    "2027_28": 1466,
+    "2028_29": 1471
+   },
+   "master_name": "Cleveland High School",
+   "rs_a": "boundary",
+   "rs_b": "boundary"
+  },
+  {
+   "name": "Lincoln",
+   "band": "High",
+   "school_type": "9-12 (International Baccalaureate)",
+   "title_i": false,
+   "proficient_math_2425": 40,
+   "proficient_ela_2425": 70,
+   "pct_direct_cert_2425": 11,
+   "dollars_per_student": {
+    "2022_23": 8963,
+    "2023_24": 9389,
+    "2024_25": 9749,
+    "2025_26": 9684,
+    "2026_27": 9491
+   },
+   "students_per_fte": {
+    "2022_23": 12.0,
+    "2023_24": 11.9,
+    "2024_25": 11.9,
+    "2025_26": 12.3,
+    "2026_27": 12.8
+   },
+   "enrollment": {
+    "2021_22": 1462,
+    "2022_23": 1528,
+    "2023_24": 1579,
+    "2024_25": 1615,
+    "2025_26": 1647,
+    "2026_27": 1653,
+    "2027_28": 1604,
+    "2028_29": 1595
+   },
+   "master_name": "Lincoln High School",
+   "rs_a": "boundary",
+   "rs_b": "boundary"
+  },
+  {
+   "name": "Ida B. Wells-Barnett",
+   "band": "High",
+   "school_type": "9-12 (Advanced Placement, Computer Sciences) TSI",
+   "title_i": false,
+   "proficient_math_2425": 30,
+   "proficient_ela_2425": 55,
+   "pct_direct_cert_2425": 17,
+   "dollars_per_student": {
+    "2022_23": 8355,
+    "2023_24": 8891,
+    "2024_25": 9311,
+    "2025_26": 9773,
+    "2026_27": 9439
+   },
+   "students_per_fte": {
+    "2022_23": 11.5,
+    "2023_24": 11.6,
+    "2024_25": 12.1,
+    "2025_26": 11.3,
+    "2026_27": 11.9
+   },
+   "enrollment": {
+    "2021_22": 1597,
+    "2022_23": 1558,
+    "2023_24": 1652,
+    "2024_25": 1650,
+    "2025_26": 1574,
+    "2026_27": 1558,
+    "2027_28": 1532,
+    "2028_29": 1510
+   },
+   "master_name": "Ida B. Wells-Barnett High School",
+   "rs_a": null,
+   "rs_b": null
+  },
+  {
+   "name": "Grant",
+   "band": "High",
+   "school_type": "9-12 (Advanced Placement, Dual-Credit Courses)",
+   "title_i": false,
+   "proficient_math_2425": 47,
+   "proficient_ela_2425": 71,
+   "pct_direct_cert_2425": 13,
+   "dollars_per_student": {
+    "2022_23": 7709,
+    "2023_24": 8464,
+    "2024_25": 8881,
+    "2025_26": 8936,
+    "2026_27": 9062
+   },
+   "students_per_fte": {
+    "2022_23": 12.3,
+    "2023_24": 12.1,
+    "2024_25": 12.4,
+    "2025_26": 12.7,
+    "2026_27": 12.9
+   },
+   "enrollment": {
+    "2021_22": 2126,
+    "2022_23": 2159,
+    "2023_24": 2178,
+    "2024_25": 2149,
+    "2025_26": 2074,
+    "2026_27": 2019,
+    "2027_28": 1936,
+    "2028_29": 1823
+   },
+   "master_name": "Grant High School",
+   "rs_a": null,
+   "rs_b": null
+  }
+ ]
+}

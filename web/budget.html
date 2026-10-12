@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PPS Budget Explorer | Portland Public Schools Data Explorer</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap">
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+
+<style>
+  :root {
+    --bg: #0e1115; --panel: #161b22; --border: #30363d; --fg: #e6edf3;
+    --muted: #7d8590; --accent: #2f81f7;
+    --fs-h1: 32px; --fs-h2: 22px; --fs-h3: 16px;
+    --fs-body: 15px; --fs-note: 15px; --fs-small: 13px; --fs-micro: 12px;
+    --nav-h: 52px; --max-w: 1600px;
+  }
+  @media (max-width: 700px) {
+    :root { --fs-h1: 24px; --fs-h2: 18px; --fs-h3: 15px; --fs-body: 15px;
+      --fs-note: 14px; --fs-small: 12.5px; --fs-micro: 11.5px; --nav-h: 48px; }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--fg);
+    font: var(--fs-body)/1.55 "Nunito Sans", -apple-system, "SF Pro Text", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased; }
+
+  .topnav { position: sticky; top: 0; z-index: 1100; background: rgba(14,17,21,0.92);
+    backdrop-filter: saturate(140%) blur(8px); -webkit-backdrop-filter: saturate(140%) blur(8px);
+    border-bottom: 1px solid var(--border); }
+  .topnav-inner { max-width: var(--max-w); margin: 0 auto; padding: 0 24px;
+    height: var(--nav-h); display: flex; align-items: center; gap: 18px; }
+  .topnav .brand { font-weight: 600; font-size: 14px; letter-spacing: 0.2px;
+    color: var(--fg); text-decoration: none; white-space: nowrap;
+    display: inline-flex; align-items: center; }
+  .topnav .brand .dot { width: 8px; height: 8px; margin-right: 8px;
+    border-radius: 50%; background: var(--accent); flex-shrink: 0;
+    transform: translateY(-2px); }
+  .topnav .links { display: flex; gap: 4px; }
+  .topnav .links a { color: var(--muted); text-decoration: none; font-size: 13px;
+    padding: 6px 10px; border-radius: 6px; transition: color 0.15s, background 0.15s; }
+  .topnav .links a:hover { color: var(--fg); background: rgba(255,255,255,0.04); }
+  .topnav .back { margin-left: auto; color: var(--muted); text-decoration: none; font-size: 13px;
+    padding: 6px 10px; border-radius: 6px; transition: color 0.15s, background 0.15s; }
+  .topnav .back:hover { color: var(--fg); background: rgba(255,255,255,0.04); }
+  @media (max-width: 1000px) { .topnav-inner { padding: 0 16px; } .topnav .links { display: none; } }
+
+  header { padding: 28px 32px 24px; border-bottom: 1px solid var(--border);
+    max-width: var(--max-w); margin: 0 auto; }
+  header h1 { margin: 0 0 8px; font-size: var(--fs-h1); font-weight: 600; line-height: 1.2; }
+  header p { margin: 0 0 10px; color: var(--muted); max-width: 820px; font-size: var(--fs-note); }
+  header p:last-of-type { margin-bottom: 0; }
+  a { color: var(--accent); }
+  a:hover { color: var(--fg); }
+
+  main { padding: 24px 32px 80px; max-width: var(--max-w); margin: 0 auto; }
+  section { margin-bottom: 40px; scroll-margin-top: calc(var(--nav-h) + 12px); }
+  section > h2 { margin: 0 0 12px; font-size: var(--fs-h2); font-weight: 600;
+    border-left: 3px solid var(--accent); padding-left: 10px; line-height: 1.25; }
+  p.note { color: var(--muted); margin: 0 0 14px; font-size: var(--fs-note); max-width: 900px; }
+  p.caveat { color: var(--muted); margin: 10px 0 0; font-size: var(--fs-small); max-width: 900px; }
+
+  .panel { background: var(--panel); border: 1px solid var(--border); border-radius: 6px; }
+  .panel-pad { padding: 16px 18px; }
+
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 12px; margin-bottom: 36px; }
+  .tile { background: var(--panel); border: 1px solid var(--border); border-radius: 6px;
+    padding: 14px 16px; }
+  .tile .value { font-size: 28px; font-weight: 700; line-height: 1.15;
+    font-variant-numeric: tabular-nums; }
+  .tile .label { color: var(--fg); font-size: var(--fs-small); font-weight: 600; margin-top: 4px; }
+  .tile .sub { color: var(--muted); font-size: var(--fs-micro); margin-top: 4px; line-height: 1.4; }
+
+  .callout { background: #1c2533; border: 1px solid #2b3b52; border-radius: 6px;
+    padding: 14px 18px; margin-top: 16px; }
+  .callout h3 { margin: 0 0 6px; font-size: var(--fs-h3); }
+  .callout p { margin: 0 0 10px; color: var(--muted); font-size: var(--fs-small); max-width: 900px; }
+
+  .chart { width: 100%; }
+  #plot-flow { height: 620px; }
+  #plot-funds { height: 150px; }
+  #plot-gap { height: 420px; }
+  #plot-enroll { height: 220px; }
+  #plot-schools { height: 520px; }
+  @media (max-width: 700px) {
+    #plot-flow { display: none; }
+    #plot-gap { height: 340px; }
+    #plot-funds { height: 260px; }
+  }
+  .mobile-only { display: none; }
+  @media (max-width: 700px) { .mobile-only { display: block; } }
+
+  .controls { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; margin-bottom: 12px; }
+  .seg { display: inline-flex; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+  .seg button { background: transparent; color: var(--muted); border: 0; padding: 6px 12px;
+    font: inherit; font-size: var(--fs-small); cursor: pointer; }
+  .seg button + button { border-left: 1px solid var(--border); }
+  .seg button.on { background: #1f2a3a; color: var(--fg); }
+  .controls label { color: var(--muted); font-size: var(--fs-small); display: inline-flex; gap: 8px; align-items: center; }
+  .controls select { background: var(--panel); color: var(--fg); border: 1px solid var(--border);
+    border-radius: 6px; padding: 5px 8px; font: inherit; font-size: var(--fs-small); }
+
+  details { margin-top: 12px; }
+  details summary { cursor: pointer; color: var(--muted); font-size: var(--fs-small); }
+  table.data { border-collapse: collapse; width: 100%; max-width: 900px; margin-top: 10px;
+    font-size: var(--fs-small); font-variant-numeric: tabular-nums; }
+  table.data th, table.data td { padding: 6px 10px; border-bottom: 1px solid var(--border); text-align: left; }
+  table.data th { color: var(--muted); font-weight: 600; }
+  table.data td.num, table.data th.num { text-align: right; }
+  table.data tr.group td { color: var(--fg); font-weight: 600; background: #1b2129; }
+  table.data td.sub { padding-left: 24px; color: var(--muted); }
+  .table-scroll { overflow-x: auto; }
+
+  .methodology { font-size: var(--fs-body); }
+  .methodology h3 { font-size: var(--fs-h3); margin: 22px 0 8px; }
+  .methodology p, .methodology li { color: var(--muted); max-width: 860px; }
+  .methodology ul { padding-left: 20px; }
+
+  @media (max-width: 700px) {
+    header { padding: 20px 16px 18px; }
+    main { padding: 18px 16px 60px; }
+    .panel-pad { padding: 12px; }
+    .tile .value { font-size: 24px; }
+  }
+</style>
+<script data-goatcounter="https://a9n27kisdf.execute-api.us-east-1.amazonaws.com/count/ppsdata"
+        async src="count.js"></script>
+</head>
+<body>
+
+<div class="topnav">
+  <div class="topnav-inner">
+    <a class="brand" href="/"><span class="dot"></span>PPS Data Explorer</a>
+    <nav class="links">
+      <a href="#section-flow">Money in and out</a>
+      <a href="#section-gap">The yearly gap</a>
+      <a href="#section-schools">Cost per student</a>
+      <a href="#section-methodology">Methodology</a>
+    </nav>
+    <a class="back" href="/">← Back to dashboard</a>
+  </div>
+</div>
+
+<header>
+  <h1>Where PPS's money comes from, and where it goes</h1>
+  <p>
+    A plain-language view of the Portland Public Schools budget for the 2026-27
+    school year, built from the district's published budget documents. It covers
+    the General Fund, the money PPS uses to run schools day to day.
+  </p>
+  <p>
+    Every number comes from PPS's
+    <a href="#section-methodology">2026-27 budget books</a>. This page explains them;
+    it doesn't evaluate them.
+  </p>
+</header>
+
+<main>
+  <div class="tiles" id="tiles"></div>
+
+  <section id="section-flow">
+    <h2>Money in and money out</h2>
+    <p class="note">
+      Left: where the General Fund's money comes from. Right: what it pays for.
+      Band width is proportional to dollars. Hover over a band for the amount.
+    </p>
+    <div class="panel panel-pad">
+      <div id="plot-flow" class="chart"></div>
+      <p class="mobile-only note">On a small screen the breakdown is shown as a table.</p>
+      <details id="flow-details">
+        <summary>Show as a table</summary>
+        <div class="table-scroll"><table class="data" id="flow-table"></table></div>
+      </details>
+    </div>
+
+    <div class="callout">
+      <h3>Why you may have heard "$2.77 billion"</h3>
+      <p id="funds-text"></p>
+      <div id="plot-funds" class="chart"></div>
+    </div>
+  </section>
+
+  <section id="section-gap">
+    <h2>Why there's a budget gap every year</h2>
+    <p class="note" id="gap-text"></p>
+    <div class="panel panel-pad">
+      <div id="plot-gap" class="chart"></div>
+      <details>
+        <summary>Show as a table</summary>
+        <div class="table-scroll"><table class="data" id="gap-table"></table></div>
+      </details>
+    </div>
+    <p class="note" style="margin-top:18px">
+      Enrollment drives state funding. PPS counts about 2,900 fewer students in
+      2026-27 than in 2022-23.
+    </p>
+    <div class="panel panel-pad">
+      <div id="plot-enroll" class="chart"></div>
+    </div>
+    <p class="caveat">
+      Forecast years assume PPS keeps today's staffing and services. They show the
+      gap PPS would have to close, not a plan. 2025-26 and 2026-27 are budgets, not
+      final spending.
+    </p>
+  </section>
+
+  <section id="section-schools">
+    <h2>Cost per student and school size</h2>
+    <p class="note">
+      Each dot is one school. PPS gives every school a principal, an office
+      assistant, and a support position regardless of size, so those fixed costs are
+      spread over fewer students in a small school. Schools with more students from
+      low-income families also receive extra federal Title I and equity staffing.
+    </p>
+    <div class="controls">
+      <div class="seg" id="band-seg">
+        <button data-band="K-5" class="on">K-5</button>
+        <button data-band="K-8">K-8</button>
+        <button data-band="Middle">Middle</button>
+        <button data-band="High">High</button>
+        <button data-band="all">All</button>
+      </div>
+      <label>Mark schools
+        <select id="mark-select">
+          <option value="">None</option>
+          <option value="rs_a">Closing in Scenario A</option>
+          <option value="rs_b">Closing in Scenario B</option>
+        </select>
+      </label>
+    </div>
+    <div class="panel panel-pad">
+      <div id="plot-schools" class="chart"></div>
+      <details>
+        <summary>Show as a table</summary>
+        <div class="table-scroll"><table class="data" id="schools-table"></table></div>
+      </details>
+    </div>
+    <p class="caveat">
+      "Dollars per student" is PPS's figure from the Individual School Reports: the
+      school's General Fund, Title I, and grant dollars divided by its enrollment. It
+      leaves out staff PPS assigns centrally (special education, English language
+      development, nutrition, custodians), so it is lower than the full cost of
+      running a school. Enrollment is PPS's 2026-27 projection, the number it used to
+      staff each school.
+    </p>
+  </section>
+
+  <section id="section-methodology" class="methodology">
+    <h2>Methodology &amp; sources</h2>
+    <h3>Sources</h3>
+    <ul id="source-list"></ul>
+    <h3>How the numbers were put together</h3>
+    <ul>
+      <li>The money-in and money-out figures are the 2026-27 adopted General Fund
+        (Volume 1, pp. 103 and 107-108). Uses are PPS's accounting function codes,
+        grouped and renamed in plain language. Two lines PPS books as negative
+        district-wide adjustments are folded into their groups.</li>
+      <li>"Revenue" in the gap chart is each year's General Fund resources minus the
+        money carried over from the year before. "Spending" leaves out the required
+        reserve. The forecast is PPS's own (Volume 1, p. 113), and the shortfall
+        labels are the amounts PPS prints.</li>
+      <li>Average cost per position is General Fund salaries plus benefits ($680.5
+        million) divided by budgeted General Fund positions (4,481 FTE). It mixes
+        teachers, custodians, and administrators, so it is a rough figure.</li>
+      <li>School figures come from Volume 2, which is the May 2026 proposed budget.
+        The adopted budget changed some school allocations, so a few schools may
+        differ slightly from their final 2026-27 numbers.</li>
+      <li>Scenario markings use PPS's October 2026 draft rightsizing scenarios, as on
+        the main dashboard.</li>
+    </ul>
+    <h3>What this page doesn't show</h3>
+    <ul>
+      <li>Savings from the rightsizing scenarios. PPS has not published savings
+        estimates per scenario, and building operating costs (utilities, upkeep) are
+        not broken out by school in the budget.</li>
+      <li>Bond-funded construction, which voters approve separately and can't be spent
+        on teachers or programs.</li>
+    </ul>
+    <p>This site was built with an AI coding assistant (Claude Code). Every figure
+      comes from the public sources listed above.</p>
+  </section>
+</main>
+
+<script>
+(async function () {
+  const D = await (await fetch("budget.json")).json();
+
+  const FONT = { color: "#e6edf3", size: 12, family: '"Nunito Sans", -apple-system, Helvetica, Arial, sans-serif' };
+  const SURFACE = "#161b22", GRID = "#30363d", MUTED = "#7d8590";
+  // Validated with the dataviz validator on #161b22 (dark): blue / aqua pass
+  // CVD and normal-vision separation.
+  const BLUE = "#3987e5", AQUA = "#199e70", ORANGE = "#d95926", GRAY = "#8b949e";
+  const CONFIG = { displayModeBar: false, responsive: true };
+  const mobile = () => window.innerWidth < 700;
+
+  const fmtM = (k) => k >= 1000000
+    ? "$" + (k / 1000000).toFixed(2) + "B"
+    : "$" + (k / 1000).toLocaleString(undefined, { maximumFractionDigits: k >= 100000 ? 0 : 1 }) + "M";
+  const fmtUSD = (v) => "$" + Math.round(v).toLocaleString();
+  const pct = (part, whole) => Math.round(100 * part / whole) + "%";
+  const total = D.general_fund_total;
+
+  // ---- Tiles ----
+  const thisYear = D.history.find(h => h.year === "2026-27");
+  const nextYear = D.history.find(h => h.year === "2027-28");
+  const perStudent = thisYear.spending * 1000 / thisYear.enrollment;
+  const perFte = D.people_cost * 1000 / D.fte;
+  const tiles = [
+    [fmtM(total), "General Fund, 2026-27", "The budget for running schools day to day."],
+    [fmtUSD(Math.round(perStudent / 100) * 100), "Spent per student", `General Fund spending ÷ ${thisYear.enrollment.toLocaleString()} students.`],
+    [pct(D.people_cost, total), "Goes to people", `Salaries and benefits. A position costs about ${fmtUSD(Math.round(perFte / 1000) * 1000)} on average.`],
+    [fmtM(nextYear.shortfall), "Projected gap in 2027-28", "PPS's forecast if staffing and services stay the same."],
+  ];
+  document.getElementById("tiles").innerHTML = tiles.map(([v, l, s]) =>
+    `<div class="tile"><div class="value">${v}</div><div class="label">${l}</div><div class="sub">${s}</div></div>`).join("");
+
+  // ---- Sankey: sources -> General Fund -> groups -> uses ----
+  const GROUP_COLOR = { "Instruction": AQUA, "Support services": BLUE, "Other": GRAY };
+  const alpha = (hex, a) => {
+    const n = parseInt(hex.slice(1), 16);
+    return `rgba(${n >> 16},${(n >> 8) & 255},${n & 255},${a})`;
+  };
+  const nodes = [], links = { source: [], target: [], value: [], color: [], customdata: [] };
+  // Columns are placed by hand: the uses column has long labels drawn to the
+  // left of its nodes, so the group column sits far enough left to keep its
+  // own labels clear of them.
+  const COL_X = [0.001, 0.25, 0.43, 0.999];
+  const addNode = (label, color, amount, col) => {
+    nodes.push({ label: `${label}  ${fmtM(amount)}`, color, amount, col });
+    return nodes.length - 1;
+  };
+  // Stack each column's nodes top to bottom in proportion to their value.
+  function nodeY() {
+    const PAD = 0.018;
+    const y = new Array(nodes.length);
+    COL_X.forEach((_, col) => {
+      const idx = nodes.map((n, i) => i).filter(i => nodes[i].col === col);
+      const span = 1 - PAD * (idx.length - 1);
+      let top = 0;
+      idx.forEach(i => {
+        const h = span * nodes[i].amount / total;
+        y[i] = Math.min(0.999, Math.max(0.001, top + h / 2));
+        top += h + PAD;
+      });
+    });
+    return y;
+  }
+  const gf = (() => {
+    const srcIdx = D.resources.map(r => addNode(r.label, GRAY, r.amount, 0));
+    const g = addNode("General Fund", "#c9d1d9", total, 1);
+    D.resources.forEach((r, i) => {
+      links.source.push(srcIdx[i]); links.target.push(g); links.value.push(r.amount);
+      links.color.push(alpha(GRAY, 0.28)); links.customdata.push(`${r.label}: ${fmtM(r.amount)} (${pct(r.amount, total)})<br>${r.note}`);
+    });
+    return g;
+  })();
+  D.uses.forEach(grp => {
+    const c = GROUP_COLOR[grp.label];
+    const gi = addNode(grp.label, c, grp.amount, 2);
+    links.source.push(gf); links.target.push(gi); links.value.push(grp.amount);
+    links.color.push(alpha(c, 0.35)); links.customdata.push(`${grp.label}: ${fmtM(grp.amount)} (${pct(grp.amount, total)})<br>${grp.note}`);
+    grp.children.forEach(ch => {
+      const ci = addNode(ch.label, c, ch.amount, 3);
+      links.source.push(gi); links.target.push(ci); links.value.push(ch.amount);
+      links.color.push(alpha(c, 0.35)); links.customdata.push(`${ch.label}: ${fmtM(ch.amount)} (${pct(ch.amount, total)} of the General Fund)`);
+    });
+  });
+  function drawFlow() {
+    if (mobile()) return;
+    Plotly.react("plot-flow", [{
+      type: "sankey", arrangement: "fixed", valueformat: ",.0f",
+      node: { label: nodes.map(n => n.label), color: nodes.map(n => n.color),
+        x: nodes.map(n => COL_X[n.col]), y: nodeY(),
+        pad: 14, thickness: 14, line: { width: 0 },
+        hovertemplate: "%{label}<extra></extra>" },
+      link: { ...links, hovertemplate: "%{customdata}<extra></extra>" },
+    }], {
+      paper_bgcolor: SURFACE, plot_bgcolor: SURFACE, font: FONT,
+      margin: { l: 4, r: 4, t: 8, b: 8 },
+      hoverlabel: { font: FONT, bgcolor: "#0d1117", bordercolor: GRID },
+    }, CONFIG);
+  }
+  drawFlow();
+
+  // Table view of the same breakdown (also the mobile view).
+  const flowRows = [`<tr><th>Money in</th><th class="num">Amount</th><th class="num">Share</th></tr>`]
+    .concat(D.resources.map(r => `<tr><td>${r.label}</td><td class="num">${fmtM(r.amount)}</td><td class="num">${pct(r.amount, total)}</td></tr>`))
+    .concat([`<tr><th>Money out</th><th class="num">Amount</th><th class="num">Share</th></tr>`])
+    .concat(D.uses.flatMap(g => [
+      `<tr class="group"><td>${g.label}</td><td class="num">${fmtM(g.amount)}</td><td class="num">${pct(g.amount, total)}</td></tr>`,
+      ...g.children.map(c => `<tr><td class="sub">${c.label}</td><td class="num">${fmtM(c.amount)}</td><td class="num">${pct(c.amount, total)}</td></tr>`),
+    ]));
+  document.getElementById("flow-table").innerHTML = flowRows.join("");
+  if (mobile()) document.getElementById("flow-details").open = true;
+
+  // ---- All funds callout ----
+  const allTotal = D.all_funds.reduce((a, f) => a + f.amount, 0);
+  const capital = D.all_funds[1].amount;
+  document.getElementById("funds-text").textContent =
+    `That's PPS's total across every fund (${fmtM(allTotal)}). Half of it, ${fmtM(capital)}, is ` +
+    `construction money, mostly from voter-approved bonds, that by law can only be spent on buildings. ` +
+    `The General Fund above is the part that pays for teachers and programs.`;
+  const FUND_COLORS = [AQUA, BLUE, GRAY, "#6e7681", "#484f58"];
+  Plotly.newPlot("plot-funds", D.all_funds.map((f, i) => ({
+    type: "bar", orientation: "h", y: ["All PPS funds"], x: [f.amount / 1000], name: f.label,
+    marker: { color: FUND_COLORS[i], line: { color: "#1c2533", width: 2 } },
+    hovertemplate: `${f.label}<br>${fmtM(f.amount)} (${pct(f.amount, allTotal)})<extra></extra>`,
+  })), {
+    barmode: "stack", paper_bgcolor: "rgba(0,0,0,0)", plot_bgcolor: "rgba(0,0,0,0)", font: FONT,
+    margin: { l: 4, r: 10, t: 4, b: mobile() ? 150 : 50 },
+    xaxis: { ticksuffix: "M", tickprefix: "$", gridcolor: GRID, zeroline: false },
+    yaxis: { visible: false },
+    legend: { orientation: "h", y: -0.45, x: 0, font: { size: 11 }, traceorder: "normal" },
+    hoverlabel: { font: FONT },
+  }, CONFIG);
+
+  // ---- Gap chart ----
+  const H = D.history;
+  const solid = H.filter(h => h.status !== "forecast");
+  const fc = H.filter(h => h.status === "forecast" || h.year === "2026-27");
+  const lastActual = H.filter(h => h.status === "actual").slice(-1)[0];
+  document.getElementById("gap-text").textContent =
+    `Costs have grown faster than revenue. In 2023-24 and 2024-25 PPS spent more than it took in and ` +
+    `covered the difference from savings, which fell from ${fmtM(H[0].reserve)} to ${fmtM(lastActual.reserve)}. ` +
+    `For 2026-27 PPS closed a $56 million gap by cutting 336 positions. Its forecast shows the gap returning.`;
+  const line = (rows, key, color, dash, name, show) => ({
+    type: "scatter", mode: "lines+markers", x: rows.map(h => h.year), y: rows.map(h => h[key] / 1000),
+    name, showlegend: show, legendgroup: key,
+    line: { color, width: 2, dash }, marker: { size: 8, color, line: { color: SURFACE, width: 2 } },
+    customdata: rows.map(h => h.status),
+    hovertemplate: `${name}: $%{y:,.0f}M (%{customdata})<extra></extra>`,
+  });
+  const gapTraces = [
+    line(solid, "revenue", BLUE, "solid", "Revenue", true),
+    line(solid, "spending", ORANGE, "solid", "Spending", true),
+    line(fc, "revenue", BLUE, "dot", "Revenue", false),
+    line(fc, "spending", ORANGE, "dot", "Spending", false),
+  ];
+  const gapAnn = H.filter(h => h.shortfall).map(h => ({
+    x: h.year, y: h.spending / 1000, yshift: 16, showarrow: false,
+    text: mobile() ? `$${Math.round(h.shortfall / 1000)}M` : `gap ${fmtM(h.shortfall)}`,
+    font: { ...FONT, size: 11, color: "#e6edf3" },
+  }));
+  if (!mobile()) gapAnn.push({ x: "2028-29", y: 1, yref: "paper", yanchor: "top", showarrow: false,
+    text: "PPS forecast", font: { ...FONT, size: 11, color: MUTED } });
+  Plotly.newPlot("plot-gap", gapTraces, {
+    paper_bgcolor: SURFACE, plot_bgcolor: SURFACE, font: FONT,
+    margin: { l: 60, r: 16, t: 24, b: 40 },
+    hovermode: "x unified", hoverlabel: { font: FONT, bgcolor: "#0d1117", bordercolor: GRID },
+    xaxis: { gridcolor: "rgba(0,0,0,0)", fixedrange: true, tickangle: 0,
+      tickvals: H.map(h => h.year), ticktext: H.map(h => mobile() ? "'" + h.year.slice(5) : h.year) },
+    yaxis: { title: mobile() ? "" : "Millions of dollars", tickprefix: "$", ticksuffix: "M", gridcolor: GRID, zeroline: false, fixedrange: true },
+    legend: { orientation: "h", x: 0, y: 1.12 },
+    shapes: [{ type: "rect", xref: "x", yref: "paper", x0: 4.5, x1: 7.5, y0: 0, y1: 1,
+      fillcolor: "rgba(255,255,255,0.035)", line: { width: 0 }, layer: "below" }],
+    annotations: gapAnn,
+  }, CONFIG);
+  document.getElementById("gap-table").innerHTML =
+    `<tr><th>Year</th><th>Type</th><th class="num">Revenue</th><th class="num">Spending</th><th class="num">Savings at year end</th><th class="num">PPS-projected gap</th></tr>` +
+    H.map(h => `<tr><td>${h.year}</td><td>${h.status}</td><td class="num">${fmtM(h.revenue)}</td><td class="num">${fmtM(h.spending)}</td>` +
+      `<td class="num">${h.shortfall ? "" : fmtM(h.reserve)}</td><td class="num">${h.shortfall ? fmtM(h.shortfall) : ""}</td></tr>`).join("");
+
+  const E = H.filter(h => h.enrollment);
+  Plotly.newPlot("plot-enroll", [{
+    // A line, not bars: the axis doesn't start at zero, and bars would
+    // exaggerate the decline.
+    type: "scatter", mode: "lines+markers+text", x: E.map(h => h.year), y: E.map(h => h.enrollment),
+    line: { color: BLUE, width: 2 }, marker: { size: 8, color: BLUE, line: { color: SURFACE, width: 2 } },
+    text: E.map(h => h.enrollment.toLocaleString()), textposition: "top center", cliponaxis: false,
+    textfont: { ...FONT, size: 11 },
+    hovertemplate: "%{x}: %{y:,} students<extra></extra>",
+  }], {
+    paper_bgcolor: SURFACE, plot_bgcolor: SURFACE, font: FONT,
+    margin: { l: 60, r: 16, t: 20, b: 34 },
+    yaxis: { title: "Students", range: [40000, 46000], gridcolor: GRID, zeroline: false, fixedrange: true, tickformat: "," },
+    xaxis: { fixedrange: true },
+    showlegend: false,
+  }, CONFIG);
+
+  // ---- Schools scatter ----
+  let band = "K-5", mark = "";
+  const S = D.schools.filter(s => s.dollars_per_student["2026_27"] && s.enrollment["2026_27"]);
+  function drawSchools() {
+    const rows = S.filter(s => band === "all" || s.band === band);
+    const trace = (title, name, color, symbol) => {
+      const pts = rows.filter(s => s.title_i === title);
+      const marked = pts.map(s => mark && s[mark] === "closes");
+      return {
+        type: "scatter", mode: "markers", name,
+        x: pts.map(s => s.enrollment["2026_27"]), y: pts.map(s => s.dollars_per_student["2026_27"]),
+        text: pts.map(s => s.name),
+        customdata: pts.map(s => [s.school_type, s.pct_direct_cert_2425, s.students_per_fte["2026_27"],
+          mark ? (s[mark] === "closes" ? "Closes in this scenario" : "Stays open in this scenario") : ""]),
+        marker: {
+          color, symbol, size: marked.map(m => m ? 14 : 10),
+          opacity: mark ? marked.map(m => m ? 1 : 0.3) : 0.9,
+          line: { color: marked.map(m => m ? "#ffffff" : SURFACE), width: marked.map(m => m ? 2.5 : 1.5) },
+        },
+        hovertemplate: "<b>%{text}</b><br>%{customdata[0]}<br>" +
+          "Projected 2026-27 enrollment: %{x:,}<br>Dollars per student: $%{y:,}<br>" +
+          "Students per staff member: %{customdata[2]}<br>Free meals by direct certification: %{customdata[1]}%" +
+          "<br>%{customdata[3]}<extra></extra>",
+      };
+    };
+    Plotly.react("plot-schools", [
+      trace(false, "Not Title I", BLUE, "circle"),
+      trace(true, "Title I (extra federal funding)", AQUA, "diamond"),
+    ], {
+      paper_bgcolor: SURFACE, plot_bgcolor: SURFACE, font: FONT,
+      margin: { l: 70, r: 16, t: 30, b: 50 },
+      hoverlabel: { font: FONT, bgcolor: "#0d1117", bordercolor: GRID },
+      xaxis: { title: "Projected enrollment, 2026-27", gridcolor: GRID, zeroline: false, rangemode: "tozero" },
+      yaxis: { title: "Dollars per student, 2026-27", tickprefix: "$", gridcolor: GRID, zeroline: false },
+      legend: { orientation: "h", x: 0, y: 1.08 },
+    }, CONFIG);
+    const sorted = [...rows].sort((a, b) => b.dollars_per_student["2026_27"] - a.dollars_per_student["2026_27"]);
+    document.getElementById("schools-table").innerHTML =
+      `<tr><th>School</th><th>Type</th><th class="num">Projected enrollment</th><th class="num">Dollars per student</th><th class="num">Students per staff</th><th>Title I</th>${mark ? "<th>Scenario</th>" : ""}</tr>` +
+      sorted.map(s => `<tr><td>${s.name}</td><td>${s.school_type}</td><td class="num">${s.enrollment["2026_27"].toLocaleString()}</td>` +
+        `<td class="num">${fmtUSD(s.dollars_per_student["2026_27"])}</td><td class="num">${s.students_per_fte["2026_27"] ?? ""}</td>` +
+        `<td>${s.title_i ? "Yes" : ""}</td>${mark ? `<td>${s[mark] === "closes" ? "Closes" : ""}</td>` : ""}</tr>`).join("");
+  }
+  document.querySelectorAll("#band-seg button").forEach(b => b.addEventListener("click", () => {
+    band = b.dataset.band;
+    document.querySelectorAll("#band-seg button").forEach(x => x.classList.toggle("on", x === b));
+    drawSchools();
+  }));
+  document.getElementById("mark-select").addEventListener("change", e => { mark = e.target.value; drawSchools(); });
+  drawSchools();
+
+  // ---- Sources ----
+  document.getElementById("source-list").innerHTML = Object.values(D.sources).map(s =>
+    `<li><a href="${s.url}" target="_blank" rel="noopener">${s.title}</a>, ${s.publisher}.</li>`).join("") +
+    `<li>PPS, Rightsizing board presentation and draft scenarios, October 6, 2026.</li>`;
+
+  let lastMobile = mobile();
+  window.addEventListener("resize", () => {
+    if (mobile() !== lastMobile) { lastMobile = mobile(); drawFlow(); }
+  });
+})();
+</script>
+</body>
+</html>

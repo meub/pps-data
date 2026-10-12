@@ -37,3 +37,6 @@ data/raw/pps_rightsizing_videos/
 
 # PPS Oct 2026 attendance-boundary map PDFs (~40 MB); memo, slides, and regional summaries are tracked
 data/raw/pps_rightsizing_board_2026-10-06/*Attendance_Boundaries*.pdf
+
+# PPS 2026-27 adopted budget Vol 1 (23 MB); export_budget.py cites its pages instead of parsing it
+data/raw/pps_budget_2026-27_adopted_vol1.pdf
