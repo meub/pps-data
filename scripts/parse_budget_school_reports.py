@@ -9,7 +9,8 @@ Two parts are read:
     for 2022-23 through 2026-27, students per FTE, and the direct-
     certification share, grouped by grade band.
   - Each school's two-page report: the enrollment "Total" row (five years
-    of October counts plus three projected years).
+    of October counts plus three projected years), 2026-27 budgeted FTE for
+    a few staff rows, and the 2026-27 total of its School Financial Data.
 
 Dollars per student here are PPS's own figure: school General Fund,
 Title I, and grant dollars divided by enrollment. They exclude centrally
@@ -61,6 +62,17 @@ BAND_HEADERS = {
 REPORT_NAME = {
     "MLK Jr": "Martin Luther King Jr",
     "da Vinci": "Da Vinci",
+}
+
+# Staff rows read from each report (2026-27 budget column). Teachers covers
+# homeroom and specialist teachers; Admin. is principals and APs; Clerical
+# is office staff; Custodial and Nutrition are centrally allocated.
+STAFF_ROWS = {
+    "teachers": "Teachers",
+    "admin": "Admin.",
+    "clerical": "Clerical",
+    "custodial": "Custodial",
+    "nutrition": "Nutrition Services",
 }
 
 TOC = re.compile(r"^\s*(?P<name>[A-Za-z].*?)\s*\.{3,}\s*\d+\s*$")
@@ -121,6 +133,31 @@ def parse_heat_map(pages: list[str]) -> list[dict]:
     return rows
 
 
+def budget_column(lines: list[str], label: str) -> float | None:
+    """2026-27 budget value from the first staff row matching `label`.
+
+    The staff table's last column is "Budget"; earlier years can be blank, so
+    the value must sit under that header to count. A row with nothing in the
+    budget column means zero FTE that year.
+    """
+    header = next(l for l in lines if re.search(r"Position\s+Actual", l))
+    budget = header.rindex("Budget") + len("Budget") / 2
+    row = next((l for l in lines[lines.index(header):]
+                if re.search(rf"(^|\s){re.escape(label)}\s+\d", l)), None)
+    if row is None:
+        return None
+    last = list(re.finditer(r"\d+\.\d+", row))[-1]
+    return float(last.group()) if abs((last.start() + last.end()) / 2 - budget) < 8 else 0.0
+
+
+def financial_total(page: str) -> int | None:
+    """2026-27 budgeted dollars from the report's School Financial Data table."""
+    row = next((l for l in page.splitlines() if re.match(r"^\s*Total\s+\$", l)), None)
+    if row is None:
+        return None
+    return int(re.findall(r"\$\s*([\d,]+)", row)[-1].replace(",", ""))
+
+
 def report_names(pages: list[str]) -> list[str]:
     """School names from the table of contents, in report order."""
     names = []
@@ -137,7 +174,7 @@ def report_names(pages: list[str]) -> list[str]:
 
 
 def parse_enrollment(pages: list[str]) -> dict[str, dict]:
-    """Report name -> {year: total enrollment}.
+    """Report name -> enrollment by year, 2026-27 budgeted FTE, and dollars.
 
     Report headers wrap or carry ODE notes in the same row, so names come
     from the table of contents. Reports appear in TOC order; each one's
@@ -146,12 +183,21 @@ def parse_enrollment(pages: list[str]) -> dict[str, dict]:
     names = report_names(pages)
     # The intro page also says "Enrollment Data"; only reports have a
     # Projected column.
-    reports = [p for p in pages if "Enrollment Data" in p and "Projected" in p]
+    reports = [i for i, p in enumerate(pages) if "Enrollment Data" in p and "Projected" in p]
     if len(names) != len(reports):
         sys.exit(f"TOC lists {len(names)} schools but found {len(reports)} reports")
     out: dict[str, dict] = {}
-    for name, page in zip(names, reports):
+    for name, idx in zip(names, reports):
+        page = pages[idx]
         lines = page.splitlines()
+        staff = {key: budget_column(lines, label) for key, label in STAFF_ROWS.items()}
+        if staff["teachers"] is None or staff["admin"] is None:
+            sys.exit(f"{name}: missing Teachers or Admin. staff row")
+        staff = {k: v or 0.0 for k, v in staff.items()}
+        dollars = financial_total(pages[idx + 1])
+        if dollars is None:
+            sys.exit(f"{name}: no School Financial Data total")
+        extra = {"fte_2026_27": staff, "school_dollars_2026_27": dollars}
         head = " ".join(lines[:8]).upper()
         if name.split()[0].upper().rstrip(".") not in head:
             sys.exit(f"report order mismatch: expected {name!r}")
@@ -169,14 +215,14 @@ def parse_enrollment(pages: list[str]) -> dict[str, dict]:
         if len(nums) == len(ENROLL_YEARS):
             # A full row maps in order. Lincoln's Total row is offset from
             # its header, so positions alone would misplace it.
-            out[name] = dict(zip(ENROLL_YEARS, (int(m.group()) for m in nums)))
+            out[name] = {"enrollment": dict(zip(ENROLL_YEARS, (int(m.group()) for m in nums))), **extra}
             continue
         values: dict[str, int | None] = dict.fromkeys(ENROLL_YEARS)
         for m in nums:
             mid = (m.start() + m.end()) / 2
             col = min(range(len(centers)), key=lambda i: abs(centers[i] - mid))
             values[ENROLL_YEARS[col]] = int(m.group())
-        out[name] = values
+        out[name] = {"enrollment": values, **extra}
     return out
 
 
@@ -192,7 +238,13 @@ def main() -> None:
         report = REPORT_NAME.get(s["name"], s["name"])
         if report not in enrollment:
             sys.exit(f"no report page for heat-map row {s['name']!r}")
-        s["enrollment"] = enrollment[report]
+        s.update(enrollment[report])
+        # Cross-check the two parts of the PDF: report dollars / projected
+        # enrollment must reproduce the heat map's 2026-27 dollars per student.
+        calc = s["school_dollars_2026_27"] / s["enrollment"]["2026_27"]
+        if abs(calc - s["dollars_per_student"]["2026_27"]) > 2:
+            sys.exit(f"{s['name']}: report dollars give ${calc:,.0f}/student, heat map says "
+                     f"${s['dollars_per_student']['2026_27']:,}")
     OUT.write_text(json.dumps({"source": SOURCE, "schools": schools}, indent=2) + "\n")
     print(f"wrote {OUT.relative_to(ROOT)}: {len(schools)} schools")
 

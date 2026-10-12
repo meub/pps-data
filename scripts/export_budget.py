@@ -107,6 +107,21 @@ GROUP_NOTES = {
 GF_PEOPLE_COST = 680_515
 GF_FTE = 4_481.34
 
+# General Fund salaries and budgeted FTE by employee group, 2026-27. Vol 1
+# p. 104. Payroll costs (benefits, PERS, payroll taxes) are $245,251K on
+# $435,264K of salaries, a 56% load applied to every group below.
+GF_SALARIES_TOTAL = 435_264
+GF_PAYROLL_COSTS = 245_251
+SALARY_FTE = {
+    "licensed": (276_175, 2_718.10),       # teachers and other licensed staff
+    "classified": (65_416, 1_255.72),      # office staff, custodians, aides
+    "administrator": (33_957, 199.90),     # principals and assistant principals
+}
+
+# Building operations and maintenance (function 2540), 2026-27. Vol 1 p. 108.
+# Includes custodians, utilities, and upkeep for every PPS building.
+GF_BUILDING_OPS = 72_437
+
 # Every PPS fund, 2026-27 adopted. Vol 1 p. 320.
 ALL_FUNDS = [
     ("General Fund (day-to-day operations)", 862_112),
@@ -210,6 +225,77 @@ def schools() -> list[dict]:
     return out
 
 
+def cost_per_fte() -> dict[str, float]:
+    """Average salary plus benefits per FTE, in dollars."""
+    load = 1 + GF_PAYROLL_COSTS / GF_SALARIES_TOTAL
+    return {k: 1000 * pay / fte * load for k, (pay, fte) in SALARY_FTE.items()}
+
+
+def closure_savings(rows: list[dict]) -> dict:
+    """Annual General Fund savings estimate for each scenario's closures.
+
+    Per closing school, in 2026-27 dollars:
+      leadership  principal/AP and office staff (go away with the school)
+      custodians  the building's custodians
+      building    the building's share of all operations and maintenance by
+                  square footage, which includes custodians (high case only:
+                  assumes PPS sells or leases the building)
+      teachers    teachers beyond what the school's students need at the
+                  district's average students per teacher for its grade band
+                  (high case only: assumes receiving schools absorb students
+                  at that average)
+    Low = leadership + custodians. High = leadership + max(custodians,
+    building) + teachers. Teachers and other staff that follow students
+    (special education, ESL, counselors, nutrition) are not savings.
+    """
+    cost = cost_per_fte()
+    master = pd.read_csv(MASTER)
+    pps = master[master["school_type"] != "Charter School"]
+    sqft = pps.set_index(pps["school_name"].str.strip())["square_feet"]
+    # Upper bound per square foot: school buildings only, so offices and
+    # other district sites don't dilute the rate.
+    per_sqft = GF_BUILDING_OPS * 1000 / sqft.sum()
+
+    band_ratio = {}
+    for band in ("K-5", "K-8", "Middle", "High"):
+        # MLC is listed with middle schools but is K-12.
+        b = [r for r in rows if r["band"] == band and r["name"] != "Metro. Learning Center"]
+        band_ratio[band] = sum(r["enrollment"]["2026_27"] for r in b) / sum(r["fte_2026_27"]["teachers"] for r in b)
+
+    def one(r: dict) -> dict:
+        f = r["fte_2026_27"]
+        enroll = r["enrollment"]["2026_27"]
+        leadership = f["admin"] * cost["administrator"] + f["clerical"] * cost["classified"]
+        custodians = f["custodial"] * cost["classified"]
+        building = sqft.get(r["master_name"], float("nan")) * per_sqft
+        extra_teachers = max(0.0, f["teachers"] - enroll / band_ratio[r["band"]])
+        teachers = extra_teachers * cost["licensed"]
+        high_building = max(custodians, building) if building == building else custodians
+        return {
+            "name": r["name"], "master_name": r["master_name"], "band": r["band"],
+            "enrollment": enroll, "school_dollars": r["school_dollars_2026_27"],
+            "leadership": round(leadership), "custodians": round(custodians),
+            "building_extra": round(high_building - custodians),
+            "teachers": round(teachers), "extra_teacher_fte": round(extra_teachers, 2),
+            "low": round(leadership + custodians),
+            "high": round(leadership + high_building + teachers),
+        }
+
+    out = {"cost_per_fte": {k: round(v) for k, v in cost.items()},
+           "building_ops_per_sqft": round(per_sqft, 2),
+           "students_per_teacher": {k: round(v, 1) for k, v in band_ratio.items()},
+           "scenarios": {}}
+    for key in ("rs_a", "rs_b"):
+        schools = [one(r) for r in rows if r[key] == "closes"]
+        out["scenarios"][key] = {
+            "schools": sorted(schools, key=lambda s: -s["high"]),
+            "low": sum(s["low"] for s in schools),
+            "high": sum(s["high"] for s in schools),
+            "students": sum(s["enrollment"] for s in schools),
+        }
+    return out
+
+
 def main() -> None:
     payload = {
         "sources": SOURCES,
@@ -222,6 +308,7 @@ def main() -> None:
         "history": history(),
         "schools": schools(),
     }
+    payload["savings"] = closure_savings(payload["schools"])
     OUT.write_text(json.dumps(payload, indent=1, ensure_ascii=False) + "\n")
     print(f"wrote {OUT.relative_to(ROOT)}: {len(payload['schools'])} schools")
 

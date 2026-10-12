@@ -37,7 +37,15 @@
         "2026_27": 161,
         "2027_28": 160,
         "2028_29": 167
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 8.4,
+        "admin": 1.0,
+        "clerical": 2.15,
+        "custodial": 3.0,
+        "nutrition": 1.5
+      },
+      "school_dollars_2026_27": 2705598
     },
     {
       "name": "Woodmere",
@@ -70,7 +78,15 @@
         "2026_27": 223,
         "2027_28": 225,
         "2028_29": 225
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 11.6,
+        "admin": 1.0,
+        "clerical": 1.5,
+        "custodial": 2.0,
+        "nutrition": 1.63
+      },
+      "school_dollars_2026_27": 3290042
     },
     {
       "name": "Whitman",
@@ -103,7 +119,15 @@
         "2026_27": 199,
         "2027_28": 208,
         "2028_29": 218
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 11.4,
+        "admin": 1.0,
+        "clerical": 1.5,
+        "custodial": 2.0,
+        "nutrition": 1.63
+      },
+      "school_dollars_2026_27": 2915327
     },
     {
       "name": "Sitton",
@@ -136,7 +160,15 @@
         "2026_27": 341,
         "2027_28": 336,
         "2028_29": 323
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 19.8,
+        "admin": 1.0,
+        "clerical": 2.0,
+        "custodial": 3.0,
+        "nutrition": 2.06
+      },
+      "school_dollars_2026_27": 4649853
     },
     {
       "name": "Marysville",
@@ -169,7 +201,15 @@
         "2026_27": 299,
         "2027_28": 297,
         "2028_29": 304
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 15.2,
+        "admin": 2.0,
+        "clerical": 2.0,
+        "custodial": 2.73,
+        "nutrition": 2.0
+      },
+      "school_dollars_2026_27": 4036287
     },
     {
       "name": "Lee",
@@ -202,7 +242,15 @@
         "2026_27": 255,
         "2027_28": 248,
         "2028_29": 251
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 12.6,
+        "admin": 1.0,
+        "clerical": 1.0,
+        "custodial": 3.0,
+        "nutrition": 1.69
+      },
+      "school_dollars_2026_27": 3435337
     },
     {
       "name": "Boise-Eliot/Humboldt",
@@ -235,7 +283,15 @@
         "2026_27": 295,
         "2027_28": 298,
         "2028_29": 306
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 14.4,
+        "admin": 1.0,
+        "clerical": 2.0,
+        "custodial": 3.0,
+        "nutrition": 1.88
+      },
+      "school_dollars_2026_27": 3944732
     },
     {
       "name": "James John",
@@ -268,7 +324,15 @@
         "2026_27": 361,
         "2027_28": 358,
         "2028_29": 369
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 18.4,
+        "admin": 1.0,
+        "clerical": 2.0,
+        "custodial": 2.0,
+        "nutrition": 1.69
+      },
+      "school_dollars_2026_27": 4731875
     },
     {
       "name": "Beach",
@@ -301,7 +365,15 @@
         "2026_27": 284,
         "2027_28": 280,
         "2028_29": 284
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 15.2,
+        "admin": 1.0,
+        "clerical": 2.0,
+        "custodial": 3.73,
+        "nutrition": 1.63
+      },
+      "school_dollars_2026_27": 3695156
     },
     {
       "name": "Arleta",
@@ -334,7 +406,15 @@
         "2026_27": 217,
         "2027_28": 217,
         "2028_29": 219
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 12.1,
+        "admin": 1.0,
+        "clerical": 1.5,
+        "custodial": 3.0,
+        "nutrition": 1.0
+      },
+      "school_dollars_2026_27": 2799998
     },
     {
       "name": "Grout",
@@ -367,7 +447,15 @@
         "2026_27": 305,
         "2027_28": 298,
         "2028_29": 295
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 13.6,
+        "admin": 1.5,
+        "clerical": 2.0,
+        "custodial": 3.0,
+        "nutrition": 1.56
+      },
+      "school_dollars_2026_27": 3925764
     },
     {
       "name": "Clark",
@@ -400,7 +488,15 @@
         "2026_27": 366,
         "2027_28": 365,
         "2028_29": 360
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 19.4,
+        "admin": 1.0,
+        "clerical": 1.63,
+        "custodial": 2.0,
+        "nutrition": 1.81
+      },
+      "school_dollars_2026_27": 4695445
     },
     {
       "name": "Lent",
@@ -433,7 +529,15 @@
         "2026_27": 253,
         "2027_28": 256,
         "2028_29": 268
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 12.6,
+        "admin": 1.0,
+        "clerical": 2.0,
+        "custodial": 3.0,
+        "nutrition": 1.88
+      },
+      "school_dollars_2026_27": 3241336
     },
     {
       "name": "Scott",
@@ -466,7 +570,15 @@
         "2026_27": 477,
         "2027_28": 479,
         "2028_29": 469
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 26.2,
+        "admin": 1.0,
+        "clerical": 2.0,
+        "custodial": 3.0,
+        "nutrition": 2.38
+      },
+      "school_dollars_2026_27": 6088495
     },
     {
       "name": "Kelly",
@@ -499,7 +611,15 @@
         "2026_27": 414,
         "2027_28": 404,
         "2028_29": 407
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 19.4,
+        "admin": 2.0,
+        "clerical": 2.0,
+        "custodial": 4.0,
+        "nutrition": 2.69
+      },
+      "school_dollars_2026_27": 5080014
     },
     {
       "name": "MLK Jr",
@@ -532,7 +652,15 @@
         "2026_27": 314,
         "2027_28": 334,
         "2028_29": 344
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 16.45,
+        "admin": 1.0,
+        "clerical": 1.7,
+        "custodial": 4.0,
+        "nutrition": 2.31
+      },
+      "school_dollars_2026_27": 3851213
     },
     {
       "name": "Buckman",
@@ -565,7 +693,15 @@
         "2026_27": 260,
         "2027_28": 247,
         "2028_29": 249
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 12.6,
+        "admin": 1.0,
+        "clerical": 1.75,
+        "custodial": 3.0,
+        "nutrition": 1.25
+      },
+      "school_dollars_2026_27": 3187960
     },
     {
       "name": "Abernethy",
@@ -598,7 +734,15 @@
         "2026_27": 250,
         "2027_28": 243,
         "2028_29": 244
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 12.6,
+        "admin": 1.0,
+        "clerical": 1.5,
+        "custodial": 2.0,
+        "nutrition": 1.0
+      },
+      "school_dollars_2026_27": 3031502
     },
     {
       "name": "Vestal",
@@ -631,7 +775,15 @@
         "2026_27": 290,
         "2027_28": 308,
         "2028_29": 305
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 13.7,
+        "admin": 1.0,
+        "clerical": 1.5,
+        "custodial": 3.0,
+        "nutrition": 1.63
+      },
+      "school_dollars_2026_27": 3492199
     },
     {
       "name": "Peninsula",
@@ -664,7 +816,15 @@
         "2026_27": 255,
         "2027_28": 252,
         "2028_29": 253
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 11.8,
+        "admin": 1.0,
+        "clerical": 1.75,
+        "custodial": 2.0,
+        "nutrition": 1.31
+      },
+      "school_dollars_2026_27": 3060466
     },
     {
       "name": "Lewis",
@@ -697,7 +857,15 @@
         "2026_27": 244,
         "2027_28": 225,
         "2028_29": 208
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 12.0,
+        "admin": 1.0,
+        "clerical": 1.5,
+        "custodial": 2.0,
+        "nutrition": 1.0
+      },
+      "school_dollars_2026_27": 2888066
     },
     {
       "name": "Rigler",
@@ -730,7 +898,15 @@
         "2026_27": 302,
         "2027_28": 307,
         "2028_29": 330
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 15.1,
+        "admin": 1.0,
+        "clerical": 1.8,
+        "custodial": 3.0,
+        "nutrition": 1.94
+      },
+      "school_dollars_2026_27": 3569612
     },
     {
       "name": "Chapman",
@@ -763,7 +939,15 @@
         "2026_27": 336,
         "2027_28": 318,
         "2028_29": 325
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 15.2,
+        "admin": 1.0,
+        "clerical": 1.5,
+        "custodial": 3.0,
+        "nutrition": 1.69
+      },
+      "school_dollars_2026_27": 3957676
     },
     {
       "name": "Woodlawn",
@@ -796,7 +980,15 @@
         "2026_27": 320,
         "2027_28": 300,
         "2028_29": 316
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 15.2,
+        "admin": 2.0,
+        "clerical": 1.5,
+        "custodial": 3.0,
+        "nutrition": 1.69
+      },
+      "school_dollars_2026_27": 3757833
     },
     {
       "name": "Rieke",
@@ -829,7 +1021,15 @@
         "2026_27": 255,
         "2027_28": 252,
         "2028_29": 272
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 12.6,
+        "admin": 1.0,
+        "clerical": 1.5,
+        "custodial": 2.0,
+        "nutrition": 1.0
+      },
+      "school_dollars_2026_27": 2962405
     },
     {
       "name": "Irvington",
@@ -862,7 +1062,15 @@
         "2026_27": 251,
         "2027_28": 243,
         "2028_29": 239
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 12.1,
+        "admin": 1.0,
+        "clerical": 1.5,
+        "custodial": 2.73,
+        "nutrition": 1.31
+      },
+      "school_dollars_2026_27": 2913922
     },
     {
       "name": "Woodstock",
@@ -895,7 +1103,15 @@
         "2026_27": 353,
         "2027_28": 343,
         "2028_29": 344
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 17.2,
+        "admin": 1.0,
+        "clerical": 1.5,
+        "custodial": 3.0,
+        "nutrition": 1.44
+      },
+      "school_dollars_2026_27": 4056667
     },
     {
       "name": "Creston",
@@ -928,7 +1144,15 @@
         "2026_27": 199,
         "2027_28": 187,
         "2028_29": 177
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 8.4,
+        "admin": 1.0,
+        "clerical": 1.5,
+        "custodial": 3.0,
+        "nutrition": 1.63
+      },
+      "school_dollars_2026_27": 2281941
     },
     {
       "name": "Maplewood",
@@ -961,7 +1185,15 @@
         "2026_27": 288,
         "2027_28": 279,
         "2028_29": 266
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 13.6,
+        "admin": 1.0,
+        "clerical": 1.5,
+        "custodial": 2.0,
+        "nutrition": 1.0
+      },
+      "school_dollars_2026_27": 3248514
     },
     {
       "name": "Chief Joseph",
@@ -994,7 +1226,15 @@
         "2026_27": 242,
         "2027_28": 248,
         "2028_29": 251
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 12.2,
+        "admin": 1.0,
+        "clerical": 1.5,
+        "custodial": 2.0,
+        "nutrition": 1.0
+      },
+      "school_dollars_2026_27": 2707437
     },
     {
       "name": "Rose City Park",
@@ -1027,7 +1267,15 @@
         "2026_27": 398,
         "2027_28": 392,
         "2028_29": 369
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 20.4,
+        "admin": 1.0,
+        "clerical": 1.5,
+        "custodial": 2.73,
+        "nutrition": 1.63
+      },
+      "school_dollars_2026_27": 4415126
     },
     {
       "name": "Markham",
@@ -1060,7 +1308,15 @@
         "2026_27": 327,
         "2027_28": 315,
         "2028_29": 325
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 16.2,
+        "admin": 1.0,
+        "clerical": 1.5,
+        "custodial": 3.0,
+        "nutrition": 2.06
+      },
+      "school_dollars_2026_27": 3614381
     },
     {
       "name": "Atkinson",
@@ -1093,7 +1349,15 @@
         "2026_27": 358,
         "2027_28": 366,
         "2028_29": 379
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 18.2,
+        "admin": 1.0,
+        "clerical": 2.0,
+        "custodial": 3.45,
+        "nutrition": 1.38
+      },
+      "school_dollars_2026_27": 3919668
     },
     {
       "name": "Glencoe",
@@ -1126,7 +1390,15 @@
         "2026_27": 328,
         "2027_28": 314,
         "2028_29": 295
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 15.2,
+        "admin": 1.0,
+        "clerical": 1.5,
+        "custodial": 2.73,
+        "nutrition": 1.31
+      },
+      "school_dollars_2026_27": 3577496
     },
     {
       "name": "Sabin",
@@ -1159,7 +1431,15 @@
         "2026_27": 259,
         "2027_28": 238,
         "2028_29": 250
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 11.6,
+        "admin": 1.0,
+        "clerical": 1.5,
+        "custodial": 3.0,
+        "nutrition": 1.31
+      },
+      "school_dollars_2026_27": 2792497
     },
     {
       "name": "Forest Park",
@@ -1192,7 +1472,15 @@
         "2026_27": 260,
         "2027_28": 261,
         "2028_29": 261
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 11.6,
+        "admin": 1.0,
+        "clerical": 1.5,
+        "custodial": 2.0,
+        "nutrition": 1.0
+      },
+      "school_dollars_2026_27": 2782065
     },
     {
       "name": "Llewellyn",
@@ -1225,7 +1513,15 @@
         "2026_27": 333,
         "2027_28": 312,
         "2028_29": 304
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 15.2,
+        "admin": 1.0,
+        "clerical": 1.5,
+        "custodial": 2.0,
+        "nutrition": 1.31
+      },
+      "school_dollars_2026_27": 3559679
     },
     {
       "name": "Stephenson",
@@ -1258,7 +1554,15 @@
         "2026_27": 270,
         "2027_28": 275,
         "2028_29": 269
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 12.6,
+        "admin": 1.0,
+        "clerical": 1.5,
+        "custodial": 2.0,
+        "nutrition": 1.0
+      },
+      "school_dollars_2026_27": 2858178
     },
     {
       "name": "Hayhurst",
@@ -1291,7 +1595,15 @@
         "2026_27": 284,
         "2027_28": 276,
         "2028_29": 273
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 13.6,
+        "admin": 1.0,
+        "clerical": 1.5,
+        "custodial": 2.0,
+        "nutrition": 1.25
+      },
+      "school_dollars_2026_27": 2895012
     },
     {
       "name": "Bridlemile",
@@ -1324,7 +1636,15 @@
         "2026_27": 414,
         "2027_28": 416,
         "2028_29": 411
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 18.4,
+        "admin": 1.0,
+        "clerical": 1.5,
+        "custodial": 2.73,
+        "nutrition": 1.69
+      },
+      "school_dollars_2026_27": 4002313
     },
     {
       "name": "Capitol Hill",
@@ -1357,7 +1677,15 @@
         "2026_27": 322,
         "2027_28": 313,
         "2028_29": 303
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 13.6,
+        "admin": 1.0,
+        "clerical": 1.5,
+        "custodial": 2.73,
+        "nutrition": 1.25
+      },
+      "school_dollars_2026_27": 3104939
     },
     {
       "name": "Ainsworth",
@@ -1390,7 +1718,15 @@
         "2026_27": 556,
         "2027_28": 558,
         "2028_29": 574
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 24.8,
+        "admin": 2.0,
+        "clerical": 1.5,
+        "custodial": 3.0,
+        "nutrition": 2.13
+      },
+      "school_dollars_2026_27": 5319551
     },
     {
       "name": "Duniway",
@@ -1423,7 +1759,15 @@
         "2026_27": 364,
         "2027_28": 342,
         "2028_29": 352
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 15.0,
+        "admin": 1.0,
+        "clerical": 1.5,
+        "custodial": 3.0,
+        "nutrition": 1.5
+      },
+      "school_dollars_2026_27": 3397182
     },
     {
       "name": "Richmond",
@@ -1456,7 +1800,15 @@
         "2026_27": 505,
         "2027_28": 504,
         "2028_29": 502
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 21.4,
+        "admin": 1.0,
+        "clerical": 1.5,
+        "custodial": 3.0,
+        "nutrition": 1.75
+      },
+      "school_dollars_2026_27": 4421208
     },
     {
       "name": "Alameda",
@@ -1489,7 +1841,15 @@
         "2026_27": 504,
         "2027_28": 502,
         "2028_29": 507
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 20.4,
+        "admin": 1.6,
+        "clerical": 1.5,
+        "custodial": 3.73,
+        "nutrition": 1.63
+      },
+      "school_dollars_2026_27": 4354172
     },
     {
       "name": "C\u00e9sar Ch\u00e1vez",
@@ -1522,7 +1882,15 @@
         "2026_27": 425,
         "2027_28": 417,
         "2028_29": 407
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 26.4,
+        "admin": 3.0,
+        "clerical": 2.0,
+        "custodial": 3.73,
+        "nutrition": 2.38
+      },
+      "school_dollars_2026_27": 6138197
     },
     {
       "name": "Skyline",
@@ -1555,7 +1923,15 @@
         "2026_27": 206,
         "2027_28": 200,
         "2028_29": 202
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 11.48,
+        "admin": 1.0,
+        "clerical": 1.0,
+        "custodial": 2.0,
+        "nutrition": 1.0
+      },
+      "school_dollars_2026_27": 2670198
     },
     {
       "name": "Faubion",
@@ -1588,7 +1964,15 @@
         "2026_27": 586,
         "2027_28": 580,
         "2028_29": 615
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 32.04,
+        "admin": 3.0,
+        "clerical": 4.0,
+        "custodial": 5.0,
+        "nutrition": 3.19
+      },
+      "school_dollars_2026_27": 7525797
     },
     {
       "name": "Astor",
@@ -1621,7 +2005,15 @@
         "2026_27": 419,
         "2027_28": 416,
         "2028_29": 415
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 21.0,
+        "admin": 2.0,
+        "clerical": 1.75,
+        "custodial": 2.0,
+        "nutrition": 1.63
+      },
+      "school_dollars_2026_27": 4792494
     },
     {
       "name": "Odyssey",
@@ -1654,7 +2046,15 @@
         "2026_27": 222,
         "2027_28": 221,
         "2028_29": 224
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 11.2,
+        "admin": 1.0,
+        "clerical": 1.5,
+        "custodial": 1.0,
+        "nutrition": 0.75
+      },
+      "school_dollars_2026_27": 2485965
     },
     {
       "name": "Beverly Cleary",
@@ -1687,7 +2087,15 @@
         "2026_27": 466,
         "2027_28": 436,
         "2028_29": 420
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 23.0,
+        "admin": 2.0,
+        "clerical": 1.5,
+        "custodial": 5.0,
+        "nutrition": 1.44
+      },
+      "school_dollars_2026_27": 5144091
     },
     {
       "name": "Bridger Creative Science",
@@ -1720,7 +2128,15 @@
         "2026_27": 454,
         "2027_28": 443,
         "2028_29": 435
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 22.47,
+        "admin": 1.0,
+        "clerical": 1.5,
+        "custodial": 2.73,
+        "nutrition": 1.56
+      },
+      "school_dollars_2026_27": 4966108
     },
     {
       "name": "Access",
@@ -1753,7 +2169,15 @@
         "2026_27": 315,
         "2027_28": 310,
         "2028_29": 297
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 15.7,
+        "admin": 1.0,
+        "clerical": 1.5,
+        "custodial": 2.0,
+        "nutrition": 1.0
+      },
+      "school_dollars_2026_27": 3378379
     },
     {
       "name": "Winterhaven",
@@ -1786,7 +2210,15 @@
         "2026_27": 315,
         "2027_28": 311,
         "2028_29": 312
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 15.4,
+        "admin": 1.0,
+        "clerical": 1.0,
+        "custodial": 2.0,
+        "nutrition": 1.25
+      },
+      "school_dollars_2026_27": 3355818
     },
     {
       "name": "Sunnyside Environmental",
@@ -1819,7 +2251,15 @@
         "2026_27": 483,
         "2027_28": 487,
         "2028_29": 484
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 22.5,
+        "admin": 2.0,
+        "clerical": 1.8,
+        "custodial": 2.73,
+        "nutrition": 1.63
+      },
+      "school_dollars_2026_27": 5052977
     },
     {
       "name": "Vernon",
@@ -1852,7 +2292,15 @@
         "2026_27": 515,
         "2027_28": 494,
         "2028_29": 490
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 23.05,
+        "admin": 1.0,
+        "clerical": 2.0,
+        "custodial": 3.0,
+        "nutrition": 1.69
+      },
+      "school_dollars_2026_27": 5292121
     },
     {
       "name": "Laurelhurst",
@@ -1885,7 +2333,15 @@
         "2026_27": 574,
         "2027_28": 585,
         "2028_29": 569
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 27.08,
+        "admin": 1.8,
+        "clerical": 1.5,
+        "custodial": 3.0,
+        "nutrition": 1.69
+      },
+      "school_dollars_2026_27": 5752706
     },
     {
       "name": "George",
@@ -1918,7 +2374,15 @@
         "2026_27": 377,
         "2027_28": 390,
         "2028_29": 404
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 18.82,
+        "admin": 2.0,
+        "clerical": 3.9,
+        "custodial": 3.73,
+        "nutrition": 1.69
+      },
+      "school_dollars_2026_27": 5010493
     },
     {
       "name": "Lane",
@@ -1951,7 +2415,15 @@
         "2026_27": 427,
         "2027_28": 419,
         "2028_29": 407
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 21.4,
+        "admin": 2.0,
+        "clerical": 2.5,
+        "custodial": 4.0,
+        "nutrition": 2.31
+      },
+      "school_dollars_2026_27": 5244102
     },
     {
       "name": "Harrison Park",
@@ -1984,7 +2456,15 @@
         "2026_27": 442,
         "2027_28": 432,
         "2028_29": 421
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 22.1,
+        "admin": 2.0,
+        "clerical": 1.75,
+        "custodial": 4.0,
+        "nutrition": 1.69
+      },
+      "school_dollars_2026_27": 5338439
     },
     {
       "name": "Kellogg",
@@ -2017,7 +2497,15 @@
         "2026_27": 515,
         "2027_28": 509,
         "2028_29": 488
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 23.0,
+        "admin": 2.0,
+        "clerical": 2.0,
+        "custodial": 4.0,
+        "nutrition": 2.13
+      },
+      "school_dollars_2026_27": 6084522
     },
     {
       "name": "Roseway Heights",
@@ -2050,7 +2538,15 @@
         "2026_27": 563,
         "2027_28": 563,
         "2028_29": 549
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 26.4,
+        "admin": 2.0,
+        "clerical": 2.8,
+        "custodial": 3.75,
+        "nutrition": 2.06
+      },
+      "school_dollars_2026_27": 6522491
     },
     {
       "name": "Harriet Tubman",
@@ -2083,7 +2579,15 @@
         "2026_27": 437,
         "2027_28": 451,
         "2028_29": 403
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 18.6,
+        "admin": 3.0,
+        "clerical": 3.33,
+        "custodial": 4.0,
+        "nutrition": 1.38
+      },
+      "school_dollars_2026_27": 5014787
     },
     {
       "name": "Ockley Green",
@@ -2116,7 +2620,15 @@
         "2026_27": 436,
         "2027_28": 443,
         "2028_29": 407
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 19.9,
+        "admin": 2.0,
+        "clerical": 2.6,
+        "custodial": 3.0,
+        "nutrition": 1.38
+      },
+      "school_dollars_2026_27": 4934541
     },
     {
       "name": "Beaumont",
@@ -2149,7 +2661,15 @@
         "2026_27": 414,
         "2027_28": 409,
         "2028_29": 388
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 19.6,
+        "admin": 2.0,
+        "clerical": 1.5,
+        "custodial": 3.73,
+        "nutrition": 1.5
+      },
+      "school_dollars_2026_27": 4513924
     },
     {
       "name": "Mt Tabor",
@@ -2182,7 +2702,15 @@
         "2026_27": 415,
         "2027_28": 406,
         "2028_29": 411
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 18.49,
+        "admin": 2.0,
+        "clerical": 1.6,
+        "custodial": 3.0,
+        "nutrition": 1.63
+      },
+      "school_dollars_2026_27": 4332413
     },
     {
       "name": "Gray",
@@ -2215,7 +2743,15 @@
         "2026_27": 433,
         "2027_28": 431,
         "2028_29": 409
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 18.6,
+        "admin": 2.0,
+        "clerical": 2.0,
+        "custodial": 3.0,
+        "nutrition": 1.0
+      },
+      "school_dollars_2026_27": 4426010
     },
     {
       "name": "da Vinci",
@@ -2248,7 +2784,15 @@
         "2026_27": 430,
         "2027_28": 430,
         "2028_29": 431
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 19.5,
+        "admin": 2.0,
+        "clerical": 1.7,
+        "custodial": 3.0,
+        "nutrition": 0.94
+      },
+      "school_dollars_2026_27": 4368508
     },
     {
       "name": "Hosford",
@@ -2281,7 +2825,15 @@
         "2026_27": 524,
         "2027_28": 476,
         "2028_29": 439
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 22.95,
+        "admin": 2.0,
+        "clerical": 1.5,
+        "custodial": 3.73,
+        "nutrition": 1.63
+      },
+      "school_dollars_2026_27": 5116996
     },
     {
       "name": "Jackson",
@@ -2314,7 +2866,15 @@
         "2026_27": 684,
         "2027_28": 663,
         "2028_29": 658
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 29.8,
+        "admin": 2.0,
+        "clerical": 2.0,
+        "custodial": 9.0,
+        "nutrition": 2.75
+      },
+      "school_dollars_2026_27": 6539726
     },
     {
       "name": "Sellwood",
@@ -2347,7 +2907,15 @@
         "2026_27": 537,
         "2027_28": 524,
         "2028_29": 486
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 23.05,
+        "admin": 2.0,
+        "clerical": 1.8,
+        "custodial": 5.0,
+        "nutrition": 1.25
+      },
+      "school_dollars_2026_27": 5129295
     },
     {
       "name": "West Sylvan",
@@ -2380,7 +2948,15 @@
         "2026_27": 655,
         "2027_28": 691,
         "2028_29": 644
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 28.9,
+        "admin": 2.0,
+        "clerical": 1.9,
+        "custodial": 4.73,
+        "nutrition": 1.63
+      },
+      "school_dollars_2026_27": 5968845
     },
     {
       "name": "Metro. Learning Center",
@@ -2413,7 +2989,15 @@
         "2026_27": 266,
         "2027_28": 245,
         "2028_29": 232
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 19.2,
+        "admin": 2.0,
+        "clerical": 2.5,
+        "custodial": 2.0,
+        "nutrition": 0.88
+      },
+      "school_dollars_2026_27": 4565458
     },
     {
       "name": "Alliance",
@@ -2446,7 +3030,15 @@
         "2026_27": 217,
         "2027_28": 217,
         "2028_29": 217
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 16.5,
+        "admin": 2.0,
+        "clerical": 3.5,
+        "custodial": 3.0,
+        "nutrition": 0.81
+      },
+      "school_dollars_2026_27": 4537536
     },
     {
       "name": "Jefferson",
@@ -2479,7 +3071,15 @@
         "2026_27": 403,
         "2027_28": 547,
         "2028_29": 798
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 25.34,
+        "admin": 5.0,
+        "clerical": 4.63,
+        "custodial": 10.0,
+        "nutrition": 1.25
+      },
+      "school_dollars_2026_27": 7027697
     },
     {
       "name": "Roosevelt",
@@ -2512,7 +3112,15 @@
         "2026_27": 1339,
         "2027_28": 1312,
         "2028_29": 1252
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 63.18,
+        "admin": 5.0,
+        "clerical": 10.5,
+        "custodial": 10.75,
+        "nutrition": 3.31
+      },
+      "school_dollars_2026_27": 16214901
     },
     {
       "name": "McDaniel",
@@ -2545,7 +3153,15 @@
         "2026_27": 1587,
         "2027_28": 1525,
         "2028_29": 1474
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 73.51,
+        "admin": 5.0,
+        "clerical": 9.5,
+        "custodial": 10.73,
+        "nutrition": 4.19
+      },
+      "school_dollars_2026_27": 18171882
     },
     {
       "name": "Benson",
@@ -2578,7 +3194,15 @@
         "2026_27": 1114,
         "2027_28": 1200,
         "2028_29": 1216
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 51.5,
+        "admin": 4.0,
+        "clerical": 6.0,
+        "custodial": 8.73,
+        "nutrition": 3.0
+      },
+      "school_dollars_2026_27": 12066669
     },
     {
       "name": "Franklin",
@@ -2611,7 +3235,15 @@
         "2026_27": 1733,
         "2027_28": 1685,
         "2028_29": 1605
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 79.84,
+        "admin": 5.0,
+        "clerical": 9.3,
+        "custodial": 11.0,
+        "nutrition": 4.13
+      },
+      "school_dollars_2026_27": 18077525
     },
     {
       "name": "Cleveland",
@@ -2644,7 +3276,15 @@
         "2026_27": 1421,
         "2027_28": 1466,
         "2028_29": 1471
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 62.34,
+        "admin": 4.5,
+        "clerical": 6.38,
+        "custodial": 9.0,
+        "nutrition": 2.19
+      },
+      "school_dollars_2026_27": 13991267
     },
     {
       "name": "Lincoln",
@@ -2677,7 +3317,15 @@
         "2026_27": 1653,
         "2027_28": 1604,
         "2028_29": 1595
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 70.51,
+        "admin": 5.0,
+        "clerical": 4.4,
+        "custodial": 14.0,
+        "nutrition": 3.63
+      },
+      "school_dollars_2026_27": 15688095
     },
     {
       "name": "Ida B. Wells-Barnett",
@@ -2710,7 +3358,15 @@
         "2026_27": 1558,
         "2027_28": 1532,
         "2028_29": 1510
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 65.0,
+        "admin": 5.5,
+        "clerical": 6.75,
+        "custodial": 11.73,
+        "nutrition": 2.81
+      },
+      "school_dollars_2026_27": 14705836
     },
     {
       "name": "Grant",
@@ -2743,7 +3399,15 @@
         "2026_27": 2019,
         "2027_28": 1936,
         "2028_29": 1823
-      }
+      },
+      "fte_2026_27": {
+        "teachers": 85.66,
+        "admin": 5.0,
+        "clerical": 9.0,
+        "custodial": 9.73,
+        "nutrition": 2.88
+      },
+      "school_dollars_2026_27": 18296137
     }
   ]
 }

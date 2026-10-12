@@ -354,6 +354,14 @@
     "2027_28": 160,
     "2028_29": 167
    },
+   "fte_2026_27": {
+    "teachers": 8.4,
+    "admin": 1.0,
+    "clerical": 2.15,
+    "custodial": 3.0,
+    "nutrition": 1.5
+   },
+   "school_dollars_2026_27": 2705598,
    "master_name": "Rosa Parks Elementary School",
    "rs_a": "boundary",
    "rs_b": "boundary"
@@ -390,6 +398,14 @@
     "2027_28": 225,
     "2028_29": 225
    },
+   "fte_2026_27": {
+    "teachers": 11.6,
+    "admin": 1.0,
+    "clerical": 1.5,
+    "custodial": 2.0,
+    "nutrition": 1.63
+   },
+   "school_dollars_2026_27": 3290042,
    "master_name": "Woodmere Elementary School",
    "rs_a": "closes",
    "rs_b": "closes"
@@ -426,6 +442,14 @@
     "2027_28": 208,
     "2028_29": 218
    },
+   "fte_2026_27": {
+    "teachers": 11.4,
+    "admin": 1.0,
+    "clerical": 1.5,
+    "custodial": 2.0,
+    "nutrition": 1.63
+   },
+   "school_dollars_2026_27": 2915327,
    "master_name": "Whitman Elementary School",
    "rs_a": "boundary",
    "rs_b": "boundary"
@@ -462,6 +486,14 @@
     "2027_28": 336,
     "2028_29": 323
    },
+   "fte_2026_27": {
+    "teachers": 19.8,
+    "admin": 1.0,
+    "clerical": 2.0,
+    "custodial": 3.0,
+    "nutrition": 2.06
+   },
+   "school_dollars_2026_27": 4649853,
    "master_name": "Sitton Elementary School",
    "rs_a": "program_change",
    "rs_b": "program_change"
@@ -498,6 +530,14 @@
     "2027_28": 297,
     "2028_29": 304
    },
+   "fte_2026_27": {
+    "teachers": 15.2,
+    "admin": 2.0,
+    "clerical": 2.0,
+    "custodial": 2.73,
+    "nutrition": 2.0
+   },
+   "school_dollars_2026_27": 4036287,
    "master_name": "Marysville Elementary School",
    "rs_a": "closes",
    "rs_b": "closes"
@@ -534,6 +574,14 @@
     "2027_28": 248,
     "2028_29": 251
    },
+   "fte_2026_27": {
+    "teachers": 12.6,
+    "admin": 1.0,
+    "clerical": 1.0,
+    "custodial": 3.0,
+    "nutrition": 1.69
+   },
+   "school_dollars_2026_27": 3435337,
    "master_name": "Lee Elementary School",
    "rs_a": null,
    "rs_b": null
@@ -570,6 +618,14 @@
     "2027_28": 298,
     "2028_29": 306
    },
+   "fte_2026_27": {
+    "teachers": 14.4,
+    "admin": 1.0,
+    "clerical": 2.0,
+    "custodial": 3.0,
+    "nutrition": 1.88
+   },
+   "school_dollars_2026_27": 3944732,
    "master_name": "Boise-Eliot Elementary School",
    "rs_a": "program_change",
    "rs_b": "program_change"
@@ -606,6 +662,14 @@
     "2027_28": 358,
     "2028_29": 369
    },
+   "fte_2026_27": {
+    "teachers": 18.4,
+    "admin": 1.0,
+    "clerical": 2.0,
+    "custodial": 2.0,
+    "nutrition": 1.69
+   },
+   "school_dollars_2026_27": 4731875,
    "master_name": "James John Elementary School",
    "rs_a": "closes",
    "rs_b": "closes"
@@ -642,6 +706,14 @@
     "2027_28": 280,
     "2028_29": 284
    },
+   "fte_2026_27": {
+    "teachers": 15.2,
+    "admin": 1.0,
+    "clerical": 2.0,
+    "custodial": 3.73,
+    "nutrition": 1.63
+   },
+   "school_dollars_2026_27": 3695156,
    "master_name": "Beach Elementary School",
    "rs_a": "closes",
    "rs_b": "closes"
@@ -678,6 +750,14 @@
     "2027_28": 217,
     "2028_29": 219
    },
+   "fte_2026_27": {
+    "teachers": 12.1,
+    "admin": 1.0,
+    "clerical": 1.5,
+    "custodial": 3.0,
+    "nutrition": 1.0
+   },
+   "school_dollars_2026_27": 2799998,
    "master_name": "Arleta Elementary School",
    "rs_a": "boundary",
    "rs_b": "boundary"
@@ -714,6 +794,14 @@
     "2027_28": 298,
     "2028_29": 295
    },
+   "fte_2026_27": {
+    "teachers": 13.6,
+    "admin": 1.5,
+    "clerical": 2.0,
+    "custodial": 3.0,
+    "nutrition": 1.56
+   },
+   "school_dollars_2026_27": 3925764,
    "master_name": "Grout Elementary School",
    "rs_a": null,
    "rs_b": null
@@ -750,6 +838,14 @@
     "2027_28": 365,
     "2028_29": 360
    },
+   "fte_2026_27": {
+    "teachers": 19.4,
+    "admin": 1.0,
+    "clerical": 1.63,
+    "custodial": 2.0,
+    "nutrition": 1.81
+   },
+   "school_dollars_2026_27": 4695445,
    "master_name": "Clark Elementary School",
    "rs_a": "program_change",
    "rs_b": "program_change"
@@ -786,6 +882,14 @@
     "2027_28": 256,
     "2028_29": 268
    },
+   "fte_2026_27": {
+    "teachers": 12.6,
+    "admin": 1.0,
+    "clerical": 2.0,
+    "custodial": 3.0,
+    "nutrition": 1.88
+   },
+   "school_dollars_2026_27": 3241336,
    "master_name": "Lent Elementary School",
    "rs_a": "program_change",
    "rs_b": "program_change"
@@ -822,6 +926,14 @@
     "2027_28": 479,
     "2028_29": 469
    },
+   "fte_2026_27": {
+    "teachers": 26.2,
+    "admin": 1.0,
+    "clerical": 2.0,
+    "custodial": 3.0,
+    "nutrition": 2.38
+   },
+   "school_dollars_2026_27": 6088495,
    "master_name": "Scott Elementary School",
    "rs_a": "program_change",
    "rs_b": "program_change"
@@ -858,6 +970,14 @@
     "2027_28": 404,
     "2028_29": 407
    },
+   "fte_2026_27": {
+    "teachers": 19.4,
+    "admin": 2.0,
+    "clerical": 2.0,
+    "custodial": 4.0,
+    "nutrition": 2.69
+   },
+   "school_dollars_2026_27": 5080014,
    "master_name": "Kelly Elementary School",
    "rs_a": "boundary",
    "rs_b": "boundary"
@@ -894,6 +1014,14 @@
     "2027_28": 334,
     "2028_29": 344
    },
+   "fte_2026_27": {
+    "teachers": 16.45,
+    "admin": 1.0,
+    "clerical": 1.7,
+    "custodial": 4.0,
+    "nutrition": 2.31
+   },
+   "school_dollars_2026_27": 3851213,
    "master_name": "Dr. Martin Luther King Jr. School",
    "rs_a": "program_change",
    "rs_b": "program_change"
@@ -930,6 +1058,14 @@
     "2027_28": 247,
     "2028_29": 249
    },
+   "fte_2026_27": {
+    "teachers": 12.6,
+    "admin": 1.0,
+    "clerical": 1.75,
+    "custodial": 3.0,
+    "nutrition": 1.25
+   },
+   "school_dollars_2026_27": 3187960,
    "master_name": "Buckman Elementary School",
    "rs_a": "closes",
    "rs_b": "closes"
@@ -966,6 +1102,14 @@
     "2027_28": 243,
     "2028_29": 244
    },
+   "fte_2026_27": {
+    "teachers": 12.6,
+    "admin": 1.0,
+    "clerical": 1.5,
+    "custodial": 2.0,
+    "nutrition": 1.0
+   },
+   "school_dollars_2026_27": 3031502,
    "master_name": "Abernethy Elementary School",
    "rs_a": "boundary",
    "rs_b": "boundary"
@@ -1002,6 +1146,14 @@
     "2027_28": 308,
     "2028_29": 305
    },
+   "fte_2026_27": {
+    "teachers": 13.7,
+    "admin": 1.0,
+    "clerical": 1.5,
+    "custodial": 3.0,
+    "nutrition": 1.63
+   },
+   "school_dollars_2026_27": 3492199,
    "master_name": "Vestal Elementary School",
    "rs_a": "program_change",
    "rs_b": null
@@ -1038,6 +1190,14 @@
     "2027_28": 252,
     "2028_29": 253
    },
+   "fte_2026_27": {
+    "teachers": 11.8,
+    "admin": 1.0,
+    "clerical": 1.75,
+    "custodial": 2.0,
+    "nutrition": 1.31
+   },
+   "school_dollars_2026_27": 3060466,
    "master_name": "Peninsula Elementary School",
    "rs_a": "closes",
    "rs_b": "closes"
@@ -1074,6 +1234,14 @@
     "2027_28": 225,
     "2028_29": 208
    },
+   "fte_2026_27": {
+    "teachers": 12.0,
+    "admin": 1.0,
+    "clerical": 1.5,
+    "custodial": 2.0,
+    "nutrition": 1.0
+   },
+   "school_dollars_2026_27": 2888066,
    "master_name": "Lewis Elementary School",
    "rs_a": "closes",
    "rs_b": "boundary"
@@ -1110,6 +1278,14 @@
     "2027_28": 307,
     "2028_29": 330
    },
+   "fte_2026_27": {
+    "teachers": 15.1,
+    "admin": 1.0,
+    "clerical": 1.8,
+    "custodial": 3.0,
+    "nutrition": 1.94
+   },
+   "school_dollars_2026_27": 3569612,
    "master_name": "Rigler Elementary School",
    "rs_a": "program_change",
    "rs_b": "program_change"
@@ -1146,6 +1322,14 @@
     "2027_28": 318,
     "2028_29": 325
    },
+   "fte_2026_27": {
+    "teachers": 15.2,
+    "admin": 1.0,
+    "clerical": 1.5,
+    "custodial": 3.0,
+    "nutrition": 1.69
+   },
+   "school_dollars_2026_27": 3957676,
    "master_name": "Chapman Elementary School",
    "rs_a": null,
    "rs_b": null
@@ -1182,6 +1366,14 @@
     "2027_28": 300,
     "2028_29": 316
    },
+   "fte_2026_27": {
+    "teachers": 15.2,
+    "admin": 2.0,
+    "clerical": 1.5,
+    "custodial": 3.0,
+    "nutrition": 1.69
+   },
+   "school_dollars_2026_27": 3757833,
    "master_name": "Woodlawn Elementary School",
    "rs_a": null,
    "rs_b": null
@@ -1218,6 +1410,14 @@
     "2027_28": 252,
     "2028_29": 272
    },
+   "fte_2026_27": {
+    "teachers": 12.6,
+    "admin": 1.0,
+    "clerical": 1.5,
+    "custodial": 2.0,
+    "nutrition": 1.0
+   },
+   "school_dollars_2026_27": 2962405,
    "master_name": "Rieke Elementary School",
    "rs_a": "boundary",
    "rs_b": "boundary"
@@ -1254,6 +1454,14 @@
     "2027_28": 243,
     "2028_29": 239
    },
+   "fte_2026_27": {
+    "teachers": 12.1,
+    "admin": 1.0,
+    "clerical": 1.5,
+    "custodial": 2.73,
+    "nutrition": 1.31
+   },
+   "school_dollars_2026_27": 2913922,
    "master_name": "Irvington Elementary School",
    "rs_a": "closes",
    "rs_b": "closes"
@@ -1290,6 +1498,14 @@
     "2027_28": 343,
     "2028_29": 344
    },
+   "fte_2026_27": {
+    "teachers": 17.2,
+    "admin": 1.0,
+    "clerical": 1.5,
+    "custodial": 3.0,
+    "nutrition": 1.44
+   },
+   "school_dollars_2026_27": 4056667,
    "master_name": "Woodstock Elementary School",
    "rs_a": "program_change",
    "rs_b": "program_change"
@@ -1326,6 +1542,14 @@
     "2027_28": 187,
     "2028_29": 177
    },
+   "fte_2026_27": {
+    "teachers": 8.4,
+    "admin": 1.0,
+    "clerical": 1.5,
+    "custodial": 3.0,
+    "nutrition": 1.63
+   },
+   "school_dollars_2026_27": 2281941,
    "master_name": "Creston Elementary School",
    "rs_a": "closes",
    "rs_b": "closes"
@@ -1362,6 +1586,14 @@
     "2027_28": 279,
     "2028_29": 266
    },
+   "fte_2026_27": {
+    "teachers": 13.6,
+    "admin": 1.0,
+    "clerical": 1.5,
+    "custodial": 2.0,
+    "nutrition": 1.0
+   },
+   "school_dollars_2026_27": 3248514,
    "master_name": "Maplewood Elementary School",
    "rs_a": "closes",
    "rs_b": "closes"
@@ -1398,6 +1630,14 @@
     "2027_28": 248,
     "2028_29": 251
    },
+   "fte_2026_27": {
+    "teachers": 12.2,
+    "admin": 1.0,
+    "clerical": 1.5,
+    "custodial": 2.0,
+    "nutrition": 1.0
+   },
+   "school_dollars_2026_27": 2707437,
    "master_name": "Chief Joseph Elementary School",
    "rs_a": "boundary",
    "rs_b": "boundary"
@@ -1434,6 +1674,14 @@
     "2027_28": 392,
     "2028_29": 369
    },
+   "fte_2026_27": {
+    "teachers": 20.4,
+    "admin": 1.0,
+    "clerical": 1.5,
+    "custodial": 2.73,
+    "nutrition": 1.63
+   },
+   "school_dollars_2026_27": 4415126,
    "master_name": "Rose City Park",
    "rs_a": "closes",
    "rs_b": null
@@ -1470,6 +1718,14 @@
     "2027_28": 315,
     "2028_29": 325
    },
+   "fte_2026_27": {
+    "teachers": 16.2,
+    "admin": 1.0,
+    "clerical": 1.5,
+    "custodial": 3.0,
+    "nutrition": 2.06
+   },
+   "school_dollars_2026_27": 3614381,
    "master_name": "Markham Elementary School",
    "rs_a": "boundary",
    "rs_b": null
@@ -1506,6 +1762,14 @@
     "2027_28": 366,
     "2028_29": 379
    },
+   "fte_2026_27": {
+    "teachers": 18.2,
+    "admin": 1.0,
+    "clerical": 2.0,
+    "custodial": 3.45,
+    "nutrition": 1.38
+   },
+   "school_dollars_2026_27": 3919668,
    "master_name": "Atkinson Elementary School",
    "rs_a": "program_change",
    "rs_b": "program_change"
@@ -1542,6 +1806,14 @@
     "2027_28": 314,
     "2028_29": 295
    },
+   "fte_2026_27": {
+    "teachers": 15.2,
+    "admin": 1.0,
+    "clerical": 1.5,
+    "custodial": 2.73,
+    "nutrition": 1.31
+   },
+   "school_dollars_2026_27": 3577496,
    "master_name": "Glencoe Elementary School",
    "rs_a": "program_change",
    "rs_b": "program_change"
@@ -1578,6 +1850,14 @@
     "2027_28": 238,
     "2028_29": 250
    },
+   "fte_2026_27": {
+    "teachers": 11.6,
+    "admin": 1.0,
+    "clerical": 1.5,
+    "custodial": 3.0,
+    "nutrition": 1.31
+   },
+   "school_dollars_2026_27": 2792497,
    "master_name": "Sabin Elementary School",
    "rs_a": "closes",
    "rs_b": "closes"
@@ -1614,6 +1894,14 @@
     "2027_28": 261,
     "2028_29": 261
    },
+   "fte_2026_27": {
+    "teachers": 11.6,
+    "admin": 1.0,
+    "clerical": 1.5,
+    "custodial": 2.0,
+    "nutrition": 1.0
+   },
+   "school_dollars_2026_27": 2782065,
    "master_name": "Forest Park Elementary School",
    "rs_a": null,
    "rs_b": null
@@ -1650,6 +1938,14 @@
     "2027_28": 312,
     "2028_29": 304
    },
+   "fte_2026_27": {
+    "teachers": 15.2,
+    "admin": 1.0,
+    "clerical": 1.5,
+    "custodial": 2.0,
+    "nutrition": 1.31
+   },
+   "school_dollars_2026_27": 3559679,
    "master_name": "Llewellyn Elementary School",
    "rs_a": "boundary",
    "rs_b": null
@@ -1686,6 +1982,14 @@
     "2027_28": 275,
     "2028_29": 269
    },
+   "fte_2026_27": {
+    "teachers": 12.6,
+    "admin": 1.0,
+    "clerical": 1.5,
+    "custodial": 2.0,
+    "nutrition": 1.0
+   },
+   "school_dollars_2026_27": 2858178,
    "master_name": "Stephenson Elementary School",
    "rs_a": "closes",
    "rs_b": null
@@ -1722,6 +2026,14 @@
     "2027_28": 276,
     "2028_29": 273
    },
+   "fte_2026_27": {
+    "teachers": 13.6,
+    "admin": 1.0,
+    "clerical": 1.5,
+    "custodial": 2.0,
+    "nutrition": 1.25
+   },
+   "school_dollars_2026_27": 2895012,
    "master_name": "Hayhurst Elementary School",
    "rs_a": "boundary",
    "rs_b": "boundary"
@@ -1758,6 +2070,14 @@
     "2027_28": 416,
     "2028_29": 411
    },
+   "fte_2026_27": {
+    "teachers": 18.4,
+    "admin": 1.0,
+    "clerical": 1.5,
+    "custodial": 2.73,
+    "nutrition": 1.69
+   },
+   "school_dollars_2026_27": 4002313,
    "master_name": "Bridlemile Elementary School",
    "rs_a": null,
    "rs_b": null
@@ -1794,6 +2114,14 @@
     "2027_28": 313,
     "2028_29": 303
    },
+   "fte_2026_27": {
+    "teachers": 13.6,
+    "admin": 1.0,
+    "clerical": 1.5,
+    "custodial": 2.73,
+    "nutrition": 1.25
+   },
+   "school_dollars_2026_27": 3104939,
    "master_name": "Capitol Hill Elementary School",
    "rs_a": "boundary",
    "rs_b": null
@@ -1830,6 +2158,14 @@
     "2027_28": 558,
     "2028_29": 574
    },
+   "fte_2026_27": {
+    "teachers": 24.8,
+    "admin": 2.0,
+    "clerical": 1.5,
+    "custodial": 3.0,
+    "nutrition": 2.13
+   },
+   "school_dollars_2026_27": 5319551,
    "master_name": "Ainsworth Elementary School",
    "rs_a": null,
    "rs_b": null
@@ -1866,6 +2202,14 @@
     "2027_28": 342,
     "2028_29": 352
    },
+   "fte_2026_27": {
+    "teachers": 15.0,
+    "admin": 1.0,
+    "clerical": 1.5,
+    "custodial": 3.0,
+    "nutrition": 1.5
+   },
+   "school_dollars_2026_27": 3397182,
    "master_name": "Duniway Elementary School",
    "rs_a": "boundary",
    "rs_b": null
@@ -1902,6 +2246,14 @@
     "2027_28": 504,
     "2028_29": 502
    },
+   "fte_2026_27": {
+    "teachers": 21.4,
+    "admin": 1.0,
+    "clerical": 1.5,
+    "custodial": 3.0,
+    "nutrition": 1.75
+   },
+   "school_dollars_2026_27": 4421208,
    "master_name": "Richmond Elementary School",
    "rs_a": null,
    "rs_b": null
@@ -1938,6 +2290,14 @@
     "2027_28": 502,
     "2028_29": 507
    },
+   "fte_2026_27": {
+    "teachers": 20.4,
+    "admin": 1.6,
+    "clerical": 1.5,
+    "custodial": 3.73,
+    "nutrition": 1.63
+   },
+   "school_dollars_2026_27": 4354172,
    "master_name": "Alameda Elementary School",
    "rs_a": null,
    "rs_b": null
@@ -1974,6 +2334,14 @@
     "2027_28": 417,
     "2028_29": 407
    },
+   "fte_2026_27": {
+    "teachers": 26.4,
+    "admin": 3.0,
+    "clerical": 2.0,
+    "custodial": 3.73,
+    "nutrition": 2.38
+   },
+   "school_dollars_2026_27": 6138197,
    "master_name": "César Chávez K-8 School",
    "rs_a": "program_change",
    "rs_b": "program_change"
@@ -2010,6 +2378,14 @@
     "2027_28": 200,
     "2028_29": 202
    },
+   "fte_2026_27": {
+    "teachers": 11.48,
+    "admin": 1.0,
+    "clerical": 1.0,
+    "custodial": 2.0,
+    "nutrition": 1.0
+   },
+   "school_dollars_2026_27": 2670198,
    "master_name": "Skyline Elementary School",
    "rs_a": null,
    "rs_b": null
@@ -2046,6 +2422,14 @@
     "2027_28": 580,
     "2028_29": 615
    },
+   "fte_2026_27": {
+    "teachers": 32.04,
+    "admin": 3.0,
+    "clerical": 4.0,
+    "custodial": 5.0,
+    "nutrition": 3.19
+   },
+   "school_dollars_2026_27": 7525797,
    "master_name": "Faubion Elementary School",
    "rs_a": "program_change",
    "rs_b": "program_change"
@@ -2082,6 +2466,14 @@
     "2027_28": 416,
     "2028_29": 415
    },
+   "fte_2026_27": {
+    "teachers": 21.0,
+    "admin": 2.0,
+    "clerical": 1.75,
+    "custodial": 2.0,
+    "nutrition": 1.63
+   },
+   "school_dollars_2026_27": 4792494,
    "master_name": "Astor Elementary School",
    "rs_a": "boundary",
    "rs_b": "boundary"
@@ -2118,6 +2510,14 @@
     "2027_28": 221,
     "2028_29": 224
    },
+   "fte_2026_27": {
+    "teachers": 11.2,
+    "admin": 1.0,
+    "clerical": 1.5,
+    "custodial": 1.0,
+    "nutrition": 0.75
+   },
+   "school_dollars_2026_27": 2485965,
    "master_name": "Odyssey Program (K-8)",
    "rs_a": "program_change",
    "rs_b": "program_change"
@@ -2154,6 +2554,14 @@
     "2027_28": 436,
     "2028_29": 420
    },
+   "fte_2026_27": {
+    "teachers": 23.0,
+    "admin": 2.0,
+    "clerical": 1.5,
+    "custodial": 5.0,
+    "nutrition": 1.44
+   },
+   "school_dollars_2026_27": 5144091,
    "master_name": "Beverly Cleary School",
    "rs_a": "program_change",
    "rs_b": "program_change"
@@ -2190,6 +2598,14 @@
     "2027_28": 443,
     "2028_29": 435
    },
+   "fte_2026_27": {
+    "teachers": 22.47,
+    "admin": 1.0,
+    "clerical": 1.5,
+    "custodial": 2.73,
+    "nutrition": 1.56
+   },
+   "school_dollars_2026_27": 4966108,
    "master_name": "Bridger Creative Science School",
    "rs_a": "program_change",
    "rs_b": "program_change"
@@ -2226,6 +2642,14 @@
     "2027_28": 310,
     "2028_29": 297
    },
+   "fte_2026_27": {
+    "teachers": 15.7,
+    "admin": 1.0,
+    "clerical": 1.5,
+    "custodial": 2.0,
+    "nutrition": 1.0
+   },
+   "school_dollars_2026_27": 3378379,
    "master_name": "ACCESS Academy",
    "rs_a": null,
    "rs_b": null
@@ -2262,6 +2686,14 @@
     "2027_28": 311,
     "2028_29": 312
    },
+   "fte_2026_27": {
+    "teachers": 15.4,
+    "admin": 1.0,
+    "clerical": 1.0,
+    "custodial": 2.0,
+    "nutrition": 1.25
+   },
+   "school_dollars_2026_27": 3355818,
    "master_name": "Winterhaven School",
    "rs_a": null,
    "rs_b": null
@@ -2298,6 +2730,14 @@
     "2027_28": 487,
     "2028_29": 484
    },
+   "fte_2026_27": {
+    "teachers": 22.5,
+    "admin": 2.0,
+    "clerical": 1.8,
+    "custodial": 2.73,
+    "nutrition": 1.63
+   },
+   "school_dollars_2026_27": 5052977,
    "master_name": "Sunnyside Environmental School",
    "rs_a": "program_change",
    "rs_b": "program_change"
@@ -2334,6 +2774,14 @@
     "2027_28": 494,
     "2028_29": 490
    },
+   "fte_2026_27": {
+    "teachers": 23.05,
+    "admin": 1.0,
+    "clerical": 2.0,
+    "custodial": 3.0,
+    "nutrition": 1.69
+   },
+   "school_dollars_2026_27": 5292121,
    "master_name": "Vernon Elementary School",
    "rs_a": "program_change",
    "rs_b": "program_change"
@@ -2370,6 +2818,14 @@
     "2027_28": 585,
     "2028_29": 569
    },
+   "fte_2026_27": {
+    "teachers": 27.08,
+    "admin": 1.8,
+    "clerical": 1.5,
+    "custodial": 3.0,
+    "nutrition": 1.69
+   },
+   "school_dollars_2026_27": 5752706,
    "master_name": "Laurelhurst Elementary School",
    "rs_a": "program_change",
    "rs_b": "program_change"
@@ -2406,6 +2862,14 @@
     "2027_28": 390,
     "2028_29": 404
    },
+   "fte_2026_27": {
+    "teachers": 18.82,
+    "admin": 2.0,
+    "clerical": 3.9,
+    "custodial": 3.73,
+    "nutrition": 1.69
+   },
+   "school_dollars_2026_27": 5010493,
    "master_name": "George Middle School",
    "rs_a": "program_change",
    "rs_b": "program_change"
@@ -2442,6 +2906,14 @@
     "2027_28": 419,
     "2028_29": 407
    },
+   "fte_2026_27": {
+    "teachers": 21.4,
+    "admin": 2.0,
+    "clerical": 2.5,
+    "custodial": 4.0,
+    "nutrition": 2.31
+   },
+   "school_dollars_2026_27": 5244102,
    "master_name": "Lane Middle School",
    "rs_a": "boundary",
    "rs_b": "boundary"
@@ -2478,6 +2950,14 @@
     "2027_28": 432,
     "2028_29": 421
    },
+   "fte_2026_27": {
+    "teachers": 22.1,
+    "admin": 2.0,
+    "clerical": 1.75,
+    "custodial": 4.0,
+    "nutrition": 1.69
+   },
+   "school_dollars_2026_27": 5338439,
    "master_name": "Harrison Park School",
    "rs_a": "program_change",
    "rs_b": "program_change"
@@ -2514,6 +2994,14 @@
     "2027_28": 509,
     "2028_29": 488
    },
+   "fte_2026_27": {
+    "teachers": 23.0,
+    "admin": 2.0,
+    "clerical": 2.0,
+    "custodial": 4.0,
+    "nutrition": 2.13
+   },
+   "school_dollars_2026_27": 6084522,
    "master_name": "Kellogg Middle School",
    "rs_a": "boundary",
    "rs_b": "boundary"
@@ -2550,6 +3038,14 @@
     "2027_28": 563,
     "2028_29": 549
    },
+   "fte_2026_27": {
+    "teachers": 26.4,
+    "admin": 2.0,
+    "clerical": 2.8,
+    "custodial": 3.75,
+    "nutrition": 2.06
+   },
+   "school_dollars_2026_27": 6522491,
    "master_name": "Roseway Heights School",
    "rs_a": "program_change",
    "rs_b": "program_change"
@@ -2586,6 +3082,14 @@
     "2027_28": 451,
     "2028_29": 403
    },
+   "fte_2026_27": {
+    "teachers": 18.6,
+    "admin": 3.0,
+    "clerical": 3.33,
+    "custodial": 4.0,
+    "nutrition": 1.38
+   },
+   "school_dollars_2026_27": 5014787,
    "master_name": "Harriet Tubman Middle School",
    "rs_a": "program_change",
    "rs_b": "program_change"
@@ -2622,6 +3126,14 @@
     "2027_28": 443,
     "2028_29": 407
    },
+   "fte_2026_27": {
+    "teachers": 19.9,
+    "admin": 2.0,
+    "clerical": 2.6,
+    "custodial": 3.0,
+    "nutrition": 1.38
+   },
+   "school_dollars_2026_27": 4934541,
    "master_name": "Ockley Green Middle School",
    "rs_a": "program_change",
    "rs_b": "program_change"
@@ -2658,6 +3170,14 @@
     "2027_28": 409,
     "2028_29": 388
    },
+   "fte_2026_27": {
+    "teachers": 19.6,
+    "admin": 2.0,
+    "clerical": 1.5,
+    "custodial": 3.73,
+    "nutrition": 1.5
+   },
+   "school_dollars_2026_27": 4513924,
    "master_name": "Beaumont Middle School",
    "rs_a": "program_change",
    "rs_b": "program_change"
@@ -2694,6 +3214,14 @@
     "2027_28": 406,
     "2028_29": 411
    },
+   "fte_2026_27": {
+    "teachers": 18.49,
+    "admin": 2.0,
+    "clerical": 1.6,
+    "custodial": 3.0,
+    "nutrition": 1.63
+   },
+   "school_dollars_2026_27": 4332413,
    "master_name": "Mt Tabor Middle School",
    "rs_a": "program_change",
    "rs_b": "program_change"
@@ -2730,6 +3258,14 @@
     "2027_28": 431,
     "2028_29": 409
    },
+   "fte_2026_27": {
+    "teachers": 18.6,
+    "admin": 2.0,
+    "clerical": 2.0,
+    "custodial": 3.0,
+    "nutrition": 1.0
+   },
+   "school_dollars_2026_27": 4426010,
    "master_name": "Gray Middle School",
    "rs_a": "boundary",
    "rs_b": "boundary"
@@ -2766,6 +3302,14 @@
     "2027_28": 430,
     "2028_29": 431
    },
+   "fte_2026_27": {
+    "teachers": 19.5,
+    "admin": 2.0,
+    "clerical": 1.7,
+    "custodial": 3.0,
+    "nutrition": 0.94
+   },
+   "school_dollars_2026_27": 4368508,
    "master_name": "da Vinci Middle School",
    "rs_a": null,
    "rs_b": null
@@ -2802,6 +3346,14 @@
     "2027_28": 476,
     "2028_29": 439
    },
+   "fte_2026_27": {
+    "teachers": 22.95,
+    "admin": 2.0,
+    "clerical": 1.5,
+    "custodial": 3.73,
+    "nutrition": 1.63
+   },
+   "school_dollars_2026_27": 5116996,
    "master_name": "Hosford Middle School",
    "rs_a": "program_change",
    "rs_b": "program_change"
@@ -2838,6 +3390,14 @@
     "2027_28": 663,
     "2028_29": 658
    },
+   "fte_2026_27": {
+    "teachers": 29.8,
+    "admin": 2.0,
+    "clerical": 2.0,
+    "custodial": 9.0,
+    "nutrition": 2.75
+   },
+   "school_dollars_2026_27": 6539726,
    "master_name": "Jackson Middle School",
    "rs_a": "boundary",
    "rs_b": "boundary"
@@ -2874,6 +3434,14 @@
     "2027_28": 524,
     "2028_29": 486
    },
+   "fte_2026_27": {
+    "teachers": 23.05,
+    "admin": 2.0,
+    "clerical": 1.8,
+    "custodial": 5.0,
+    "nutrition": 1.25
+   },
+   "school_dollars_2026_27": 5129295,
    "master_name": "Sellwood Middle School",
    "rs_a": "closes",
    "rs_b": "closes"
@@ -2910,6 +3478,14 @@
     "2027_28": 691,
     "2028_29": 644
    },
+   "fte_2026_27": {
+    "teachers": 28.9,
+    "admin": 2.0,
+    "clerical": 1.9,
+    "custodial": 4.73,
+    "nutrition": 1.63
+   },
+   "school_dollars_2026_27": 5968845,
    "master_name": "West Sylvan Middle School",
    "rs_a": null,
    "rs_b": null
@@ -2946,6 +3522,14 @@
     "2027_28": 245,
     "2028_29": 232
    },
+   "fte_2026_27": {
+    "teachers": 19.2,
+    "admin": 2.0,
+    "clerical": 2.5,
+    "custodial": 2.0,
+    "nutrition": 0.88
+   },
+   "school_dollars_2026_27": 4565458,
    "master_name": "Metropolitan Learning Center",
    "rs_a": "program_change",
    "rs_b": "program_change"
@@ -2982,6 +3566,14 @@
     "2027_28": 217,
     "2028_29": 217
    },
+   "fte_2026_27": {
+    "teachers": 16.5,
+    "admin": 2.0,
+    "clerical": 3.5,
+    "custodial": 3.0,
+    "nutrition": 0.81
+   },
+   "school_dollars_2026_27": 4537536,
    "master_name": "Alliance High School",
    "rs_a": null,
    "rs_b": null
@@ -3018,6 +3610,14 @@
     "2027_28": 547,
     "2028_29": 798
    },
+   "fte_2026_27": {
+    "teachers": 25.34,
+    "admin": 5.0,
+    "clerical": 4.63,
+    "custodial": 10.0,
+    "nutrition": 1.25
+   },
+   "school_dollars_2026_27": 7027697,
    "master_name": "Jefferson High School",
    "rs_a": "boundary",
    "rs_b": "boundary"
@@ -3054,6 +3654,14 @@
     "2027_28": 1312,
     "2028_29": 1252
    },
+   "fte_2026_27": {
+    "teachers": 63.18,
+    "admin": 5.0,
+    "clerical": 10.5,
+    "custodial": 10.75,
+    "nutrition": 3.31
+   },
+   "school_dollars_2026_27": 16214901,
    "master_name": "Roosevelt High School",
    "rs_a": "boundary",
    "rs_b": "boundary"
@@ -3090,6 +3698,14 @@
     "2027_28": 1525,
     "2028_29": 1474
    },
+   "fte_2026_27": {
+    "teachers": 73.51,
+    "admin": 5.0,
+    "clerical": 9.5,
+    "custodial": 10.73,
+    "nutrition": 4.19
+   },
+   "school_dollars_2026_27": 18171882,
    "master_name": "Leodis V. McDaniel High School",
    "rs_a": "boundary",
    "rs_b": "boundary"
@@ -3126,6 +3742,14 @@
     "2027_28": 1200,
     "2028_29": 1216
    },
+   "fte_2026_27": {
+    "teachers": 51.5,
+    "admin": 4.0,
+    "clerical": 6.0,
+    "custodial": 8.73,
+    "nutrition": 3.0
+   },
+   "school_dollars_2026_27": 12066669,
    "master_name": "Benson Polytechnic High School",
    "rs_a": null,
    "rs_b": null
@@ -3162,6 +3786,14 @@
     "2027_28": 1685,
     "2028_29": 1605
    },
+   "fte_2026_27": {
+    "teachers": 79.84,
+    "admin": 5.0,
+    "clerical": 9.3,
+    "custodial": 11.0,
+    "nutrition": 4.13
+   },
+   "school_dollars_2026_27": 18077525,
    "master_name": "Franklin High School",
    "rs_a": "boundary",
    "rs_b": "boundary"
@@ -3198,6 +3830,14 @@
     "2027_28": 1466,
     "2028_29": 1471
    },
+   "fte_2026_27": {
+    "teachers": 62.34,
+    "admin": 4.5,
+    "clerical": 6.38,
+    "custodial": 9.0,
+    "nutrition": 2.19
+   },
+   "school_dollars_2026_27": 13991267,
    "master_name": "Cleveland High School",
    "rs_a": "boundary",
    "rs_b": "boundary"
@@ -3234,6 +3874,14 @@
     "2027_28": 1604,
     "2028_29": 1595
    },
+   "fte_2026_27": {
+    "teachers": 70.51,
+    "admin": 5.0,
+    "clerical": 4.4,
+    "custodial": 14.0,
+    "nutrition": 3.63
+   },
+   "school_dollars_2026_27": 15688095,
    "master_name": "Lincoln High School",
    "rs_a": "boundary",
    "rs_b": "boundary"
@@ -3270,6 +3918,14 @@
     "2027_28": 1532,
     "2028_29": 1510
    },
+   "fte_2026_27": {
+    "teachers": 65.0,
+    "admin": 5.5,
+    "clerical": 6.75,
+    "custodial": 11.73,
+    "nutrition": 2.81
+   },
+   "school_dollars_2026_27": 14705836,
    "master_name": "Ida B. Wells-Barnett High School",
    "rs_a": null,
    "rs_b": null
@@ -3306,9 +3962,397 @@
     "2027_28": 1936,
     "2028_29": 1823
    },
+   "fte_2026_27": {
+    "teachers": 85.66,
+    "admin": 5.0,
+    "clerical": 9.0,
+    "custodial": 9.73,
+    "nutrition": 2.88
+   },
+   "school_dollars_2026_27": 18296137,
    "master_name": "Grant High School",
    "rs_a": null,
    "rs_b": null
   }
- ]
+ ],
+ "savings": {
+  "cost_per_fte": {
+   "licensed": 158856,
+   "classified": 81447,
+   "administrator": 265584
+  },
+  "building_ops_per_sqft": 9.58,
+  "students_per_teacher": {
+   "K-5": 20.7,
+   "K-8": 19.8,
+   "Middle": 22.0,
+   "High": 22.0
+  },
+  "scenarios": {
+   "rs_a": {
+    "schools": [
+     {
+      "name": "Sellwood",
+      "master_name": "Sellwood Middle School",
+      "band": "Middle",
+      "enrollment": 537,
+      "school_dollars": 5129295,
+      "leadership": 677772,
+      "custodians": 407236,
+      "building_extra": 424131,
+      "teachers": 0,
+      "extra_teacher_fte": 0.0,
+      "low": 1085008,
+      "high": 1509140
+     },
+     {
+      "name": "Marysville",
+      "master_name": "Marysville Elementary School",
+      "band": "K-5",
+      "enrollment": 299,
+      "school_dollars": 4036287,
+      "leadership": 694062,
+      "custodians": 222351,
+      "building_extra": 289839,
+      "teachers": 124995,
+      "extra_teacher_fte": 0.79,
+      "low": 916413,
+      "high": 1331247
+     },
+     {
+      "name": "Beach",
+      "master_name": "Beach Elementary School",
+      "band": "K-5",
+      "enrollment": 284,
+      "school_dollars": 3695156,
+      "leadership": 428478,
+      "custodians": 303798,
+      "building_extra": 334241,
+      "teachers": 239859,
+      "extra_teacher_fte": 1.51,
+      "low": 732276,
+      "high": 1306377
+     },
+     {
+      "name": "Rose City Park",
+      "master_name": "Rose City Park",
+      "band": "K-5",
+      "enrollment": 398,
+      "school_dollars": 4415126,
+      "leadership": 387755,
+      "custodians": 222351,
+      "building_extra": 467587,
+      "teachers": 192946,
+      "extra_teacher_fte": 1.21,
+      "low": 610105,
+      "high": 1270639
+     },
+     {
+      "name": "Buckman",
+      "master_name": "Buckman Elementary School",
+      "band": "K-5",
+      "enrollment": 260,
+      "school_dollars": 3187960,
+      "leadership": 408116,
+      "custodians": 244342,
+      "building_extra": 541064,
+      "teachers": 10615,
+      "extra_teacher_fte": 0.07,
+      "low": 652458,
+      "high": 1204137
+     },
+     {
+      "name": "James John",
+      "master_name": "James John Elementary School",
+      "band": "K-5",
+      "enrollment": 361,
+      "school_dollars": 4731875,
+      "leadership": 428478,
+      "custodians": 162894,
+      "building_extra": 447032,
+      "teachers": 158565,
+      "extra_teacher_fte": 1.0,
+      "low": 591373,
+      "high": 1196969
+     },
+     {
+      "name": "Peninsula",
+      "master_name": "Peninsula Elementary School",
+      "band": "K-5",
+      "enrollment": 255,
+      "school_dollars": 3060466,
+      "leadership": 408116,
+      "custodians": 162894,
+      "building_extra": 508831,
+      "teachers": 0,
+      "extra_teacher_fte": 0.0,
+      "low": 571011,
+      "high": 1079842
+     },
+     {
+      "name": "Creston",
+      "master_name": "Creston Elementary School",
+      "band": "K-5",
+      "enrollment": 199,
+      "school_dollars": 2281941,
+      "leadership": 387755,
+      "custodians": 244342,
+      "building_extra": 433263,
+      "teachers": 0,
+      "extra_teacher_fte": 0.0,
+      "low": 632096,
+      "high": 1065360
+     },
+     {
+      "name": "Woodmere",
+      "master_name": "Woodmere Elementary School",
+      "band": "K-5",
+      "enrollment": 223,
+      "school_dollars": 3290042,
+      "leadership": 387755,
+      "custodians": 162894,
+      "building_extra": 366857,
+      "teachers": 135090,
+      "extra_teacher_fte": 0.85,
+      "low": 550649,
+      "high": 1052595
+     },
+     {
+      "name": "Sabin",
+      "master_name": "Sabin Elementary School",
+      "band": "K-5",
+      "enrollment": 259,
+      "school_dollars": 2792497,
+      "leadership": 387755,
+      "custodians": 244342,
+      "building_extra": 396532,
+      "teachers": 0,
+      "extra_teacher_fte": 0.0,
+      "low": 632096,
+      "high": 1028628
+     },
+     {
+      "name": "Irvington",
+      "master_name": "Irvington Elementary School",
+      "band": "K-5",
+      "enrollment": 251,
+      "school_dollars": 2913922,
+      "leadership": 387755,
+      "custodians": 222351,
+      "building_extra": 402781,
+      "teachers": 105,
+      "extra_teacher_fte": 0.0,
+      "low": 610105,
+      "high": 1012992
+     },
+     {
+      "name": "Lewis",
+      "master_name": "Lewis Elementary School",
+      "band": "K-5",
+      "enrollment": 244,
+      "school_dollars": 2888066,
+      "leadership": 387755,
+      "custodians": 162894,
+      "building_extra": 300365,
+      "teachers": 37823,
+      "extra_teacher_fte": 0.24,
+      "low": 550649,
+      "high": 888837
+     },
+     {
+      "name": "Stephenson",
+      "master_name": "Stephenson Elementary School",
+      "band": "K-5",
+      "enrollment": 270,
+      "school_dollars": 2858178,
+      "leadership": 387755,
+      "custodians": 162894,
+      "building_extra": 225284,
+      "teachers": 0,
+      "extra_teacher_fte": 0.0,
+      "low": 550649,
+      "high": 775933
+     },
+     {
+      "name": "Maplewood",
+      "master_name": "Maplewood Elementary School",
+      "band": "K-5",
+      "enrollment": 288,
+      "school_dollars": 3248514,
+      "leadership": 387755,
+      "custodians": 162894,
+      "building_extra": 166050,
+      "teachers": 0,
+      "extra_teacher_fte": 0.0,
+      "low": 550649,
+      "high": 716699
+     }
+    ],
+    "low": 9235537,
+    "high": 15439395,
+    "students": 4128
+   },
+   "rs_b": {
+    "schools": [
+     {
+      "name": "Sellwood",
+      "master_name": "Sellwood Middle School",
+      "band": "Middle",
+      "enrollment": 537,
+      "school_dollars": 5129295,
+      "leadership": 677772,
+      "custodians": 407236,
+      "building_extra": 424131,
+      "teachers": 0,
+      "extra_teacher_fte": 0.0,
+      "low": 1085008,
+      "high": 1509140
+     },
+     {
+      "name": "Marysville",
+      "master_name": "Marysville Elementary School",
+      "band": "K-5",
+      "enrollment": 299,
+      "school_dollars": 4036287,
+      "leadership": 694062,
+      "custodians": 222351,
+      "building_extra": 289839,
+      "teachers": 124995,
+      "extra_teacher_fte": 0.79,
+      "low": 916413,
+      "high": 1331247
+     },
+     {
+      "name": "Beach",
+      "master_name": "Beach Elementary School",
+      "band": "K-5",
+      "enrollment": 284,
+      "school_dollars": 3695156,
+      "leadership": 428478,
+      "custodians": 303798,
+      "building_extra": 334241,
+      "teachers": 239859,
+      "extra_teacher_fte": 1.51,
+      "low": 732276,
+      "high": 1306377
+     },
+     {
+      "name": "Buckman",
+      "master_name": "Buckman Elementary School",
+      "band": "K-5",
+      "enrollment": 260,
+      "school_dollars": 3187960,
+      "leadership": 408116,
+      "custodians": 244342,
+      "building_extra": 541064,
+      "teachers": 10615,
+      "extra_teacher_fte": 0.07,
+      "low": 652458,
+      "high": 1204137
+     },
+     {
+      "name": "James John",
+      "master_name": "James John Elementary School",
+      "band": "K-5",
+      "enrollment": 361,
+      "school_dollars": 4731875,
+      "leadership": 428478,
+      "custodians": 162894,
+      "building_extra": 447032,
+      "teachers": 158565,
+      "extra_teacher_fte": 1.0,
+      "low": 591373,
+      "high": 1196969
+     },
+     {
+      "name": "Peninsula",
+      "master_name": "Peninsula Elementary School",
+      "band": "K-5",
+      "enrollment": 255,
+      "school_dollars": 3060466,
+      "leadership": 408116,
+      "custodians": 162894,
+      "building_extra": 508831,
+      "teachers": 0,
+      "extra_teacher_fte": 0.0,
+      "low": 571011,
+      "high": 1079842
+     },
+     {
+      "name": "Creston",
+      "master_name": "Creston Elementary School",
+      "band": "K-5",
+      "enrollment": 199,
+      "school_dollars": 2281941,
+      "leadership": 387755,
+      "custodians": 244342,
+      "building_extra": 433263,
+      "teachers": 0,
+      "extra_teacher_fte": 0.0,
+      "low": 632096,
+      "high": 1065360
+     },
+     {
+      "name": "Woodmere",
+      "master_name": "Woodmere Elementary School",
+      "band": "K-5",
+      "enrollment": 223,
+      "school_dollars": 3290042,
+      "leadership": 387755,
+      "custodians": 162894,
+      "building_extra": 366857,
+      "teachers": 135090,
+      "extra_teacher_fte": 0.85,
+      "low": 550649,
+      "high": 1052595
+     },
+     {
+      "name": "Sabin",
+      "master_name": "Sabin Elementary School",
+      "band": "K-5",
+      "enrollment": 259,
+      "school_dollars": 2792497,
+      "leadership": 387755,
+      "custodians": 244342,
+      "building_extra": 396532,
+      "teachers": 0,
+      "extra_teacher_fte": 0.0,
+      "low": 632096,
+      "high": 1028628
+     },
+     {
+      "name": "Irvington",
+      "master_name": "Irvington Elementary School",
+      "band": "K-5",
+      "enrollment": 251,
+      "school_dollars": 2913922,
+      "leadership": 387755,
+      "custodians": 222351,
+      "building_extra": 402781,
+      "teachers": 105,
+      "extra_teacher_fte": 0.0,
+      "low": 610105,
+      "high": 1012992
+     },
+     {
+      "name": "Maplewood",
+      "master_name": "Maplewood Elementary School",
+      "band": "K-5",
+      "enrollment": 288,
+      "school_dollars": 3248514,
+      "leadership": 387755,
+      "custodians": 162894,
+      "building_extra": 166050,
+      "teachers": 0,
+      "extra_teacher_fte": 0.0,
+      "low": 550649,
+      "high": 716699
+     }
+    ],
+    "low": 7524134,
+    "high": 12503986,
+    "students": 3216
+   }
+  }
+ }
 }

@@ -90,6 +90,12 @@
   #plot-gap { height: 420px; }
   #plot-enroll { height: 220px; }
   #plot-schools { height: 520px; }
+  #plot-savings { height: 260px; }
+  .estimate-badge { display: inline-block; font-size: var(--fs-micro); font-weight: 600;
+    color: #e3b341; border: 1px solid #5c4a1a; background: #2a2210; border-radius: 10px;
+    padding: 1px 8px; margin-left: 8px; vertical-align: middle; }
+  .savings-head { font-size: var(--fs-h3); margin: 0 0 6px; }
+  ul.caveats { color: var(--muted); font-size: var(--fs-small); max-width: 900px; margin: 8px 0 0; padding-left: 20px; }
   @media (max-width: 700px) {
     #plot-flow { display: none; }
     #plot-gap { height: 340px; }
@@ -143,6 +149,7 @@
       <a href="#section-flow">Money in and out</a>
       <a href="#section-gap">The yearly gap</a>
       <a href="#section-schools">Cost per student</a>
+      <a href="#section-savings">Closure savings</a>
       <a href="#section-methodology">Methodology</a>
     </nav>
     <a class="back" href="/">← Back to dashboard</a>
@@ -253,6 +260,41 @@
     </p>
   </section>
 
+  <section id="section-savings">
+    <h2>What closing schools might save <span class="estimate-badge">Estimate, not a PPS figure</span></h2>
+    <p class="note">
+      PPS hasn't published how much each scenario would save. This is a rough
+      estimate built from PPS's own budget numbers: the staff and building costs
+      that go away when a school closes. Most teachers and student services move
+      with the students, so they aren't counted as savings.
+    </p>
+    <div class="panel panel-pad">
+      <p class="savings-head" id="savings-head"></p>
+      <div id="plot-savings" class="chart"></div>
+    </div>
+    <div class="controls" style="margin-top:16px">
+      <div class="seg" id="savings-seg">
+        <button data-s="rs_a" class="on">Scenario A</button>
+        <button data-s="rs_b">Scenario B</button>
+      </div>
+    </div>
+    <div class="panel panel-pad">
+      <div class="table-scroll"><table class="data" id="savings-table"></table></div>
+    </div>
+    <p class="caveat"><b>How it's estimated</b> (2026-27 dollars, per year):</p>
+    <ul class="caveats" id="savings-method"></ul>
+    <p class="caveat"><b>Not included:</b></p>
+    <ul class="caveats">
+      <li>Added costs at receiving schools, such as an assistant principal when a school
+        grows past PPS's staffing thresholds, or longer bus routes.</li>
+      <li>One-time costs: moving, building closure, and transition support.</li>
+      <li>Savings from filling partly empty classrooms at receiving schools, which
+        could be larger than the teacher estimate here.</li>
+      <li>Program moves, boundary changes, and grade changes in the scenarios.</li>
+      <li>State funding follows students, so closures don't change revenue directly.</li>
+    </ul>
+  </section>
+
   <section id="section-methodology" class="methodology">
     <h2>Methodology &amp; sources</h2>
     <h3>Sources</h3>
@@ -278,9 +320,9 @@
     </ul>
     <h3>What this page doesn't show</h3>
     <ul>
-      <li>Savings from the rightsizing scenarios. PPS has not published savings
-        estimates per scenario, and building operating costs (utilities, upkeep) are
-        not broken out by school in the budget.</li>
+      <li>A PPS estimate of scenario savings. PPS has not published one; the savings
+        section is this site's estimate from budget figures, and building operating
+        costs (utilities, upkeep) are not broken out by school in the budget.</li>
       <li>Bond-funded construction, which voters approve separately and can't be spent
         on teachers or programs.</li>
     </ul>
@@ -535,6 +577,72 @@
   }));
   document.getElementById("mark-select").addEventListener("change", e => { mark = e.target.value; drawSchools(); });
   drawSchools();
+
+  // ---- Closure savings estimate ----
+  const SV = D.savings;
+  const SC_LABEL = { rs_a: "Scenario A", rs_b: "Scenario B" };
+  const fmtRange = (lo, hi) => `${fmtM(lo / 1000)} to ${fmtM(hi / 1000)}`;
+  const gap = nextYear.shortfall;
+  const A = SV.scenarios.rs_a, B = SV.scenarios.rs_b;
+  document.getElementById("savings-head").textContent =
+    `Scenario A (${A.schools.length} closures): about ${fmtRange(A.low, A.high)} a year. ` +
+    `Scenario B (${B.schools.length} closures): about ${fmtRange(B.low, B.high)} a year. ` +
+    `For scale, PPS projects a ${fmtM(gap)} gap in 2027-28.`;
+  const PARTS = [
+    ["leadership", "Principal and office staff", AQUA],
+    ["custodians", "Custodians", BLUE],
+    ["building_extra", "Other building costs (high estimate)", "#6e7681"],
+    ["teachers", "Fewer teaching positions (high estimate)", "#484f58"],
+  ];
+  const keys = ["rs_b", "rs_a"];
+  const ylab = keys.map(k => `${SC_LABEL[k]} (${SV.scenarios[k].schools.length})`);
+  Plotly.newPlot("plot-savings", PARTS.map(([k, label, color]) => ({
+    type: "bar", orientation: "h", name: label, y: ylab,
+    x: keys.map(sk => SV.scenarios[sk].schools.reduce((a, s) => a + s[k], 0) / 1e6),
+    marker: { color, line: { color: SURFACE, width: 2 } },
+    hovertemplate: `${label}: $%{x:.1f}M<extra></extra>`,
+  })), {
+    barmode: "stack", paper_bgcolor: SURFACE, plot_bgcolor: SURFACE, font: FONT,
+    margin: { l: mobile() ? 100 : 130, r: 16, t: 10, b: mobile() ? 120 : 70 },
+    xaxis: { title: "Estimated savings per year (millions)", tickprefix: "$", ticksuffix: "M",
+      gridcolor: GRID, zeroline: false, fixedrange: true, rangemode: "tozero" },
+    yaxis: { fixedrange: true },
+    legend: { orientation: "h", x: 0, y: mobile() ? -0.6 : -0.38, traceorder: "normal" },
+    hoverlabel: { font: FONT, bgcolor: "#0d1117", bordercolor: GRID },
+    annotations: keys.map((sk, i) => ({ x: SV.scenarios[sk].high / 1e6, y: ylab[i], xanchor: "left",
+      xshift: 6, showarrow: false, text: fmtRange(SV.scenarios[sk].low, SV.scenarios[sk].high),
+      font: { ...FONT, size: 12 } })),
+  }, CONFIG);
+
+  let svKey = "rs_a";
+  function drawSavingsTable() {
+    const sc = SV.scenarios[svKey];
+    const k = (v) => fmtM(v / 1000);
+    document.getElementById("savings-table").innerHTML =
+      `<tr><th>Closing school</th><th class="num">Students</th><th class="num">Principal and office</th>` +
+      `<th class="num">Custodians</th><th class="num">Other building costs</th><th class="num">Teaching positions</th>` +
+      `<th class="num">Low</th><th class="num">High</th><th class="num">School's 2026-27 budget</th></tr>` +
+      sc.schools.map(s => `<tr><td>${s.name}</td><td class="num">${s.enrollment}</td><td class="num">${k(s.leadership)}</td>` +
+        `<td class="num">${k(s.custodians)}</td><td class="num">${k(s.building_extra)}</td>` +
+        `<td class="num">${!s.teachers ? "none" : s.teachers < 50000 ? "under $0.1M" : k(s.teachers)}</td><td class="num">${k(s.low)}</td><td class="num">${k(s.high)}</td>` +
+        `<td class="num">${k(s.school_dollars)}</td></tr>`).join("") +
+      `<tr class="group"><td>Total</td><td class="num">${sc.students.toLocaleString()}</td><td></td><td></td><td></td><td></td>` +
+      `<td class="num">${k(sc.low)}</td><td class="num">${k(sc.high)}</td><td></td></tr>`;
+  }
+  document.querySelectorAll("#savings-seg button").forEach(b => b.addEventListener("click", () => {
+    svKey = b.dataset.s;
+    document.querySelectorAll("#savings-seg button").forEach(x => x.classList.toggle("on", x === b));
+    drawSavingsTable();
+  }));
+  drawSavingsTable();
+  const c = SV.cost_per_fte, r = SV.students_per_teacher;
+  document.getElementById("savings-method").innerHTML = [
+    `<b>Principal and office staff:</b> each closing school's budgeted administrator and office FTE, at PPS's average cost with benefits (${fmtUSD(c.administrator)} per administrator, ${fmtUSD(c.classified)} per classified position).`,
+    `<b>Custodians:</b> the school's budgeted custodial FTE at the classified average.`,
+    `<b>Other building costs (high estimate):</b> the building's share of PPS's ${fmtM(72437)} operations and maintenance budget by square footage (${"$" + SV.building_ops_per_sqft.toFixed(2)} per sq ft), which includes custodians. Assumes the building is sold or leased; an empty building still costs money.`,
+    `<b>Teaching positions (high estimate):</b> teachers beyond what the school's students would need at the district average of ${r["K-5"]} students per teacher (K-5), ${r["K-8"]} (K-8), or ${r["Middle"]} (middle), at ${fmtUSD(c.licensed)} each. Most small schools are already near that ratio, so this is often zero.`,
+    `<b>Low estimate</b> = principal and office staff + custodians. <b>High estimate</b> adds the other two.`,
+  ].map(x => `<li>${x}</li>`).join("");
 
   // ---- Sources ----
   document.getElementById("source-list").innerHTML = Object.values(D.sources).map(s =>
