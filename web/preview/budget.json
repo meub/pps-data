@@ -243,6 +243,9 @@
   {
    "year": "2022-23",
    "status": "actual",
+   "salaries": 401758,
+   "benefits": 188552,
+   "other_costs": 134231,
    "revenue": 731234,
    "spending": 724541,
    "carryover": 98804,
@@ -253,6 +256,9 @@
   {
    "year": "2023-24",
    "status": "actual",
+   "salaries": 431978,
+   "benefits": 206210,
+   "other_costs": 149110,
    "revenue": 767878,
    "spending": 787298,
    "carryover": 105497,
@@ -263,6 +269,9 @@
   {
    "year": "2024-25",
    "status": "actual",
+   "salaries": 453047,
+   "benefits": 212696,
+   "other_costs": 145768,
    "revenue": 769756,
    "spending": 811511,
    "carryover": 86078,
@@ -273,6 +282,9 @@
   {
    "year": "2025-26",
    "status": "budget",
+   "salaries": 442948,
+   "benefits": 248507,
+   "other_costs": 135946,
    "revenue": 823580,
    "spending": 827401,
    "carryover": 45000,
@@ -283,6 +295,9 @@
   {
    "year": "2026-27",
    "status": "budget",
+   "salaries": 435264,
+   "benefits": 245251,
+   "other_costs": 140542,
    "revenue": 821112,
    "spending": 821055,
    "carryover": 41000,
@@ -293,6 +308,9 @@
   {
    "year": "2027-28",
    "status": "forecast",
+   "salaries": 448322,
+   "benefits": 309868,
+   "other_costs": 142079,
    "revenue": 835804,
    "spending": 900269,
    "carryover": 41056,
@@ -303,6 +321,9 @@
   {
    "year": "2028-29",
    "status": "forecast",
+   "salaries": 461772,
+   "benefits": 295055,
+   "other_costs": 144750,
    "revenue": 860460,
    "spending": 901577,
    "carryover": 41790,
@@ -313,6 +334,9 @@
   {
    "year": "2029-30",
    "status": "forecast",
+   "salaries": 475626,
+   "benefits": 310702,
+   "other_costs": 147474,
    "revenue": 873458,
    "spending": 933802,
    "carryover": 43023,

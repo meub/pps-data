@@ -149,6 +149,24 @@ GF_YEARS = [
 # PPS's own projected shortfalls (negative budgeted ending balance). p. 113.
 GF_SHORTFALL = {"2027-28": 65_198, "2028-29": 42_349, "2029-30": 60_991}
 
+# General Fund spending by object, for the cost-drivers panel. Vol 1 p. 104
+# (2022-23 to 2026-27) and p. 113 (forecast). "salaries" is licensed +
+# classified + non-represented + administrators + other salaries; "benefits"
+# is object 200, associated payroll costs (health insurance, PERS, payroll
+# taxes). "other" is purchased services, supplies, capital outlay, other
+# objects, and transfers. Each year must add to GF_YEARS spending.
+GF_OBJECTS = {
+    #           salaries  benefits  other
+    "2022-23": (401_758, 188_552, 134_231),
+    "2023-24": (431_978, 206_210, 149_110),
+    "2024-25": (453_047, 212_696, 145_768),
+    "2025-26": (442_948, 248_507, 135_946),
+    "2026-27": (435_264, 245_251, 140_542),
+    "2027-28": (448_322, 309_868, 142_079),
+    "2028-29": (461_772, 295_055, 144_750),
+    "2029-30": (475_626, 310_702, 147_474),
+}
+
 # Average daily enrollment (ADMr). Vol 1 p. 21 (2025-26 and 2026-27 are
 # estimates).
 ENROLLMENT = {"2022-23": 44_518, "2023-24": 43_882, "2024-25": 43_201,
@@ -193,7 +211,11 @@ def history() -> list[dict]:
         short = GF_SHORTFALL.get(year, 0)
         if abs(total - (spend + reserve - short)) > 3:
             sys.exit(f"{year}: resources {total:,} != spending + reserve - shortfall")
+        salaries, benefits, other = GF_OBJECTS[year]
+        if abs(salaries + benefits + other - spend) > 3:
+            sys.exit(f"{year}: objects add to {salaries + benefits + other:,}, spending is {spend:,}")
         rows.append({"year": year, "status": status,
+                     "salaries": salaries, "benefits": benefits, "other_costs": other,
                      "revenue": total - carry, "spending": spend,
                      "carryover": carry, "reserve": reserve,
                      "shortfall": GF_SHORTFALL.get(year),
