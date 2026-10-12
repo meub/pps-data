@@ -553,19 +553,19 @@
 
   const E = H.filter(h => h.enrollment);
   Plotly.newPlot("plot-enroll", [{
-    // Bars start at zero so their heights stay proportional; the labels carry
-    // the year-to-year change.
-    type: "bar", x: E.map(h => h.year), y: E.map(h => h.enrollment),
-    marker: { color: BLUE, line: { color: SURFACE, width: 2 } },
+    // A line, not bars: the axis doesn't start at zero, and bars on a cut
+    // axis would exaggerate the decline.
+    type: "scatter", mode: "lines+markers+text", x: E.map(h => h.year), y: E.map(h => h.enrollment),
+    line: { color: BLUE, width: 2 }, marker: { size: 8, color: BLUE, line: { color: SURFACE, width: 2 } },
     // Count on top, change from the year before beneath it.
     text: E.map((h, i) => h.enrollment.toLocaleString() + (i ? `<br>${(h.enrollment - E[i - 1].enrollment).toLocaleString().replace("-", "−")}` : "")),
-    textposition: "outside", cliponaxis: false,
+    textposition: "top center", cliponaxis: false,
     textfont: { ...FONT, size: 12 },
     hovertemplate: "%{x}: %{y:,} students<extra></extra>",
   }], {
     paper_bgcolor: SURFACE, plot_bgcolor: SURFACE, font: FONT,
-    margin: { l: 60, r: 16, t: 40, b: 34 }, bargap: 0.35,
-    yaxis: { title: mobile() ? "" : "Students", rangemode: "tozero", gridcolor: GRID, zeroline: false,
+    margin: { l: 60, r: 24, t: 40, b: 34 },
+    yaxis: { title: mobile() ? "" : "Students", range: [40000, 46000], gridcolor: GRID, zeroline: false,
       fixedrange: true, tickformat: "," },
     xaxis: { fixedrange: true },
     showlegend: false,
