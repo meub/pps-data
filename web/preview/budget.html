@@ -553,17 +553,18 @@
 
   const E = H.filter(h => h.enrollment);
   Plotly.newPlot("plot-enroll", [{
-    // A line, not bars: the axis doesn't start at zero, and bars would
-    // exaggerate the decline.
-    type: "scatter", mode: "lines+markers+text", x: E.map(h => h.year), y: E.map(h => h.enrollment),
-    line: { color: BLUE, width: 2 }, marker: { size: 8, color: BLUE, line: { color: SURFACE, width: 2 } },
-    text: E.map(h => h.enrollment.toLocaleString()), textposition: "top center", cliponaxis: false,
+    // Bars start at zero so their heights stay proportional; the labels carry
+    // the year-to-year change.
+    type: "bar", x: E.map(h => h.year), y: E.map(h => h.enrollment),
+    marker: { color: BLUE, line: { color: SURFACE, width: 2 } },
+    text: E.map(h => h.enrollment.toLocaleString()), textposition: "outside", cliponaxis: false,
     textfont: { ...FONT, size: 11 },
     hovertemplate: "%{x}: %{y:,} students<extra></extra>",
   }], {
     paper_bgcolor: SURFACE, plot_bgcolor: SURFACE, font: FONT,
-    margin: { l: 60, r: 16, t: 20, b: 34 },
-    yaxis: { title: "Students", range: [40000, 46000], gridcolor: GRID, zeroline: false, fixedrange: true, tickformat: "," },
+    margin: { l: 60, r: 16, t: 24, b: 34 }, bargap: 0.35,
+    yaxis: { title: mobile() ? "" : "Students", rangemode: "tozero", gridcolor: GRID, zeroline: false,
+      fixedrange: true, tickformat: "," },
     xaxis: { fixedrange: true },
     showlegend: false,
   }, CONFIG);
