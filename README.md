@@ -93,13 +93,13 @@ scripts/
   merge_rightsizing_scenarios.py + rs_a/rs_b_category and _detail (PPS Oct 2026 Scenarios A/B per school)
   export_web.py                 → web/data.json (filters to the 74 in-scope schools)
   parse_budget_school_reports.py → data/raw/pps_budget_school_reports.json (2026-27 budget Vol 2, per-school $/student + enrollment; needs poppler's pdftotext)
-  export_budget.py              → web/budget.json (Vol 1 General Fund figures as cited constants + per-school data)
+  export_budget.py              → web/preview/budget.json (Vol 1 General Fund figures as cited constants + per-school data)
 web/
   index.html              single-page dashboard
   feeders.html            standalone elem→middle→HS feeder-tree diagrams (Mermaid)
   data.json               dashboard payload (generated)
-  budget.html             budget explainer: General Fund money in/out, yearly gap, cost per student vs size
-  budget.json             budget page payload (generated)
+  preview/budget.html     budget explainer (password-protected draft): General Fund money in/out, yearly gap, cost per student vs size
+  preview/budget.json     budget page payload (generated)
 ```
 
 ## Reproducing the pipeline
