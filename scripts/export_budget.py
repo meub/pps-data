@@ -172,6 +172,93 @@ GF_OBJECTS = {
 ENROLLMENT = {"2022-23": 44_518, "2023-24": 43_882, "2024-25": 43_201,
               "2025-26": 42_467, "2026-27": 41_661}
 
+# General Fund purchased services (object 300) by line, for the contracts
+# panel. Vol 1 pp. 109-110; years are 2022-23 to 2024-25 actual, 2025-26
+# adopted, 2026-27 adopted. Object definitions are on pp. 81-82. Grouped and
+# renamed in plain language.
+# Union contracts are not here: those costs are salaries and benefits.
+PS_YEARS = ["2022-23", "2023-24", "2024-25", "2025-26", "2026-27"]
+# Printed "Subtotal - 300 - PURCHASED SERVICES", p. 110.
+PS_TOTALS = [106_798, 119_699, 117_095, 104_835, 110_672]
+GF_PURCHASED_SERVICES = {
+    "Student transportation": (
+        "Contracted school buses and taxis, TriMet passes, and field trips.", [
+        ("533110", "Reimb - School Bus", (23_696, 28_710, 29_716, 25_495, 28_829)),
+        ("533120", "Reimb - Taxi Cab", (3_513, 2_647, 2_405, 3_290, 2_885)),
+        ("533130", "Reimb - In-Lieu", (22, 12, 14, 14, 14)),
+        ("533140", "Reimb - Tri-Met", (2_020, 2_025, 2_034, 2_066, 2_108)),
+        ("533150", "Reimb - Field Trips", (1_241, 1_578, 1_923, 1_258, 1_388)),
+        ("533200", "Non-Reimb Student Transport", (1_101, 1_255, 1_333, 763, 953)),
+        ("534901", "Student Academic Transport", (0, 0, 7, 7, 7)),
+    ]),
+    "Payments to charter schools": (
+        "Money PPS passes to the charter schools it sponsors for the students they serve.", [
+        ("536000", "Charter Schools", (16_670, 18_504, 18_177, 19_449, 18_639)),
+    ]),
+    "Professional services": (
+        "Consultants, legal, audit, security, and other specialized outside services.", [
+        ("538100", "Audit Services", (220, 353, 265, 227, 227)),
+        ("538200", "Legal Services", (1_068, 1_198, 1_063, 1_370, 1_350)),
+        ("538300", "Architect and Engineering Svcs", (139, 326, 118, 0, 0)),
+        ("538400", "Negotiation Services", (116, 433, 5, 140, 100)),
+        ("538500", "Management Services", (65, 382, 735, 78, 78)),
+        ("538600", "Data Processing Services", (85, 0, 0, 0, 0)),
+        ("538800", "Election Services", (249, 74, 331, 350, 350)),
+        ("538910", "Security Services", (130, 494, 298, 148, 83)),
+        ("538920", "Staff Services", (26, 27, 33, 0, 0)),
+        ("538930", "Secretarial/Clerical Services", (0, 16, 36, 0, 0)),
+        ("538940", "Professional Moving Services", (162, 214, 253, 163, 164)),
+        ("538950", "Professional Health Care Svcs", (14, 83, 30, 2, 2)),
+        ("538960", "Professional Child Care Svcs", (116, 35, 2, 356, 194)),
+        ("538970", "Graphic Arts Services", (63, 1, 0, 7, 7)),
+        ("538980", "Laundering Services", (27, 50, 78, 21, 17)),
+        ("538990", "Non-Instr Pers/Professional Sv", (10_023, 13_862, 9_412, 4_636, 5_855)),
+        ("538995", "Meal Services", (0, 0, 189, 187, 187)),
+    ]),
+    "Utilities": (
+        "Electricity, heating fuel, water and sewer, and garbage.", [
+        ("532500", "Electricity", (4_402, 4_839, 5_815, 5_373, 6_450)),
+        ("532600", "Fuel", (4_200, 3_520, 3_499, 4_763, 3_285)),
+        ("532700", "Water and Sewage", (3_201, 3_390, 3_992, 3_634, 3_634)),
+        ("532800", "Garbage", (1_146, 1_034, 1_076, 1_185, 1_185)),
+    ]),
+    "Building repairs and property services": (
+        "Outside repair and maintenance work, rentals, and other property services.", [
+        ("532100", "Cleaning Services", (0, 40, 3, 0, 0)),
+        ("532200", "Repairs and Maintenance Svcs", (997, 1_384, 880, 1_729, 778)),
+        ("532400", "Rentals", (304, 301, 235, 362, 383)),
+        ("532900", "Other Property Services", (9_947, 9_408, 10_781, 3_245, 8_790)),
+    ]),
+    "Tuition to other schools": (
+        "Tuition PPS pays to private schools and other agencies that serve its students.", [
+        ("537300", "Tuition to Private Schools", (7_731, 9_514, 9_936, 9_898, 9_410)),
+        ("537410", "Tuition - Fees College Credit", (10, 48, 77, 0, 0)),
+    ]),
+    "Instruction and training services": (
+        "Outside providers for teaching, program improvement, and staff training.", [
+        ("531100", "Instructional Services", (2_802, 3_925, 4_298, 5_324, 5_000)),
+        ("531200", "Instr Program Improvement Svcs", (1_782, 1_626, 1_241, 1_105, 1_035)),
+        ("531300", "Student Services", (28, 11, 13, 246, 126)),
+        ("531800", "Local Mtgs/Non-Instr Staff Dev", (1_429, 914, 448, 905, 760)),
+        ("531810", "Non-Instr Dev Profess Dev Fds", (122, 98, 125, 259, 104)),
+        ("531900", "Other Instr Prof/Tech Svcs", (3_271, 3_750, 2_603, 1_837, 2_363)),
+    ]),
+    "Travel, phone, postage, and printing": (
+        "Staff and student travel, communications, and printing.", [
+        ("534100", "Travel, Local in District", (395, 148, 143, 195, 208)),
+        ("534200", "Travel, Out of District", (726, 503, 604, 497, 380)),
+        ("534210", "Trav Out Dist Profess Dev Fds", (42, 54, 58, 4, 4)),
+        ("534300", "Travel, Student Activities", (412, 449, 408, 767, 705)),
+        ("534900", "Other Travel", (0, 0, 1, 0, 0)),
+        ("535100", "Telephone", (597, 873, 683, 414, 721)),
+        ("535300", "Postage", (278, 291, 91, 353, 371)),
+        ("535400", "Advertising", (119, 88, 49, 67, 65)),
+        ("535500", "Printing and Binding", (1_091, 954, 1_349, 1_643, 1_427)),
+        ("535920", "Internet Fees", (0, 9, 37, 0, 0)),
+        ("535990", "Wide Area Network/Misc", (999, 248, 190, 1_005, 52)),
+    ]),
+}
+
 # Volume 2 short names that don't prefix-match a master-CSV name.
 MASTER_NAME = {
     "Access": "ACCESS Academy",
@@ -221,6 +308,20 @@ def history() -> list[dict]:
                      "shortfall": GF_SHORTFALL.get(year),
                      "enrollment": ENROLLMENT.get(year)})
     return rows
+
+
+def purchased_services() -> dict:
+    groups = []
+    for label, (note, lines) in GF_PURCHASED_SERVICES.items():
+        groups.append({"label": label, "note": note,
+                       "by_year": [sum(y[i] for _, _, y in lines) for i in range(len(PS_YEARS))],
+                       "lines": [{"code": c, "name": n, "by_year": list(y)} for c, n, y in lines]})
+    for i, year in enumerate(PS_YEARS):
+        total = sum(g["by_year"][i] for g in groups)
+        if abs(total - PS_TOTALS[i]) > 3:
+            sys.exit(f"{year}: purchased services add to {total:,}, PPS prints {PS_TOTALS[i]:,}")
+    return {"years": PS_YEARS, "totals": PS_TOTALS,
+            "groups": sorted(groups, key=lambda g: -g["by_year"][-1])}
 
 
 def schools() -> list[dict]:
@@ -328,6 +429,7 @@ def main() -> None:
         "fte": GF_FTE,
         "all_funds": [{"label": l, "amount": a} for l, a in ALL_FUNDS],
         "history": history(),
+        "purchased_services": purchased_services(),
         "schools": schools(),
     }
     payload["savings"] = closure_savings(payload["schools"])

@@ -345,6 +345,700 @@
    "enrollment": null
   }
  ],
+ "purchased_services": {
+  "years": [
+   "2022-23",
+   "2023-24",
+   "2024-25",
+   "2025-26",
+   "2026-27"
+  ],
+  "totals": [
+   106798,
+   119699,
+   117095,
+   104835,
+   110672
+  ],
+  "groups": [
+   {
+    "label": "Student transportation",
+    "note": "Contracted school buses and taxis, TriMet passes, and field trips.",
+    "by_year": [
+     31593,
+     36227,
+     37432,
+     32893,
+     36184
+    ],
+    "lines": [
+     {
+      "code": "533110",
+      "name": "Reimb - School Bus",
+      "by_year": [
+       23696,
+       28710,
+       29716,
+       25495,
+       28829
+      ]
+     },
+     {
+      "code": "533120",
+      "name": "Reimb - Taxi Cab",
+      "by_year": [
+       3513,
+       2647,
+       2405,
+       3290,
+       2885
+      ]
+     },
+     {
+      "code": "533130",
+      "name": "Reimb - In-Lieu",
+      "by_year": [
+       22,
+       12,
+       14,
+       14,
+       14
+      ]
+     },
+     {
+      "code": "533140",
+      "name": "Reimb - Tri-Met",
+      "by_year": [
+       2020,
+       2025,
+       2034,
+       2066,
+       2108
+      ]
+     },
+     {
+      "code": "533150",
+      "name": "Reimb - Field Trips",
+      "by_year": [
+       1241,
+       1578,
+       1923,
+       1258,
+       1388
+      ]
+     },
+     {
+      "code": "533200",
+      "name": "Non-Reimb Student Transport",
+      "by_year": [
+       1101,
+       1255,
+       1333,
+       763,
+       953
+      ]
+     },
+     {
+      "code": "534901",
+      "name": "Student Academic Transport",
+      "by_year": [
+       0,
+       0,
+       7,
+       7,
+       7
+      ]
+     }
+    ]
+   },
+   {
+    "label": "Payments to charter schools",
+    "note": "Money PPS passes to the charter schools it sponsors for the students they serve.",
+    "by_year": [
+     16670,
+     18504,
+     18177,
+     19449,
+     18639
+    ],
+    "lines": [
+     {
+      "code": "536000",
+      "name": "Charter Schools",
+      "by_year": [
+       16670,
+       18504,
+       18177,
+       19449,
+       18639
+      ]
+     }
+    ]
+   },
+   {
+    "label": "Utilities",
+    "note": "Electricity, heating fuel, water and sewer, and garbage.",
+    "by_year": [
+     12949,
+     12783,
+     14382,
+     14955,
+     14554
+    ],
+    "lines": [
+     {
+      "code": "532500",
+      "name": "Electricity",
+      "by_year": [
+       4402,
+       4839,
+       5815,
+       5373,
+       6450
+      ]
+     },
+     {
+      "code": "532600",
+      "name": "Fuel",
+      "by_year": [
+       4200,
+       3520,
+       3499,
+       4763,
+       3285
+      ]
+     },
+     {
+      "code": "532700",
+      "name": "Water and Sewage",
+      "by_year": [
+       3201,
+       3390,
+       3992,
+       3634,
+       3634
+      ]
+     },
+     {
+      "code": "532800",
+      "name": "Garbage",
+      "by_year": [
+       1146,
+       1034,
+       1076,
+       1185,
+       1185
+      ]
+     }
+    ]
+   },
+   {
+    "label": "Building repairs and property services",
+    "note": "Outside repair and maintenance work, rentals, and other property services.",
+    "by_year": [
+     11248,
+     11133,
+     11899,
+     5336,
+     9951
+    ],
+    "lines": [
+     {
+      "code": "532100",
+      "name": "Cleaning Services",
+      "by_year": [
+       0,
+       40,
+       3,
+       0,
+       0
+      ]
+     },
+     {
+      "code": "532200",
+      "name": "Repairs and Maintenance Svcs",
+      "by_year": [
+       997,
+       1384,
+       880,
+       1729,
+       778
+      ]
+     },
+     {
+      "code": "532400",
+      "name": "Rentals",
+      "by_year": [
+       304,
+       301,
+       235,
+       362,
+       383
+      ]
+     },
+     {
+      "code": "532900",
+      "name": "Other Property Services",
+      "by_year": [
+       9947,
+       9408,
+       10781,
+       3245,
+       8790
+      ]
+     }
+    ]
+   },
+   {
+    "label": "Tuition to other schools",
+    "note": "Tuition PPS pays to private schools and other agencies that serve its students.",
+    "by_year": [
+     7741,
+     9562,
+     10013,
+     9898,
+     9410
+    ],
+    "lines": [
+     {
+      "code": "537300",
+      "name": "Tuition to Private Schools",
+      "by_year": [
+       7731,
+       9514,
+       9936,
+       9898,
+       9410
+      ]
+     },
+     {
+      "code": "537410",
+      "name": "Tuition - Fees College Credit",
+      "by_year": [
+       10,
+       48,
+       77,
+       0,
+       0
+      ]
+     }
+    ]
+   },
+   {
+    "label": "Instruction and training services",
+    "note": "Outside providers for teaching, program improvement, and staff training.",
+    "by_year": [
+     9434,
+     10324,
+     8728,
+     9676,
+     9388
+    ],
+    "lines": [
+     {
+      "code": "531100",
+      "name": "Instructional Services",
+      "by_year": [
+       2802,
+       3925,
+       4298,
+       5324,
+       5000
+      ]
+     },
+     {
+      "code": "531200",
+      "name": "Instr Program Improvement Svcs",
+      "by_year": [
+       1782,
+       1626,
+       1241,
+       1105,
+       1035
+      ]
+     },
+     {
+      "code": "531300",
+      "name": "Student Services",
+      "by_year": [
+       28,
+       11,
+       13,
+       246,
+       126
+      ]
+     },
+     {
+      "code": "531800",
+      "name": "Local Mtgs/Non-Instr Staff Dev",
+      "by_year": [
+       1429,
+       914,
+       448,
+       905,
+       760
+      ]
+     },
+     {
+      "code": "531810",
+      "name": "Non-Instr Dev Profess Dev Fds",
+      "by_year": [
+       122,
+       98,
+       125,
+       259,
+       104
+      ]
+     },
+     {
+      "code": "531900",
+      "name": "Other Instr Prof/Tech Svcs",
+      "by_year": [
+       3271,
+       3750,
+       2603,
+       1837,
+       2363
+      ]
+     }
+    ]
+   },
+   {
+    "label": "Professional services",
+    "note": "Consultants, legal, audit, security, and other specialized outside services.",
+    "by_year": [
+     12503,
+     17548,
+     12848,
+     7685,
+     8614
+    ],
+    "lines": [
+     {
+      "code": "538100",
+      "name": "Audit Services",
+      "by_year": [
+       220,
+       353,
+       265,
+       227,
+       227
+      ]
+     },
+     {
+      "code": "538200",
+      "name": "Legal Services",
+      "by_year": [
+       1068,
+       1198,
+       1063,
+       1370,
+       1350
+      ]
+     },
+     {
+      "code": "538300",
+      "name": "Architect and Engineering Svcs",
+      "by_year": [
+       139,
+       326,
+       118,
+       0,
+       0
+      ]
+     },
+     {
+      "code": "538400",
+      "name": "Negotiation Services",
+      "by_year": [
+       116,
+       433,
+       5,
+       140,
+       100
+      ]
+     },
+     {
+      "code": "538500",
+      "name": "Management Services",
+      "by_year": [
+       65,
+       382,
+       735,
+       78,
+       78
+      ]
+     },
+     {
+      "code": "538600",
+      "name": "Data Processing Services",
+      "by_year": [
+       85,
+       0,
+       0,
+       0,
+       0
+      ]
+     },
+     {
+      "code": "538800",
+      "name": "Election Services",
+      "by_year": [
+       249,
+       74,
+       331,
+       350,
+       350
+      ]
+     },
+     {
+      "code": "538910",
+      "name": "Security Services",
+      "by_year": [
+       130,
+       494,
+       298,
+       148,
+       83
+      ]
+     },
+     {
+      "code": "538920",
+      "name": "Staff Services",
+      "by_year": [
+       26,
+       27,
+       33,
+       0,
+       0
+      ]
+     },
+     {
+      "code": "538930",
+      "name": "Secretarial/Clerical Services",
+      "by_year": [
+       0,
+       16,
+       36,
+       0,
+       0
+      ]
+     },
+     {
+      "code": "538940",
+      "name": "Professional Moving Services",
+      "by_year": [
+       162,
+       214,
+       253,
+       163,
+       164
+      ]
+     },
+     {
+      "code": "538950",
+      "name": "Professional Health Care Svcs",
+      "by_year": [
+       14,
+       83,
+       30,
+       2,
+       2
+      ]
+     },
+     {
+      "code": "538960",
+      "name": "Professional Child Care Svcs",
+      "by_year": [
+       116,
+       35,
+       2,
+       356,
+       194
+      ]
+     },
+     {
+      "code": "538970",
+      "name": "Graphic Arts Services",
+      "by_year": [
+       63,
+       1,
+       0,
+       7,
+       7
+      ]
+     },
+     {
+      "code": "538980",
+      "name": "Laundering Services",
+      "by_year": [
+       27,
+       50,
+       78,
+       21,
+       17
+      ]
+     },
+     {
+      "code": "538990",
+      "name": "Non-Instr Pers/Professional Sv",
+      "by_year": [
+       10023,
+       13862,
+       9412,
+       4636,
+       5855
+      ]
+     },
+     {
+      "code": "538995",
+      "name": "Meal Services",
+      "by_year": [
+       0,
+       0,
+       189,
+       187,
+       187
+      ]
+     }
+    ]
+   },
+   {
+    "label": "Travel, phone, postage, and printing",
+    "note": "Staff and student travel, communications, and printing.",
+    "by_year": [
+     4659,
+     3617,
+     3613,
+     4945,
+     3933
+    ],
+    "lines": [
+     {
+      "code": "534100",
+      "name": "Travel, Local in District",
+      "by_year": [
+       395,
+       148,
+       143,
+       195,
+       208
+      ]
+     },
+     {
+      "code": "534200",
+      "name": "Travel, Out of District",
+      "by_year": [
+       726,
+       503,
+       604,
+       497,
+       380
+      ]
+     },
+     {
+      "code": "534210",
+      "name": "Trav Out Dist Profess Dev Fds",
+      "by_year": [
+       42,
+       54,
+       58,
+       4,
+       4
+      ]
+     },
+     {
+      "code": "534300",
+      "name": "Travel, Student Activities",
+      "by_year": [
+       412,
+       449,
+       408,
+       767,
+       705
+      ]
+     },
+     {
+      "code": "534900",
+      "name": "Other Travel",
+      "by_year": [
+       0,
+       0,
+       1,
+       0,
+       0
+      ]
+     },
+     {
+      "code": "535100",
+      "name": "Telephone",
+      "by_year": [
+       597,
+       873,
+       683,
+       414,
+       721
+      ]
+     },
+     {
+      "code": "535300",
+      "name": "Postage",
+      "by_year": [
+       278,
+       291,
+       91,
+       353,
+       371
+      ]
+     },
+     {
+      "code": "535400",
+      "name": "Advertising",
+      "by_year": [
+       119,
+       88,
+       49,
+       67,
+       65
+      ]
+     },
+     {
+      "code": "535500",
+      "name": "Printing and Binding",
+      "by_year": [
+       1091,
+       954,
+       1349,
+       1643,
+       1427
+      ]
+     },
+     {
+      "code": "535920",
+      "name": "Internet Fees",
+      "by_year": [
+       0,
+       9,
+       37,
+       0,
+       0
+      ]
+     },
+     {
+      "code": "535990",
+      "name": "Wide Area Network/Misc",
+      "by_year": [
+       999,
+       248,
+       190,
+       1005,
+       52
+      ]
+     }
+    ]
+   }
+  ]
+ },
  "schools": [
   {
    "name": "Rosa Parks",

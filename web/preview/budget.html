@@ -152,6 +152,7 @@
     <nav class="links">
       <a href="#section-flow">Money in and out</a>
       <a href="#section-gap">The yearly gap</a>
+      <a href="#section-contracts">Contracts</a>
       <a href="#section-schools">Cost per student</a>
       <a href="#section-savings">Closure savings</a>
       <a href="#section-methodology">Methodology</a>
@@ -246,6 +247,20 @@
         Its outstanding bond and other debt is about $2.1 billion (Volume 1, p. 23).
         PPS's finance office is the authority on exactly what the district may borrow for.
       </p>
+    </div>
+  </section>
+
+  <section id="section-contracts">
+    <h2>Contracts and outside services</h2>
+    <p class="note" id="contracts-text"></p>
+    <div class="panel panel-pad">
+      <div id="plot-contracts" class="chart"></div>
+      <div class="table-scroll"><table class="data" id="contracts-table"></table></div>
+      <details>
+        <summary>Show every line item</summary>
+        <div class="table-scroll"><table class="data" id="contracts-lines"></table></div>
+      </details>
+      <ul class="facts" id="contracts-facts"></ul>
     </div>
   </section>
 
@@ -345,6 +360,9 @@
       <li>School figures come from Volume 2, which is the May 2026 proposed budget.
         The adopted budget changed some school allocations, so a few schools may
         differ slightly from their final 2026-27 numbers.</li>
+      <li>Contracts and outside services are General Fund object 300, "purchased
+        services" (Volume 1, pp. 109-110), grouped and renamed in plain language. The
+        groups add to the subtotal PPS prints for each year.</li>
       <li>Scenario markings use PPS's October 2026 draft rightsizing scenarios, as on
         the main dashboard.</li>
     </ul>
@@ -603,6 +621,55 @@
     `<b>Raises.</b> Contracts settled in 2023-24 and 2024-25 raised salaries and benefits. PPS is bargaining with all its unions now; the forecast assumes a 1% cost-of-living raise.`,
     `<b>One-time money ran out.</b> Federal COVID relief (ESSER) paid for school staff through 2023-24. PPS then covered shortfalls from savings, which fell from ${fmtM(H[0].reserve)} to ${fmtM(H[2].reserve)}, and used a ${fmtM(23962)} pension reserve in 2025-26, now empty.`,
     `<b>The 2027-28 jump.</b> PPS's forecast has benefits rising ${fmtM(y27.benefits - y26.benefits)} in one year, about the size of the whole projected gap, while salaries rise ${fmtM(y27.salaries - y26.salaries)}. The budget book doesn't explain the jump.`,
+  ].map(x => `<li>${x}</li>`).join("");
+
+  // ---- Contracts (purchased services) ----
+  const PS = D.purchased_services, last = PS.years.length - 1;
+  const psTotal = PS.totals[last];
+  const psGroup = (label) => PS.groups.find(g => g.label === label);
+  // fmtM drops trailing decimals ("$15M", "$0M"); a table of small lines reads better
+  // with a fixed decimal and thousands below $1M.
+  const fmtPS = (k) => k === 0 ? "" : k < 1000 ? "$" + k + "K" : "$" + (k / 1000).toFixed(1) + "M";
+  document.getElementById("contracts-text").innerHTML =
+    `About ${pct(psTotal, total)} of the General Fund (${fmtPS(psTotal)} in 2026-27) pays outside companies and ` +
+    `agencies rather than PPS employees. The budget calls this "purchased services." The money-in, money-out ` +
+    `chart groups spending by purpose, so these dollars are spread across its boxes. Here they are by type.`;
+  const psRows = PS.groups.slice().reverse();
+  // The category names don't fit beside bars on a phone; the table below covers it.
+  if (mobile()) document.getElementById("plot-contracts").style.display = "none";
+  else Plotly.newPlot("plot-contracts", [{
+    type: "bar", orientation: "h",
+    y: psRows.map(g => g.label), x: psRows.map(g => g.by_year[last] / 1000),
+    marker: { color: BLUE },
+    text: psRows.map(g => `${fmtPS(g.by_year[last])} (${pct(g.by_year[last], psTotal)})`),
+    textposition: "outside", cliponaxis: false, textfont: { ...FONT, size: 12 },
+    customdata: psRows.map(g => g.note),
+    hovertemplate: "%{y}<br>%{customdata}<extra></extra>",
+  }], {
+    paper_bgcolor: SURFACE, plot_bgcolor: SURFACE, font: FONT, height: 360,
+    margin: { l: 10, r: 110, t: 10, b: 30 },
+    xaxis: { title: "Millions, 2026-27", gridcolor: GRID, zeroline: false,
+      fixedrange: true, tickprefix: "$", ticksuffix: "M" },
+    yaxis: { fixedrange: true, automargin: true },
+    showlegend: false,
+  }, CONFIG);
+  const psHead = `<tr><th></th>${PS.years.map(y => `<th class="num">${y}</th>`).join("")}</tr>`;
+  const psCells = (vals) => vals.map(v => `<td class="num">${fmtPS(v)}</td>`).join("");
+  document.getElementById("contracts-table").innerHTML = psHead +
+    PS.groups.map(g => `<tr><td>${g.label}</td>${psCells(g.by_year)}</tr>`).join("") +
+    `<tr class="group"><td>Total</td>${psCells(PS.totals)}</tr>`;
+  document.getElementById("contracts-lines").innerHTML =
+    `<tr><th>Code</th><th>PPS line item</th>${PS.years.map(y => `<th class="num">${y}</th>`).join("")}</tr>` +
+    PS.groups.map(g => `<tr class="group"><td></td><td>${g.label}</td>${psCells(g.by_year)}</tr>` +
+      g.lines.map(l => `<tr><td>${l.code}</td><td class="sub">${l.name}</td>${psCells(l.by_year)}</tr>`).join("")).join("");
+  const peak = PS.totals.indexOf(Math.max(...PS.totals));
+  const prof = psGroup("Professional services"), bus = psGroup("Student transportation");
+  const transportFn = D.uses.flatMap(g => g.children).find(c => c.label === "Student transportation");
+  document.getElementById("contracts-facts").innerHTML = [
+    `<b>Transportation is the biggest piece.</b> ${fmtPS(bus.by_year[last])} pays bus and taxi companies, TriMet, and field trip carriers. The transportation line in the money-in, money-out chart is larger (${fmtM(transportFn.amount)}) because it also counts PPS's own transportation costs.`,
+    `<b>The total peaked in ${PS.years[peak]}</b> at ${fmtPS(PS.totals[peak])}. Professional services fell from ${fmtPS(prof.by_year[peak])} that year to ${fmtPS(prof.by_year[last])} in 2026-27.`,
+    `<b>Union contracts aren't in this table.</b> Wages and benefits PPS bargains with its unions are salaries and benefits: ${fmtPS(D.people_cost)}, or ${pct(D.people_cost, total)} of the General Fund.`,
+    `2022-23 to 2024-25 are actual spending; 2025-26 and 2026-27 are adopted budgets. Line items are PPS's names (Volume 1, pp. 109-110).`,
   ].map(x => `<li>${x}</li>`).join("");
 
   // ---- Schools scatter ----
