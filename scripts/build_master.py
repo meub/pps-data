@@ -717,6 +717,18 @@ DATA_NOTES = {
         "Enrollment is PPS's own count. State and federal data report "
         "Odyssey's students under Hayhurst, so Odyssey has no demographics, "
         "test-score, or staffing figures of its own."),
+    # PPS's utilization workbook (GENERAL NOTES, 2026-03-01) says a facilities
+    # project removed portables at Abernethy, Beach, and Kenton. The 2021 LRFP
+    # capacity we use still counts them: Abernethy 2 modular classrooms (54
+    # seats), Beach 3 (84 seats), per the LRFP elementary capacity chart.
+    "Abernethy Elementary School": (
+        "Capacity is from PPS's 2021 facilities plan, which counts 54 seats in "
+        "portable classrooms. PPS removed Abernethy's portables in 2026. Without "
+        "them, capacity is about 468 and utilization is about 57%, not 52%."),
+    "Beach Elementary School": (
+        "Capacity is from PPS's 2021 facilities plan, which counts 84 seats in "
+        "portable classrooms. PPS removed Beach's portables in 2026. Without "
+        "them, capacity is about 666 and utilization is about 43%, not 38%."),
 }
 
 
