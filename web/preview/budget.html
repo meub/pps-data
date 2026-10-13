@@ -635,12 +635,19 @@
     `agencies rather than PPS employees. The budget calls this "purchased services." The money-in, money-out ` +
     `chart groups spending by purpose, so these dollars are spread across its boxes. Here they are by type.`;
   const psRows = PS.groups.slice().reverse();
+  // One color per category, keyed by label so a category keeps its color if the order changes.
+  const PS_COLOR = {
+    "Student transportation": BLUE, "Payments to charter schools": AQUA, "Utilities": ORANGE,
+    "Building repairs and property services": "#e0a83a", "Tuition to other schools": "#a371f7",
+    "Instruction and training services": "#db61a2", "Professional services": "#56b6c2",
+    "Travel, phone, postage, and printing": GRAY,
+  };
   // The category names don't fit beside bars on a phone; the table below covers it.
   if (mobile()) document.getElementById("plot-contracts").style.display = "none";
   else Plotly.newPlot("plot-contracts", [{
     type: "bar", orientation: "h",
     y: psRows.map(g => g.label), x: psRows.map(g => g.by_year[last] / 1000),
-    marker: { color: BLUE },
+    marker: { color: psRows.map(g => PS_COLOR[g.label] || GRAY) },
     text: psRows.map(g => `${fmtPS(g.by_year[last])} (${pct(g.by_year[last], psTotal)})`),
     textposition: "outside", cliponaxis: false, textfont: { ...FONT, size: 12 },
     customdata: psRows.map(g => g.note),
