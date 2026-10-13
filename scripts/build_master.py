@@ -905,6 +905,14 @@ def main():
     bc_cap = lrfp_cap.get("HOLLYROOD", 0) + lrfp_cap.get("FERNWOOD", 0)
     pps.loc[pps["School Name"].str.strip() == "Beverly Cleary School",
             "functional_capacity_2021"] = bc_cap or None
+    # Portable (modular) classrooms the LRFP counts in that capacity, so the
+    # dashboard can mark schools whose capacity leans on portables.
+    lrfp_mod = {r["name"]: r["modular_classrooms"] for r in lrfp_raw}
+    pps["modular_classrooms_2021"] = pps["School Name"].map(
+        lambda n: lrfp_mod.get(LRFP_NAME_MAP.get(n))
+    )
+    pps.loc[pps["School Name"].str.strip() == "Beverly Cleary School",
+            "modular_classrooms_2021"] = lrfp_mod.get("HOLLYROOD", 0) + lrfp_mod.get("FERNWOOD", 0)
 
     # Merge the functional capacity recovered from PPS's operational School
     # Utilization Model workbook (2025 records request). This is a second PPS
@@ -1201,7 +1209,7 @@ def main():
         "programs", "has_dli", "dli_languages", "has_focus_option",
         "dli_students_2526", "neighborhood_students_2526", "pct_dli_2526",
         "year_built", "square_feet", "construction_type_2009",
-        "functional_capacity_2021", "utilization_pct_2526",
+        "functional_capacity_2021", "modular_classrooms_2021", "utilization_pct_2526",
         "functional_capacity_model", "utilization_model_2526",
         "capacity_source_conflict", "fc_model_approx", "capacity_conflict_note",
         "capacity_source", "data_note",

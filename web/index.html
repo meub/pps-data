@@ -642,6 +642,10 @@
       Current enrollment as a percentage of PPS's own functional capacity from the 2021 Long-Range Facility Plan. Functional capacity accounts for classroom count, modular rooms, and set-asides (SPED, art/music, DLI co-location). This is a planning number from PPS, not a raw square-footage estimate.
     </p>
     <div class="panel chart-card"><div id="plot-ranking" style="height: 620px;"></div></div>
+    <p class="note">
+      * The school's capacity includes portable (modular) classrooms, as counted in the
+      2021 plan. Portables are separate modular buildings on the school grounds, not rooms in the main building.
+    </p>
   </section>
 
   <section id="section-sustainability">
@@ -936,6 +940,13 @@
       Learning Center, Early Childhood, and leased spaces in the records request
       lower capacity by removing rooms up front; they do not change the percentage
       rate.
+    </p>
+    <p>
+      Portable (modular) classrooms count like any other room. In the 2021 plan, 31 of
+      the 74 schools have portables in their capacity, from one classroom at several
+      schools to ten at Forest Park. Those schools carry a * next to their capacity in
+      the table and their name in the utilization chart. PPS removed the portables at
+      Abernethy and Beach in 2026; their popups give the capacity without them.
     </p>
     <p>
       The workbook PPS released has its reduction inputs (SPED and Early Childhood
@@ -1239,6 +1250,10 @@
   const CHARTER_TABLE_COLS = data.charter_table_cols || [];
 
   // ---------- formatters ----------
+  // Portable (modular) classrooms PPS's 2021 LRFP counts in a school's capacity.
+  const portables = (s) => Number(s.modular_classrooms_2021) || 0;
+  const portablesText = (s) => `Capacity includes ${portables(s)} portable classroom${portables(s) === 1 ? "" : "s"}`;
+
   function fmt(val, type) {
     if (val === null || val === undefined || Number.isNaN(val) || val === "") return "—";
     switch (type) {
@@ -1325,7 +1340,7 @@
         ["Year built", fmt(s.year_built, "year")],
         ["Square feet", fmt(s.square_feet, "int")],
         ["Construction type", s.construction_type_2009 || "—"],
-        ["Functional capacity (2021)", fmt(s.functional_capacity_2021, "int") + (s.capacity_source === "Utilization workbook" ? " (PPS utilization workbook)" : "")],
+        ["Functional capacity (2021)", fmt(s.functional_capacity_2021, "int") + (s.capacity_source === "Utilization workbook" ? " (PPS utilization workbook)" : "") + (portables(s) ? ` (includes ${portables(s)} portable${portables(s) === 1 ? "" : "s"})` : "")],
         ["Utilization 25-26", fmt(s.utilization_pct_2526, "pct_0_1")],
         ["URM", fmt(s.is_urm_building, "bool")],
         ["URM retrofit cost", fmt(s.urm_retrofit_cost_usd, "usd")],
@@ -1522,10 +1537,11 @@
       if (!el) return;
       const mobile = window.innerWidth < 700;
       el.style.height = mobile ? (rows.length * 18 + 80) + "px" : "620px";
-      const names = rows.map(s => shortName(s.school_name));
+      const names = rows.map(s => shortName(s.school_name) + (portables(s) ? " *" : ""));
       const values = rows.map(s => s.utilization_pct_2526 * 100);
       const fullNames = rows.map(s => s.school_name);
-      const customdata = rows.map(s => [s.enrollment_2025_26, s.functional_capacity_2021]);
+      const customdata = rows.map(s => [s.enrollment_2025_26, s.functional_capacity_2021,
+        portables(s) ? `<br>* ${portablesText(s)}` : ""]);
       const trace = mobile ? {
         type: "bar", orientation: "h",
         x: values, y: names,
@@ -1535,7 +1551,7 @@
         customdata,
         hovertemplate: "<b>%{text}</b><br>" +
           "Utilization: %{x:.0f}%<br>" +
-          "%{customdata[0]} students / %{customdata[1]} capacity<extra></extra>",
+          "%{customdata[0]} students / %{customdata[1]} capacity%{customdata[2]}<extra></extra>",
       } : {
         type: "bar",
         x: rows.map((_, i) => i), y: values,
@@ -1545,7 +1561,7 @@
         customdata,
         hovertemplate: "<b>%{text}</b><br>" +
           "Utilization: %{y:.0f}%<br>" +
-          "%{customdata[0]} students / %{customdata[1]} capacity<extra></extra>",
+          "%{customdata[0]} students / %{customdata[1]} capacity%{customdata[2]}<extra></extra>",
       };
       const layout = mobile ? {
         paper_bgcolor: "#161b22", plot_bgcolor: "#161b22",
@@ -3295,6 +3311,10 @@
           if (col === "functional_capacity_2021" && s.capacity_source === "Utilization workbook" && v != null) {
             td.innerHTML += ' <span class="conflict-flag" style="color:var(--muted)">&dagger;</span>';
             attachCellTip(td, "<b>Capacity from PPS's utilization workbook</b>PPS's 2021 Long-Range Facility Plan does not list this building, so this figure comes from PPS's operational utilization workbook (public-records request), about 2021 vintage.");
+          }
+          if (col === "functional_capacity_2021" && v != null && portables(s)) {
+            td.innerHTML += ' <span class="conflict-flag" style="color:var(--muted)">*</span>';
+            attachCellTip(td, `<b>${portablesText(s)}</b>PPS's 2021 Long-Range Facility Plan counts this school's portable (modular) classrooms in its functional capacity, the same as rooms in the main building.`);
           }
           if (col === "gross_capacity" && v != null) attachCellTip(td, grossTip(s));
           if (col === "leased_classrooms" && s.lease_tenants) attachCellTip(td, leaseTip(s));
