@@ -110,6 +110,9 @@ META = {
     "frl_reduced_lunch": {"label": "Reduced lunch (count)", "desc": "Students eligible for reduced-price meals (raw count).", "source": "NCES CCD 2022", "fmt": "int"},
     "pct_free_lunch": {"label": "% Free lunch", "desc": "Share of students on free meals (free ÷ 2022 enrollment); proxy for poverty.", "source": "Derived: NCES CCD 2022", "fmt": "pct_0_1"},
     "pct_frl": {"label": "% FRL", "desc": "Share of students eligible for free OR reduced-price meals; standard poverty proxy.", "source": "Derived: NCES CCD 2022", "fmt": "pct_0_1"},
+    "sped_count_2526": {"label": "Students with IEPs", "desc": "Students with an IEP (special education) on October 1, 2025, as PPS counts them in Synergy. Includes students in focus classrooms housed at the school.", "source": "PPS Enrollment Characteristics, October 2025 (SpEd/TAG/LEP)", "fmt": "int"},
+    "pct_sped_2526": {"label": "% with IEPs", "desc": "Students with an IEP as a share of PK-12 enrollment, October 1, 2025. PPS's own count; replaces the older CRDC 2020 % SPED (IDEA) figure for current comparisons.", "source": "PPS Enrollment Characteristics, October 2025 (SpEd/TAG/LEP)", "fmt": "pct_0_1"},
+    "pct_direct_cert_pps_2425": {"label": "% Direct cert (PPS)", "desc": "Share of students directly certified for free meals (SNAP, TANF, foster care), 2024-25, as PPS reports it in its budget school summary. PPS uses this measure for equity staffing.", "source": "PPS 2026-27 Proposed Budget, Volume 2 (school summary)", "fmt": "pct_0_1"},
     "pct_direct_cert": {"label": "% Direct cert", "desc": "Share directly certified for free meals via SNAP/TANF/foster; proxy for deep poverty.", "source": "Derived: NCES CCD 2022", "fmt": "pct_0_1"},
     "pct_lep": {"label": "% English learners", "desc": "Share of students classified LEP.", "source": "Derived: CRDC 2020 ÷ current enrollment", "fmt": "pct_0_1"},
     "pct_idea": {"label": "% SPED (IDEA)", "desc": "Share of students on IEPs.", "source": "Derived: CRDC 2020 ÷ current enrollment", "fmt": "pct_0_1"},
@@ -192,7 +195,8 @@ TABLE_COLS = [
     "year_built", "square_feet", "fully_sprinklered",
     "pct_ela_prof_2425", "pct_math_prof_2425",
     "is_urm_building", "retrofit_cost_remaining_usd", "seismic_retrofit_status",
-    "is_title_i", "pct_bipoc",
+    "is_title_i", "pct_bipoc", "pct_direct_cert_pps_2425",
+    "sped_count_2526", "pct_sped_2526",
     "enrollment_pct_change_7yr",
     "enrollment_forecast_2035_36", "enrollment_forecast_pct_change_10yr",
     "utilization_pct_2035_36",
@@ -534,7 +538,9 @@ def main():
         charters.append({c: clean_val(row[c]) for c in charter_df.columns})
 
     rightsizing = load_resolved(set(df_all["school_name"]))
-    rightsizing["model"] = build_rightsizing_model(rightsizing, set(df_all["school_name"]))
+    rightsizing["model"] = build_rightsizing_model(
+        rightsizing, set(df_all["school_name"]),
+        df_all.set_index("school_name")["pct_direct_cert_pps_2425"].dropna().to_dict())
     payload = {
         "schools": schools,
         "charters": charters,

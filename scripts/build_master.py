@@ -2,6 +2,7 @@
 merged with NCES CCD 2022 (addresses, lat/lon, FRL) and 2009 KPFF facility data
 (year built, square footage, construction type)."""
 import json
+import sys
 import pandas as pd
 from pathlib import Path
 
@@ -21,6 +22,8 @@ OSAS_ELA_24 = ROOT / "data/raw/pagr_schools_ela_all_2324.xlsx"
 OSAS_MATH_24 = ROOT / "data/raw/pagr_schools_math_all_2324.xlsx"
 ODE_AAG = ROOT / "data/raw/ode_aag_schools_2425.csv"
 DLI_REPORT = ROOT / "data/raw/pps_immersion_details_2526.json"
+SPED_REPORT = ROOT / "data/raw/pps_sped_enrollment_2526.json"
+BUDGET_SCHOOLS = ROOT / "data/raw/pps_budget_school_reports.json"
 LRFP_CAPACITY = ROOT / "data/raw/pps_functional_capacity_2021.json"
 UTIL_MODEL = ROOT / "data/raw/pps_utilization_model_recovered.json"
 OUT = ROOT / "data/pps_schools.csv"
@@ -313,6 +316,27 @@ DLI_NAME_MAP = {
     "West Sylvan": "West Sylvan Middle School",
     "Woodstock": "Woodstock Elementary School",
 }
+
+# PPS's October 2025 SpEd/TAG/LEP report and budget Volume 2 use short names.
+# Most match a master name by prefix ("Abernethy" -> "Abernethy Elementary
+# School") or DLI_NAME_MAP; these don't. ACCESS Academy is a
+# SUPPLEMENTAL_SCHOOLS stub, so it isn't in the name list a prefix match uses.
+SPED_NAME_MAP = {
+    "ACCESS": "ACCESS Academy",
+    "Access": "ACCESS Academy",
+    "Boise-Eliot/Humboldt": "Boise-Eliot Elementary School",
+    "Metro. Learning Center": "Metropolitan Learning Center",
+    "Arthur Academy": "Portland Arthur Academy Charter School",
+}
+
+
+def pps_master_name(name: str, master_names: list[str]) -> str | None:
+    """Master school name for a PPS short name (SpEd report, budget Volume 2), or None."""
+    if name in SPED_NAME_MAP or name in DLI_NAME_MAP:
+        return SPED_NAME_MAP.get(name) or DLI_NAME_MAP[name]
+    hits = [m for m in master_names if m.strip().lower() == name.lower()
+            or m.strip().lower().startswith(name.lower() + " ")]
+    return hits[0] if len(hits) == 1 else None
 
 # Master_name -> PPS airflow index slug (data/raw/pps_airflow_index.json).
 # PPS publishes one 2021 NEBB-certified airflow report per building. Maps each
@@ -1174,6 +1198,29 @@ def main():
         lambda r: (r["2025-26 Total Enrollment"] - r["dli_students_2526"])
         if pd.notna(r["dli_students_2526"]) else None, axis=1)
 
+    # Merge PPS's October 2025 SpEd counts: students with an IEP flag in
+    # Synergy, out of PK-12 enrollment (so shares differ slightly from ODE's
+    # K-12 denominators). Every in-scope school must match.
+    with open(SPED_REPORT) as f:
+        sped_raw = json.load(f)["schools"]
+    names = list(pps["School Name"])
+    sped_map = {m: r for r in sped_raw if (m := pps_master_name(r["name"], names))}
+    missing = [n for n in names if n not in sped_map]
+    if missing:
+        sys.exit(f"SpEd report: no row for {missing}")
+    pps["sped_count_2526"] = pps["School Name"].map(lambda n: sped_map[n]["sped"])
+    pps["sped_enrollment_2526"] = pps["School Name"].map(lambda n: sped_map[n]["total"])
+    pps["pct_sped_2526"] = (pps["sped_count_2526"] / pps["sped_enrollment_2526"]).round(4)
+
+    # PPS's own direct-certification share (2024-25, free meals via SNAP/TANF/
+    # foster), from the budget Volume 2 school summary. Newer than the NCES
+    # 2022 pct_direct_cert, and what PPS uses for staffing.
+    with open(BUDGET_SCHOOLS) as f:
+        budget_raw = json.load(f)["schools"]
+    dc_map = {m: r["pct_direct_cert_2425"] for r in budget_raw
+              if (m := pps_master_name(r["name"], names)) and r["pct_direct_cert_2425"] is not None}
+    pps["pct_direct_cert_pps_2425"] = pps["School Name"].map(lambda n: dc_map.get(n) / 100 if n in dc_map else None)
+
     # Rename columns to snake_case for easier downstream use.
     rename = {
         "School Institution ID": "ode_school_id",
@@ -1210,6 +1257,7 @@ def main():
         "dli_students_2526", "neighborhood_students_2526", "pct_dli_2526",
         "year_built", "square_feet", "construction_type_2009",
         "functional_capacity_2021", "modular_classrooms_2021", "utilization_pct_2526",
+        "sped_count_2526", "sped_enrollment_2526", "pct_sped_2526", "pct_direct_cert_pps_2425",
         "functional_capacity_model", "utilization_model_2526",
         "capacity_source_conflict", "fc_model_approx", "capacity_conflict_note",
         "capacity_source", "data_note",
@@ -1252,6 +1300,14 @@ def main():
             continue
         pps = pd.concat([pps, pd.DataFrame([{c: row.get(c) for c in pps.columns}])],
                         ignore_index=True)
+        if row["school_name"] in sped_map:
+            r = sped_map[row["school_name"]]
+            pps.loc[pps["school_name"] == row["school_name"],
+                    ["sped_count_2526", "sped_enrollment_2526", "pct_sped_2526"]] = \
+                [r["sped"], r["total"], round(r["sped"] / r["total"], 4)]
+        if row["school_name"] in dc_map:
+            pps.loc[pps["school_name"] == row["school_name"], "pct_direct_cert_pps_2425"] = \
+                dc_map[row["school_name"]] / 100
 
     pps.to_csv(OUT, index=False)
     print(f"Wrote {len(pps)} rows to {OUT}")

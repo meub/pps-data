@@ -1,0 +1,1342 @@
+{
+ "source": {
+  "title": "Enrollment Characteristics, October 2025 (SpEd / TAG / LEP)",
+  "publisher": "Portland Public Schools",
+  "as_of": "2025-10-01",
+  "url": "https://resources.finalsite.net/images/v1761768730/ppsnet/urzqafgv7wzzprexxjvw/SchoolProfiles-SPEDTAGLEP25-26.pdf"
+ },
+ "schools": [
+  {
+   "name": "Abernethy",
+   "programs": [],
+   "sped": 39,
+   "tag": 35,
+   "lep": 4,
+   "total": 269
+  },
+  {
+   "name": "Ainsworth",
+   "programs": [
+    {
+     "program": "Neighborhood Program",
+     "sped": 31,
+     "tag": 43,
+     "lep": 21,
+     "total": 273
+    },
+    {
+     "program": "Spanish Immersion",
+     "sped": 19,
+     "tag": 54,
+     "lep": 38,
+     "total": 287
+    }
+   ],
+   "sped": 50,
+   "tag": 97,
+   "lep": 59,
+   "total": 560
+  },
+  {
+   "name": "Alameda",
+   "programs": [],
+   "sped": 97,
+   "tag": 72,
+   "lep": 6,
+   "total": 513
+  },
+  {
+   "name": "Arleta",
+   "programs": [],
+   "sped": 58,
+   "tag": 25,
+   "lep": 9,
+   "total": 230
+  },
+  {
+   "name": "Astor",
+   "programs": [],
+   "sped": 97,
+   "tag": 73,
+   "lep": 11,
+   "total": 400
+  },
+  {
+   "name": "Atkinson",
+   "programs": [
+    {
+     "program": "Neighborhood Program",
+     "sped": 44,
+     "tag": 21,
+     "lep": 6,
+     "total": 188
+    },
+    {
+     "program": "Spanish Immersion",
+     "sped": 29,
+     "tag": 4,
+     "lep": 72,
+     "total": 178
+    }
+   ],
+   "sped": 73,
+   "tag": 25,
+   "lep": 78,
+   "total": 366
+  },
+  {
+   "name": "Beach",
+   "programs": [
+    {
+     "program": "Neighborhood Program",
+     "sped": 24,
+     "tag": 2,
+     "lep": 9,
+     "total": 133
+    },
+    {
+     "program": "Spanish Immersion",
+     "sped": 17,
+     "tag": 21,
+     "lep": 27,
+     "total": 155
+    }
+   ],
+   "sped": 41,
+   "tag": 23,
+   "lep": 36,
+   "total": 288
+  },
+  {
+   "name": "Beverly Cleary",
+   "programs": [],
+   "sped": 67,
+   "tag": 123,
+   "lep": 18,
+   "total": 480
+  },
+  {
+   "name": "Boise-Eliot/Humboldt",
+   "programs": [],
+   "sped": 83,
+   "tag": 14,
+   "lep": 23,
+   "total": 294
+  },
+  {
+   "name": "Bridger Creative Science",
+   "programs": [],
+   "sped": 97,
+   "tag": 54,
+   "lep": 19,
+   "total": 446
+  },
+  {
+   "name": "Bridlemile",
+   "programs": [],
+   "sped": 92,
+   "tag": 57,
+   "lep": 9,
+   "total": 423
+  },
+  {
+   "name": "Buckman",
+   "programs": [],
+   "sped": 73,
+   "tag": 38,
+   "lep": 20,
+   "total": 283
+  },
+  {
+   "name": "Capitol Hill",
+   "programs": [],
+   "sped": 44,
+   "tag": 51,
+   "lep": 0,
+   "total": 325
+  },
+  {
+   "name": "César Chávez",
+   "programs": [
+    {
+     "program": "Neighborhood Program",
+     "sped": 46,
+     "tag": 2,
+     "lep": 22,
+     "total": 143
+    },
+    {
+     "program": "Spanish Immersion",
+     "sped": 47,
+     "tag": 15,
+     "lep": 136,
+     "total": 300
+    }
+   ],
+   "sped": 93,
+   "tag": 17,
+   "lep": 158,
+   "total": 443
+  },
+  {
+   "name": "Chapman",
+   "programs": [],
+   "sped": 59,
+   "tag": 23,
+   "lep": 29,
+   "total": 330
+  },
+  {
+   "name": "Chief Joseph",
+   "programs": [],
+   "sped": 35,
+   "tag": 23,
+   "lep": 8,
+   "total": 242
+  },
+  {
+   "name": "Clark",
+   "programs": [
+    {
+     "program": "Mandarin Immersion",
+     "sped": 5,
+     "tag": 6,
+     "lep": 52,
+     "total": 91
+    },
+    {
+     "program": "Neighborhood Program",
+     "sped": 45,
+     "tag": 4,
+     "lep": 103,
+     "total": 273
+    }
+   ],
+   "sped": 50,
+   "tag": 10,
+   "lep": 155,
+   "total": 364
+  },
+  {
+   "name": "Creston",
+   "programs": [],
+   "sped": 66,
+   "tag": 16,
+   "lep": 29,
+   "total": 213
+  },
+  {
+   "name": "Duniway",
+   "programs": [],
+   "sped": 60,
+   "tag": 63,
+   "lep": 5,
+   "total": 362
+  },
+  {
+   "name": "Faubion",
+   "programs": [],
+   "sped": 113,
+   "tag": 48,
+   "lep": 110,
+   "total": 600
+  },
+  {
+   "name": "Forest Park",
+   "programs": [],
+   "sped": 27,
+   "tag": 49,
+   "lep": 3,
+   "total": 264
+  },
+  {
+   "name": "Glencoe",
+   "programs": [],
+   "sped": 56,
+   "tag": 29,
+   "lep": 11,
+   "total": 339
+  },
+  {
+   "name": "Grout",
+   "programs": [],
+   "sped": 76,
+   "tag": 24,
+   "lep": 79,
+   "total": 327
+  },
+  {
+   "name": "Hayhurst",
+   "programs": [],
+   "sped": 72,
+   "tag": 34,
+   "lep": 25,
+   "total": 290
+  },
+  {
+   "name": "Irvington",
+   "programs": [],
+   "sped": 58,
+   "tag": 43,
+   "lep": 12,
+   "total": 259
+  },
+  {
+   "name": "James John",
+   "programs": [
+    {
+     "program": "Neighborhood Program",
+     "sped": 51,
+     "tag": 11,
+     "lep": 37,
+     "total": 232
+    },
+    {
+     "program": "Spanish Immersion",
+     "sped": 19,
+     "tag": 7,
+     "lep": 60,
+     "total": 133
+    }
+   ],
+   "sped": 70,
+   "tag": 18,
+   "lep": 97,
+   "total": 365
+  },
+  {
+   "name": "Kelly",
+   "programs": [
+    {
+     "program": "Neighborhood Program",
+     "sped": 50,
+     "tag": 12,
+     "lep": 87,
+     "total": 268
+    },
+    {
+     "program": "Russian Immersion",
+     "sped": 6,
+     "tag": 4,
+     "lep": 104,
+     "total": 143
+    }
+   ],
+   "sped": 56,
+   "tag": 16,
+   "lep": 191,
+   "total": 411
+  },
+  {
+   "name": "Laurelhurst",
+   "programs": [],
+   "sped": 92,
+   "tag": 116,
+   "lep": 10,
+   "total": 610
+  },
+  {
+   "name": "Lee",
+   "programs": [],
+   "sped": 85,
+   "tag": 23,
+   "lep": 27,
+   "total": 251
+  },
+  {
+   "name": "Lent",
+   "programs": [
+    {
+     "program": "Spanish Immersion",
+     "sped": 53,
+     "tag": 26,
+     "lep": 106,
+     "total": 256
+    }
+   ],
+   "sped": 53,
+   "tag": 26,
+   "lep": 106,
+   "total": 256
+  },
+  {
+   "name": "Lewis",
+   "programs": [],
+   "sped": 60,
+   "tag": 35,
+   "lep": 5,
+   "total": 259
+  },
+  {
+   "name": "Llewellyn",
+   "programs": [],
+   "sped": 87,
+   "tag": 42,
+   "lep": 5,
+   "total": 345
+  },
+  {
+   "name": "Maplewood",
+   "programs": [],
+   "sped": 46,
+   "tag": 28,
+   "lep": 11,
+   "total": 287
+  },
+  {
+   "name": "Markham",
+   "programs": [],
+   "sped": 47,
+   "tag": 29,
+   "lep": 52,
+   "total": 339
+  },
+  {
+   "name": "Marysville",
+   "programs": [],
+   "sped": 68,
+   "tag": 23,
+   "lep": 43,
+   "total": 307
+  },
+  {
+   "name": "MLK Jr",
+   "programs": [
+    {
+     "program": "Mandarin Immersion",
+     "sped": 27,
+     "tag": 19,
+     "lep": 11,
+     "total": 193
+    },
+    {
+     "program": "Neighborhood Program",
+     "sped": 33,
+     "tag": 2,
+     "lep": 23,
+     "total": 126
+    }
+   ],
+   "sped": 60,
+   "tag": 21,
+   "lep": 34,
+   "total": 319
+  },
+  {
+   "name": "Odyssey",
+   "programs": [],
+   "sped": 39,
+   "tag": 54,
+   "lep": 3,
+   "total": 217
+  },
+  {
+   "name": "Peninsula",
+   "programs": [],
+   "sped": 72,
+   "tag": 19,
+   "lep": 14,
+   "total": 239
+  },
+  {
+   "name": "Richmond",
+   "programs": [],
+   "sped": 56,
+   "tag": 79,
+   "lep": 36,
+   "total": 512
+  },
+  {
+   "name": "Rieke",
+   "programs": [],
+   "sped": 37,
+   "tag": 46,
+   "lep": 6,
+   "total": 264
+  },
+  {
+   "name": "Rigler",
+   "programs": [],
+   "sped": 43,
+   "tag": 11,
+   "lep": 144,
+   "total": 289
+  },
+  {
+   "name": "Rosa Parks",
+   "programs": [],
+   "sped": 46,
+   "tag": 6,
+   "lep": 57,
+   "total": 160
+  },
+  {
+   "name": "Rose City Park",
+   "programs": [
+    {
+     "program": "Neighborhood Program",
+     "sped": 38,
+     "tag": 20,
+     "lep": 13,
+     "total": 210
+    },
+    {
+     "program": "Vietnamese Immersion",
+     "sped": 18,
+     "tag": 18,
+     "lep": 77,
+     "total": 207
+    }
+   ],
+   "sped": 56,
+   "tag": 38,
+   "lep": 90,
+   "total": 417
+  },
+  {
+   "name": "Sabin",
+   "programs": [],
+   "sped": 61,
+   "tag": 35,
+   "lep": 12,
+   "total": 269
+  },
+  {
+   "name": "Scott",
+   "programs": [
+    {
+     "program": "Neighborhood Program",
+     "sped": 55,
+     "tag": 11,
+     "lep": 43,
+     "total": 254
+    },
+    {
+     "program": "Spanish Immersion",
+     "sped": 41,
+     "tag": 23,
+     "lep": 70,
+     "total": 222
+    }
+   ],
+   "sped": 96,
+   "tag": 34,
+   "lep": 113,
+   "total": 476
+  },
+  {
+   "name": "Sitton",
+   "programs": [
+    {
+     "program": "Neighborhood Program",
+     "sped": 57,
+     "tag": 8,
+     "lep": 30,
+     "total": 207
+    },
+    {
+     "program": "Spanish Immersion",
+     "sped": 24,
+     "tag": 11,
+     "lep": 78,
+     "total": 138
+    }
+   ],
+   "sped": 81,
+   "tag": 19,
+   "lep": 108,
+   "total": 345
+  },
+  {
+   "name": "Skyline",
+   "programs": [],
+   "sped": 36,
+   "tag": 45,
+   "lep": 7,
+   "total": 207
+  },
+  {
+   "name": "Stephenson",
+   "programs": [],
+   "sped": 50,
+   "tag": 41,
+   "lep": 11,
+   "total": 281
+  },
+  {
+   "name": "Sunnyside Environmental",
+   "programs": [],
+   "sped": 114,
+   "tag": 98,
+   "lep": 7,
+   "total": 485
+  },
+  {
+   "name": "Vernon",
+   "programs": [],
+   "sped": 64,
+   "tag": 83,
+   "lep": 25,
+   "total": 541
+  },
+  {
+   "name": "Vestal",
+   "programs": [],
+   "sped": 69,
+   "tag": 18,
+   "lep": 54,
+   "total": 283
+  },
+  {
+   "name": "Whitman",
+   "programs": [],
+   "sped": 55,
+   "tag": 7,
+   "lep": 35,
+   "total": 194
+  },
+  {
+   "name": "Winterhaven",
+   "programs": [],
+   "sped": 22,
+   "tag": 114,
+   "lep": 1,
+   "total": 316
+  },
+  {
+   "name": "Woodlawn",
+   "programs": [],
+   "sped": 82,
+   "tag": 29,
+   "lep": 29,
+   "total": 323
+  },
+  {
+   "name": "Woodmere",
+   "programs": [],
+   "sped": 69,
+   "tag": 16,
+   "lep": 57,
+   "total": 227
+  },
+  {
+   "name": "Woodstock",
+   "programs": [
+    {
+     "program": "Mandarin Immersion",
+     "sped": 20,
+     "tag": 23,
+     "lep": 38,
+     "total": 190
+    },
+    {
+     "program": "Neighborhood Program",
+     "sped": 38,
+     "tag": 32,
+     "lep": 6,
+     "total": 177
+    }
+   ],
+   "sped": 58,
+   "tag": 55,
+   "lep": 44,
+   "total": 367
+  },
+  {
+   "name": "Beaumont",
+   "programs": [
+    {
+     "program": "Neighborhood Program",
+     "sped": 69,
+     "tag": 103,
+     "lep": 7,
+     "total": 315
+    },
+    {
+     "program": "Spanish Immersion",
+     "sped": 14,
+     "tag": 15,
+     "lep": 41,
+     "total": 101
+    }
+   ],
+   "sped": 83,
+   "tag": 118,
+   "lep": 48,
+   "total": 416
+  },
+  {
+   "name": "da Vinci",
+   "programs": [],
+   "sped": 67,
+   "tag": 112,
+   "lep": 9,
+   "total": 429
+  },
+  {
+   "name": "George",
+   "programs": [
+    {
+     "program": "Neighborhood Program",
+     "sped": 82,
+     "tag": 17,
+     "lep": 42,
+     "total": 249
+    },
+    {
+     "program": "Spanish Immersion",
+     "sped": 14,
+     "tag": 13,
+     "lep": 67,
+     "total": 109
+    }
+   ],
+   "sped": 96,
+   "tag": 30,
+   "lep": 109,
+   "total": 358
+  },
+  {
+   "name": "Gray",
+   "programs": [],
+   "sped": 64,
+   "tag": 163,
+   "lep": 24,
+   "total": 432
+  },
+  {
+   "name": "Harriet Tubman",
+   "programs": [
+    {
+     "program": "Mandarin Immersion",
+     "sped": 6,
+     "tag": 17,
+     "lep": 1,
+     "total": 48
+    },
+    {
+     "program": "Neighborhood Program",
+     "sped": 50,
+     "tag": 73,
+     "lep": 18,
+     "total": 354
+    }
+   ],
+   "sped": 56,
+   "tag": 90,
+   "lep": 19,
+   "total": 402
+  },
+  {
+   "name": "Harrison Park",
+   "programs": [
+    {
+     "program": "Mandarin Immersion",
+     "sped": 6,
+     "tag": 29,
+     "lep": 17,
+     "total": 111
+    },
+    {
+     "program": "Neighborhood Program",
+     "sped": 39,
+     "tag": 43,
+     "lep": 59,
+     "total": 308
+    }
+   ],
+   "sped": 45,
+   "tag": 72,
+   "lep": 76,
+   "total": 419
+  },
+  {
+   "name": "Hosford",
+   "programs": [],
+   "sped": 83,
+   "tag": 138,
+   "lep": 37,
+   "total": 528
+  },
+  {
+   "name": "Jackson",
+   "programs": [],
+   "sped": 99,
+   "tag": 201,
+   "lep": 41,
+   "total": 689
+  },
+  {
+   "name": "Kellogg",
+   "programs": [
+    {
+     "program": "Neighborhood Program",
+     "sped": 75,
+     "tag": 55,
+     "lep": 44,
+     "total": 330
+    },
+    {
+     "program": "Spanish Immersion",
+     "sped": 24,
+     "tag": 39,
+     "lep": 46,
+     "total": 201
+    }
+   ],
+   "sped": 99,
+   "tag": 94,
+   "lep": 90,
+   "total": 531
+  },
+  {
+   "name": "Lane",
+   "programs": [
+    {
+     "program": "Neighborhood Program",
+     "sped": 113,
+     "tag": 59,
+     "lep": 68,
+     "total": 411
+    },
+    {
+     "program": "Russian Immersion",
+     "sped": 2,
+     "tag": 6,
+     "lep": 15,
+     "total": 36
+    }
+   ],
+   "sped": 115,
+   "tag": 65,
+   "lep": 83,
+   "total": 447
+  },
+  {
+   "name": "Mt Tabor",
+   "programs": [
+    {
+     "program": "Japanese Immersion",
+     "sped": 16,
+     "tag": 92,
+     "lep": 3,
+     "total": 222
+    },
+    {
+     "program": "Neighborhood Program",
+     "sped": 36,
+     "tag": 61,
+     "lep": 7,
+     "total": 208
+    }
+   ],
+   "sped": 52,
+   "tag": 153,
+   "lep": 10,
+   "total": 430
+  },
+  {
+   "name": "Ockley Green",
+   "programs": [
+    {
+     "program": "Neighborhood Program",
+     "sped": 68,
+     "tag": 91,
+     "lep": 25,
+     "total": 397
+    },
+    {
+     "program": "Spanish Immersion",
+     "sped": 2,
+     "tag": 25,
+     "lep": 10,
+     "total": 63
+    }
+   ],
+   "sped": 70,
+   "tag": 116,
+   "lep": 35,
+   "total": 460
+  },
+  {
+   "name": "Roseway Heights",
+   "programs": [
+    {
+     "program": "Neighborhood Program",
+     "sped": 76,
+     "tag": 76,
+     "lep": 35,
+     "total": 415
+    },
+    {
+     "program": "Spanish Immersion",
+     "sped": 12,
+     "tag": 20,
+     "lep": 41,
+     "total": 93
+    },
+    {
+     "program": "Vietnamese Immersion",
+     "sped": 5,
+     "tag": 11,
+     "lep": 19,
+     "total": 64
+    }
+   ],
+   "sped": 93,
+   "tag": 107,
+   "lep": 95,
+   "total": 572
+  },
+  {
+   "name": "Sellwood",
+   "programs": [],
+   "sped": 83,
+   "tag": 205,
+   "lep": 12,
+   "total": 564
+  },
+  {
+   "name": "West Sylvan",
+   "programs": [
+    {
+     "program": "Neighborhood Program",
+     "sped": 75,
+     "tag": 172,
+     "lep": 25,
+     "total": 567
+    },
+    {
+     "program": "Spanish Immersion",
+     "sped": 10,
+     "tag": 45,
+     "lep": 11,
+     "total": 116
+    }
+   ],
+   "sped": 85,
+   "tag": 217,
+   "lep": 36,
+   "total": 683
+  },
+  {
+   "name": "Benson",
+   "programs": [],
+   "sped": 238,
+   "tag": 165,
+   "lep": 71,
+   "total": 1025
+  },
+  {
+   "name": "Cleveland",
+   "programs": [
+    {
+     "program": "Mandarin Immersion",
+     "sped": 7,
+     "tag": 52,
+     "lep": 4,
+     "total": 115
+    },
+    {
+     "program": "Neighborhood Program",
+     "sped": 192,
+     "tag": 409,
+     "lep": 40,
+     "total": 1336
+    }
+   ],
+   "sped": 199,
+   "tag": 461,
+   "lep": 44,
+   "total": 1451
+  },
+  {
+   "name": "Franklin",
+   "programs": [
+    {
+     "program": "Neighborhood Program",
+     "sped": 246,
+     "tag": 317,
+     "lep": 136,
+     "total": 1578
+    },
+    {
+     "program": "Russian Immersion",
+     "sped": 4,
+     "tag": 2,
+     "lep": 14,
+     "total": 29
+    },
+    {
+     "program": "Spanish Immersion",
+     "sped": 14,
+     "tag": 44,
+     "lep": 33,
+     "total": 173
+    }
+   ],
+   "sped": 264,
+   "tag": 363,
+   "lep": 183,
+   "total": 1780
+  },
+  {
+   "name": "Grant",
+   "programs": [
+    {
+     "program": "Japanese Immersion",
+     "sped": 8,
+     "tag": 108,
+     "lep": 2,
+     "total": 265
+    },
+    {
+     "program": "Neighborhood Program",
+     "sped": 197,
+     "tag": 593,
+     "lep": 29,
+     "total": 1809
+    }
+   ],
+   "sped": 205,
+   "tag": 701,
+   "lep": 31,
+   "total": 2074
+  },
+  {
+   "name": "Ida B. Wells-Barnett",
+   "programs": [],
+   "sped": 193,
+   "tag": 490,
+   "lep": 48,
+   "total": 1574
+  },
+  {
+   "name": "Jefferson",
+   "programs": [
+    {
+     "program": "Mandarin Immersion",
+     "sped": 1,
+     "tag": 3,
+     "lep": 1,
+     "total": 14
+    },
+    {
+     "program": "Neighborhood Program",
+     "sped": 54,
+     "tag": 32,
+     "lep": 30,
+     "total": 377
+    }
+   ],
+   "sped": 55,
+   "tag": 35,
+   "lep": 31,
+   "total": 391
+  },
+  {
+   "name": "Lincoln",
+   "programs": [
+    {
+     "program": "Neighborhood Program",
+     "sped": 142,
+     "tag": 437,
+     "lep": 42,
+     "total": 1469
+    },
+    {
+     "program": "Spanish Immersion",
+     "sped": 14,
+     "tag": 86,
+     "lep": 2,
+     "total": 178
+    }
+   ],
+   "sped": 156,
+   "tag": 523,
+   "lep": 44,
+   "total": 1647
+  },
+  {
+   "name": "McDaniel",
+   "programs": [
+    {
+     "program": "Neighborhood Program",
+     "sped": 198,
+     "tag": 195,
+     "lep": 187,
+     "total": 1325
+    },
+    {
+     "program": "Portland International Scholars",
+     "sped": 0,
+     "tag": 0,
+     "lep": 65,
+     "total": 65
+    },
+    {
+     "program": "Spanish Immersion",
+     "sped": 28,
+     "tag": 28,
+     "lep": 71,
+     "total": 205
+    },
+    {
+     "program": "Vietnamese Immersion",
+     "sped": 2,
+     "tag": 5,
+     "lep": 3,
+     "total": 34
+    }
+   ],
+   "sped": 228,
+   "tag": 228,
+   "lep": 326,
+   "total": 1629
+  },
+  {
+   "name": "Roosevelt",
+   "programs": [
+    {
+     "program": "Neighborhood Program",
+     "sped": 200,
+     "tag": 130,
+     "lep": 113,
+     "total": 1082
+    },
+    {
+     "program": "Portland International Scholars",
+     "sped": 0,
+     "tag": 0,
+     "lep": 37,
+     "total": 38
+    },
+    {
+     "program": "Spanish Immersion",
+     "sped": 29,
+     "tag": 63,
+     "lep": 105,
+     "total": 299
+    }
+   ],
+   "sped": 229,
+   "tag": 193,
+   "lep": 255,
+   "total": 1419
+  },
+  {
+   "name": "ACCESS",
+   "programs": [],
+   "sped": 40,
+   "tag": 291,
+   "lep": 1,
+   "total": 324
+  },
+  {
+   "name": "Alliance",
+   "programs": [
+    {
+     "program": "Alliance - Alder",
+     "sped": 52,
+     "tag": 7,
+     "lep": 5,
+     "total": 130
+    },
+    {
+     "program": "Alliance - Cedar",
+     "sped": 22,
+     "tag": 12,
+     "lep": 7,
+     "total": 87
+    }
+   ],
+   "sped": 74,
+   "tag": 19,
+   "lep": 12,
+   "total": 217
+  },
+  {
+   "name": "Head Start Early Childhood Ed",
+   "programs": [],
+   "sped": 0,
+   "tag": 0,
+   "lep": 0,
+   "total": 857
+  },
+  {
+   "name": "Metro. Learning Center",
+   "programs": [],
+   "sped": 85,
+   "tag": 51,
+   "lep": 3,
+   "total": 275
+  },
+  {
+   "name": "Mt Scott Learning Center",
+   "programs": [],
+   "sped": 40,
+   "tag": 4,
+   "lep": 1,
+   "total": 84
+  },
+  {
+   "name": "NAYA Many Nations Academy",
+   "programs": [],
+   "sped": 8,
+   "tag": 0,
+   "lep": 3,
+   "total": 55
+  },
+  {
+   "name": "PCC",
+   "programs": [
+    {
+     "program": "P.C.C. H.S. Completion",
+     "sped": 19,
+     "tag": 42,
+     "lep": 5,
+     "total": 207
+    },
+    {
+     "program": "P.C.C. YES!",
+     "sped": 33,
+     "tag": 2,
+     "lep": 53,
+     "total": 192
+    }
+   ],
+   "sped": 52,
+   "tag": 44,
+   "lep": 58,
+   "total": 399
+  },
+  {
+   "name": "Rosemary Anderson",
+   "programs": [],
+   "sped": 57,
+   "tag": 3,
+   "lep": 22,
+   "total": 193
+  },
+  {
+   "name": "Youth Builders",
+   "programs": [],
+   "sped": 0,
+   "tag": 0,
+   "lep": 0,
+   "total": 6
+  },
+  {
+   "name": "Youth Progress Association",
+   "programs": [],
+   "sped": 2,
+   "tag": 0,
+   "lep": 0,
+   "total": 3
+  },
+  {
+   "name": "Clinton School",
+   "programs": [],
+   "sped": 46,
+   "tag": 1,
+   "lep": 1,
+   "total": 82
+  },
+  {
+   "name": "CTC Northeast",
+   "programs": [],
+   "sped": 38,
+   "tag": 0,
+   "lep": 5,
+   "total": 41
+  },
+  {
+   "name": "CTC Southeast",
+   "programs": [],
+   "sped": 87,
+   "tag": 0,
+   "lep": 7,
+   "total": 88
+  },
+  {
+   "name": "PPS Pioneer Programs",
+   "programs": [],
+   "sped": 60,
+   "tag": 0,
+   "lep": 1,
+   "total": 63
+  },
+  {
+   "name": "Providence Hospital",
+   "programs": [],
+   "sped": 13,
+   "tag": 0,
+   "lep": 0,
+   "total": 13
+  },
+  {
+   "name": "Serendipity",
+   "programs": [],
+   "sped": 4,
+   "tag": 0,
+   "lep": 0,
+   "total": 4
+  },
+  {
+   "name": "Special Education Instruction",
+   "programs": [
+    {
+     "program": "SPED Instruction",
+     "sped": 44,
+     "tag": 1,
+     "lep": 0,
+     "total": 51
+    }
+   ],
+   "sped": 44,
+   "tag": 1,
+   "lep": 0,
+   "total": 51
+  },
+  {
+   "name": "Arthur Academy",
+   "programs": [],
+   "sped": 18,
+   "tag": 0,
+   "lep": 30,
+   "total": 167
+  },
+  {
+   "name": "Emerson School",
+   "programs": [],
+   "sped": 33,
+   "tag": 3,
+   "lep": 4,
+   "total": 139
+  },
+  {
+   "name": "Kairos PDX",
+   "programs": [],
+   "sped": 28,
+   "tag": 0,
+   "lep": 3,
+   "total": 178
+  },
+  {
+   "name": "Le Monde",
+   "programs": [],
+   "sped": 45,
+   "tag": 1,
+   "lep": 5,
+   "total": 385
+  },
+  {
+   "name": "Portland Village School",
+   "programs": [],
+   "sped": 81,
+   "tag": 15,
+   "lep": 13,
+   "total": 434
+  }
+ ]
+}

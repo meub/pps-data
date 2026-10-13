@@ -32,6 +32,10 @@
       "functional_capacity_2021": 594.0,
       "modular_classrooms_2021": 0.0,
       "utilization_pct_2526": 0.2694,
+      "sped_count_2526": 46,
+      "sped_enrollment_2526": 160,
+      "pct_sped_2526": 0.2875,
+      "pct_direct_cert_pps_2425": 0.79,
       "functional_capacity_model": 594.0,
       "utilization_model_2526": 0.2694,
       "capacity_source_conflict": false,
@@ -180,6 +184,10 @@
       "functional_capacity_2021": 493.0,
       "modular_classrooms_2021": 0.0,
       "utilization_pct_2526": 0.3915,
+      "sped_count_2526": 55,
+      "sped_enrollment_2526": 194,
+      "pct_sped_2526": 0.2835,
+      "pct_direct_cert_pps_2425": 0.64,
       "functional_capacity_model": 493.0,
       "utilization_model_2526": 0.3915,
       "capacity_source_conflict": false,
@@ -328,6 +336,10 @@
       "functional_capacity_2021": 282.0,
       "modular_classrooms_2021": 0.0,
       "utilization_pct_2526": 0.734,
+      "sped_count_2526": 36,
+      "sped_enrollment_2526": 207,
+      "pct_sped_2526": 0.1739,
+      "pct_direct_cert_pps_2425": 0.13,
       "functional_capacity_model": 282.0,
       "utilization_model_2526": 0.734,
       "capacity_source_conflict": false,
@@ -476,6 +488,10 @@
       "functional_capacity_2021": 558.0,
       "modular_classrooms_2021": 0.0,
       "utilization_pct_2526": 0.3925,
+      "sped_count_2526": 66,
+      "sped_enrollment_2526": 213,
+      "pct_sped_2526": 0.3099,
+      "pct_direct_cert_pps_2425": 0.23,
       "functional_capacity_model": 282.0,
       "utilization_model_2526": 0.7766,
       "capacity_source_conflict": true,
@@ -624,6 +640,10 @@
       "functional_capacity_2021": 174.0,
       "modular_classrooms_2021": 0.0,
       "utilization_pct_2526": 1.2471,
+      "sped_count_2526": 39,
+      "sped_enrollment_2526": 217,
+      "pct_sped_2526": 0.1797,
+      "pct_direct_cert_pps_2425": 0.07,
       "functional_capacity_model": 174.0,
       "utilization_model_2526": 1.2471,
       "capacity_source_conflict": false,
@@ -772,6 +792,10 @@
       "functional_capacity_2021": 473.0,
       "modular_classrooms_2021": 4.0,
       "utilization_pct_2526": 0.4778,
+      "sped_count_2526": 69,
+      "sped_enrollment_2526": 227,
+      "pct_sped_2526": 0.304,
+      "pct_direct_cert_pps_2425": 0.59,
       "functional_capacity_model": 496.8,
       "utilization_model_2526": 0.4549,
       "capacity_source_conflict": true,
@@ -920,6 +944,10 @@
       "functional_capacity_2021": 696.0,
       "modular_classrooms_2021": 0.0,
       "utilization_pct_2526": 0.3305,
+      "sped_count_2526": 58,
+      "sped_enrollment_2526": 230,
+      "pct_sped_2526": 0.2522,
+      "pct_direct_cert_pps_2425": 0.24,
       "functional_capacity_model": 696.0,
       "utilization_model_2526": 0.3305,
       "capacity_source_conflict": false,
@@ -1068,6 +1096,10 @@
       "functional_capacity_2021": 613.0,
       "modular_classrooms_2021": 0.0,
       "utilization_pct_2526": 0.3899,
+      "sped_count_2526": 72,
+      "sped_enrollment_2526": 239,
+      "pct_sped_2526": 0.3013,
+      "pct_direct_cert_pps_2425": 0.38,
       "functional_capacity_model": 612.8,
       "utilization_model_2526": 0.39,
       "capacity_source_conflict": false,
@@ -1216,6 +1248,10 @@
       "functional_capacity_2021": 499.0,
       "modular_classrooms_2021": 2.0,
       "utilization_pct_2526": 0.495,
+      "sped_count_2526": 35,
+      "sped_enrollment_2526": 242,
+      "pct_sped_2526": 0.1446,
+      "pct_direct_cert_pps_2425": 0.22,
       "functional_capacity_model": 498.8,
       "utilization_model_2526": 0.4952,
       "capacity_source_conflict": false,
@@ -1364,6 +1400,10 @@
       "functional_capacity_2021": 443.0,
       "modular_classrooms_2021": 1.0,
       "utilization_pct_2526": 0.5666,
+      "sped_count_2526": 85,
+      "sped_enrollment_2526": 251,
+      "pct_sped_2526": 0.3386,
+      "pct_direct_cert_pps_2425": 0.45,
       "functional_capacity_model": 442.8,
       "utilization_model_2526": 0.5668,
       "capacity_source_conflict": false,
@@ -1512,6 +1552,10 @@
       "functional_capacity_2021": 707.0,
       "modular_classrooms_2021": 3.0,
       "utilization_pct_2526": 0.3621,
+      "sped_count_2526": 53,
+      "sped_enrollment_2526": 256,
+      "pct_sped_2526": 0.207,
+      "pct_direct_cert_pps_2425": 0.46,
       "functional_capacity_model": 658.8,
       "utilization_model_2526": 0.3886,
       "capacity_source_conflict": true,
@@ -1660,6 +1704,10 @@
       "functional_capacity_2021": 547.0,
       "modular_classrooms_2021": 0.0,
       "utilization_pct_2526": 0.4735,
+      "sped_count_2526": 58,
+      "sped_enrollment_2526": 259,
+      "pct_sped_2526": 0.2239,
+      "pct_direct_cert_pps_2425": 0.2,
       "functional_capacity_model": 547.2,
       "utilization_model_2526": 0.4733,
       "capacity_source_conflict": false,
@@ -1808,6 +1856,10 @@
       "functional_capacity_2021": 444.0,
       "modular_classrooms_2021": 0.0,
       "utilization_pct_2526": 0.5901,
+      "sped_count_2526": 60,
+      "sped_enrollment_2526": 259,
+      "pct_sped_2526": 0.2317,
+      "pct_direct_cert_pps_2425": 0.22,
       "functional_capacity_model": 444.0,
       "utilization_model_2526": 0.5901,
       "capacity_source_conflict": false,
@@ -1956,6 +2008,10 @@
       "functional_capacity_2021": 546.0,
       "modular_classrooms_2021": 10.0,
       "utilization_pct_2526": 0.4835,
+      "sped_count_2526": 27,
+      "sped_enrollment_2526": 264,
+      "pct_sped_2526": 0.1023,
+      "pct_direct_cert_pps_2425": 0.06,
       "functional_capacity_model": 546.0,
       "utilization_model_2526": 0.4835,
       "capacity_source_conflict": false,
@@ -2104,6 +2160,10 @@
       "functional_capacity_2021": 492.0,
       "modular_classrooms_2021": 6.0,
       "utilization_pct_2526": 0.5407,
+      "sped_count_2526": 37,
+      "sped_enrollment_2526": 264,
+      "pct_sped_2526": 0.1402,
+      "pct_direct_cert_pps_2425": 0.15,
       "functional_capacity_model": 492.0,
       "utilization_model_2526": 0.5407,
       "capacity_source_conflict": false,
@@ -2252,6 +2312,10 @@
       "functional_capacity_2021": 522.0,
       "modular_classrooms_2021": 2.0,
       "utilization_pct_2526": 0.5153,
+      "sped_count_2526": 39,
+      "sped_enrollment_2526": 269,
+      "pct_sped_2526": 0.145,
+      "pct_direct_cert_pps_2425": 0.11,
       "functional_capacity_model": 522.0,
       "utilization_model_2526": 0.5153,
       "capacity_source_conflict": false,
@@ -2400,6 +2464,10 @@
       "functional_capacity_2021": 636.0,
       "modular_classrooms_2021": 4.0,
       "utilization_pct_2526": 0.8884,
+      "sped_count_2526": 50,
+      "sped_enrollment_2526": 560,
+      "pct_sped_2526": 0.0893,
+      "pct_direct_cert_pps_2425": 0.12,
       "functional_capacity_model": 636.0,
       "utilization_model_2526": 0.8884,
       "capacity_source_conflict": false,
@@ -2548,6 +2616,10 @@
       "functional_capacity_2021": 792.0,
       "modular_classrooms_2021": 2.0,
       "utilization_pct_2526": 0.6503,
+      "sped_count_2526": 97,
+      "sped_enrollment_2526": 513,
+      "pct_sped_2526": 0.1891,
+      "pct_direct_cert_pps_2425": 0.06,
       "functional_capacity_model": 792.0,
       "utilization_model_2526": 0.6503,
       "capacity_source_conflict": false,
@@ -2696,6 +2768,10 @@
       "functional_capacity_2021": null,
       "modular_classrooms_2021": null,
       "utilization_pct_2526": null,
+      "sped_count_2526": 74,
+      "sped_enrollment_2526": 217,
+      "pct_sped_2526": 0.341,
+      "pct_direct_cert_pps_2425": 0.38,
       "functional_capacity_model": null,
       "utilization_model_2526": null,
       "capacity_source_conflict": false,
@@ -2844,6 +2920,10 @@
       "functional_capacity_2021": 559.0,
       "modular_classrooms_2021": 4.0,
       "utilization_pct_2526": 0.7174,
+      "sped_count_2526": 97,
+      "sped_enrollment_2526": 400,
+      "pct_sped_2526": 0.2425,
+      "pct_direct_cert_pps_2425": 0.29,
       "functional_capacity_model": 558.6,
       "utilization_model_2526": 0.7179,
       "capacity_source_conflict": false,
@@ -2992,6 +3072,10 @@
       "functional_capacity_2021": 567.0,
       "modular_classrooms_2021": 0.0,
       "utilization_pct_2526": 0.6455,
+      "sped_count_2526": 73,
+      "sped_enrollment_2526": 366,
+      "pct_sped_2526": 0.1995,
+      "pct_direct_cert_pps_2425": 0.32,
       "functional_capacity_model": 567.0,
       "utilization_model_2526": 0.6455,
       "capacity_source_conflict": false,
@@ -3140,6 +3224,10 @@
       "functional_capacity_2021": 750.0,
       "modular_classrooms_2021": 3.0,
       "utilization_pct_2526": 0.384,
+      "sped_count_2526": 41,
+      "sped_enrollment_2526": 288,
+      "pct_sped_2526": 0.1424,
+      "pct_direct_cert_pps_2425": 0.34,
       "functional_capacity_model": 750.0,
       "utilization_model_2526": 0.384,
       "capacity_source_conflict": false,
@@ -3288,6 +3376,10 @@
       "functional_capacity_2021": 701.0,
       "modular_classrooms_2021": 0.0,
       "utilization_pct_2526": 0.5934,
+      "sped_count_2526": 83,
+      "sped_enrollment_2526": 416,
+      "pct_sped_2526": 0.1995,
+      "pct_direct_cert_pps_2425": 0.23,
       "functional_capacity_model": 700.8,
       "utilization_model_2526": 0.5936,
       "capacity_source_conflict": false,
@@ -3436,6 +3528,10 @@
       "functional_capacity_2021": 783.0,
       "modular_classrooms_2021": 0.0,
       "utilization_pct_2526": 0.613,
+      "sped_count_2526": 67,
+      "sped_enrollment_2526": 480,
+      "pct_sped_2526": 0.1396,
+      "pct_direct_cert_pps_2425": 0.11,
       "functional_capacity_model": null,
       "utilization_model_2526": null,
       "capacity_source_conflict": false,
@@ -3584,6 +3680,10 @@
       "functional_capacity_2021": 651.0,
       "modular_classrooms_2021": 0.0,
       "utilization_pct_2526": 0.4531,
+      "sped_count_2526": 83,
+      "sped_enrollment_2526": 294,
+      "pct_sped_2526": 0.2823,
+      "pct_direct_cert_pps_2425": 0.62,
       "functional_capacity_model": null,
       "utilization_model_2526": null,
       "capacity_source_conflict": false,
@@ -3732,6 +3832,10 @@
       "functional_capacity_2021": 561.0,
       "modular_classrooms_2021": 6.0,
       "utilization_pct_2526": 0.795,
+      "sped_count_2526": 97,
+      "sped_enrollment_2526": 446,
+      "pct_sped_2526": 0.2175,
+      "pct_direct_cert_pps_2425": 0.27,
       "functional_capacity_model": 561.4,
       "utilization_model_2526": 0.7944,
       "capacity_source_conflict": false,
@@ -3880,6 +3984,10 @@
       "functional_capacity_2021": 645.0,
       "modular_classrooms_2021": 1.0,
       "utilization_pct_2526": 0.6558,
+      "sped_count_2526": 92,
+      "sped_enrollment_2526": 423,
+      "pct_sped_2526": 0.2175,
+      "pct_direct_cert_pps_2425": 0.13,
       "functional_capacity_model": 618.0,
       "utilization_model_2526": 0.6845,
       "capacity_source_conflict": false,
@@ -4028,6 +4136,10 @@
       "functional_capacity_2021": 654.0,
       "modular_classrooms_2021": 0.0,
       "utilization_pct_2526": 0.4327,
+      "sped_count_2526": 73,
+      "sped_enrollment_2526": 283,
+      "pct_sped_2526": 0.258,
+      "pct_direct_cert_pps_2425": 0.36,
       "functional_capacity_model": 654.0,
       "utilization_model_2526": 0.4327,
       "capacity_source_conflict": false,
@@ -4176,6 +4288,10 @@
       "functional_capacity_2021": 456.0,
       "modular_classrooms_2021": 1.0,
       "utilization_pct_2526": 0.7215,
+      "sped_count_2526": 44,
+      "sped_enrollment_2526": 325,
+      "pct_sped_2526": 0.1354,
+      "pct_direct_cert_pps_2425": 0.18,
       "functional_capacity_model": 456.0,
       "utilization_model_2526": 0.7215,
       "capacity_source_conflict": false,
@@ -4324,6 +4440,10 @@
       "functional_capacity_2021": 618.0,
       "modular_classrooms_2021": 3.0,
       "utilization_pct_2526": 0.5388,
+      "sped_count_2526": 59,
+      "sped_enrollment_2526": 330,
+      "pct_sped_2526": 0.1788,
+      "pct_direct_cert_pps_2425": 0.52,
       "functional_capacity_model": 585.9,
       "utilization_model_2526": 0.5684,
       "capacity_source_conflict": true,
@@ -4472,6 +4592,10 @@
       "functional_capacity_2021": 495.0,
       "modular_classrooms_2021": 0.0,
       "utilization_pct_2526": 0.7333,
+      "sped_count_2526": 50,
+      "sped_enrollment_2526": 364,
+      "pct_sped_2526": 0.1374,
+      "pct_direct_cert_pps_2425": 0.67,
       "functional_capacity_model": 468.0,
       "utilization_model_2526": 0.7756,
       "capacity_source_conflict": true,
@@ -4620,6 +4744,10 @@
       "functional_capacity_2021": 589.0,
       "modular_classrooms_2021": 2.0,
       "utilization_pct_2526": 0.7521,
+      "sped_count_2526": 93,
+      "sped_enrollment_2526": 443,
+      "pct_sped_2526": 0.2099,
+      "pct_direct_cert_pps_2425": 0.65,
       "functional_capacity_model": null,
       "utilization_model_2526": null,
       "capacity_source_conflict": false,
@@ -4768,6 +4896,10 @@
       "functional_capacity_2021": 635.0,
       "modular_classrooms_2021": 0.0,
       "utilization_pct_2526": 0.5024,
+      "sped_count_2526": 60,
+      "sped_enrollment_2526": 319,
+      "pct_sped_2526": 0.1881,
+      "pct_direct_cert_pps_2425": 0.51,
       "functional_capacity_model": null,
       "utilization_model_2526": null,
       "capacity_source_conflict": false,
@@ -4916,6 +5048,10 @@
       "functional_capacity_2021": 552.0,
       "modular_classrooms_2021": 0.0,
       "utilization_pct_2526": 0.6558,
+      "sped_count_2526": 60,
+      "sped_enrollment_2526": 362,
+      "pct_sped_2526": 0.1657,
+      "pct_direct_cert_pps_2425": 0.08,
       "functional_capacity_model": 552.0,
       "utilization_model_2526": 0.6558,
       "capacity_source_conflict": false,
@@ -5064,6 +5200,10 @@
       "functional_capacity_2021": 710.0,
       "modular_classrooms_2021": 0.0,
       "utilization_pct_2526": 0.8451,
+      "sped_count_2526": 113,
+      "sped_enrollment_2526": 600,
+      "pct_sped_2526": 0.1883,
+      "pct_direct_cert_pps_2425": 0.56,
       "functional_capacity_model": 685.8,
       "utilization_model_2526": 0.8749,
       "capacity_source_conflict": false,
@@ -5212,6 +5352,10 @@
       "functional_capacity_2021": 617.0,
       "modular_classrooms_2021": 0.0,
       "utilization_pct_2526": 0.577,
+      "sped_count_2526": 96,
+      "sped_enrollment_2526": 358,
+      "pct_sped_2526": 0.2682,
+      "pct_direct_cert_pps_2425": 0.7,
       "functional_capacity_model": 616.5,
       "utilization_model_2526": 0.5775,
       "capacity_source_conflict": false,
@@ -5360,6 +5504,10 @@
       "functional_capacity_2021": 600.0,
       "modular_classrooms_2021": 1.0,
       "utilization_pct_2526": 0.5683,
+      "sped_count_2526": 56,
+      "sped_enrollment_2526": 339,
+      "pct_sped_2526": 0.1652,
+      "pct_direct_cert_pps_2425": 0.17,
       "functional_capacity_model": 600.0,
       "utilization_model_2526": 0.5683,
       "capacity_source_conflict": false,
@@ -5508,6 +5656,10 @@
       "functional_capacity_2021": 622.0,
       "modular_classrooms_2021": 0.0,
       "utilization_pct_2526": 0.6945,
+      "sped_count_2526": 64,
+      "sped_enrollment_2526": 432,
+      "pct_sped_2526": 0.1481,
+      "pct_direct_cert_pps_2425": 0.2,
       "functional_capacity_model": 622.2,
       "utilization_model_2526": 0.6943,
       "capacity_source_conflict": false,
@@ -5656,6 +5808,10 @@
       "functional_capacity_2021": 510.0,
       "modular_classrooms_2021": 0.0,
       "utilization_pct_2526": 0.6412,
+      "sped_count_2526": 76,
+      "sped_enrollment_2526": 327,
+      "pct_sped_2526": 0.2324,
+      "pct_direct_cert_pps_2425": 0.51,
       "functional_capacity_model": 510.1,
       "utilization_model_2526": 0.6411,
       "capacity_source_conflict": false,
@@ -5804,6 +5960,10 @@
       "functional_capacity_2021": 732.0,
       "modular_classrooms_2021": 0.0,
       "utilization_pct_2526": 0.5505,
+      "sped_count_2526": 56,
+      "sped_enrollment_2526": 402,
+      "pct_sped_2526": 0.1393,
+      "pct_direct_cert_pps_2425": 0.37,
       "functional_capacity_model": null,
       "utilization_model_2526": null,
       "capacity_source_conflict": false,
@@ -5952,6 +6112,10 @@
       "functional_capacity_2021": 1006.0,
       "modular_classrooms_2021": 0.0,
       "utilization_pct_2526": 0.4175,
+      "sped_count_2526": 45,
+      "sped_enrollment_2526": 419,
+      "pct_sped_2526": 0.1074,
+      "pct_direct_cert_pps_2425": 0.46,
       "functional_capacity_model": 890.4,
       "utilization_model_2526": 0.4717,
       "capacity_source_conflict": true,
@@ -6100,6 +6264,10 @@
       "functional_capacity_2021": 546.0,
       "modular_classrooms_2021": 0.0,
       "utilization_pct_2526": 0.5311,
+      "sped_count_2526": 72,
+      "sped_enrollment_2526": 290,
+      "pct_sped_2526": 0.2483,
+      "pct_direct_cert_pps_2425": 0.26,
       "functional_capacity_model": 546.0,
       "utilization_model_2526": 0.5311,
       "capacity_source_conflict": false,
@@ -6248,6 +6416,10 @@
       "functional_capacity_2021": 696.0,
       "modular_classrooms_2021": 0.0,
       "utilization_pct_2526": 0.7586,
+      "sped_count_2526": 83,
+      "sped_enrollment_2526": 528,
+      "pct_sped_2526": 0.1572,
+      "pct_direct_cert_pps_2425": 0.25,
       "functional_capacity_model": 696.1,
       "utilization_model_2526": 0.7585,
       "capacity_source_conflict": false,
@@ -6396,6 +6568,10 @@
       "functional_capacity_2021": 908.0,
       "modular_classrooms_2021": 0.0,
       "utilization_pct_2526": 0.7577,
+      "sped_count_2526": 99,
+      "sped_enrollment_2526": 689,
+      "pct_sped_2526": 0.1437,
+      "pct_direct_cert_pps_2425": 0.22,
       "functional_capacity_model": 930.8,
       "utilization_model_2526": 0.7391,
       "capacity_source_conflict": false,
@@ -6544,6 +6720,10 @@
       "functional_capacity_2021": 513.0,
       "modular_classrooms_2021": 0.0,
       "utilization_pct_2526": 0.7096,
+      "sped_count_2526": 70,
+      "sped_enrollment_2526": 365,
+      "pct_sped_2526": 0.1918,
+      "pct_direct_cert_pps_2425": 0.54,
       "functional_capacity_model": 513.0,
       "utilization_model_2526": 0.7096,
       "capacity_source_conflict": false,
@@ -6692,6 +6872,10 @@
       "functional_capacity_2021": 803.0,
       "modular_classrooms_2021": 0.0,
       "utilization_pct_2526": 0.6638,
+      "sped_count_2526": 99,
+      "sped_enrollment_2526": 531,
+      "pct_sped_2526": 0.1864,
+      "pct_direct_cert_pps_2425": 0.44,
       "functional_capacity_model": 732.0,
       "utilization_model_2526": 0.7281,
       "capacity_source_conflict": true,
@@ -6840,6 +7024,10 @@
       "functional_capacity_2021": 670.0,
       "modular_classrooms_2021": 0.0,
       "utilization_pct_2526": 0.6134,
+      "sped_count_2526": 56,
+      "sped_enrollment_2526": 411,
+      "pct_sped_2526": 0.1363,
+      "pct_direct_cert_pps_2425": 0.67,
       "functional_capacity_model": 669.6,
       "utilization_model_2526": 0.6138,
       "capacity_source_conflict": false,
@@ -6988,6 +7176,10 @@
       "functional_capacity_2021": 770.0,
       "modular_classrooms_2021": 0.0,
       "utilization_pct_2526": 0.5844,
+      "sped_count_2526": 115,
+      "sped_enrollment_2526": 447,
+      "pct_sped_2526": 0.2573,
+      "pct_direct_cert_pps_2425": 0.57,
       "functional_capacity_model": 769.5,
       "utilization_model_2526": 0.5848,
       "capacity_source_conflict": false,
@@ -7136,6 +7328,10 @@
       "functional_capacity_2021": 657.0,
       "modular_classrooms_2021": 8.0,
       "utilization_pct_2526": 0.9346,
+      "sped_count_2526": 92,
+      "sped_enrollment_2526": 610,
+      "pct_sped_2526": 0.1508,
+      "pct_direct_cert_pps_2425": 0.12,
       "functional_capacity_model": 657.0,
       "utilization_model_2526": 0.9346,
       "capacity_source_conflict": false,
@@ -7284,6 +7480,10 @@
       "functional_capacity_2021": 528.0,
       "modular_classrooms_2021": 3.0,
       "utilization_pct_2526": 0.6534,
+      "sped_count_2526": 87,
+      "sped_enrollment_2526": 345,
+      "pct_sped_2526": 0.2522,
+      "pct_direct_cert_pps_2425": 0.13,
       "functional_capacity_model": 528.0,
       "utilization_model_2526": 0.6534,
       "capacity_source_conflict": false,
@@ -7432,6 +7632,10 @@
       "functional_capacity_2021": 467.0,
       "modular_classrooms_2021": 6.0,
       "utilization_pct_2526": 0.6167,
+      "sped_count_2526": 46,
+      "sped_enrollment_2526": 287,
+      "pct_sped_2526": 0.1603,
+      "pct_direct_cert_pps_2425": 0.19,
       "functional_capacity_model": 467.4,
       "utilization_model_2526": 0.6162,
       "capacity_source_conflict": false,
@@ -7580,6 +7784,10 @@
       "functional_capacity_2021": 588.0,
       "modular_classrooms_2021": 0.0,
       "utilization_pct_2526": 0.5765,
+      "sped_count_2526": 47,
+      "sped_enrollment_2526": 339,
+      "pct_sped_2526": 0.1386,
+      "pct_direct_cert_pps_2425": 0.38,
       "functional_capacity_model": 561.0,
       "utilization_model_2526": 0.6043,
       "capacity_source_conflict": false,
@@ -7728,6 +7936,10 @@
       "functional_capacity_2021": 533.0,
       "modular_classrooms_2021": 0.0,
       "utilization_pct_2526": 0.5704,
+      "sped_count_2526": 68,
+      "sped_enrollment_2526": 307,
+      "pct_sped_2526": 0.2215,
+      "pct_direct_cert_pps_2425": 0.58,
       "functional_capacity_model": 481.7,
       "utilization_model_2526": 0.6311,
       "capacity_source_conflict": true,
@@ -7876,6 +8088,10 @@
       "functional_capacity_2021": 487.1,
       "modular_classrooms_2021": null,
       "utilization_pct_2526": 0.5646,
+      "sped_count_2526": 85,
+      "sped_enrollment_2526": 275,
+      "pct_sped_2526": 0.3091,
+      "pct_direct_cert_pps_2425": 0.21,
       "functional_capacity_model": 487.1,
       "utilization_model_2526": 0.5646,
       "capacity_source_conflict": false,
@@ -8024,6 +8240,10 @@
       "functional_capacity_2021": 682.0,
       "modular_classrooms_2021": 0.0,
       "utilization_pct_2526": 0.6305,
+      "sped_count_2526": 52,
+      "sped_enrollment_2526": 430,
+      "pct_sped_2526": 0.1209,
+      "pct_direct_cert_pps_2425": 0.16,
       "functional_capacity_model": 681.6,
       "utilization_model_2526": 0.6309,
       "capacity_source_conflict": false,
@@ -8172,6 +8392,10 @@
       "functional_capacity_2021": 689.0,
       "modular_classrooms_2021": 3.0,
       "utilization_pct_2526": 0.6676,
+      "sped_count_2526": 70,
+      "sped_enrollment_2526": 460,
+      "pct_sped_2526": 0.1522,
+      "pct_direct_cert_pps_2425": 0.35,
       "functional_capacity_model": 688.8,
       "utilization_model_2526": 0.6678,
       "capacity_source_conflict": false,
@@ -8320,6 +8544,10 @@
       "functional_capacity_2021": 723.0,
       "modular_classrooms_2021": 0.0,
       "utilization_pct_2526": 0.7082,
+      "sped_count_2526": 56,
+      "sped_enrollment_2526": 512,
+      "pct_sped_2526": 0.1094,
+      "pct_direct_cert_pps_2425": 0.06,
       "functional_capacity_model": 723.0,
       "utilization_model_2526": 0.7082,
       "capacity_source_conflict": false,
@@ -8468,6 +8696,10 @@
       "functional_capacity_2021": 589.0,
       "modular_classrooms_2021": 8.0,
       "utilization_pct_2526": 0.4941,
+      "sped_count_2526": 43,
+      "sped_enrollment_2526": 289,
+      "pct_sped_2526": 0.1488,
+      "pct_direct_cert_pps_2425": 0.53,
       "functional_capacity_model": 588.6,
       "utilization_model_2526": 0.4944,
       "capacity_source_conflict": false,
@@ -8616,6 +8848,10 @@
       "functional_capacity_2021": 636.0,
       "modular_classrooms_2021": 0.0,
       "utilization_pct_2526": 0.6557,
+      "sped_count_2526": 56,
+      "sped_enrollment_2526": 417,
+      "pct_sped_2526": 0.1343,
+      "pct_direct_cert_pps_2425": 0.32,
       "functional_capacity_model": 636.0,
       "utilization_model_2526": 0.6557,
       "capacity_source_conflict": false,
@@ -8764,6 +9000,10 @@
       "functional_capacity_2021": 803.0,
       "modular_classrooms_2021": 0.0,
       "utilization_pct_2526": 0.7123,
+      "sped_count_2526": 93,
+      "sped_enrollment_2526": 572,
+      "pct_sped_2526": 0.1626,
+      "pct_direct_cert_pps_2425": 0.43,
       "functional_capacity_model": 803.2,
       "utilization_model_2526": 0.7122,
       "capacity_source_conflict": false,
@@ -8912,6 +9152,10 @@
       "functional_capacity_2021": 559.0,
       "modular_classrooms_2021": 4.0,
       "utilization_pct_2526": 0.483,
+      "sped_count_2526": 61,
+      "sped_enrollment_2526": 269,
+      "pct_sped_2526": 0.2268,
+      "pct_direct_cert_pps_2425": 0.28,
       "functional_capacity_model": 635.5,
       "utilization_model_2526": 0.4249,
       "capacity_source_conflict": true,
@@ -9060,6 +9304,10 @@
       "functional_capacity_2021": 643.0,
       "modular_classrooms_2021": 2.0,
       "utilization_pct_2526": 0.7418,
+      "sped_count_2526": 96,
+      "sped_enrollment_2526": 476,
+      "pct_sped_2526": 0.2017,
+      "pct_direct_cert_pps_2425": 0.51,
       "functional_capacity_model": 642.6,
       "utilization_model_2526": 0.7423,
       "capacity_source_conflict": false,
@@ -9208,6 +9456,10 @@
       "functional_capacity_2021": 683.0,
       "modular_classrooms_2021": 0.0,
       "utilization_pct_2526": 0.8287,
+      "sped_count_2526": 83,
+      "sped_enrollment_2526": 564,
+      "pct_sped_2526": 0.1472,
+      "pct_direct_cert_pps_2425": 0.12,
       "functional_capacity_model": 683.4,
       "utilization_model_2526": 0.8282,
       "capacity_source_conflict": false,
@@ -9356,6 +9608,10 @@
       "functional_capacity_2021": 467.0,
       "modular_classrooms_2021": 2.0,
       "utilization_pct_2526": 0.7409,
+      "sped_count_2526": 81,
+      "sped_enrollment_2526": 345,
+      "pct_sped_2526": 0.2348,
+      "pct_direct_cert_pps_2425": 0.6,
       "functional_capacity_model": 467.1,
       "utilization_model_2526": 0.7407,
       "capacity_source_conflict": false,
@@ -9504,6 +9760,10 @@
       "functional_capacity_2021": 552.0,
       "modular_classrooms_2021": 0.0,
       "utilization_pct_2526": 0.5091,
+      "sped_count_2526": 50,
+      "sped_enrollment_2526": 281,
+      "pct_sped_2526": 0.1779,
+      "pct_direct_cert_pps_2425": 0.09,
       "functional_capacity_model": 552.0,
       "utilization_model_2526": 0.5091,
       "capacity_source_conflict": false,
@@ -9652,6 +9912,10 @@
       "functional_capacity_2021": 546.0,
       "modular_classrooms_2021": 2.0,
       "utilization_pct_2526": 0.8883,
+      "sped_count_2526": 114,
+      "sped_enrollment_2526": 485,
+      "pct_sped_2526": 0.2351,
+      "pct_direct_cert_pps_2425": 0.18,
       "functional_capacity_model": null,
       "utilization_model_2526": null,
       "capacity_source_conflict": false,
@@ -9800,6 +10064,10 @@
       "functional_capacity_2021": 579.0,
       "modular_classrooms_2021": 4.0,
       "utilization_pct_2526": 0.9309,
+      "sped_count_2526": 64,
+      "sped_enrollment_2526": 541,
+      "pct_sped_2526": 0.1183,
+      "pct_direct_cert_pps_2425": 0.27,
       "functional_capacity_model": 579.0,
       "utilization_model_2526": 0.9309,
       "capacity_source_conflict": false,
@@ -9948,6 +10216,10 @@
       "functional_capacity_2021": 554.0,
       "modular_classrooms_2021": 3.0,
       "utilization_pct_2526": 0.5162,
+      "sped_count_2526": 69,
+      "sped_enrollment_2526": 283,
+      "pct_sped_2526": 0.2438,
+      "pct_direct_cert_pps_2425": 0.43,
       "functional_capacity_model": 430.2,
       "utilization_model_2526": 0.6648,
       "capacity_source_conflict": true,
@@ -10096,6 +10368,10 @@
       "functional_capacity_2021": 987.0,
       "modular_classrooms_2021": 0.0,
       "utilization_pct_2526": 0.694,
+      "sped_count_2526": 85,
+      "sped_enrollment_2526": 683,
+      "pct_sped_2526": 0.1245,
+      "pct_direct_cert_pps_2425": 0.16,
       "functional_capacity_model": 986.9,
       "utilization_model_2526": 0.6941,
       "capacity_source_conflict": false,
@@ -10244,6 +10520,10 @@
       "functional_capacity_2021": 261.0,
       "modular_classrooms_2021": 1.0,
       "utilization_pct_2526": 1.2107,
+      "sped_count_2526": 22,
+      "sped_enrollment_2526": 316,
+      "pct_sped_2526": 0.0696,
+      "pct_direct_cert_pps_2425": 0.18,
       "functional_capacity_model": 261.0,
       "utilization_model_2526": 1.2107,
       "capacity_source_conflict": false,
@@ -10392,6 +10672,10 @@
       "functional_capacity_2021": 644.0,
       "modular_classrooms_2021": 3.0,
       "utilization_pct_2526": 0.5016,
+      "sped_count_2526": 82,
+      "sped_enrollment_2526": 323,
+      "pct_sped_2526": 0.2539,
+      "pct_direct_cert_pps_2425": 0.44,
       "functional_capacity_model": 669.8,
       "utilization_model_2526": 0.4822,
       "capacity_source_conflict": false,
@@ -10540,6 +10824,10 @@
       "functional_capacity_2021": 648.0,
       "modular_classrooms_2021": 0.0,
       "utilization_pct_2526": 0.5648,
+      "sped_count_2526": 58,
+      "sped_enrollment_2526": 367,
+      "pct_sped_2526": 0.158,
+      "pct_direct_cert_pps_2425": 0.23,
       "functional_capacity_model": 648.0,
       "utilization_model_2526": 0.5648,
       "capacity_source_conflict": false,
@@ -10688,6 +10976,10 @@
       "functional_capacity_2021": 714.0,
       "modular_classrooms_2021": 6.0,
       "utilization_pct_2526": 0.6008,
+      "sped_count_2526": 67,
+      "sped_enrollment_2526": 429,
+      "pct_sped_2526": 0.1562,
+      "pct_direct_cert_pps_2425": 0.3,
       "functional_capacity_model": 714.0,
       "utilization_model_2526": 0.6008,
       "capacity_source_conflict": false,
@@ -10836,6 +11128,10 @@
       "functional_capacity_2021": null,
       "modular_classrooms_2021": null,
       "utilization_pct_2526": null,
+      "sped_count_2526": 40,
+      "sped_enrollment_2526": 324,
+      "pct_sped_2526": 0.1235,
+      "pct_direct_cert_pps_2425": 0.12,
       "functional_capacity_model": null,
       "utilization_model_2526": null,
       "capacity_source_conflict": null,
@@ -10986,6 +11282,10 @@
       "functional_capacity_2021": null,
       "modular_classrooms_2021": null,
       "utilization_pct_2526": null,
+      "sped_count_2526": 33,
+      "sped_enrollment_2526": 139,
+      "pct_sped_2526": 0.2374,
+      "pct_direct_cert_pps_2425": null,
       "functional_capacity_model": null,
       "utilization_model_2526": null,
       "capacity_source_conflict": false,
@@ -11121,6 +11421,10 @@
       "functional_capacity_2021": null,
       "modular_classrooms_2021": null,
       "utilization_pct_2526": null,
+      "sped_count_2526": 28,
+      "sped_enrollment_2526": 178,
+      "pct_sped_2526": 0.1573,
+      "pct_direct_cert_pps_2425": null,
       "functional_capacity_model": null,
       "utilization_model_2526": null,
       "capacity_source_conflict": false,
@@ -11256,6 +11560,10 @@
       "functional_capacity_2021": null,
       "modular_classrooms_2021": null,
       "utilization_pct_2526": null,
+      "sped_count_2526": 45,
+      "sped_enrollment_2526": 385,
+      "pct_sped_2526": 0.1169,
+      "pct_direct_cert_pps_2425": null,
       "functional_capacity_model": null,
       "utilization_model_2526": null,
       "capacity_source_conflict": false,
@@ -11391,6 +11699,10 @@
       "functional_capacity_2021": null,
       "modular_classrooms_2021": null,
       "utilization_pct_2526": null,
+      "sped_count_2526": 18,
+      "sped_enrollment_2526": 167,
+      "pct_sped_2526": 0.1078,
+      "pct_direct_cert_pps_2425": null,
       "functional_capacity_model": null,
       "utilization_model_2526": null,
       "capacity_source_conflict": false,
@@ -11526,6 +11838,10 @@
       "functional_capacity_2021": null,
       "modular_classrooms_2021": null,
       "utilization_pct_2526": null,
+      "sped_count_2526": 81,
+      "sped_enrollment_2526": 434,
+      "pct_sped_2526": 0.1866,
+      "pct_direct_cert_pps_2425": null,
       "functional_capacity_model": null,
       "utilization_model_2526": null,
       "capacity_source_conflict": false,
@@ -11869,6 +12185,24 @@
       "label": "% FRL",
       "desc": "Share of students eligible for free OR reduced-price meals; standard poverty proxy.",
       "source": "Derived: NCES CCD 2022",
+      "fmt": "pct_0_1"
+    },
+    "sped_count_2526": {
+      "label": "Students with IEPs",
+      "desc": "Students with an IEP (special education) on October 1, 2025, as PPS counts them in Synergy. Includes students in focus classrooms housed at the school.",
+      "source": "PPS Enrollment Characteristics, October 2025 (SpEd/TAG/LEP)",
+      "fmt": "int"
+    },
+    "pct_sped_2526": {
+      "label": "% with IEPs",
+      "desc": "Students with an IEP as a share of PK-12 enrollment, October 1, 2025. PPS's own count; replaces the older CRDC 2020 % SPED (IDEA) figure for current comparisons.",
+      "source": "PPS Enrollment Characteristics, October 2025 (SpEd/TAG/LEP)",
+      "fmt": "pct_0_1"
+    },
+    "pct_direct_cert_pps_2425": {
+      "label": "% Direct cert (PPS)",
+      "desc": "Share of students directly certified for free meals (SNAP, TANF, foster care), 2024-25, as PPS reports it in its budget school summary. PPS uses this measure for equity staffing.",
+      "source": "PPS 2026-27 Proposed Budget, Volume 2 (school summary)",
       "fmt": "pct_0_1"
     },
     "pct_direct_cert": {
@@ -12309,6 +12643,9 @@
     "seismic_retrofit_status",
     "is_title_i",
     "pct_bipoc",
+    "pct_direct_cert_pps_2425",
+    "sped_count_2526",
+    "pct_sped_2526",
     "enrollment_pct_change_7yr",
     "enrollment_forecast_2035_36",
     "enrollment_forecast_pct_change_10yr",
@@ -13227,6 +13564,10 @@
                 0.0
               ]
             },
+            "iep_before": 39.0,
+            "dc_before": 29.6,
+            "iep_after": 75.5,
+            "dc_after": 80.5,
             "closes": false,
             "inflows": [
               "Buckman Elementary School: Neighborhood students"
@@ -13259,6 +13600,10 @@
                 0.0
               ]
             },
+            "iep_before": 58.0,
+            "dc_before": 55.2,
+            "iep_after": 125.3,
+            "dc_after": 231.5,
             "closes": false,
             "inflows": [
               "Marysville Elementary School: Neighborhood students"
@@ -13302,6 +13647,10 @@
                 0.0
               ]
             },
+            "iep_before": 73.0,
+            "dc_before": 117.1,
+            "iep_after": 111.9,
+            "dc_after": 110.5,
             "closes": false,
             "inflows": [
               "Creston Elementary School: Neighborhood K-5 students"
@@ -13333,6 +13682,10 @@
               ]
             },
             "after": {},
+            "iep_before": 41.0,
+            "dc_before": 97.9,
+            "iep_after": 0.0,
+            "dc_after": 0.0,
             "closes": true,
             "inflows": []
           },
@@ -13374,6 +13727,10 @@
                 163.5
               ]
             },
+            "iep_before": 83.0,
+            "dc_before": 95.7,
+            "iep_after": 97.5,
+            "dc_after": 94.9,
             "closes": false,
             "inflows": [
               "Beverly Cleary 6\u20138 to Beaumont MS",
@@ -13407,6 +13764,10 @@
                 0.0
               ]
             },
+            "iep_before": 67.0,
+            "dc_before": 52.8,
+            "iep_after": 96.5,
+            "dc_after": 82.2,
             "closes": false,
             "inflows": [
               "Irvington Elementary School: K-5 students"
@@ -13450,6 +13811,10 @@
                 0.0
               ]
             },
+            "iep_before": 83.3,
+            "dc_before": 182.9,
+            "iep_after": 110.3,
+            "dc_after": 281.3,
             "closes": false,
             "inflows": [
               "MLK Jr. to Boise-Eliot/Humboldt"
@@ -13482,6 +13847,10 @@
                 0.0
               ]
             },
+            "iep_before": 97.0,
+            "dc_before": 120.4,
+            "iep_after": 66.6,
+            "dc_after": 82.6,
             "closes": false,
             "inflows": []
           },
@@ -13500,6 +13869,10 @@
               ]
             },
             "after": {},
+            "iep_before": 73.0,
+            "dc_before": 101.9,
+            "iep_after": 0.0,
+            "dc_after": 0.0,
             "closes": true,
             "inflows": []
           },
@@ -13530,6 +13903,10 @@
                 0.0
               ]
             },
+            "iep_before": 44.5,
+            "dc_before": 59.2,
+            "iep_after": 59.5,
+            "dc_after": 66.8,
             "closes": false,
             "inflows": [
               "Stephenson Elementary School: Neighborhood students"
@@ -13562,6 +13939,10 @@
                 0.0
               ]
             },
+            "iep_before": 35.7,
+            "dc_before": 54.3,
+            "iep_after": 59.7,
+            "dc_after": 99.6,
             "closes": false,
             "inflows": [
               "Beach Elementary School: Neighborhood K-5 students"
@@ -13605,6 +13986,10 @@
                 0.0
               ]
             },
+            "iep_before": 49.9,
+            "dc_before": 243.2,
+            "iep_after": 44.9,
+            "dc_after": 182.4,
             "closes": false,
             "inflows": []
           },
@@ -13623,6 +14008,10 @@
               ]
             },
             "after": {},
+            "iep_before": 67.9,
+            "dc_before": 50.4,
+            "iep_after": 0.0,
+            "dc_after": 0.0,
             "closes": true,
             "inflows": []
           },
@@ -13664,6 +14053,10 @@
                 0.0
               ]
             },
+            "iep_before": 93.0,
+            "dc_before": 288.0,
+            "iep_after": 89.0,
+            "dc_after": 327.5,
             "closes": false,
             "inflows": [
               "Beach Elementary School: Spanish immersion",
@@ -13709,6 +14102,10 @@
                 0.0
               ]
             },
+            "iep_before": 60.0,
+            "dc_before": 162.7,
+            "iep_after": 94.2,
+            "dc_after": 139.9,
             "closes": false,
             "inflows": [
               "Sabin Elementary School: Neighborhood students"
@@ -13741,6 +14138,10 @@
                 0.0
               ]
             },
+            "iep_before": 60.0,
+            "dc_before": 29.0,
+            "iep_after": 120.7,
+            "dc_after": 86.6,
             "closes": false,
             "inflows": [
               "Lewis Elementary School: Neighborhood students"
@@ -13773,6 +14174,10 @@
                 0.0
               ]
             },
+            "iep_before": 113.0,
+            "dc_before": 336.0,
+            "iep_after": 71.0,
+            "dc_after": 211.1,
             "closes": false,
             "inflows": []
           },
@@ -13825,6 +14230,10 @@
                 91.7
               ]
             },
+            "iep_before": 95.5,
+            "dc_before": 249.2,
+            "iep_after": 133.2,
+            "dc_after": 381.8,
             "closes": false,
             "inflows": [
               "Chavez 6-8 to George",
@@ -13880,6 +14289,10 @@
                 174.1
               ]
             },
+            "iep_before": 56.1,
+            "dc_before": 149.1,
+            "iep_after": 79.2,
+            "dc_after": 201.8,
             "closes": false,
             "inflows": [
               "Vernon 6\u20138 to Harriet Tubman MS"
@@ -13934,6 +14347,10 @@
                 144.4
               ]
             },
+            "iep_before": 45.1,
+            "dc_before": 193.2,
+            "iep_after": 75.6,
+            "dc_after": 231.0,
             "closes": false,
             "inflows": [
               "Bridger Creative Science 6\u20138 to Harrison Park MS"
@@ -13966,6 +14383,10 @@
                 0.0
               ]
             },
+            "iep_before": 72.0,
+            "dc_before": 75.4,
+            "iep_after": 104.3,
+            "dc_after": 113.7,
             "closes": false,
             "inflows": [
               "Maplewood Elementary School: Neighborhood students"
@@ -13998,6 +14419,10 @@
                 340.0
               ]
             },
+            "iep_before": 83.0,
+            "dc_before": 132.0,
+            "iep_after": 170.0,
+            "dc_after": 200.7,
             "closes": false,
             "inflows": [
               "Sellwood Middle School: Llewellyn-area students",
@@ -14019,6 +14444,10 @@
               ]
             },
             "after": {},
+            "iep_before": 58.0,
+            "dc_before": 51.8,
+            "iep_after": 0.0,
+            "dc_after": 0.0,
             "closes": true,
             "inflows": []
           },
@@ -14048,6 +14477,10 @@
               ]
             },
             "after": {},
+            "iep_before": 69.8,
+            "dc_before": 196.6,
+            "iep_after": 0.0,
+            "dc_after": 0.0,
             "closes": true,
             "inflows": []
           },
@@ -14100,6 +14533,10 @@
                 232.7
               ]
             },
+            "iep_before": 115.8,
+            "dc_before": 256.5,
+            "iep_after": 157.4,
+            "dc_after": 290.5,
             "closes": false,
             "inflows": [
               "Sellwood Middle School: Duniway- and Lewis-area students"
@@ -14132,6 +14569,10 @@
                 0.0
               ]
             },
+            "iep_before": 92.6,
+            "dc_before": 73.7,
+            "iep_after": 57.2,
+            "dc_after": 45.5,
             "closes": false,
             "inflows": []
           },
@@ -14162,6 +14603,10 @@
                 0.0
               ]
             },
+            "iep_before": 53.0,
+            "dc_before": 117.8,
+            "iep_after": 82.0,
+            "dc_after": 174.7,
             "closes": false,
             "inflows": [
               "Atkinson to Lent"
@@ -14182,6 +14627,10 @@
               ]
             },
             "after": {},
+            "iep_before": 60.7,
+            "dc_before": 57.6,
+            "iep_after": 0.0,
+            "dc_after": 0.0,
             "closes": true,
             "inflows": []
           },
@@ -14200,6 +14649,10 @@
               ]
             },
             "after": {},
+            "iep_before": 46.2,
+            "dc_before": 54.7,
+            "iep_after": 0.0,
+            "dc_after": 0.0,
             "closes": true,
             "inflows": []
           },
@@ -14230,6 +14683,10 @@
                 0.0
               ]
             },
+            "iep_before": 47.0,
+            "dc_before": 128.8,
+            "iep_after": 82.0,
+            "dc_after": 146.5,
             "closes": false,
             "inflows": [
               "Stephenson Elementary School: Neighborhood students"
@@ -14250,6 +14707,10 @@
               ]
             },
             "after": {},
+            "iep_before": 67.3,
+            "dc_before": 176.3,
+            "iep_after": 0.0,
+            "dc_after": 0.0,
             "closes": true,
             "inflows": []
           },
@@ -14302,6 +14763,10 @@
                 160.1
               ]
             },
+            "iep_before": 52.0,
+            "dc_before": 68.8,
+            "iep_after": 87.4,
+            "dc_after": 97.0,
             "closes": false,
             "inflows": [
               "Laurelhurst 6\u20138 to Mt. Tabor MS"
@@ -14345,6 +14810,10 @@
                 195.3
               ]
             },
+            "iep_before": 70.0,
+            "dc_before": 161.0,
+            "iep_after": 110.0,
+            "dc_after": 263.8,
             "closes": false,
             "inflows": [
               "Faubion 6\u20138 to Ockley Green MS"
@@ -14365,6 +14834,10 @@
               ]
             },
             "after": {},
+            "iep_before": 72.0,
+            "dc_before": 90.8,
+            "iep_after": 0.0,
+            "dc_after": 0.0,
             "closes": true,
             "inflows": []
           },
@@ -14395,6 +14868,10 @@
                 0.0
               ]
             },
+            "iep_before": 37.3,
+            "dc_before": 39.9,
+            "iep_after": 51.1,
+            "dc_after": 56.3,
             "closes": false,
             "inflows": [
               "Maplewood Elementary School: Neighborhood students"
@@ -14427,6 +14904,10 @@
                 0.0
               ]
             },
+            "iep_before": 43.3,
+            "dc_before": 154.2,
+            "iep_after": 84.4,
+            "dc_after": 267.7,
             "closes": false,
             "inflows": [
               "Scott to Rigler"
@@ -14459,6 +14940,10 @@
                 0.0
               ]
             },
+            "iep_before": 46.0,
+            "dc_before": 126.4,
+            "iep_after": 146.3,
+            "dc_after": 274.5,
             "closes": false,
             "inflows": [
               "C\u00e9sar Ch\u00e1vez non-immersion K-5 students to Rosa Parks (board memo)",
@@ -14491,6 +14976,10 @@
               ]
             },
             "after": {},
+            "iep_before": 56.0,
+            "dc_before": 133.4,
+            "iep_after": 0.0,
+            "dc_after": 0.0,
             "closes": true,
             "inflows": []
           },
@@ -14565,6 +15054,10 @@
                 128.4
               ]
             },
+            "iep_before": 93.0,
+            "dc_before": 246.0,
+            "iep_after": 107.0,
+            "dc_after": 269.2,
             "closes": false,
             "inflows": [
               "Beaumont MS to Roseway Heights MS"
@@ -14585,6 +15078,10 @@
               ]
             },
             "after": {},
+            "iep_before": 61.2,
+            "dc_before": 75.6,
+            "iep_after": 0.0,
+            "dc_after": 0.0,
             "closes": true,
             "inflows": []
           },
@@ -14626,6 +15123,10 @@
                 0.0
               ]
             },
+            "iep_before": 96.2,
+            "dc_before": 243.3,
+            "iep_after": 93.1,
+            "dc_after": 197.0,
             "closes": false,
             "inflows": [
               "Rose City Park: Neighborhood K-5 students"
@@ -14646,6 +15147,10 @@
               ]
             },
             "after": {},
+            "iep_before": 83.3,
+            "dc_before": 67.9,
+            "iep_after": 0.0,
+            "dc_after": 0.0,
             "closes": true,
             "inflows": []
           },
@@ -14687,6 +15192,10 @@
                 0.0
               ]
             },
+            "iep_before": 81.2,
+            "dc_before": 207.6,
+            "iep_after": 108.0,
+            "dc_after": 249.5,
             "closes": false,
             "inflows": [
               "James John Elementary School: Neighborhood K-5 students"
@@ -14707,6 +15216,10 @@
               ]
             },
             "after": {},
+            "iep_before": 50.0,
+            "dc_before": 25.3,
+            "iep_after": 0.0,
+            "dc_after": 0.0,
             "closes": true,
             "inflows": []
           },
@@ -14737,6 +15250,10 @@
                 0.0
               ]
             },
+            "iep_before": 114.0,
+            "dc_before": 87.3,
+            "iep_after": 105.1,
+            "dc_after": 103.5,
             "closes": false,
             "inflows": [
               "Buckman Elementary School: Neighborhood students"
@@ -14769,6 +15286,10 @@
                 0.0
               ]
             },
+            "iep_before": 63.8,
+            "dc_before": 145.5,
+            "iep_after": 40.7,
+            "dc_after": 92.9,
             "closes": false,
             "inflows": []
           },
@@ -14810,6 +15331,10 @@
                 0.0
               ]
             },
+            "iep_before": 69.7,
+            "dc_before": 123.0,
+            "iep_after": 87.7,
+            "dc_after": 189.2,
             "closes": false,
             "inflows": [
               "Rose City Park: Vietnamese immersion"
@@ -14842,6 +15367,10 @@
                 0.0
               ]
             },
+            "iep_before": 54.7,
+            "dc_before": 123.5,
+            "iep_after": 123.4,
+            "dc_after": 256.9,
             "closes": false,
             "inflows": [
               "Woodmere Elementary School: Neighborhood students"
@@ -14862,6 +15391,10 @@
               ]
             },
             "after": {},
+            "iep_before": 68.7,
+            "dc_before": 133.3,
+            "iep_after": 0.0,
+            "dc_after": 0.0,
             "closes": true,
             "inflows": []
           },
@@ -14914,6 +15447,10 @@
                 0.0
               ]
             },
+            "iep_before": 57.8,
+            "dc_before": 84.2,
+            "iep_after": 62.8,
+            "dc_after": 145.0,
             "closes": false,
             "inflows": [
               "Mandarin: Clark to Woodstock"
@@ -14948,6 +15485,10 @@
                 0.0
               ]
             },
+            "iep_before": 39.0,
+            "dc_before": 29.6,
+            "iep_after": 75.5,
+            "dc_after": 80.5,
             "closes": false,
             "inflows": [
               "Buckman Elementary School: Neighborhood students"
@@ -14980,6 +15521,10 @@
                 0.0
               ]
             },
+            "iep_before": 58.0,
+            "dc_before": 55.2,
+            "iep_after": 125.3,
+            "dc_after": 231.5,
             "closes": false,
             "inflows": [
               "Marysville Elementary School: Neighborhood students"
@@ -15023,6 +15568,10 @@
                 0.0
               ]
             },
+            "iep_before": 73.0,
+            "dc_before": 117.1,
+            "iep_after": 111.9,
+            "dc_after": 110.5,
             "closes": false,
             "inflows": [
               "Creston Elementary School: Neighborhood K-5 students"
@@ -15054,6 +15603,10 @@
               ]
             },
             "after": {},
+            "iep_before": 41.0,
+            "dc_before": 97.9,
+            "iep_after": 0.0,
+            "dc_after": 0.0,
             "closes": true,
             "inflows": []
           },
@@ -15095,6 +15648,10 @@
                 163.5
               ]
             },
+            "iep_before": 83.0,
+            "dc_before": 95.7,
+            "iep_after": 97.5,
+            "dc_after": 94.9,
             "closes": false,
             "inflows": [
               "Beverly Cleary 6\u20138 to Beaumont MS",
@@ -15128,6 +15685,10 @@
                 0.0
               ]
             },
+            "iep_before": 67.0,
+            "dc_before": 52.8,
+            "iep_after": 96.5,
+            "dc_after": 82.2,
             "closes": false,
             "inflows": [
               "Irvington Elementary School: K-5 students"
@@ -15171,6 +15732,10 @@
                 0.0
               ]
             },
+            "iep_before": 83.3,
+            "dc_before": 182.9,
+            "iep_after": 110.3,
+            "dc_after": 281.3,
             "closes": false,
             "inflows": [
               "MLK Jr. to Boise-Eliot/Humboldt"
@@ -15203,6 +15768,10 @@
                 0.0
               ]
             },
+            "iep_before": 97.0,
+            "dc_before": 120.4,
+            "iep_after": 66.6,
+            "dc_after": 82.6,
             "closes": false,
             "inflows": []
           },
@@ -15221,6 +15790,10 @@
               ]
             },
             "after": {},
+            "iep_before": 73.0,
+            "dc_before": 101.9,
+            "iep_after": 0.0,
+            "dc_after": 0.0,
             "closes": true,
             "inflows": []
           },
@@ -15251,6 +15824,10 @@
                 0.0
               ]
             },
+            "iep_before": 35.7,
+            "dc_before": 54.3,
+            "iep_after": 59.7,
+            "dc_after": 99.6,
             "closes": false,
             "inflows": [
               "Beach Elementary School: Neighborhood K-5 students"
@@ -15294,6 +15871,10 @@
                 0.0
               ]
             },
+            "iep_before": 49.9,
+            "dc_before": 243.2,
+            "iep_after": 44.9,
+            "dc_after": 182.4,
             "closes": false,
             "inflows": []
           },
@@ -15312,6 +15893,10 @@
               ]
             },
             "after": {},
+            "iep_before": 67.9,
+            "dc_before": 50.4,
+            "iep_after": 0.0,
+            "dc_after": 0.0,
             "closes": true,
             "inflows": []
           },
@@ -15353,6 +15938,10 @@
                 0.0
               ]
             },
+            "iep_before": 93.0,
+            "dc_before": 288.0,
+            "iep_after": 89.0,
+            "dc_after": 327.5,
             "closes": false,
             "inflows": [
               "Beach Elementary School: Spanish immersion",
@@ -15398,6 +15987,10 @@
                 0.0
               ]
             },
+            "iep_before": 60.0,
+            "dc_before": 162.7,
+            "iep_after": 94.2,
+            "dc_after": 139.9,
             "closes": false,
             "inflows": [
               "Sabin Elementary School: Neighborhood students"
@@ -15430,6 +16023,10 @@
                 0.0
               ]
             },
+            "iep_before": 113.0,
+            "dc_before": 336.0,
+            "iep_after": 71.0,
+            "dc_after": 211.1,
             "closes": false,
             "inflows": []
           },
@@ -15482,6 +16079,10 @@
                 91.7
               ]
             },
+            "iep_before": 95.5,
+            "dc_before": 249.2,
+            "iep_after": 133.2,
+            "dc_after": 381.8,
             "closes": false,
             "inflows": [
               "Chavez 6-8 to George",
@@ -15537,6 +16138,10 @@
                 174.1
               ]
             },
+            "iep_before": 56.1,
+            "dc_before": 149.1,
+            "iep_after": 79.2,
+            "dc_after": 201.8,
             "closes": false,
             "inflows": [
               "Vernon 6\u20138 to Harriet Tubman MS"
@@ -15591,6 +16196,10 @@
                 144.4
               ]
             },
+            "iep_before": 45.1,
+            "dc_before": 193.2,
+            "iep_after": 75.6,
+            "dc_after": 231.0,
             "closes": false,
             "inflows": [
               "Bridger Creative Science 6\u20138 to Harrison Park MS"
@@ -15623,6 +16232,10 @@
                 0.0
               ]
             },
+            "iep_before": 72.0,
+            "dc_before": 75.4,
+            "iep_after": 104.3,
+            "dc_after": 113.7,
             "closes": false,
             "inflows": [
               "Maplewood Elementary School: Neighborhood students"
@@ -15655,6 +16268,10 @@
                 340.0
               ]
             },
+            "iep_before": 83.0,
+            "dc_before": 132.0,
+            "iep_after": 170.0,
+            "dc_after": 200.7,
             "closes": false,
             "inflows": [
               "Sellwood Middle School: Llewellyn-area students",
@@ -15676,6 +16293,10 @@
               ]
             },
             "after": {},
+            "iep_before": 58.0,
+            "dc_before": 51.8,
+            "iep_after": 0.0,
+            "dc_after": 0.0,
             "closes": true,
             "inflows": []
           },
@@ -15705,6 +16326,10 @@
               ]
             },
             "after": {},
+            "iep_before": 69.8,
+            "dc_before": 196.6,
+            "iep_after": 0.0,
+            "dc_after": 0.0,
             "closes": true,
             "inflows": []
           },
@@ -15757,6 +16382,10 @@
                 232.7
               ]
             },
+            "iep_before": 115.8,
+            "dc_before": 256.5,
+            "iep_after": 157.4,
+            "dc_after": 290.5,
             "closes": false,
             "inflows": [
               "Sellwood Middle School: Duniway- and Lewis-area students"
@@ -15789,6 +16418,10 @@
                 0.0
               ]
             },
+            "iep_before": 92.6,
+            "dc_before": 73.7,
+            "iep_after": 57.2,
+            "dc_after": 45.5,
             "closes": false,
             "inflows": []
           },
@@ -15819,6 +16452,10 @@
                 0.0
               ]
             },
+            "iep_before": 53.0,
+            "dc_before": 117.8,
+            "iep_after": 82.0,
+            "dc_after": 174.7,
             "closes": false,
             "inflows": [
               "Atkinson to Lent"
@@ -15839,6 +16476,10 @@
               ]
             },
             "after": {},
+            "iep_before": 46.2,
+            "dc_before": 54.7,
+            "iep_after": 0.0,
+            "dc_after": 0.0,
             "closes": true,
             "inflows": []
           },
@@ -15857,6 +16498,10 @@
               ]
             },
             "after": {},
+            "iep_before": 67.3,
+            "dc_before": 176.3,
+            "iep_after": 0.0,
+            "dc_after": 0.0,
             "closes": true,
             "inflows": []
           },
@@ -15909,6 +16554,10 @@
                 160.1
               ]
             },
+            "iep_before": 52.0,
+            "dc_before": 68.8,
+            "iep_after": 87.4,
+            "dc_after": 97.0,
             "closes": false,
             "inflows": [
               "Laurelhurst 6\u20138 to Mt. Tabor MS"
@@ -15952,6 +16601,10 @@
                 195.3
               ]
             },
+            "iep_before": 70.0,
+            "dc_before": 161.0,
+            "iep_after": 110.0,
+            "dc_after": 263.8,
             "closes": false,
             "inflows": [
               "Faubion 6\u20138 to Ockley Green MS"
@@ -15972,6 +16625,10 @@
               ]
             },
             "after": {},
+            "iep_before": 72.0,
+            "dc_before": 90.8,
+            "iep_after": 0.0,
+            "dc_after": 0.0,
             "closes": true,
             "inflows": []
           },
@@ -16002,6 +16659,10 @@
                 0.0
               ]
             },
+            "iep_before": 37.3,
+            "dc_before": 39.9,
+            "iep_after": 51.1,
+            "dc_after": 56.3,
             "closes": false,
             "inflows": [
               "Maplewood Elementary School: Neighborhood students"
@@ -16034,6 +16695,10 @@
                 0.0
               ]
             },
+            "iep_before": 43.3,
+            "dc_before": 154.2,
+            "iep_after": 84.4,
+            "dc_after": 267.7,
             "closes": false,
             "inflows": [
               "Scott to Rigler"
@@ -16066,6 +16731,10 @@
                 0.0
               ]
             },
+            "iep_before": 46.0,
+            "dc_before": 126.4,
+            "iep_after": 146.3,
+            "dc_after": 274.5,
             "closes": false,
             "inflows": [
               "C\u00e9sar Ch\u00e1vez non-immersion K-5 students to Rosa Parks (board memo)",
@@ -16143,6 +16812,10 @@
                 128.4
               ]
             },
+            "iep_before": 93.0,
+            "dc_before": 246.0,
+            "iep_after": 107.0,
+            "dc_after": 269.2,
             "closes": false,
             "inflows": [
               "Beaumont MS to Roseway Heights MS"
@@ -16163,6 +16836,10 @@
               ]
             },
             "after": {},
+            "iep_before": 61.2,
+            "dc_before": 75.6,
+            "iep_after": 0.0,
+            "dc_after": 0.0,
             "closes": true,
             "inflows": []
           },
@@ -16204,6 +16881,10 @@
                 0.0
               ]
             },
+            "iep_before": 96.2,
+            "dc_before": 243.3,
+            "iep_after": 55.1,
+            "dc_after": 129.8,
             "closes": false,
             "inflows": []
           },
@@ -16222,6 +16903,10 @@
               ]
             },
             "after": {},
+            "iep_before": 83.3,
+            "dc_before": 67.9,
+            "iep_after": 0.0,
+            "dc_after": 0.0,
             "closes": true,
             "inflows": []
           },
@@ -16263,6 +16948,10 @@
                 0.0
               ]
             },
+            "iep_before": 81.2,
+            "dc_before": 207.6,
+            "iep_after": 108.0,
+            "dc_after": 249.5,
             "closes": false,
             "inflows": [
               "James John Elementary School: Neighborhood K-5 students"
@@ -16295,6 +16984,10 @@
                 0.0
               ]
             },
+            "iep_before": 114.0,
+            "dc_before": 87.3,
+            "iep_after": 105.1,
+            "dc_after": 103.5,
             "closes": false,
             "inflows": [
               "Buckman Elementary School: Neighborhood students"
@@ -16327,6 +17020,10 @@
                 0.0
               ]
             },
+            "iep_before": 63.8,
+            "dc_before": 145.5,
+            "iep_after": 40.7,
+            "dc_after": 92.9,
             "closes": false,
             "inflows": []
           },
@@ -16357,6 +17054,10 @@
                 0.0
               ]
             },
+            "iep_before": 54.7,
+            "dc_before": 123.5,
+            "iep_after": 123.4,
+            "dc_after": 256.9,
             "closes": false,
             "inflows": [
               "Woodmere Elementary School: Neighborhood students"
@@ -16377,6 +17078,10 @@
               ]
             },
             "after": {},
+            "iep_before": 68.7,
+            "dc_before": 133.3,
+            "iep_after": 0.0,
+            "dc_after": 0.0,
             "closes": true,
             "inflows": []
           },
@@ -16429,6 +17134,10 @@
                 0.0
               ]
             },
+            "iep_before": 57.8,
+            "dc_before": 84.2,
+            "iep_after": 62.8,
+            "dc_after": 145.0,
             "closes": false,
             "inflows": [
               "Mandarin: Clark to Woodstock"

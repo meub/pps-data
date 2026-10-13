@@ -21,6 +21,9 @@ What moves, per scenario:
   - Program moves from schools that stay open move that school's immersion
     strand (its only language, unless PPS names one).
   - EXTRA_FLOWS: assignments in the memo but not in the scenario PDF.
+  - Students with IEPs move with their group: each strand carries its
+    school's October 2025 IEP rate (PPS SpEd report; immersion and
+    neighborhood programs use their own rates where PPS prints them).
 
 Assumptions and gaps (also shown on the dashboard):
   - A strand's students are spread across grades in proportion to the
@@ -30,6 +33,8 @@ Assumptions and gaps (also shown on the dashboard):
   - Program sizes PPS does not publish are not moved: Creston's Deaf and
     Hard of Hearing program, and Odyssey (no grade counts; ODE reports it
     under Hayhurst).
+  - Focus classrooms (SES, CB, ISC) are not moved separately: students in a
+    closing school's focus rooms are assumed to go where its other students go.
   - Hayhurst's ODE counts include Odyssey; they are scaled to PPS's
     Hayhurst-only total.
 """
@@ -38,11 +43,12 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from build_master import DLI_NAME_MAP, HAYHURST_ODYSSEY_SPLIT
+from build_master import DLI_NAME_MAP, HAYHURST_ODYSSEY_SPLIT, pps_master_name
 from export_enrollment_by_grade import GRADE_KEYS, load_year
 
 ROOT = Path(__file__).resolve().parent.parent
 DLI_JSON = ROOT / "data" / "raw" / "pps_immersion_details_2526.json"
+SPED_JSON = ROOT / "data" / "raw" / "pps_sped_enrollment_2526.json"
 
 GRADES = GRADE_KEYS[:9]  # K-8; the scenarios change only elementary and middle grades
 K5 = GRADES[:6]
@@ -93,6 +99,27 @@ def base_strands(master_names: set[str]) -> dict[str, dict[str, list[float]]]:
     return out
 
 
+def iep_rates(master_names: set[str]) -> dict[str, dict[str, float]]:
+    """school -> strand -> share of students with IEPs, October 2025.
+
+    "*" is the whole-school rate, used for any strand PPS doesn't print a
+    program row for.
+    """
+    names = sorted(master_names)
+    out = {}
+    for r in json.loads(SPED_JSON.read_text())["schools"]:
+        name = pps_master_name(r["name"], names)
+        if name is None or not r["total"]:
+            continue
+        rates = {"*": r["sped"] / r["total"]}
+        for p in r["programs"]:
+            strand = NEIGHBORHOOD if p["program"] == "Neighborhood Program" else p["program"].replace(" Immersion", "")
+            if p["total"]:
+                rates[strand] = p["sped"] / p["total"]
+        out[name] = rates
+    return out
+
+
 def _strand_for(group: str, src: dict) -> list[str] | None:
     """Which of the source school's strands a closure group takes."""
     for lang in ("Spanish", "Mandarin", "Vietnamese", "Japanese", "Russian"):
@@ -110,8 +137,18 @@ def _grades_for(group: str) -> list[str]:
     return GRADES
 
 
-def build(resolved: dict, master_names: set[str]) -> dict:
+def build(resolved: dict, master_names: set[str], direct_cert: dict[str, float] | None = None) -> dict:
+    """direct_cert: school -> share of students directly certified, moved
+    like IEPs (one rate per school) so merged schools get a blended share."""
     base = base_strands(master_names)
+    rates = iep_rates(master_names)
+    rate = lambda n, strand: rates.get(n, {}).get(strand, rates.get(n, {}).get("*", 0.0))
+    dc = direct_cert or {}
+    # Students carrying each measure, by school and strand: a rate times the head count.
+    measures = {
+        "iep": {n: {k: [c * rate(n, k) for c in v] for k, v in st.items()} for n, st in base.items()},
+        "dc": {n: {k: [c * dc.get(n, 0.0) for c in v] for k, v in st.items()} for n, st in base.items()},
+    }
     result = {"assumptions": {
         "grade_distribution": "Strand totals spread across grades in proportion to each school's grade counts.",
         "not_modeled": ["Attendance boundary changes", "Creston Deaf and Hard of Hearing program (size not published)",
@@ -159,6 +196,7 @@ def build(resolved: dict, master_names: set[str]) -> dict:
         flows += EXTRA_FLOWS
 
         after = {n: {k: list(v) for k, v in st.items()} for n, st in base.items()}
+        m_after = {m: {n: sum(sum(v) for v in st.values()) for n, st in mb.items()} for m, mb in measures.items()}
         for f in flows:
             src = base.get(f["from"], {}).get(f["strand"])
             if src is None or f["to"] not in after:
@@ -168,11 +206,18 @@ def build(resolved: dict, master_names: set[str]) -> dict:
                 moved = src[i] * f["share"]
                 after[f["from"]][f["strand"]][i] -= moved
                 after[f["to"]].setdefault(f["strand"], [0.0] * len(GRADES))[i] += moved
+                for m, mb in measures.items():
+                    carried = mb[f["from"]][f["strand"]][i] * f["share"]
+                    m_after[m][f["from"]] -= carried
+                    m_after[m][f["to"]] += carried
 
         # Students are only moved, never created or lost.
         before_total = sum(sum(sum(v) for v in st.values()) for st in base.values())
         after_total = sum(sum(sum(v) for v in st.values()) for st in after.values())
         assert abs(before_total - after_total) < 0.5, f"Scenario {scen}: model lost students"
+        for m, mb in measures.items():
+            total = sum(sum(sum(v) for v in st.values()) for st in mb.values())
+            assert abs(total - sum(m_after[m].values())) < 0.5, f"Scenario {scen}: model lost {m} students"
         dropped = [f for f in flows if f["from"] in base and f["to"] not in after]
         assert not dropped, f"Scenario {scen}: flows to unknown schools: {[f['to'] for f in dropped]}"
 
@@ -183,6 +228,8 @@ def build(resolved: dict, master_names: set[str]) -> dict:
                 continue
             rnd = lambda st: {k: [round(x, 1) for x in v] for k, v in st.items() if sum(v) > 0.05}
             rows[n] = {"before": rnd(base[n]), "after": {} if n in closing else rnd(after[n]),
+                       **{f"{m}_before": round(sum(sum(v) for v in mb[n].values()), 1) for m, mb in measures.items()},
+                       **{f"{m}_after": 0.0 if n in closing else round(m_after[m][n], 1) for m in measures},
                        "closes": n in closing,
                        "inflows": sorted({f["text"] for f in flows if f["to"] == n})}
         result["scenarios"][scen] = rows
