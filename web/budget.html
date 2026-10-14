@@ -310,6 +310,29 @@
       that go away when a school closes. Most teachers and student services move
       with the students, so they aren't counted as savings.
     </p>
+    <div class="callout" id="savings-and-gap">
+      <h3>How closures and the budget gap connect</h3>
+      <p>
+        On paper they are separate. PPS closes the gap by cutting the budget whether or
+        not any school closes, and it puts closure savings back into the remaining
+        schools instead of counting them toward the gap.
+      </p>
+      <p>
+        In practice they overlap. Falling enrollment drives both: it lowers state funding,
+        which is set per student, and it leaves buildings that cost about the same to run
+        with fewer students in them. When schools take their share of the cuts, reinvested
+        savings offset part of it, so closures change what the remaining money pays for
+        (fewer principals and buildings, more classroom staff) rather than the size of the
+        cuts. PPS itself says the two could be seen as one and the same.
+      </p>
+      <p id="savings-scale"></p>
+      <p>
+        PPS hasn't said how it calculated the $10 million to $12 million, whether it
+        subtracts new costs such as longer bus routes, or whether the reinvestment is
+        permanent. If savings later go toward future gaps, closures would shrink those
+        gaps.
+      </p>
+    </div>
     <div class="panel panel-pad">
       <p class="savings-head" id="savings-head"></p>
       <div id="plot-savings" class="chart"></div>
@@ -740,6 +763,11 @@
     `Scenario B (${B.schools.length} closures): about ${fmtRange(B.low, B.high)} a year. ` +
     `PPS's own estimate is $10 million to $12 million a year. It plans to reinvest that money in the remaining schools, ` +
     `separate from the ${fmtM(gap)} it has to cut for 2027-28.`;
+  // gap is in thousands of dollars, like every budget.json figure.
+  document.getElementById("savings-scale").textContent =
+    `For scale: $10 million to $12 million is about ${Math.round(10000 / gap * 100)}% to ${Math.round(12000 / gap * 100)}% ` +
+    `of the ${fmtM(gap)} gap for 2027-28. Even if all of it went toward the gap, PPS would still need about ` +
+    `${fmtM(gap - 12000)} to ${fmtM(gap - 10000)} in other cuts.`;
   const PARTS = [
     ["leadership", "Principal and office staff", AQUA],
     ["custodians", "Custodians", BLUE],
