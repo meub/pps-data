@@ -90,8 +90,8 @@
 </div>
 
 <div class="layout">
-<nav class="toc" aria-label="Guide chapters">
-  <b>Chapters</b>
+<nav class="toc" aria-label="Guide sections">
+  <b>Sections</b>
   <a href="#big-picture">1. The big picture</a>
   <a href="#schools">2. Kinds of schools</a>
   <a href="#counting">3. Counting students</a>
@@ -108,7 +108,7 @@
 <header>
   <h1>A guide to school district data</h1>
   <p>
-    The ideas behind the numbers on this site, with examples from Portland. Each chapter
+    The ideas behind the numbers on this site, with examples from Portland. Each section
     stands on its own, and the <a href="#index">term index</a> jumps to any word.
   </p>
 </header>
@@ -131,7 +131,7 @@
     heat, and a roof. When enrollment falls but the number of schools doesn't, each school
     gets smaller, and the district spends more per student on fixed costs. At the same time,
     PPS's costs are rising faster than its revenue, mostly because of salaries, health care,
-    and pensions (see <a href="#money">chapter 7</a>).
+    and pensions (see <a href="#money">section 7</a>).
   </p>
   <p>
     <dfn id="t-rightsizing">Rightsizing</dfn> is PPS's name for the process of matching its
@@ -324,7 +324,7 @@
     <li><b>Apply a utilization rate.</b> Elementary and K-8 buildings count at 100% of what's left;
       middle and high schools at 85%, because students move between rooms and not every room can
       be full every period. Schools with extra federal or state support designations (Title I,
-      TSI, CSI; see <a href="#t-title1">chapter 5</a>) lose 5 more points each, to leave room for
+      TSI, CSI; see <a href="#t-title1">section 5</a>) lose 5 more points each, to leave room for
       smaller groups.</li>
   </ul>
   <div class="math">functional capacity = (gross capacity − set-aside seats) × utilization rate</div>
@@ -786,7 +786,7 @@
     return [{ label, anchor }];
   });
   function prevAnchor(node) {
-    // Nearest preceding h3 with an id, else the chapter section.
+    // Nearest preceding h3 with an id, else the enclosing section.
     const all = Array.from(document.querySelectorAll("article h3[id], article section[id]"));
     let best = null;
     for (const a of all) if (a.compareDocumentPosition(node) & Node.DOCUMENT_POSITION_FOLLOWING) best = a;
@@ -796,7 +796,7 @@
   document.getElementById("term-index").innerHTML =
     terms.map(t => `<li><a href="#${t.anchor}">${t.label}</a></li>`).join("");
 
-  // Highlight the chapter in view in the side contents.
+  // Highlight the section in view in the side contents.
   const toc = Array.from(document.querySelectorAll(".toc a"));
   if ("IntersectionObserver" in window) {
     const io = new IntersectionObserver(es => es.forEach(e => {

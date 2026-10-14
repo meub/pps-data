@@ -43,7 +43,7 @@ python3 -m http.server -d web 8000
 - **Charter reference table** of the 5 PPS-sponsored charters (Emerson, Kairos PDX, Le Monde, Portland Arthur Academy, Portland Village). Kept separate from the in-scope 74 since PPS can't close a charter through its consolidation process. Shows only the state/federal measures that cover charters (enrollment, demographics, OSAS proficiency, attendance, Title I); building, seismic, capacity, ventilation, and forecast columns are omitted because no source publishes them for charters.
 - **Methodology** section documenting every source with vintage.
 - **Budget page** at [`/budget.html`](https://ppsdata.info/budget.html): where the General Fund's money comes from and goes, the yearly gap and what drives it, contracts and outside services, cost per student by school size, and a rough estimate of what each scenario's closures might save (labeled as an estimate; PPS's own figure is $10-12M a year, reinvested in schools).
-- **Guide** at [`/guide.html`](https://ppsdata.info/guide.html): nine chapters on how school districts work and how to read the numbers (capacity, poverty measures, special education, school finance, rightsizing), with an A-Z term index.
+- **Guide** at [`/guide.html`](https://ppsdata.info/guide.html): nine sections on how school districts work and how to read the numbers (capacity, poverty measures, special education, school finance, rightsizing), with an A-Z term index.
 - **Feeder trees** on a standalone page at [`/feeders.html`](https://ppsdata.info/feeders.html) — elementary → middle → high school feeder chains, one tree per high school (Mermaid diagrams).
 
 Ranking charts render vertically on desktop and swap to horizontal bars on narrow screens (<700 px) so every school label stays legible.
