@@ -75,10 +75,19 @@
   .nav-group:hover .nav-menu, .nav-group.open .nav-menu { display: flex; }
   /* Bridges the gap between button and menu so hover doesn't drop. */
   .nav-group:hover::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 6px; }
+  /* Where the reader is: section name beside the brand, and a scroll progress line. */
+  .nav-current { font-size: 13px; color: var(--muted); white-space: nowrap; overflow: hidden;
+    text-overflow: ellipsis; min-width: 0; opacity: 0; transition: opacity 0.2s; }
+  .nav-current.show { opacity: 1; }
+  .nav-current b { color: var(--fg); font-weight: 500; }
+  .nav-current::before { content: "/"; margin-right: 12px; opacity: 0.4; }
+  .nav-progress { position: absolute; left: 0; bottom: -1px; height: 2px; width: 0;
+    background: var(--accent); pointer-events: none; }
   .nav-toggle { display: none; background: transparent; border: 1px solid var(--border);
     color: var(--fg); border-radius: 6px; padding: 6px 10px; font: inherit; cursor: pointer;
     margin-left: auto; }
   .nav-toggle:hover { border-color: var(--accent); }
+  @media (max-width: 1240px) and (min-width: 1001px) { .nav-current { display: none; } }
   @media (max-width: 1000px) {
     .topnav-inner { padding: 0 16px; }
     .nav-toggle { display: inline-flex; align-items: center; gap: 6px; }
@@ -165,7 +174,7 @@
     --rs-none: #6e7681; --rs-a: #3987e5; --rs-b: #199e70; --rs-receive: #3987e5; }
   #rs-map { height: 560px; position: relative; }
   /* Wide screens: fill most of the viewport, capped so the toggle and table stay close. */
-  @media (min-width: 1000px) { #rs-map { height: clamp(560px, 78vh, 900px); } }
+  @media (min-width: 1000px) { #rs-map, #map { height: clamp(560px, 78vh, 900px); } }
   .rs-arrow { background: none; border: 0; }
   .rs-toggle, .sped-toggle { display: inline-flex; border: 1px solid var(--border); border-radius: 6px;
     overflow: hidden; margin: 0 0 12px; }
@@ -416,8 +425,10 @@
 <body>
 
 <div class="topnav">
+  <div class="nav-progress" id="nav-progress"></div>
   <div class="topnav-inner">
     <a class="brand" href="#top"><span class="dot"></span>PPS Data Explorer</a>
+    <span class="nav-current" id="nav-current" aria-live="polite"></span>
     <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 4h12M2 8h12M2 12h12"/></svg>
       Menu
@@ -1298,6 +1309,7 @@
 (function () {
   const toggle = document.getElementById("nav-toggle");
   const nav = document.getElementById("primary-nav");
+  const current = document.getElementById("nav-current");
   toggle.addEventListener("click", () => {
     const open = nav.classList.toggle("open");
     toggle.setAttribute("aria-expanded", open ? "true" : "false");
@@ -1341,11 +1353,29 @@
         links.forEach(a => a.classList.remove("active"));
         nav.querySelectorAll(".nav-group-btn").forEach(b => b.classList.remove("active"));
         link.classList.add("active");
+        const group = link.closest(".nav-group")?.querySelector(".nav-group-btn").textContent;
         link.closest(".nav-group")?.querySelector(".nav-group-btn").classList.add("active");
+        current.innerHTML = (group ? group + " › " : "") + "<b>" + link.textContent + "</b>";
       });
+      onScroll();
     }, { rootMargin: "-45% 0px -50% 0px", threshold: 0 });
     sections.forEach(s => io.observe(s));
   }
+  const progress = document.getElementById("nav-progress");
+  const onScroll = () => {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    progress.style.width = (max > 0 ? 100 * scrollY / max : 0) + "%";
+    // Above the first section (the intro) there is no current section to name.
+    const atTop = !sections.length || sections[0].getBoundingClientRect().top > innerHeight * 0.5;
+    current.classList.toggle("show", !atTop && current.textContent !== "");
+    if (atTop) {
+      links.forEach(a => a.classList.remove("active"));
+      nav.querySelectorAll(".nav-group-btn").forEach(b => b.classList.remove("active"));
+    }
+  };
+  addEventListener("scroll", onScroll, { passive: true });
+  addEventListener("resize", onScroll);
+  onScroll();
 })();
 </script>
 
