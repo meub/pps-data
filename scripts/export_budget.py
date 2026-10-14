@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Write web/preview/budget.json for the budget explainer (web/preview/budget.html).
+"""Write web/budget.json for the budget explainer (web/budget.html).
 
 District-level figures are typed in below from the 2026-27 Adopted Budget,
 Volume 1 (data/raw/pps_budget_2026-27_adopted_vol1.pdf). Its tables do not
@@ -25,7 +25,7 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parent.parent
 SCHOOLS_JSON = ROOT / "data" / "raw" / "pps_budget_school_reports.json"
 MASTER = ROOT / "data" / "pps_schools.csv"
-OUT = ROOT / "web" / "preview" / "budget.json"
+OUT = ROOT / "web" / "budget.json"
 
 SOURCES = {
     "vol1": {

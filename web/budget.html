@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>PPS Budget Explorer | Portland Public Schools Data Explorer</title>
-<meta name="robots" content="noindex, nofollow">
-<link rel="icon" href="../favicon.ico" sizes="any">
-<link rel="icon" type="image/png" href="../favicon.png">
-<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet"
   href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap">
+<link rel="stylesheet" href="nav.css">
 <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
 
 <style>
@@ -32,25 +32,6 @@
     font: var(--fs-body)/1.55 "Nunito Sans", -apple-system, "SF Pro Text", Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased; }
 
-  .topnav { position: sticky; top: 0; z-index: 1100; background: rgba(14,17,21,0.92);
-    backdrop-filter: saturate(140%) blur(8px); -webkit-backdrop-filter: saturate(140%) blur(8px);
-    border-bottom: 1px solid var(--border); }
-  .topnav-inner { max-width: var(--max-w); margin: 0 auto; padding: 0 24px;
-    height: var(--nav-h); display: flex; align-items: center; gap: 18px; }
-  .topnav .brand { font-weight: 600; font-size: 14px; letter-spacing: 0.2px;
-    color: var(--fg); text-decoration: none; white-space: nowrap;
-    display: inline-flex; align-items: center; }
-  .topnav .brand .dot { width: 8px; height: 8px; margin-right: 8px;
-    border-radius: 50%; background: var(--accent); flex-shrink: 0;
-    transform: translateY(-2px); }
-  .topnav .links { display: flex; gap: 4px; }
-  .topnav .links a { color: var(--muted); text-decoration: none; font-size: 13px;
-    padding: 6px 10px; border-radius: 6px; transition: color 0.15s, background 0.15s; }
-  .topnav .links a:hover { color: var(--fg); background: rgba(255,255,255,0.04); }
-  .topnav .back { margin-left: auto; color: var(--muted); text-decoration: none; font-size: 13px;
-    padding: 6px 10px; border-radius: 6px; transition: color 0.15s, background 0.15s; }
-  .topnav .back:hover { color: var(--fg); background: rgba(255,255,255,0.04); }
-  @media (max-width: 1000px) { .topnav-inner { padding: 0 16px; } .topnav .links { display: none; } }
 
   header { padding: 28px 32px 24px; border-bottom: 1px solid var(--border);
     max-width: var(--max-w); margin: 0 auto; }
@@ -144,20 +125,17 @@
 <script data-goatcounter="https://a9n27kisdf.execute-api.us-east-1.amazonaws.com/count/ppsdata"
         async src="../count.js"></script>
 </head>
-<body>
+<body data-page="budget">
 
 <div class="topnav">
   <div class="topnav-inner">
-    <a class="brand" href="/"><span class="dot"></span>PPS Data Explorer</a>
-    <nav class="links">
-      <a href="#section-flow">Money in and out</a>
-      <a href="#section-gap">The yearly gap</a>
-      <a href="#section-contracts">Contracts</a>
-      <a href="#section-schools">Cost per student</a>
-      <a href="#section-savings">Closure savings</a>
-      <a href="#section-methodology">Methodology</a>
-    </nav>
-    <a class="back" href="/">← Back to dashboard</a>
+    <a class="brand" href="index.html"><span class="dot"></span>PPS Data Explorer</a>
+    <span class="nav-current" id="nav-current" aria-live="polite"></span>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 4h12M2 8h12M2 12h12"/></svg>
+      Menu
+    </button>
+    <nav id="primary-nav" aria-label="Sections"></nav>
   </div>
 </div>
 
@@ -399,6 +377,7 @@
   </section>
 </main>
 
+<script src="nav.js"></script>
 <script>
 (async function () {
   const D = await (await fetch("budget.json")).json();

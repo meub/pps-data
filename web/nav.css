@@ -1,0 +1,57 @@
+/* Top nav shared by index.html and budget.html. Pages define the CSS variables
+   (--bg, --border, --fg, --muted, --accent, --nav-h, --max-w). */
+.topnav { position: sticky; top: 0; z-index: 1100; background: rgba(14,17,21,0.92);
+  backdrop-filter: saturate(140%) blur(8px); -webkit-backdrop-filter: saturate(140%) blur(8px);
+  border-bottom: 1px solid var(--border); }
+.topnav-inner { max-width: var(--max-w); margin: 0 auto; padding: 0 24px;
+  height: var(--nav-h); display: flex; align-items: center; gap: 18px; }
+.topnav .brand { font-weight: 600; font-size: 14px; letter-spacing: 0.2px;
+  color: var(--fg); text-decoration: none; white-space: nowrap;
+  display: inline-flex; align-items: center; }
+.topnav .brand .dot { width: 8px; height: 8px; margin-right: 8px;
+  border-radius: 50%; background: var(--accent); flex-shrink: 0;
+  transform: translateY(-2px); }
+.topnav nav { margin-left: auto; display: flex; gap: 4px; }
+.topnav nav a { color: var(--muted); text-decoration: none; font-size: 13px;
+  padding: 6px 10px; border-radius: 6px; white-space: nowrap; transition: color 0.15s, background 0.15s; }
+.topnav nav a:hover { color: var(--fg); background: rgba(255,255,255,0.04); }
+.topnav nav a.active { color: var(--fg); background: rgba(47,129,247,0.12); }
+/* Section groups: dropdown on desktop, labeled lists in the mobile menu. */
+.nav-group { position: relative; }
+.nav-group-btn { background: transparent; border: 0; color: var(--muted); font: inherit;
+  font-size: 13px; padding: 6px 10px; border-radius: 6px; cursor: pointer; white-space: nowrap; }
+.nav-group-btn::after { content: "▾"; margin-left: 4px; font-size: 10px; opacity: 0.7; }
+.nav-group-btn:hover, .nav-group.open .nav-group-btn { color: var(--fg); background: rgba(255,255,255,0.04); }
+.nav-group-btn.active, .nav-group-btn.here { color: var(--fg); background: rgba(47,129,247,0.12); }
+.nav-menu { display: none; position: absolute; top: 100%; left: 0; min-width: 160px;
+  flex-direction: column; padding: 6px; margin-top: 4px; background: var(--bg);
+  border: 1px solid var(--border); border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+.nav-group:hover .nav-menu, .nav-group.open .nav-menu { display: flex; }
+/* Bridges the gap between button and menu so hover doesn't drop. */
+.nav-group:hover::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 6px; }
+/* Where the reader is: section name beside the brand. */
+.nav-current { font-size: 13px; color: var(--muted); white-space: nowrap; overflow: hidden;
+  text-overflow: ellipsis; min-width: 0; opacity: 0; transition: opacity 0.2s; }
+.nav-current.show { opacity: 1; }
+.nav-current b { color: var(--fg); font-weight: 500; }
+.nav-current::before { content: "/"; margin-right: 12px; opacity: 0.4; }
+.nav-toggle { display: none; background: transparent; border: 1px solid var(--border);
+  color: var(--fg); border-radius: 6px; padding: 6px 10px; font: inherit; cursor: pointer;
+  margin-left: auto; }
+.nav-toggle:hover { border-color: var(--accent); }
+@media (max-width: 1240px) and (min-width: 1001px) { .nav-current { display: none; } }
+@media (max-width: 1000px) {
+  .topnav-inner { padding: 0 16px; }
+  .nav-toggle { display: inline-flex; align-items: center; gap: 6px; }
+  .topnav nav { display: none; position: absolute; top: var(--nav-h); right: 0; left: 0;
+    background: var(--bg); border-bottom: 1px solid var(--border); flex-direction: column;
+    gap: 0; padding: 6px 12px 12px; margin: 0; }
+  .topnav nav.open { display: flex; }
+  .topnav nav a { padding: 10px 12px; border-radius: 6px; font-size: 14px; }
+  .nav-group-btn { display: block; width: 100%; text-align: left; padding: 12px 12px 4px;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; cursor: default; }
+  .nav-group-btn::after { content: none; }
+  .nav-group-btn:hover, .nav-group-btn.active, .nav-group-btn.here, .nav-group.open .nav-group-btn { background: transparent; color: var(--muted); }
+  .nav-menu, .nav-group:hover .nav-menu { display: flex; position: static; border: 0; box-shadow: none;
+    padding: 0 0 0 8px; margin: 0; background: transparent; }
+}

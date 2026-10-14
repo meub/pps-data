@@ -13,6 +13,7 @@
 <link rel="stylesheet"
   href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap">
 
+<link rel="stylesheet" href="nav.css">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
   integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -44,63 +45,6 @@
     font: var(--fs-body)/1.55 "Nunito Sans", -apple-system, "SF Pro Text", Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased; }
   html { scroll-behavior: smooth; }
-
-  /* ---------- Top nav ---------- */
-  .topnav { position: sticky; top: 0; z-index: 1100; background: rgba(14,17,21,0.92);
-    backdrop-filter: saturate(140%) blur(8px); -webkit-backdrop-filter: saturate(140%) blur(8px);
-    border-bottom: 1px solid var(--border); }
-  .topnav-inner { max-width: var(--max-w); margin: 0 auto; padding: 0 24px;
-    height: var(--nav-h); display: flex; align-items: center; gap: 18px; }
-  .topnav .brand { font-weight: 600; font-size: 14px; letter-spacing: 0.2px;
-    color: var(--fg); text-decoration: none; white-space: nowrap;
-    display: inline-flex; align-items: center; }
-  .topnav .brand .dot { width: 8px; height: 8px; margin-right: 8px;
-    border-radius: 50%; background: var(--accent); flex-shrink: 0;
-    transform: translateY(-2px); }
-  .topnav nav { margin-left: auto; display: flex; gap: 4px; }
-  .topnav nav a { color: var(--muted); text-decoration: none; font-size: 13px;
-    padding: 6px 10px; border-radius: 6px; white-space: nowrap; transition: color 0.15s, background 0.15s; }
-  .topnav nav a:hover { color: var(--fg); background: rgba(255,255,255,0.04); }
-  .topnav nav a.active { color: var(--fg); background: rgba(47,129,247,0.12); }
-  /* Section groups: dropdown on desktop, labeled lists in the mobile menu. */
-  .nav-group { position: relative; }
-  .nav-group-btn { background: transparent; border: 0; color: var(--muted); font: inherit;
-    font-size: 13px; padding: 6px 10px; border-radius: 6px; cursor: pointer; white-space: nowrap; }
-  .nav-group-btn::after { content: "▾"; margin-left: 4px; font-size: 10px; opacity: 0.7; }
-  .nav-group-btn:hover, .nav-group.open .nav-group-btn { color: var(--fg); background: rgba(255,255,255,0.04); }
-  .nav-group-btn.active { color: var(--fg); background: rgba(47,129,247,0.12); }
-  .nav-menu { display: none; position: absolute; top: 100%; left: 0; min-width: 160px;
-    flex-direction: column; padding: 6px; margin-top: 4px; background: var(--bg);
-    border: 1px solid var(--border); border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
-  .nav-group:hover .nav-menu, .nav-group.open .nav-menu { display: flex; }
-  /* Bridges the gap between button and menu so hover doesn't drop. */
-  .nav-group:hover::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 6px; }
-  /* Where the reader is: section name beside the brand. */
-  .nav-current { font-size: 13px; color: var(--muted); white-space: nowrap; overflow: hidden;
-    text-overflow: ellipsis; min-width: 0; opacity: 0; transition: opacity 0.2s; }
-  .nav-current.show { opacity: 1; }
-  .nav-current b { color: var(--fg); font-weight: 500; }
-  .nav-current::before { content: "/"; margin-right: 12px; opacity: 0.4; }
-  .nav-toggle { display: none; background: transparent; border: 1px solid var(--border);
-    color: var(--fg); border-radius: 6px; padding: 6px 10px; font: inherit; cursor: pointer;
-    margin-left: auto; }
-  .nav-toggle:hover { border-color: var(--accent); }
-  @media (max-width: 1240px) and (min-width: 1001px) { .nav-current { display: none; } }
-  @media (max-width: 1000px) {
-    .topnav-inner { padding: 0 16px; }
-    .nav-toggle { display: inline-flex; align-items: center; gap: 6px; }
-    .topnav nav { display: none; position: absolute; top: var(--nav-h); right: 0; left: 0;
-      background: var(--bg); border-bottom: 1px solid var(--border); flex-direction: column;
-      gap: 0; padding: 6px 12px 12px; margin: 0; }
-    .topnav nav.open { display: flex; }
-    .topnav nav a { padding: 10px 12px; border-radius: 6px; font-size: 14px; }
-    .nav-group-btn { display: block; width: 100%; text-align: left; padding: 12px 12px 4px;
-      font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; cursor: default; }
-    .nav-group-btn::after { content: none; }
-    .nav-group-btn:hover, .nav-group-btn.active, .nav-group.open .nav-group-btn { background: transparent; color: var(--muted); }
-    .nav-menu, .nav-group:hover .nav-menu { display: flex; position: static; border: 0; box-shadow: none;
-      padding: 0 0 0 8px; margin: 0; background: transparent; }
-  }
 
   header { padding: 28px 32px 24px; border-bottom: 1px solid var(--border);
     max-width: var(--max-w); margin: 0 auto; }
@@ -424,7 +368,7 @@
 <script data-goatcounter="https://a9n27kisdf.execute-api.us-east-1.amazonaws.com/count/ppsdata"
         async src="count.js"></script>
 </head>
-<body>
+<body data-page="index">
 
 <div class="topnav">
   <div class="topnav-inner">
@@ -434,43 +378,7 @@
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 4h12M2 8h12M2 12h12"/></svg>
       Menu
     </button>
-    <nav id="primary-nav" aria-label="Sections">
-      <a href="#section-rightsizing">Scenarios</a>
-      <div class="nav-group">
-        <button type="button" class="nav-group-btn" aria-expanded="false">Buildings</button>
-        <div class="nav-menu">
-          <a href="#section-map">Utilization map</a>
-          <a href="#section-utilization">Utilization</a>
-          <a href="#section-seismic">Seismic</a>
-          <a href="#section-transport">Transportation</a>
-        </div>
-      </div>
-      <div class="nav-group">
-        <button type="button" class="nav-group-btn" aria-expanded="false">Enrollment</button>
-        <div class="nav-menu">
-          <a href="#section-trends">Trends</a>
-          <a href="#section-sustainability">7-year change</a>
-          <a href="#section-enrollment-forecast">2035 forecast</a>
-        </div>
-      </div>
-      <div class="nav-group">
-        <button type="button" class="nav-group-btn" aria-expanded="false">Programs</button>
-        <div class="nav-menu">
-          <a href="#section-ratios">Class sizes</a>
-          <a href="#section-dli">DLI</a>
-          <a href="#section-sped">Special ed</a>
-        </div>
-      </div>
-      <div class="nav-group">
-        <button type="button" class="nav-group-btn" aria-expanded="false">Data</button>
-        <div class="nav-menu">
-          <a href="#section-scatters">Scatters</a>
-          <a href="#section-table">Table</a>
-          <a href="#section-charters">Charters</a>
-          <a href="#section-methodology">Methodology</a>
-        </div>
-      </div>
-    </nav>
+    <nav id="primary-nav" aria-label="Sections"></nav>
   </div>
 </div>
 
@@ -1306,75 +1214,7 @@
 
 <div class="tt" id="tt"></div>
 
-<script>
-(function () {
-  const toggle = document.getElementById("nav-toggle");
-  const nav = document.getElementById("primary-nav");
-  const current = document.getElementById("nav-current");
-  toggle.addEventListener("click", () => {
-    const open = nav.classList.toggle("open");
-    toggle.setAttribute("aria-expanded", open ? "true" : "false");
-  });
-  const groups = Array.from(nav.querySelectorAll(".nav-group"));
-  const closeGroups = (except) => groups.forEach(g => {
-    if (g === except) return;
-    g.classList.remove("open");
-    g.querySelector(".nav-group-btn").setAttribute("aria-expanded", "false");
-  });
-  nav.addEventListener("click", (e) => {
-    const btn = e.target.closest(".nav-group-btn");
-    if (btn) {
-      const g = btn.parentElement;
-      closeGroups(g);
-      btn.setAttribute("aria-expanded", g.classList.toggle("open") ? "true" : "false");
-      return;
-    }
-    if (e.target.tagName === "A") {
-      nav.classList.remove("open");
-      toggle.setAttribute("aria-expanded", "false");
-      closeGroups();
-      e.target.blur();
-    }
-  });
-  document.addEventListener("click", (e) => { if (!nav.contains(e.target)) closeGroups(); });
-  document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeGroups(); });
-
-
-  const links = Array.from(nav.querySelectorAll("a"));
-  const sections = links
-    .map(a => document.querySelector(a.getAttribute("href")))
-    .filter(Boolean);
-  const linkFor = (id) => links.find(a => a.getAttribute("href") === "#" + id);
-  if ("IntersectionObserver" in window && sections.length) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        const link = linkFor(entry.target.id);
-        if (!link) return;
-        links.forEach(a => a.classList.remove("active"));
-        nav.querySelectorAll(".nav-group-btn").forEach(b => b.classList.remove("active"));
-        link.classList.add("active");
-        const group = link.closest(".nav-group")?.querySelector(".nav-group-btn").textContent;
-        link.closest(".nav-group")?.querySelector(".nav-group-btn").classList.add("active");
-        current.innerHTML = (group ? group + " › " : "") + "<b>" + link.textContent + "</b>";
-      });
-      onScroll();
-    }, { rootMargin: "-45% 0px -50% 0px", threshold: 0 });
-    sections.forEach(s => io.observe(s));
-  }
-  const onScroll = () => {
-    // Above the first section (the intro) there is no current section to name.
-    const atTop = !sections.length || sections[0].getBoundingClientRect().top > innerHeight * 0.5;
-    current.classList.toggle("show", !atTop && current.textContent !== "");
-    if (atTop) {
-      links.forEach(a => a.classList.remove("active"));
-      nav.querySelectorAll(".nav-group-btn").forEach(b => b.classList.remove("active"));
-    }
-  };
-  addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
-})();
-</script>
+<script src="nav.js"></script>
 
 <script>
 (async function () {
