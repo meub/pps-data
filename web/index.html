@@ -425,20 +425,20 @@
     <nav id="primary-nav" aria-label="Sections">
       <a href="#section-rightsizing">Scenarios</a>
       <div class="nav-group">
+        <button type="button" class="nav-group-btn" aria-expanded="false">Buildings</button>
+        <div class="nav-menu">
+          <a href="#section-map">Utilization map</a>
+          <a href="#section-utilization">Utilization</a>
+          <a href="#section-seismic">Seismic</a>
+          <a href="#section-transport">Transportation</a>
+        </div>
+      </div>
+      <div class="nav-group">
         <button type="button" class="nav-group-btn" aria-expanded="false">Enrollment</button>
         <div class="nav-menu">
           <a href="#section-trends">Trends</a>
           <a href="#section-sustainability">7-year change</a>
           <a href="#section-enrollment-forecast">2035 forecast</a>
-        </div>
-      </div>
-      <div class="nav-group">
-        <button type="button" class="nav-group-btn" aria-expanded="false">Buildings</button>
-        <div class="nav-menu">
-          <a href="#section-utilization">Utilization</a>
-          <a href="#section-map">Utilization map</a>
-          <a href="#section-seismic">Seismic</a>
-          <a href="#section-transport">Transportation</a>
         </div>
       </div>
       <div class="nav-group">
@@ -650,34 +650,6 @@
     <div class="panel"><div id="map"></div></div>
   </section>
 
-  <section id="section-trends">
-    <h2>Enrollment trends: every school, 2018 → 2025</h2>
-    <p class="note">
-      Each thin line is one school's enrollment indexed to its 2018 baseline (2018 = 100).
-      A flat line means stable enrollment; lines sloping down are losing students.
-      The bold orange line is the district-wide total. Use the search box below to find
-      schools and check one or more to isolate them on the chart; hover a line to identify
-      it. Shows 70 of the 74 in-scope schools (4 schools without complete 2018-2025
-      history are omitted. Source: <a href="https://nces.ed.gov/ccd/" target="_blank" rel="noopener">NCES CCD</a> (2018-2023) + <a href="https://www.oregon.gov/ode/reports-and-data/students/Pages/Student-Enrollment-Reports.aspx" target="_blank" rel="noopener">Oregon ODE</a> (2024-2025).
-    </p>
-    <p class="note" style="margin-top: -6px;">
-      <strong>Caveat:</strong> 19 schools had their attendance boundary or grade
-      configuration redrawn inside this window; via <em>DBRAC</em> (2018) or the
-      <em>Southeast Guiding Coalition</em> (SEGC, 2023). For those rows, some of the
-      apparent enrollment change reflects catchment redraws rather than pure demand
-      change. See the "Recent boundary change" column in the table below.
-    </p>
-    <div class="panel chart-card">
-      <div class="trends-controls">
-        <input id="trends-search" type="search" placeholder="Search schools…" aria-label="Filter school list">
-        <button id="trends-clear" class="csv-btn" type="button">Clear selection</button>
-        <span class="trends-count" id="trends-count"></span>
-      </div>
-      <div class="trends-checkboxes" id="trends-checkboxes" aria-label="Toggle schools"></div>
-      <div id="plot-trends" style="height: 520px;"></div>
-    </div>
-  </section>
-
   <section id="section-utilization">
     <h2>All schools ranked by building utilization</h2>
     <p class="note">
@@ -688,54 +660,6 @@
       * The school's capacity includes portable (modular) classrooms, as counted in the
       2021 plan. Portables are separate modular buildings on the school grounds, not rooms in the main building.
     </p>
-  </section>
-
-  <section id="section-sustainability">
-    <h2>Long-term sustainability: 7-year enrollment change (2018 → 2025)</h2>
-    <p class="note">
-      Total in-scope enrollment fell 20% over this window (median school -19%). Bars below
-      that baseline are losing students faster than the district overall. Source: <a href="https://nces.ed.gov/ccd/" target="_blank" rel="noopener">NCES CCD</a> fall
-      2018 + <a href="https://www.oregon.gov/ode/reports-and-data/students/Pages/Student-Enrollment-Reports.aspx" target="_blank" rel="noopener">ODE</a> fall 2025.
-    </p>
-    <div class="panel chart-card"><div id="plot-trend7yr" style="height: 1400px;"></div></div>
-  </section>
-
-  <section id="section-enrollment-forecast">
-    <h2>Projected enrollment, 2035-36 (PRC medium forecast)</h2>
-    <p class="note">
-      Per-school 10-year enrollment forecast from
-      <a href="https://resources.finalsite.net/images/v1785171463/ppsnet/ejdr22voeddvux8qwlob/PPS_Forecast_2026_27.pdf" target="_blank" rel="noopener">PSU Population Research Center's 2026 report</a>
-      (Table 5.5, medium scenario). Each bar is one school's projected 2035-36 enrollment.
-      The faint range bars show the low/high scenario band: PRC only publishes low/high at the district-and-grade level, so each school's band is the medium × district Low/Medium and High/Medium ratios at its grade band (K-5: ×0.93/×1.11; 6-8: ×0.90/×1.07). Middle schools have narrower bands because the cohorts are already in the pipeline; elementaries depend more on K/1 recovery.
-      Districtwide, PRC expects enrollment to fall from 42,622 (2025-26) to 36,763 (2035-36 medium), a 14% decline.
-    </p>
-    <details class="note inline-expand">
-      <summary>Why this matters</summary>
-      <p>
-        Current utilization is a 2025 snapshot; closure decisions play out over 2027-2030+. PRC's 10-year forecast is the best public per-school answer to "how empty will this building be by then?" Schools where 2025 enrollment looks defensible but 2035 enrollment does not are the ones most exposed by a forward-looking analysis. Sellwood (-33%), Hosford (-30%), Metropolitan Learning Center (-30%), and Lewis (-29%) top that list.
-      </p>
-    </details>
-    <div class="panel chart-card"><div id="plot-enrollment-forecast" style="height: 620px;"></div></div>
-  </section>
-
-  <section id="section-forecast">
-    <h2>Housing growth forecast (Metro BLI, ~2035)</h2>
-    <p class="note">
-      Projected new residential units inside each school's PPS attendance area, from Metro's 2045 Building Land Inventory (BLI) Housing-Employment Allocation grid. It's an area-weighted sum over intersecting BLI cells; schools without a published catchment (focus-option, alternative) fall back to a 1-mile buffer (shown in <span style="color:#2dd4bf">teal</span>). Each bar below is one school, ranked by forecast growth. Source: <a href="https://www.portlandmaps.com/od/rest/services/COP_OpenData_PlanningDevelopment/MapServer/88" target="_blank" rel="noopener">Portland/Metro BLI Housing-Employment Allocation</a>.
-    </p>
-    <details class="note inline-expand">
-      <summary>How to read this</summary>
-      <p>
-        BLI is Metro's long-horizon forecast of where new housing will
-        land by ~2035 under current zoning and policy. It's useful for
-        spotting which catchments are expected to absorb disproportionate
-        growth. A school at the high end of the distribution sits in a
-        catchment projected to absorb a large share of new housing, so
-        closing one there risks leaving a growth area without capacity
-        by the time the forecast units arrive.
-      </p>
-    </details>
-    <div class="panel chart-card"><div id="plot-forecast" style="height: 620px;"></div></div>
   </section>
 
   <section id="section-seismic">
@@ -810,6 +734,82 @@
       their school were closed; actual PPS reassignment may differ. Bars are labeled with the nearest alternative school and, where available, the estimated free-flow drive time is included in the tooltip.
     </p>
     <div class="panel chart-card"><div id="plot-transport" style="height: 560px;"></div></div>
+  </section>
+
+  <section id="section-trends">
+    <h2>Enrollment trends: every school, 2018 → 2025</h2>
+    <p class="note">
+      Each thin line is one school's enrollment indexed to its 2018 baseline (2018 = 100).
+      A flat line means stable enrollment; lines sloping down are losing students.
+      The bold orange line is the district-wide total. Use the search box below to find
+      schools and check one or more to isolate them on the chart; hover a line to identify
+      it. Shows 70 of the 74 in-scope schools (4 schools without complete 2018-2025
+      history are omitted. Source: <a href="https://nces.ed.gov/ccd/" target="_blank" rel="noopener">NCES CCD</a> (2018-2023) + <a href="https://www.oregon.gov/ode/reports-and-data/students/Pages/Student-Enrollment-Reports.aspx" target="_blank" rel="noopener">Oregon ODE</a> (2024-2025).
+    </p>
+    <p class="note" style="margin-top: -6px;">
+      <strong>Caveat:</strong> 19 schools had their attendance boundary or grade
+      configuration redrawn inside this window; via <em>DBRAC</em> (2018) or the
+      <em>Southeast Guiding Coalition</em> (SEGC, 2023). For those rows, some of the
+      apparent enrollment change reflects catchment redraws rather than pure demand
+      change. See the "Recent boundary change" column in the table below.
+    </p>
+    <div class="panel chart-card">
+      <div class="trends-controls">
+        <input id="trends-search" type="search" placeholder="Search schools…" aria-label="Filter school list">
+        <button id="trends-clear" class="csv-btn" type="button">Clear selection</button>
+        <span class="trends-count" id="trends-count"></span>
+      </div>
+      <div class="trends-checkboxes" id="trends-checkboxes" aria-label="Toggle schools"></div>
+      <div id="plot-trends" style="height: 520px;"></div>
+    </div>
+  </section>
+
+  <section id="section-sustainability">
+    <h2>Long-term sustainability: 7-year enrollment change (2018 → 2025)</h2>
+    <p class="note">
+      Total in-scope enrollment fell 20% over this window (median school -19%). Bars below
+      that baseline are losing students faster than the district overall. Source: <a href="https://nces.ed.gov/ccd/" target="_blank" rel="noopener">NCES CCD</a> fall
+      2018 + <a href="https://www.oregon.gov/ode/reports-and-data/students/Pages/Student-Enrollment-Reports.aspx" target="_blank" rel="noopener">ODE</a> fall 2025.
+    </p>
+    <div class="panel chart-card"><div id="plot-trend7yr" style="height: 1400px;"></div></div>
+  </section>
+
+  <section id="section-enrollment-forecast">
+    <h2>Projected enrollment, 2035-36 (PRC medium forecast)</h2>
+    <p class="note">
+      Per-school 10-year enrollment forecast from
+      <a href="https://resources.finalsite.net/images/v1785171463/ppsnet/ejdr22voeddvux8qwlob/PPS_Forecast_2026_27.pdf" target="_blank" rel="noopener">PSU Population Research Center's 2026 report</a>
+      (Table 5.5, medium scenario). Each bar is one school's projected 2035-36 enrollment.
+      The faint range bars show the low/high scenario band: PRC only publishes low/high at the district-and-grade level, so each school's band is the medium × district Low/Medium and High/Medium ratios at its grade band (K-5: ×0.93/×1.11; 6-8: ×0.90/×1.07). Middle schools have narrower bands because the cohorts are already in the pipeline; elementaries depend more on K/1 recovery.
+      Districtwide, PRC expects enrollment to fall from 42,622 (2025-26) to 36,763 (2035-36 medium), a 14% decline.
+    </p>
+    <details class="note inline-expand">
+      <summary>Why this matters</summary>
+      <p>
+        Current utilization is a 2025 snapshot; closure decisions play out over 2027-2030+. PRC's 10-year forecast is the best public per-school answer to "how empty will this building be by then?" Schools where 2025 enrollment looks defensible but 2035 enrollment does not are the ones most exposed by a forward-looking analysis. Sellwood (-33%), Hosford (-30%), Metropolitan Learning Center (-30%), and Lewis (-29%) top that list.
+      </p>
+    </details>
+    <div class="panel chart-card"><div id="plot-enrollment-forecast" style="height: 620px;"></div></div>
+  </section>
+
+  <section id="section-forecast">
+    <h2>Housing growth forecast (Metro BLI, ~2035)</h2>
+    <p class="note">
+      Projected new residential units inside each school's PPS attendance area, from Metro's 2045 Building Land Inventory (BLI) Housing-Employment Allocation grid. It's an area-weighted sum over intersecting BLI cells; schools without a published catchment (focus-option, alternative) fall back to a 1-mile buffer (shown in <span style="color:#2dd4bf">teal</span>). Each bar below is one school, ranked by forecast growth. Source: <a href="https://www.portlandmaps.com/od/rest/services/COP_OpenData_PlanningDevelopment/MapServer/88" target="_blank" rel="noopener">Portland/Metro BLI Housing-Employment Allocation</a>.
+    </p>
+    <details class="note inline-expand">
+      <summary>How to read this</summary>
+      <p>
+        BLI is Metro's long-horizon forecast of where new housing will
+        land by ~2035 under current zoning and policy. It's useful for
+        spotting which catchments are expected to absorb disproportionate
+        growth. A school at the high end of the distribution sits in a
+        catchment projected to absorb a large share of new housing, so
+        closing one there risks leaving a growth area without capacity
+        by the time the forecast units arrive.
+      </p>
+    </details>
+    <div class="panel chart-card"><div id="plot-forecast" style="height: 620px;"></div></div>
   </section>
 
   <section id="section-ratios">
