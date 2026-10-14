@@ -12710,6 +12710,14 @@
       "trendline": true
     },
     {
+      "id": "sped_vs_direct_cert",
+      "title": "Students with IEPs vs. direct certification",
+      "x": "pct_direct_cert_pps_2425",
+      "y": "pct_sped_2526",
+      "subtitle": "Moderate relationship (r = 0.40): higher-poverty schools tend to have a larger share of students with IEPs, with wide spread. IEP counts include focus classrooms housed at the school.",
+      "trendline": true
+    },
+    {
       "id": "enrollment_vs_bipoc",
       "title": "Enrollment vs. % BIPOC students",
       "x": "enrollment_2025_26",
