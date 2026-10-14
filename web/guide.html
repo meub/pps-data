@@ -17,12 +17,12 @@
   :root {
     --bg: #0e1115; --panel: #161b22; --border: #30363d; --fg: #e6edf3;
     --muted: #7d8590; --accent: #2f81f7;
-    --fs-h1: 32px; --fs-h2: 24px; --fs-h3: 17px;
-    --fs-body: 16px; --fs-small: 13px;
+    --fs-h1: 36px; --fs-h2: 27px; --fs-h3: 19px;
+    --fs-body: 18px; --fs-small: 14.5px;
     --nav-h: 52px; --max-w: 1600px;
   }
   @media (max-width: 700px) {
-    :root { --fs-h1: 26px; --fs-h2: 20px; --fs-h3: 16px; --fs-body: 15.5px; --nav-h: 48px; }
+    :root { --fs-h1: 28px; --fs-h2: 22px; --fs-h3: 17.5px; --fs-body: 17px; --nav-h: 48px; }
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -35,13 +35,13 @@
   .toc { position: sticky; top: calc(var(--nav-h) + 24px); align-self: start;
     font-size: var(--fs-small); max-height: calc(100vh - var(--nav-h) - 48px); overflow-y: auto; }
   .toc b { display: block; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px;
-    font-size: 11px; margin-bottom: 8px; }
+    font-size: 12px; margin-bottom: 8px; }
   .toc a { display: block; color: var(--muted); text-decoration: none; padding: 4px 0 4px 10px;
     border-left: 2px solid var(--border); }
   .toc a:hover, .toc a.on { color: var(--fg); border-left-color: var(--accent); }
   article { max-width: 760px; }
   header h1 { font-size: var(--fs-h1); font-weight: 600; line-height: 1.2; margin: 0 0 12px; }
-  header p { color: var(--muted); font-size: 17px; margin: 0 0 12px; }
+  header p { color: #fff; font-size: 19px; margin: 0 0 12px; }
   section { padding-top: 12px; margin-top: 36px; border-top: 1px solid var(--border);
     scroll-margin-top: calc(var(--nav-h) + 12px); }
   h2 { font-size: var(--fs-h2); font-weight: 600; margin: 16px 0 6px; line-height: 1.25; }
@@ -57,11 +57,11 @@
   .box { background: var(--panel); border: 1px solid var(--border); border-radius: 8px;
     padding: 14px 18px; margin: 18px 0; }
   .box p:last-child, .box ul:last-child { margin-bottom: 0; }
-  .box .tag { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px;
+  .box .tag { display: block; font-size: 12px; text-transform: uppercase; letter-spacing: 0.6px;
     color: var(--muted); margin-bottom: 4px; }
   .box.watch { border-left: 3px solid #d29922; }
   .box.site { border-left: 3px solid var(--accent); }
-  .math { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 14px;
+  .math { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 15.5px;
     background: #0d1117; border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px;
     margin: 0 0 14px; overflow-x: auto; white-space: pre; }
   .index { columns: 3 180px; font-size: var(--fs-small); padding: 0; list-style: none; }
@@ -108,14 +108,8 @@
 <header>
   <h1>A guide to school district data</h1>
   <p>
-    School planning has its own vocabulary. Words like "functional capacity," "direct
-    certification," and "receiving school" carry specific meanings, and a lot of
-    arguments about school closures turn on them. This guide explains the ideas behind
-    the numbers on this site, in the order you need them, with examples from Portland.
-  </p>
-  <p>
-    You don't have to read it straight through. Each chapter stands on its own, and the
-    <a href="#index">term index</a> at the end jumps to where each word is explained.
+    The ideas behind the numbers on this site, with examples from Portland. Each chapter
+    stands on its own, and the <a href="#index">term index</a> jumps to any word.
   </p>
 </header>
 
