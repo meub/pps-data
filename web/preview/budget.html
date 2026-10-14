@@ -248,6 +248,23 @@
         PPS's finance office is the authority on exactly what the district may borrow for.
       </p>
     </div>
+
+    <div class="callout" id="reductions">
+      <h3>How PPS splits a reduction</h3>
+      <p>
+        PPS treats cuts and closure savings as two separate things. The gap is closed
+        by reducing the budget. Money freed up by closing schools (PPS estimates $10
+        million to $12 million a year) goes back into the remaining schools rather than
+        toward the gap.
+      </p>
+      <p>
+        Central departments are cut in proportion. PPS takes the part of the budget
+        departments control, leaving out federal mandates, state directives, and grant
+        programs, and reduces it by at least the district-wide target. For example, if
+        central offices control $23 million and the target is 8%, they cut at least
+        $1.8 million.
+      </p>
+    </div>
   </section>
 
   <section id="section-contracts">
@@ -300,16 +317,18 @@
       school's General Fund, Title I, and grant dollars divided by its enrollment. It
       leaves out staff PPS assigns centrally (special education, English language
       development, nutrition, custodians), so it is lower than the full cost of
-      running a school. Enrollment is PPS's 2026-27 projection, the number it used to
-      staff each school.
+      running a school. Central staff serve every school, so PPS budgets and cuts them
+      separately (see <a href="#reductions">how PPS splits a reduction</a>). Enrollment is
+      PPS's 2026-27 projection, the number it used to staff each school.
     </p>
   </section>
 
   <section id="section-savings">
     <h2>What closing schools might save <span class="estimate-badge">Estimate, not a PPS figure</span></h2>
     <p class="note">
-      PPS hasn't published how much each scenario would save. This is a rough
-      estimate built from PPS's own budget numbers: the staff and building costs
+      PPS estimates closures would free up $10 million to $12 million a year, but
+      hasn't published a figure for each scenario. This is a rough estimate built
+      from PPS's own budget numbers: the staff and building costs
       that go away when a school closes. Most teachers and student services move
       with the students, so they aren't counted as savings.
     </p>
@@ -368,7 +387,8 @@
     </ul>
     <h3>What this page doesn't show</h3>
     <ul>
-      <li>A PPS estimate of scenario savings. PPS has not published one; the savings
+      <li>PPS's savings for each scenario. PPS gives a district-wide estimate ($10 million
+        to $12 million a year) but no per-scenario or per-school figures; the savings
         section is this site's estimate from budget figures, and building operating
         costs (utilities, upkeep) are not broken out by school in the budget.</li>
       <li>Bond-funded construction, which voters approve separately and can't be spent
@@ -620,7 +640,7 @@
     `<b>Pensions.</b> PPS's PERS employer rate has risen from just over 4% to just over 20% of payroll, according to the superintendent's budget message. A charge to pay down the pension system's past shortfall alone adds 18.79% to every paycheck.`,
     `<b>Raises.</b> Contracts settled in 2023-24 and 2024-25 raised salaries and benefits. PPS is bargaining with all its unions now; the forecast assumes a 1% cost-of-living raise.`,
     `<b>One-time money ran out.</b> Federal COVID relief (ESSER) paid for school staff through 2023-24. PPS then covered shortfalls from savings, which fell from ${fmtM(H[0].reserve)} to ${fmtM(H[2].reserve)}, and used a ${fmtM(23962)} pension reserve in 2025-26, now empty.`,
-    `<b>The 2027-28 jump.</b> PPS's forecast has benefits rising ${fmtM(y27.benefits - y26.benefits)} in one year, about the size of the whole projected gap, while salaries rise ${fmtM(y27.salaries - y26.salaries)}. The budget book doesn't explain the jump.`,
+    `<b>The 2027-28 jump.</b> PPS's forecast has benefits rising ${fmtM(y27.benefits - y26.benefits)} in one year, about the size of the whole projected gap, while salaries rise ${fmtM(y27.salaries - y26.salaries)}. PPS says rising PERS pension obligations are the biggest reason for the 2027-28 gap, on top of the structural gap between costs and revenue.`,
   ].map(x => `<li>${x}</li>`).join("");
 
   // ---- Contracts (purchased services) ----
@@ -739,7 +759,8 @@
   document.getElementById("savings-head").textContent =
     `Scenario A (${A.schools.length} closures): about ${fmtRange(A.low, A.high)} a year. ` +
     `Scenario B (${B.schools.length} closures): about ${fmtRange(B.low, B.high)} a year. ` +
-    `For scale, PPS projects a ${fmtM(gap)} gap in 2027-28.`;
+    `PPS's own estimate is $10 million to $12 million a year. It plans to reinvest that money in the remaining schools, ` +
+    `separate from the ${fmtM(gap)} it has to cut for 2027-28.`;
   const PARTS = [
     ["leadership", "Principal and office staff", AQUA],
     ["custodians", "Custodians", BLUE],
