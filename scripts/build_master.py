@@ -79,6 +79,11 @@ URM_BUILDINGS = {
     # Wilcox (Columbia Regional Inclusive Services) — not in our PPS-operated roster.
 }
 
+# Full seismic retrofits completed after the Holmes 2024 cost estimates, so
+# Holmes's remaining cost no longer applies. Marysville: about $7M, substantially
+# complete September 2026 (KGW and KATU, October 2026).
+RETROFIT_DONE_SINCE_HOLMES = {"Marysville Elementary School"}
+
 # Seismic retrofit status (2012/2017/2020 bonds + 2025 bond plans).
 # Source: bond.pps.net/seismic-improvements.
 # Values: "full" = full seismic retrofit/modernization complete,
@@ -747,11 +752,15 @@ DATA_NOTES = {
     # seats), Beach 3 (84 seats), per the LRFP elementary capacity chart.
     "Abernethy Elementary School": (
         "Capacity is from PPS's 2021 facilities plan, which counts 54 seats in "
-        "portable classrooms. PPS removed Abernethy's portables in 2026. Without "
+        "portable classrooms. PPS has since removed Abernethy's two portables. Without "
         "them, capacity is about 468 and utilization is about 57%, not 52%."),
+    "Marysville Elementary School": (
+        "Marysville's full seismic retrofit (about $7 million) was substantially "
+        "completed in September 2026, after Holmes's 2024 estimate, so it shows no "
+        "remaining retrofit cost."),
     "Beach Elementary School": (
         "Capacity is from PPS's 2021 facilities plan, which counts 84 seats in "
-        "portable classrooms. PPS removed Beach's portables in 2026. Without "
+        "portable classrooms. PPS has since removed Beach's portables. Without "
         "them, capacity is about 666 and utilization is about 43%, not 38%."),
 }
 
@@ -1119,6 +1128,10 @@ def main():
                   else r["urm_retrofit_cost_usd"],
         axis=1,
     )
+
+    # Retrofits finished after Holmes's 2024 estimates: nothing left to fund.
+    done = pps["School Name"].isin(RETROFIT_DONE_SINCE_HOLMES)
+    pps.loc[done, ["retrofit_cost_remaining_usd", "urm_retrofit_cost_usd"]] = 0.0
 
     # Derived FRL rates. CCD 2022 enrollment is closer in time to FRL counts
     # than 2025-26 enrollment, so use it when available.
