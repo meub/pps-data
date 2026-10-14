@@ -75,14 +75,12 @@
   .nav-group:hover .nav-menu, .nav-group.open .nav-menu { display: flex; }
   /* Bridges the gap between button and menu so hover doesn't drop. */
   .nav-group:hover::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 6px; }
-  /* Where the reader is: section name beside the brand, and a scroll progress line. */
+  /* Where the reader is: section name beside the brand. */
   .nav-current { font-size: 13px; color: var(--muted); white-space: nowrap; overflow: hidden;
     text-overflow: ellipsis; min-width: 0; opacity: 0; transition: opacity 0.2s; }
   .nav-current.show { opacity: 1; }
   .nav-current b { color: var(--fg); font-weight: 500; }
   .nav-current::before { content: "/"; margin-right: 12px; opacity: 0.4; }
-  .nav-progress { position: absolute; left: 0; bottom: -1px; height: 2px; width: 0;
-    background: var(--accent); pointer-events: none; }
   .nav-toggle { display: none; background: transparent; border: 1px solid var(--border);
     color: var(--fg); border-radius: 6px; padding: 6px 10px; font: inherit; cursor: pointer;
     margin-left: auto; }
@@ -425,7 +423,6 @@
 <body>
 
 <div class="topnav">
-  <div class="nav-progress" id="nav-progress"></div>
   <div class="topnav-inner">
     <a class="brand" href="#top"><span class="dot"></span>PPS Data Explorer</a>
     <span class="nav-current" id="nav-current" aria-live="polite"></span>
@@ -1361,10 +1358,7 @@
     }, { rootMargin: "-45% 0px -50% 0px", threshold: 0 });
     sections.forEach(s => io.observe(s));
   }
-  const progress = document.getElementById("nav-progress");
   const onScroll = () => {
-    const max = document.documentElement.scrollHeight - innerHeight;
-    progress.style.width = (max > 0 ? 100 * scrollY / max : 0) + "%";
     // Above the first section (the intro) there is no current section to name.
     const atTop = !sections.length || sections[0].getBoundingClientRect().top > innerHeight * 0.5;
     current.classList.toggle("show", !atTop && current.textContent !== "");
@@ -1374,7 +1368,6 @@
     }
   };
   addEventListener("scroll", onScroll, { passive: true });
-  addEventListener("resize", onScroll);
   onScroll();
 })();
 </script>
