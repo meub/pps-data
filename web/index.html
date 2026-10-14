@@ -19,6 +19,7 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
   integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<script src="plotly-defaults.js"></script>
 
 <style>
   :root {
@@ -3111,7 +3112,7 @@
         height, barmode: "stack", bargap: 0.3,
         margin: { l: mobile ? 110 : 150, r: mobile ? 60 : 80, t: 10, b: 50 },
         xaxis: { title: "Students with IEPs", gridcolor: "#30363d", zeroline: false, rangemode: "tozero" },
-        yaxis: { autorange: "reversed", automargin: true, ticksuffix: "  " },
+        yaxis: { autorange: "reversed", automargin: true },
         legend: { orientation: "h", x: 0, y: 1.02, yanchor: "bottom", traceorder: "normal", bgcolor: "rgba(0,0,0,0)" },
       }), { displayModeBar: false, responsive: true });
 
