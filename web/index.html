@@ -62,6 +62,19 @@
     padding: 6px 10px; border-radius: 6px; white-space: nowrap; transition: color 0.15s, background 0.15s; }
   .topnav nav a:hover { color: var(--fg); background: rgba(255,255,255,0.04); }
   .topnav nav a.active { color: var(--fg); background: rgba(47,129,247,0.12); }
+  /* Section groups: dropdown on desktop, labeled lists in the mobile menu. */
+  .nav-group { position: relative; }
+  .nav-group-btn { background: transparent; border: 0; color: var(--muted); font: inherit;
+    font-size: 13px; padding: 6px 10px; border-radius: 6px; cursor: pointer; white-space: nowrap; }
+  .nav-group-btn::after { content: "▾"; margin-left: 4px; font-size: 10px; opacity: 0.7; }
+  .nav-group-btn:hover, .nav-group.open .nav-group-btn { color: var(--fg); background: rgba(255,255,255,0.04); }
+  .nav-group-btn.active { color: var(--fg); background: rgba(47,129,247,0.12); }
+  .nav-menu { display: none; position: absolute; top: 100%; left: 0; min-width: 160px;
+    flex-direction: column; padding: 6px; margin-top: 4px; background: var(--bg);
+    border: 1px solid var(--border); border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+  .nav-group:hover .nav-menu, .nav-group.open .nav-menu { display: flex; }
+  /* Bridges the gap between button and menu so hover doesn't drop. */
+  .nav-group:hover::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 6px; }
   .nav-toggle { display: none; background: transparent; border: 1px solid var(--border);
     color: var(--fg); border-radius: 6px; padding: 6px 10px; font: inherit; cursor: pointer;
     margin-left: auto; }
@@ -74,6 +87,12 @@
       gap: 0; padding: 6px 12px 12px; margin: 0; }
     .topnav nav.open { display: flex; }
     .topnav nav a { padding: 10px 12px; border-radius: 6px; font-size: 14px; }
+    .nav-group-btn { display: block; width: 100%; text-align: left; padding: 12px 12px 4px;
+      font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; cursor: default; }
+    .nav-group-btn::after { content: none; }
+    .nav-group-btn:hover, .nav-group-btn.active, .nav-group.open .nav-group-btn { background: transparent; color: var(--muted); }
+    .nav-menu, .nav-group:hover .nav-menu { display: flex; position: static; border: 0; box-shadow: none;
+      padding: 0 0 0 8px; margin: 0; background: transparent; }
   }
 
   header { padding: 28px 32px 24px; border-bottom: 1px solid var(--border);
@@ -404,19 +423,39 @@
     <nav id="primary-nav" aria-label="Sections">
       <a href="#section-rightsizing">Scenarios</a>
       <a href="#section-map">Map</a>
-      <a href="#section-trends">Trends</a>
-      <a href="#section-utilization">Utilization</a>
-      <a href="#section-sustainability">Sustainability</a>
-      <a href="#section-enrollment-forecast">Enrollment</a>
-      <a href="#section-seismic">Seismic</a>
-      <a href="#section-transport">Transportation</a>
-      <a href="#section-ratios">Ratios</a>
-      <a href="#section-dli">DLI</a>
-      <a href="#section-sped">Special ed</a>
-      <a href="#section-scatters">Scatters</a>
-      <a href="#section-table">Table</a>
-      <a href="#section-charters">Charters</a>
-      <a href="#section-methodology">Methodology</a>
+      <div class="nav-group">
+        <button type="button" class="nav-group-btn" aria-expanded="false">Enrollment</button>
+        <div class="nav-menu">
+          <a href="#section-trends">Trends</a>
+          <a href="#section-sustainability">7-year change</a>
+          <a href="#section-enrollment-forecast">2035 forecast</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button type="button" class="nav-group-btn" aria-expanded="false">Buildings</button>
+        <div class="nav-menu">
+          <a href="#section-utilization">Utilization</a>
+          <a href="#section-seismic">Seismic</a>
+          <a href="#section-transport">Transportation</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button type="button" class="nav-group-btn" aria-expanded="false">Programs</button>
+        <div class="nav-menu">
+          <a href="#section-ratios">Class sizes</a>
+          <a href="#section-dli">DLI</a>
+          <a href="#section-sped">Special ed</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button type="button" class="nav-group-btn" aria-expanded="false">Data</button>
+        <div class="nav-menu">
+          <a href="#section-scatters">Scatters</a>
+          <a href="#section-table">Table</a>
+          <a href="#section-charters">Charters</a>
+          <a href="#section-methodology">Methodology</a>
+        </div>
+      </div>
     </nav>
   </div>
 </div>
@@ -1261,12 +1300,29 @@
     const open = nav.classList.toggle("open");
     toggle.setAttribute("aria-expanded", open ? "true" : "false");
   });
+  const groups = Array.from(nav.querySelectorAll(".nav-group"));
+  const closeGroups = (except) => groups.forEach(g => {
+    if (g === except) return;
+    g.classList.remove("open");
+    g.querySelector(".nav-group-btn").setAttribute("aria-expanded", "false");
+  });
   nav.addEventListener("click", (e) => {
+    const btn = e.target.closest(".nav-group-btn");
+    if (btn) {
+      const g = btn.parentElement;
+      closeGroups(g);
+      btn.setAttribute("aria-expanded", g.classList.toggle("open") ? "true" : "false");
+      return;
+    }
     if (e.target.tagName === "A") {
       nav.classList.remove("open");
       toggle.setAttribute("aria-expanded", "false");
+      closeGroups();
+      e.target.blur();
     }
   });
+  document.addEventListener("click", (e) => { if (!nav.contains(e.target)) closeGroups(); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeGroups(); });
 
 
   const links = Array.from(nav.querySelectorAll("a"));
@@ -1281,7 +1337,9 @@
         const link = linkFor(entry.target.id);
         if (!link) return;
         links.forEach(a => a.classList.remove("active"));
+        nav.querySelectorAll(".nav-group-btn").forEach(b => b.classList.remove("active"));
         link.classList.add("active");
+        link.closest(".nav-group")?.querySelector(".nav-group-btn").classList.add("active");
       });
     }, { rootMargin: "-45% 0px -50% 0px", threshold: 0 });
     sections.forEach(s => io.observe(s));
