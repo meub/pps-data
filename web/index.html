@@ -236,6 +236,10 @@
   #rs-recv-table tr.rs-detail-row:hover td { background: #0d1117; }
   .rs-recv-notes p { font-size: var(--fs-small); }
   .rs-grades { padding: 14px 16px; }
+  .sped-table-panel { padding: 14px 16px; overflow-x: auto; }
+  .sped-table-panel h3 { margin: 0 0 4px; font-size: var(--fs-h3); }
+  .sped-table-panel .subtitle { margin: 0 0 12px; color: var(--muted); font-size: var(--fs-small); max-width: 900px; }
+  .sped-table-panel .inline-expand { margin-top: 12px; }
   .rs-grades h3 { margin: 0 0 4px; font-size: var(--fs-h3); }
   .rs-grades .subtitle { margin: 0 0 10px; color: var(--muted); font-size: var(--fs-small); max-width: 900px; }
   .rs-grades-controls { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; font-size: var(--fs-small);
@@ -876,7 +880,7 @@
       <div id="plot-sped"></div>
       <p class="subtitle" id="sped-mix"></p>
     </div>
-    <div class="panel" style="margin-top:16px; overflow-x:auto;">
+    <div class="panel sped-table-panel" style="margin-top:16px;">
       <h3>Receiving schools, before and after</h3>
       <p class="subtitle">Each group of students carries its school's (or immersion program's) share with IEPs and share directly certified for free meals.</p>
       <table class="schools" id="sped-table"></table>
