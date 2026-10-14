@@ -1,0 +1,817 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guide: How to read PPS school data | Portland Public Schools Data Explorer</title>
+<meta name="description" content="A plain-language guide to the terms and ideas behind Portland Public Schools data: attendance areas, capacity and utilization, special education, poverty measures, school funding, and the rightsizing scenarios.">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap">
+<link rel="stylesheet" href="nav.css">
+<style>
+  :root {
+    --bg: #0e1115; --panel: #161b22; --border: #30363d; --fg: #e6edf3;
+    --muted: #7d8590; --accent: #2f81f7;
+    --fs-h1: 32px; --fs-h2: 24px; --fs-h3: 17px;
+    --fs-body: 16px; --fs-small: 13px;
+    --nav-h: 52px; --max-w: 1600px;
+  }
+  @media (max-width: 700px) {
+    :root { --fs-h1: 26px; --fs-h2: 20px; --fs-h3: 16px; --fs-body: 15.5px; --nav-h: 48px; }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body { margin: 0; background: var(--bg); color: var(--fg);
+    font: var(--fs-body)/1.65 "Nunito Sans", -apple-system, "SF Pro Text", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased; }
+  a { color: var(--accent); }
+  .layout { max-width: 1180px; margin: 0 auto; padding: 32px 32px 80px;
+    display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 48px; }
+  .toc { position: sticky; top: calc(var(--nav-h) + 24px); align-self: start;
+    font-size: var(--fs-small); max-height: calc(100vh - var(--nav-h) - 48px); overflow-y: auto; }
+  .toc b { display: block; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px;
+    font-size: 11px; margin-bottom: 8px; }
+  .toc a { display: block; color: var(--muted); text-decoration: none; padding: 4px 0 4px 10px;
+    border-left: 2px solid var(--border); }
+  .toc a:hover, .toc a.on { color: var(--fg); border-left-color: var(--accent); }
+  article { max-width: 760px; }
+  header h1 { font-size: var(--fs-h1); font-weight: 600; line-height: 1.2; margin: 0 0 12px; }
+  header p { color: var(--muted); font-size: 17px; margin: 0 0 12px; }
+  section { padding-top: 12px; margin-top: 36px; border-top: 1px solid var(--border);
+    scroll-margin-top: calc(var(--nav-h) + 12px); }
+  h2 { font-size: var(--fs-h2); font-weight: 600; margin: 16px 0 6px; line-height: 1.25; }
+  h2 .num { color: var(--muted); font-weight: 400; margin-right: 8px; }
+  .lede { color: var(--muted); margin: 0 0 18px; }
+  h3 { font-size: var(--fs-h3); font-weight: 700; margin: 26px 0 6px;
+    scroll-margin-top: calc(var(--nav-h) + 12px); }
+  p { margin: 0 0 14px; }
+  ul { padding-left: 22px; margin: 0 0 14px; }
+  li { margin-bottom: 6px; }
+  dfn { font-style: normal; font-weight: 700; color: var(--fg); }
+  .aka { color: var(--muted); font-size: var(--fs-small); }
+  .box { background: var(--panel); border: 1px solid var(--border); border-radius: 8px;
+    padding: 14px 18px; margin: 18px 0; }
+  .box p:last-child, .box ul:last-child { margin-bottom: 0; }
+  .box .tag { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px;
+    color: var(--muted); margin-bottom: 4px; }
+  .box.watch { border-left: 3px solid #d29922; }
+  .box.site { border-left: 3px solid var(--accent); }
+  .math { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 14px;
+    background: #0d1117; border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px;
+    margin: 0 0 14px; overflow-x: auto; white-space: pre; }
+  .index { columns: 3 180px; font-size: var(--fs-small); padding: 0; list-style: none; }
+  .index li { break-inside: avoid; margin-bottom: 4px; }
+  footer { color: var(--muted); font-size: var(--fs-small); margin-top: 48px; }
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; padding: 24px 18px 60px; gap: 0; }
+    .toc { display: none; }
+  }
+</style>
+<script data-goatcounter="https://a9n27kisdf.execute-api.us-east-1.amazonaws.com/count/ppsdata"
+        async src="count.js"></script>
+</head>
+<body data-page="guide">
+
+<div class="topnav">
+  <div class="topnav-inner">
+    <a class="brand" href="index.html"><span class="dot"></span>PPS Data Explorer</a>
+    <span class="nav-current" id="nav-current" aria-live="polite"></span>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 4h12M2 8h12M2 12h12"/></svg>
+      Menu
+    </button>
+    <nav id="primary-nav" aria-label="Sections"></nav>
+  </div>
+</div>
+
+<div class="layout">
+<nav class="toc" aria-label="Guide chapters">
+  <b>Chapters</b>
+  <a href="#big-picture">1. The big picture</a>
+  <a href="#schools">2. Kinds of schools</a>
+  <a href="#counting">3. Counting students</a>
+  <a href="#buildings">4. Buildings and capacity</a>
+  <a href="#students">5. Who the students are</a>
+  <a href="#sped">6. Special education</a>
+  <a href="#money">7. Where the money comes from</a>
+  <a href="#rightsizing">8. Rightsizing, step by step</a>
+  <a href="#reading">9. Reading the numbers</a>
+  <a href="#index">Term index</a>
+</nav>
+
+<article>
+<header>
+  <h1>A guide to school district data</h1>
+  <p>
+    School planning has its own vocabulary. Words like "functional capacity," "direct
+    certification," and "receiving school" carry specific meanings, and a lot of
+    arguments about school closures turn on them. This guide explains the ideas behind
+    the numbers on this site, in the order you need them, with examples from Portland.
+  </p>
+  <p>
+    You don't have to read it straight through. Each chapter stands on its own, and the
+    <a href="#index">term index</a> at the end jumps to where each word is explained.
+  </p>
+</header>
+
+<!-- ================================================================ -->
+<section id="big-picture">
+  <h2><span class="num">1</span>The big picture</h2>
+  <p class="lede">Why Portland Public Schools is talking about closing schools.</p>
+
+  <p>
+    Portland Public Schools (PPS) is one of Oregon's largest school districts. Enrollment has been
+    falling for about a decade, and PPS's forecasters expect it to keep falling. Fewer
+    children are being born in Portland, housing costs push families with young children
+    out of the city, and some families moved to other districts or to private school during
+    and after the pandemic.
+  </p>
+  <p>
+    The number of school buildings hasn't changed to match. A school costs a certain amount
+    to run no matter how many students it has: it needs a principal, an office, a custodian,
+    heat, and a roof. When enrollment falls but the number of schools doesn't, each school
+    gets smaller, and the district spends more per student on fixed costs. At the same time,
+    PPS's costs are rising faster than its revenue, mostly because of salaries, health care,
+    and pensions (see <a href="#money">chapter 7</a>).
+  </p>
+  <p>
+    <dfn id="t-rightsizing">Rightsizing</dfn> is PPS's name for the process of matching its
+    schools to the number of students it actually has. In practice that means some
+    combination of closing or merging schools, changing which grades a school serves,
+    moving programs, and redrawing attendance areas. In October 2026 PPS released two draft
+    <dfn id="t-scenario">scenarios</dfn>: Scenario A closes 14 schools and Scenario B closes 11.
+    The superintendent recommends a plan in November and the school board votes in December.
+  </p>
+
+  <div class="box site">
+    <span class="tag">On this site</span>
+    <p>The dashboard covers the 74 elementary, K-8, middle, and alternative schools PPS put in
+    scope. High schools aren't part of this round. Start with
+    <a href="index.html#section-rightsizing">Scenarios</a> to see what each draft does.</p>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<section id="schools">
+  <h2><span class="num">2</span>Kinds of schools, and how students get assigned</h2>
+  <p class="lede">Not every school works the same way, and that changes what its numbers mean.</p>
+
+  <h3 id="t-grades">Grade configurations</h3>
+  <p>
+    PPS schools are grouped by the grades they serve. An <dfn>elementary school</dfn> is usually
+    kindergarten through 5th grade (written <dfn>K-5</dfn>). A <dfn>middle school</dfn> serves
+    grades 6 to 8. A <dfn>K-8</dfn> keeps students in one building from kindergarten through
+    8th grade. <dfn>PK</dfn> means pre-kindergarten, which some buildings also house.
+  </p>
+  <p>
+    Grade configuration matters for rightsizing because changing it is one of the tools.
+    "Converting a K-8 to a K-5" means its 6th to 8th graders move to a middle school, which
+    shrinks one building and grows another without closing either.
+  </p>
+
+  <h3 id="t-catchment">Neighborhood schools and attendance areas</h3>
+  <p>
+    Most PPS schools are <dfn>neighborhood schools</dfn>. Every address in the district is
+    assigned to one elementary or K-8 school, one middle school, and one high school. The
+    area a school draws from is its <dfn>attendance area</dfn>, also called its
+    <dfn>boundary</dfn> or <dfn>catchment</dfn>. These all mean the same thing: the map
+    shape that decides which school a child is assigned to by default.
+  </p>
+  <p>
+    A <dfn id="t-boundary-change">boundary change</dfn> redraws those shapes, so some addresses
+    switch schools. It's the quietest rightsizing tool, because no building closes, but it can
+    move a lot of students.
+  </p>
+  <p>
+    The chain of schools a neighborhood's students move through (elementary, then middle,
+    then high) is a <dfn id="t-feeder">feeder pattern</dfn>. Changing one school can ripple
+    down the chain.
+  </p>
+
+  <h3 id="t-focus">Focus options, alternative schools, and charters</h3>
+  <p>
+    Some schools don't have an attendance area. <dfn>Focus option</dfn> schools offer a
+    particular approach (environmental science, arts, or a program for highly gifted
+    students) and admit students through an application lottery. <dfn>Alternative</dfn>
+    schools serve students who need a different setting from a standard school.
+  </p>
+  <p>
+    <dfn id="t-charter">Charter schools</dfn> are public schools, free and open to anyone,
+    but run by an independent organization under a contract (a "charter") with the
+    district. PPS sponsors five. They're shown on this site for context, but PPS can't close
+    a charter through rightsizing.
+  </p>
+
+  <h3 id="t-dli">Dual language immersion (DLI)</h3>
+  <p>
+    In a <dfn>dual language immersion</dfn> program, students learn in two languages, often
+    with half the day in Spanish, Mandarin, Japanese, Russian, or Vietnamese. Admission is
+    by lottery. Many immersion programs share a building with a regular neighborhood
+    program, so one school can contain two groups of students: the immersion
+    <dfn>strand</dfn> and the <dfn>neighborhood program</dfn>.
+  </p>
+  <p>
+    This matters because the two groups can behave very differently. An immersion strand
+    draws students from across the city, so a school's total enrollment can look healthy
+    while its neighborhood program is small, or the other way around. In the scenarios,
+    an immersion strand can move to a different building on its own.
+  </p>
+
+  <div class="box site">
+    <span class="tag">On this site</span>
+    <p>The <a href="index.html#section-dli">DLI section</a> splits shared buildings into
+    their immersion and neighborhood students. The <a href="index.html#section-map">map</a>
+    can hide focus-option and alternative programs.</p>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<section id="counting">
+  <h2><span class="num">3</span>Counting students</h2>
+  <p class="lede">Why the same school can have three different enrollment numbers, and how forecasts work.</p>
+
+  <h3 id="t-enrollment">Enrollment counts</h3>
+  <p>
+    <dfn>Enrollment</dfn> sounds simple, but it depends on who is counting and when. The
+    official count is taken on October 1 each year. PPS publishes its own counts in late
+    October. The Oregon Department of Education (<dfn>ODE</dfn>) publishes the state's
+    version, called <dfn id="t-fall-membership">Fall Membership</dfn>, a few months later,
+    after cleaning the data. The two usually differ by a few students, and they can treat
+    programs differently: ODE, for example, reports Hayhurst and the Odyssey program it
+    houses as one school.
+  </p>
+  <p>
+    You'll also see <b>2025-26</b> style labels. A school year starts in one calendar
+    year and ends in the next, so "2025-26" is the year that began in fall 2025.
+  </p>
+
+  <h3 id="t-forecast">Enrollment forecasts</h3>
+  <p>
+    PPS's enrollment forecasts come from Portland State University's
+    <dfn>Population Research Center (PRC)</dfn>, which produces them each summer, ten years out,
+    for every school.
+  </p>
+  <p>
+    The method is called a <dfn>cohort model</dfn>. A cohort is a group of students moving
+    through school together, like this year's 2nd graders. PRC looks at how many students
+    usually carry over from one grade to the next at each school (its
+    <dfn>grade progression ratio</dfn>) and rolls each cohort forward. Kindergarten is the
+    hard part, because those children aren't in school yet: PRC estimates it from births and
+    the share of local five-year-olds who usually enroll.
+  </p>
+  <p>
+    PRC publishes a <b>low</b>, <b>medium</b>, and <b>high</b> scenario. The
+    medium one is the planning number. Forecasts for middle schools are more certain than
+    for elementary schools, because most future middle schoolers are already enrolled.
+  </p>
+
+  <h3 id="t-housing">Housing and future students</h3>
+  <p>
+    New housing can bring new students, so the site also shows new residential permits and
+    Metro's forecast of where housing will be built. Metro's forecast comes from its
+    <dfn>Buildable Land Inventory (BLI)</dfn>, which estimates how much housing each piece of
+    land could hold under current zoning.
+  </p>
+
+  <div class="box watch">
+    <span class="tag">Watch out</span>
+    <p>New housing doesn't mean new students one for one. Studio and one-bedroom apartments
+    house few children. A neighborhood with a lot of construction can still lose students if
+    families with kids are moving out faster than new ones arrive.</p>
+  </div>
+
+  <h3 id="t-sustainable">"Sustainable" school size</h3>
+  <p>
+    In its scenarios PPS uses a minimum size for a school to work well: at least
+    <b>360 students for a K-5</b> and <b>500 for a K-8 or middle school</b>. The idea
+    is that a 360-student elementary school has about two classes per grade, which gives
+    flexibility to balance class sizes and pays for staff like a full-time librarian or
+    counselor. A school with one class per grade has no room to adjust when a grade is
+    unusually big or small.
+  </p>
+
+  <div class="box site">
+    <span class="tag">On this site</span>
+    <p>See <a href="index.html#section-trends">Trends</a> for each school's history,
+    <a href="index.html#section-sustainability">7-year change</a> for who is shrinking fastest,
+    and <a href="index.html#section-enrollment-forecast">2035 forecast</a> for PRC's projections.</p>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<section id="buildings">
+  <h2><span class="num">4</span>Buildings and capacity</h2>
+  <p class="lede">How "how full is this school?" gets turned into a number, and why that number is contested.</p>
+
+  <h3 id="t-gross-capacity">Gross capacity</h3>
+  <p>
+    Start with the building. <dfn>Gross capacity</dfn> is the most students the classrooms could
+    physically hold. PPS measures every room of 500 square feet or more and assigns it a
+    student count by size: 24 students for a room under 800 square feet, 27 for 800 to 1,000,
+    and 30 for anything larger. Add them up and you get gross capacity.
+  </p>
+
+  <h3 id="t-functional-capacity">Functional capacity</h3>
+  <p>
+    Not every classroom is used for a regular class. A room might be a special education
+    classroom, a preschool, a computer lab, an art room, or leased to an outside group.
+    <dfn>Functional capacity</dfn> is PPS's estimate of how many students a building can
+    actually serve after those uses are set aside. It's built in two more steps:
+  </p>
+  <ul>
+    <li><b>Subtract rooms used for something else.</b> Each special education focus room removes
+      12 seats; each preschool room, learning center, gym, computer lab, art or music room, or
+      leased room removes 27.</li>
+    <li><b>Apply a utilization rate.</b> Elementary and K-8 buildings count at 100% of what's left;
+      middle and high schools at 85%, because students move between rooms and not every room can
+      be full every period. Schools with extra federal or state support designations (Title I,
+      TSI, CSI; see <a href="#t-title1">chapter 5</a>) lose 5 more points each, to leave room for
+      smaller groups.</li>
+  </ul>
+  <div class="math">functional capacity = (gross capacity − set-aside seats) × utilization rate</div>
+
+  <h3 id="t-utilization">Utilization</h3>
+  <p>
+    <dfn>Utilization</dfn> compares students to that capacity:
+  </p>
+  <div class="math">utilization = enrollment ÷ functional capacity</div>
+  <p>
+    A school at 60% utilization has room for about two-thirds more students under PPS's
+    planning rules. A school over 100% has more students than its planning capacity and may be
+    using portables or converting other rooms.
+  </p>
+
+  <div class="box watch">
+    <span class="tag">Watch out</span>
+    <ul>
+      <li>Utilization is a planning ratio, not a measure of crowding you'd see walking through
+        the halls. A school can be "under capacity" because it rents rooms to a preschool.</li>
+      <li>The capacity numbers come from PPS's 2021 <dfn id="t-lrfp">Long-Range Facility Plan
+        (LRFP)</dfn>. Buildings have changed since. A records request turned up PPS's working
+        spreadsheet, and for 10 schools it disagrees with the 2021 plan by 5% or more. The site
+        flags those schools with a ⚠.</li>
+      <li><dfn id="t-portables">Portables</dfn> (also called modular classrooms) are separate
+        buildings on the school grounds. The 2021 plan counts them in capacity at 31 schools.
+        Remove the portables and those schools look fuller. The site marks them with a *.</li>
+    </ul>
+  </div>
+
+  <h3 id="t-seismic">Seismic risk and URM buildings</h3>
+  <p>
+    Portland sits in an earthquake zone, and many PPS buildings are close to a century old. A
+    <dfn>seismic retrofit</dfn> strengthens a building so it's less likely to collapse in an
+    earthquake. The riskiest type is <dfn id="t-urm">unreinforced masonry (URM)</dfn>: brick or
+    stone walls with no steel inside to hold them together. In a strong quake, URM walls can
+    crumble.
+  </p>
+  <p>
+    In 2024 Holmes Engineering estimated what it would cost to fully retrofit every PPS school.
+    These are <dfn>ROM</dfn> (rough order of magnitude) estimates: good for comparing schools,
+    not a construction bid.
+  </p>
+
+  <h3 id="t-bond">Bonds</h3>
+  <p>
+    Voters approve <dfn>bonds</dfn> to pay for construction and major repairs. Bond money can
+    only be spent on buildings, never on teachers or programs. That's why a district can be
+    rebuilding schools and cutting staff at the same time. When this site says a retrofit is
+    "funded," it means a voter-approved bond covers it.
+  </p>
+
+  <div class="box site">
+    <span class="tag">On this site</span>
+    <p><a href="index.html#section-map">Utilization map</a>,
+    <a href="index.html#section-utilization">Utilization</a> (all schools ranked), and
+    <a href="index.html#section-seismic">Seismic</a>. The table's gross capacity, leased rooms,
+    and sprinkler columns have hover details.</p>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<section id="students">
+  <h2><span class="num">5</span>Who the students are</h2>
+  <p class="lede">The measures used to describe a school's students, and what each one actually captures.</p>
+
+  <h3 id="t-direct-cert">Poverty: free lunch and direct certification</h3>
+  <p>
+    Schools don't ask families their income directly, so poverty is measured through
+    school meal programs. There are two common measures, and the difference matters.
+  </p>
+  <p>
+    <dfn>Free or reduced-price lunch (FRL)</dfn> is the older one. Families fill out a form
+    with their income, and children below certain limits qualify. It has become less
+    reliable: many high-poverty schools now serve free meals to everyone (a federal option
+    called the <dfn>Community Eligibility Provision</dfn>), so families have no reason to fill
+    out the form.
+  </p>
+  <p>
+    <dfn>Direct certification</dfn> skips the form. The state matches school enrollment
+    against records from other assistance programs, and a student is certified for free
+    meals automatically if their household gets SNAP (food stamps) or TANF (cash
+    assistance), or if they're in foster care, homeless, or a migrant student. Because it
+    only counts families already enrolled in means-tested aid, it captures deeper poverty
+    than FRL and doesn't depend on paperwork.
+  </p>
+  <p>
+    It's also the stronger predictor: on this site, a school's direct certification rate
+    tracks its test scores more closely than FRL or any race or ethnicity measure. PPS uses
+    it to direct extra staff to schools.
+  </p>
+  <div class="box">
+    <span class="tag">Example</span>
+    <p>Rosa Parks Elementary has a direct certification rate of 79%: about four in five of its
+    students live in households on SNAP, TANF, or in another qualifying situation. At Duniway
+    Elementary the rate is 8%.</p>
+  </div>
+
+  <h3 id="t-title1">Title I, TSI, and CSI</h3>
+  <p>
+    <dfn>Title I</dfn> is the largest federal program for schools that serve many low-income
+    students. A school with enough poverty can run a "schoolwide" Title I program, using the
+    money for extra staff and support for everyone in the building.
+  </p>
+  <p>
+    <dfn>TSI</dfn> (Targeted Support and Improvement) and <dfn>CSI</dfn> (Comprehensive Support
+    and Improvement) are designations under federal accountability law. The state gives them to
+    schools where some or all students are falling well behind, and the schools get extra help.
+    PPS reduces these schools' capacity slightly to leave room for smaller groups.
+  </p>
+
+  <h3 id="t-ell">English learners</h3>
+  <p>
+    Students still learning English are called <dfn>English learners (ELs)</dfn>,
+    <dfn>multilingual learners</dfn>, or in older federal data, <dfn>LEP</dfn> (limited English
+    proficient). They get <dfn>English Language Development (ELD)</dfn> instruction until they
+    test as proficient.
+  </p>
+
+  <h3 id="t-tag">Talented and gifted (TAG)</h3>
+  <p>
+    Oregon requires districts to identify and serve <dfn>talented and gifted</dfn> students. Most
+    TAG students stay in their regular schools; ACCESS Academy is PPS's school for highly gifted
+    students.
+  </p>
+
+  <h3 id="t-osas">Test scores and attendance</h3>
+  <p>
+    <dfn>OSAS</dfn>, the Oregon Statewide Assessment System, is the state test in English language
+    arts and math. A school's <dfn>proficiency rate</dfn> is the share of students who score at
+    "meets" or "exceeds" the state standard.
+  </p>
+  <p>
+    A student is <dfn id="t-chronic">chronically absent</dfn> if they miss 10% or more of school
+    days, for any reason. ODE also reports the flip side, the share of <dfn>regular attenders</dfn>.
+  </p>
+  <div class="box watch">
+    <span class="tag">Watch out</span>
+    <p>Proficiency rates follow poverty closely. A school's score says a lot about who its
+    students are and less about how well the school teaches them. Comparing schools with
+    similar poverty rates is fairer than ranking all of them.</p>
+  </div>
+
+  <h3 id="t-ratio">Class size and students per teacher</h3>
+  <p>
+    <dfn>Students per teacher</dfn> divides all students by all teachers, including specialists
+    who don't have a class of their own. It's always lower than the <dfn>class size</dfn> a child
+    actually sits in. Both are useful, but they aren't interchangeable.
+  </p>
+
+  <div class="box site">
+    <span class="tag">On this site</span>
+    <p>The <a href="index.html#section-table">table</a> has all of these. The
+    <a href="index.html#section-scatters">Scatters</a> section shows how they relate, for example
+    test scores against direct certification.</p>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<section id="sped">
+  <h2><span class="num">6</span>Special education</h2>
+  <p class="lede">How students with disabilities are served, and why closures raise specific questions for them.</p>
+
+  <h3 id="t-iep">IEPs and SPED</h3>
+  <p>
+    A federal law, the Individuals with Disabilities Education Act (<dfn>IDEA</dfn>), guarantees
+    students with disabilities a free, appropriate public education. A student who qualifies gets
+    an <dfn>Individualized Education Program (IEP)</dfn>: a written plan, agreed on by the family
+    and school, that lists the student's goals and the services they'll receive. Those services can
+    be speech therapy, time with a special education teacher, an aide in class, or a specialized
+    classroom.
+  </p>
+  <p>
+    <dfn>Special education</dfn>, often shortened to <dfn>SPED</dfn> or SpEd, is the umbrella term
+    for all of it. "Students with IEPs" and "special education students" mean the same group. Across
+    the 74 schools on this site, the typical school has about 18% of students with IEPs, and the
+    share ranges from about 7% to 34%.
+  </p>
+  <p>
+    The law also requires the <dfn id="t-lre">least restrictive environment (LRE)</dfn>: students
+    with disabilities should learn alongside students without disabilities as much as their needs
+    allow.
+  </p>
+
+  <h3 id="t-focus-classroom">Learning centers and focus classrooms</h3>
+  <p>
+    Most students with IEPs spend most of the day in a regular classroom and get some services
+    from a special education teacher, often in a room called the <dfn>Learning Center</dfn>.
+  </p>
+  <p>
+    Students with more intensive needs may be placed in a <dfn>focus classroom</dfn>: a smaller,
+    specialized class with more adults. PPS has several types, including Social Emotional Skills
+    (<dfn>SES</dfn>), Communication and Behavior (<dfn>CB</dfn>), and Intensive Skills
+    (<dfn>ISC</dfn>) classrooms. These are housed in particular buildings, and students may travel
+    from across the district to attend them. Creston also houses a program for students who are
+    Deaf or hard of hearing (<dfn>DHH</dfn>).
+  </p>
+  <div class="box watch">
+    <span class="tag">Watch out</span>
+    <p>Because focus classrooms draw from many neighborhoods, a school that hosts one shows a higher
+    share of students with IEPs than its neighborhood alone would. A high number doesn't mean the
+    neighborhood has more disabilities; it may mean the school hosts a district program.</p>
+  </div>
+
+  <h3 id="t-ics">Inclusive Community Schools</h3>
+  <p>
+    PPS is moving toward an <dfn>inclusion model</dfn>, also called the
+    <dfn>Neighborhood School Model</dfn>. Instead of busing students with IEPs to a focus
+    classroom elsewhere, the goal is for them to attend their neighborhood school, in general
+    education classes with siblings and friends, with support brought to them. PPS's phrase is that
+    special education is a service, not a place. Schools running this model are called
+    <dfn>Inclusive Community Schools</dfn>. The model started with kindergarten at pilot schools and
+    adds a grade each year.
+  </p>
+  <p>
+    Inclusion depends on staffing: <dfn>case managers</dfn> (the special education teacher
+    responsible for each student's IEP) and <dfn>paraeducators</dfn> or "paras" (aides who
+    support students in class). In PPS's budget, these schools show up with extra
+    "NSM building paras."
+  </p>
+
+  <h3>Why closures raise questions here</h3>
+  <p>
+    When a school closes, its students with IEPs move with everyone else. The question isn't
+    whether the share of students with IEPs changes much at the receiving school (it usually
+    doesn't), but whether the receiving school gets enough staff and space for a caseload that
+    may double or triple. Focus classrooms also have to go somewhere.
+  </p>
+
+  <div class="box site">
+    <span class="tag">On this site</span>
+    <p>The <a href="index.html#section-sped">Special ed section</a> estimates how many students
+    with IEPs each receiving school would serve. The estimates are ours, not PPS's.</p>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<section id="money">
+  <h2><span class="num">7</span>Where the money comes from, and where it goes</h2>
+  <p class="lede">The basics of a school district budget, and why closing schools doesn't change revenue.</p>
+
+  <h3 id="t-general-fund">The General Fund</h3>
+  <p>
+    A district keeps its money in separate <b>funds</b>, each with its own rules. The
+    <dfn>General Fund</dfn> is the main one, used to run schools day to day: teachers, principals,
+    buses, utilities. Bond money, federal grants, and school meals are in other funds. When people
+    talk about "the budget" and cuts, they usually mean the General Fund.
+  </p>
+
+  <h3 id="t-revenue">Revenue</h3>
+  <p>PPS's General Fund comes mainly from three places:</p>
+  <ul>
+    <li><b>Local property taxes.</b></li>
+    <li><b>The State School Fund</b>, Oregon's formula for paying districts per student. Students who
+      cost more to educate count extra in the formula: students with IEPs, English learners, and
+      students in poverty, among others. The weighted count is called <dfn id="t-admw">ADMw</dfn>
+      (weighted average daily membership).</li>
+    <li><b>A local option levy</b>, an extra property tax Portland voters approve for schools, most
+      recently renewed in May 2024.</li>
+  </ul>
+  <div class="box watch">
+    <span class="tag">Watch out</span>
+    <p>State money follows students. When a school closes, its students enroll somewhere else in
+    PPS, and the district's revenue stays about the same. Closures save money only by lowering
+    costs, not by bringing in more.</p>
+  </div>
+
+  <h3 id="t-fte">Spending, FTE, and central staff</h3>
+  <p>
+    About four of every five General Fund dollars pay for people, in salaries and benefits.
+    Staffing is counted in <dfn>FTE</dfn> (full-time equivalent): one full-time position is 1.0
+    FTE, and two half-time positions add up to 1.0 too.
+  </p>
+  <p>
+    Some staff are assigned to a school through a <dfn>staffing formula</dfn> based on its
+    enrollment. Others are <dfn>central staff</dfn>: assigned by the district and shared across schools,
+    like special education, English language development, nutrition, and custodial staff. PPS's
+    published per-school dollars leave out central staff, so they understate the full cost of a
+    school.
+  </p>
+  <p>
+    <dfn>Purchased services</dfn> are payments to outside companies and agencies instead of PPS
+    employees: bus contracts, utilities, payments to charter schools, and so on.
+  </p>
+
+  <h3 id="t-pers">Pensions (PERS)</h3>
+  <p>
+    Oregon public employees, including teachers, earn a pension through the <dfn>Public Employees
+    Retirement System (PERS)</dfn>. Employers pay into it as a percentage of payroll. The state sets
+    that <dfn>employer rate</dfn> every two years, based on how the pension fund's investments are
+    doing and how much it owes retirees. PPS's rate has risen from about 4% of payroll to about 20%.
+  </p>
+  <p>
+    Some districts, PPS among them, borrowed in the early 2000s to pay down their pension debt
+    early. The borrowed money sits in a <dfn id="t-side-account">side account</dfn> that lowers the
+    district's rate. Many of those side accounts across Oregon run out in 2027, which is one
+    reason pension costs jump for school districts starting in the 2027-28 school year.
+  </p>
+
+  <h3 id="t-gap">The structural gap and the reserve</h3>
+  <p>
+    A <dfn>structural gap</dfn> means ongoing costs grow faster than ongoing revenue, so the problem
+    comes back every year instead of going away after one bad year. Oregon law requires each year's
+    budget to balance, so the district has to close the gap before it adopts a budget, by cutting
+    costs or using savings.
+  </p>
+  <p>
+    The <dfn>reserve</dfn> (or contingency) is the savings cushion. PPS's policy floor is 5% of the
+    General Fund, and it's at that floor now. Federal pandemic relief (<dfn>ESSER</dfn>) paid for
+    staff for a few years and then ended, which is part of why the gap opened.
+  </p>
+  <p>
+    PPS projects a gap of about $65 million for 2027-28. It plans to close that by reducing the
+    budget, including proportional cuts to central departments. Separately, it estimates closures
+    would free up $10 million to $12 million a year, which it plans to reinvest in the remaining
+    schools rather than count toward the gap.
+  </p>
+  <p>
+    Budgets come in stages: <b>proposed</b> (the superintendent's draft in spring) and
+    <b>adopted</b> (what the board approves in June). PPS publishes the budget in volumes;
+    Volume 1 is the district overview and Volume 2 has school-by-school detail.
+  </p>
+
+  <div class="box site">
+    <span class="tag">On this site</span>
+    <p>The <a href="budget.html">Budget</a> page walks through all of this with charts, including
+    <a href="budget.html#section-gap">the yearly gap</a> and an
+    <a href="budget.html#section-savings">estimate of closure savings</a>.</p>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<section id="rightsizing">
+  <h2><span class="num">8</span>Rightsizing, step by step</h2>
+  <p class="lede">The vocabulary of the scenarios, and what actually happens to students.</p>
+
+  <h3 id="t-closure">Closures, merges, and receiving schools</h3>
+  <p>
+    When a school <b>closes</b>, its building stops operating as that school and its students are
+    assigned elsewhere. A school that takes them in is a <dfn id="t-receiving">receiving school</dfn>.
+    A <b>merge</b> or <b>consolidation</b> is the same thing described from the other side:
+    two school communities become one, usually in one of the two buildings. A closing school's
+    students may all go to one receiving school, or be split among several, sometimes by
+    neighborhood and sometimes by program (immersion students to one school, neighborhood students to
+    another).
+  </p>
+
+  <h3>The other tools</h3>
+  <ul>
+    <li><b>Grade changes</b>: a K-8 becomes a K-5 and its older students go to a middle school, or the
+      reverse.</li>
+    <li><b>Program moves</b>: an immersion strand or focus program moves to another building.</li>
+    <li><b>Boundary changes</b>: attendance areas are redrawn so students are assigned to a different
+      school.</li>
+  </ul>
+  <p>
+    Most scenarios combine all four. That's why the district dot plot on the Scenarios section
+    shows four categories, not just "closes" and "stays open."
+  </p>
+
+  <h3>What closing a school saves, and costs</h3>
+  <p>
+    Most of a school's budget is teachers, and the students still need teachers wherever they go,
+    so those costs mostly move rather than disappear. The savings come from things a building needs
+    regardless of size: a principal, office staff, custodians, utilities, and upkeep. There are also
+    costs: moving, transition support, longer bus rides, and sometimes extra staff at a receiving
+    school that grows past a staffing threshold.
+  </p>
+
+  <div class="box site">
+    <span class="tag">On this site</span>
+    <p><a href="index.html#section-rightsizing">Scenarios</a> has the closing schools, a map with
+    where students go, and a model of how big each receiving school gets by grade.</p>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<section id="reading">
+  <h2><span class="num">9</span>Reading the numbers</h2>
+  <p class="lede">A few habits that keep data from saying more than it does.</p>
+
+  <h3 id="t-estimate">PPS's figures and this site's estimates</h3>
+  <p>
+    Most numbers here are PPS's or the state's, copied from their reports. Some are this site's
+    own <b>estimates</b>, like how many students a receiving school would have, or how much
+    closures might save. Those are labeled as estimates. They use simple, stated assumptions and
+    leave things out (boundary changes, for one), so treat them as a rough guide and check PPS's
+    own numbers when they come out.
+  </p>
+
+  <h3 id="t-share">Counts versus shares</h3>
+  <p>
+    A <b>count</b> is how many (120 students with IEPs). A <dfn>share</dfn> or
+    <b>rate</b> is how many out of the total (20% of students have IEPs). Big schools have
+    bigger counts of almost everything, so counts mostly tell you about size. To compare schools of
+    different sizes, use shares. Use counts when the question is about workload, like how many
+    students a counselor or case manager has to serve.
+  </p>
+  <div class="box">
+    <span class="tag">Example</span>
+    <p>Two schools each have 20% of students on IEPs. One has 200 students (40 with IEPs) and the
+    other has 600 (120). Their counts differ by three times; their shares are the same.</p>
+  </div>
+
+  <h3 id="t-correlation">Correlation</h3>
+  <p>
+    A <dfn>correlation</dfn> measures how closely two things move together across schools, from
+    −1 (one always goes down as the other goes up) through 0 (no relationship) to +1 (they always
+    rise together). It's written as <b>r</b>. As a rough guide, r around 0.2 is weak, 0.4 is
+    moderate, and 0.7 or more is strong.
+  </p>
+  <p>
+    A result is called <dfn>statistically significant</dfn> when it would be unlikely to show up by
+    chance alone. With only a few dozen schools, fairly large correlations can still be chance, and
+    "significant" doesn't mean "important." Correlation also doesn't tell you why two things move
+    together: high-poverty schools have lower test scores, but that alone doesn't say what would
+    raise them.
+  </p>
+
+  <h3>Different years</h3>
+  <p>
+    The sources were published at different times, so a school's row can mix years: 2025-26
+    enrollment, 2021 capacity, 2024-25 test scores, 2020-21 staffing data. Each column on the site
+    says which year it's from.
+  </p>
+
+  <div class="box site">
+    <span class="tag">On this site</span>
+    <p>The <a href="index.html#section-methodology">Methodology</a> section lists every source,
+    with links, and explains how each number was built.</p>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<section id="index">
+  <h2>Term index</h2>
+  <p class="lede">Jump to where each term is explained.</p>
+  <ul class="index" id="term-index"></ul>
+</section>
+
+<footer>
+  An independent project, not affiliated with Portland Public Schools. Spot something unclear or
+  wrong? <a href="https://alexmeub.com/contact" target="_blank" rel="noopener">Get in touch</a>.
+</footer>
+</article>
+</div>
+
+<script src="nav.js"></script>
+<script>
+(function () {
+  // Term index: every defined term, linked to the nearest anchor above it, A to Z.
+  const seen = new Set();
+  const terms = Array.from(document.querySelectorAll("article dfn")).flatMap(d => {
+    const label = d.textContent.trim();
+    const key = label.toLowerCase();
+    if (seen.has(key)) return [];
+    seen.add(key);
+    const anchor = d.id || (d.closest("h3[id]") && d.closest("h3[id]").id) || prevAnchor(d);
+    return [{ label, anchor }];
+  });
+  function prevAnchor(node) {
+    // Nearest preceding h3 with an id, else the chapter section.
+    const all = Array.from(document.querySelectorAll("article h3[id], article section[id]"));
+    let best = null;
+    for (const a of all) if (a.compareDocumentPosition(node) & Node.DOCUMENT_POSITION_FOLLOWING) best = a;
+    return best ? best.id : "";
+  }
+  terms.sort((a, b) => a.label.localeCompare(b.label, "en", { sensitivity: "base" }));
+  document.getElementById("term-index").innerHTML =
+    terms.map(t => `<li><a href="#${t.anchor}">${t.label}</a></li>`).join("");
+
+  // Highlight the chapter in view in the side contents.
+  const toc = Array.from(document.querySelectorAll(".toc a"));
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (!e.isIntersecting) return;
+      toc.forEach(a => a.classList.toggle("on", a.getAttribute("href") === "#" + e.target.id));
+    }), { rootMargin: "-40% 0px -55% 0px" });
+    document.querySelectorAll("article section[id]").forEach(s => io.observe(s));
+  }
+})();
+</script>
+</body>
+</html>

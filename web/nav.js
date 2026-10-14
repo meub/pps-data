@@ -2,7 +2,7 @@
 // items; each page sets <body data-page="..."> and links to its own sections
 // with a bare #hash so the current-section highlight can find them.
 (function () {
-  const PAGES = { index: "index.html", budget: "budget.html" };
+  const PAGES = { index: "index.html", budget: "budget.html", guide: "guide.html" };
   const NAV = [
     { page: "index", id: "section-rightsizing", label: "Scenarios" },
     { group: "Buildings", page: "index", items: [
@@ -20,6 +20,7 @@
     { group: "Data", page: "index", items: [
       ["section-scatters", "Scatters"], ["section-table", "Table"],
       ["section-charters", "Charters"], ["section-methodology", "Methodology"]] },
+    { page: "guide", label: "Guide" },
   ];
 
   const here = document.body.dataset.page || "index";
@@ -31,7 +32,9 @@
     // On a page other than the dashboard, its own group stays marked so readers see where they are.
     ? `<div class="nav-group"><button type="button" class="nav-group-btn${n.page === here && here !== "index" ? " here" : ""}" aria-expanded="false">${n.group}</button>` +
       `<div class="nav-menu">${n.items.map(([id, label]) => `<a href="${href(n.page, id)}">${label}</a>`).join("")}</div></div>`
-    : `<a href="${href(n.page, n.id)}">${n.label}</a>`).join("");
+    : n.id ? `<a href="${href(n.page, n.id)}">${n.label}</a>`
+    // A whole-page link (no section id), marked when it's the page you're on.
+    : `<a href="${PAGES[n.page]}"${n.page === here ? ' class="here"' : ""}>${n.label}</a>`).join("");
 
   toggle.addEventListener("click", () => {
     const open = nav.classList.toggle("open");
