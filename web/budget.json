@@ -56,18 +56,42 @@
    "amount": 458888,
    "children": [
     {
-     "label": "Classroom teaching (K-12)",
-     "amount": 328846,
+     "label": "Elementary classrooms (K-5)",
+     "amount": 142685,
      "codes": [
       "1111",
       "1113",
-      "1121",
-      "1122",
-      "1131",
-      "1132",
       "1140",
       "1100"
-     ]
+     ],
+     "fte": 870.2
+    },
+    {
+     "label": "Middle school classrooms",
+     "amount": 74894,
+     "codes": [
+      "1121",
+      "1100"
+     ],
+     "fte": 436.87
+    },
+    {
+     "label": "High school classrooms",
+     "amount": 101864,
+     "codes": [
+      "1131",
+      "1100"
+     ],
+     "fte": 583.62
+    },
+    {
+     "label": "Athletics and activities (middle and high)",
+     "amount": 9403,
+     "codes": [
+      "1122",
+      "1132"
+     ],
+     "fte": 15.05
     },
     {
      "label": "Special education",

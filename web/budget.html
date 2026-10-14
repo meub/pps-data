@@ -370,7 +370,11 @@
       <li>The money-in and money-out figures are the 2026-27 adopted General Fund
         (Volume 1, pp. 103 and 107-108). Uses are PPS's accounting function codes,
         grouped and renamed in plain language. Two lines PPS books as negative
-        district-wide adjustments are folded into their groups.</li>
+        district-wide adjustments are folded into their groups; the instruction one
+        ($4.0 million, function 1100) is spread over the elementary, middle, and high school
+        classroom lines in proportion to their size. Classroom lines include teachers,
+        aides, substitutes, their benefits, and classroom supplies, but not special
+        education, English learner, or principal's office staff.</li>
       <li>"Revenue" in the gap chart is each year's General Fund resources minus the
         money carried over from the year before. "Spending" leaves out the required
         reserve. The forecast is PPS's own (Volume 1, p. 113), and the shortfall
@@ -483,7 +487,8 @@
     grp.children.forEach(ch => {
       const ci = addNode(ch.label, c, ch.amount, 3);
       links.source.push(gi); links.target.push(ci); links.value.push(ch.amount);
-      links.color.push(alpha(c, 0.35)); links.customdata.push(`${ch.label}: ${fmtM(ch.amount)} (${pct(ch.amount, total)} of the General Fund)`);
+      links.color.push(alpha(c, 0.35)); links.customdata.push(`${ch.label}: ${fmtM(ch.amount)} (${pct(ch.amount, total)} of the General Fund)` +
+        (ch.fte ? `<br>${Math.round(ch.fte).toLocaleString()} budgeted positions (FTE)` : ""));
     });
   });
   function drawFlow() {

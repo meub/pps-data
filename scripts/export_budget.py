@@ -65,9 +65,13 @@ GF_RESOURCES = [
 # against those functions. They fold into their groups here.
 GF_USES = {
     "Instruction": {
-        "Classroom teaching (K-12)": [
-            ("1111", 144_164), ("1113", 106), ("1121", 75_828), ("1122", 2_073),
-            ("1131", 103_134), ("1132", 7_330), ("1140", 195), ("1100", -3_984)],
+        # Regular classroom programs by grade level (teachers, aides, subs,
+        # their benefits, and classroom supplies). 1100's district-wide
+        # adjustment is spread over these three in grouped_uses().
+        "Elementary classrooms (K-5)": [("1111", 144_164), ("1113", 106), ("1140", 195)],
+        "Middle school classrooms": [("1121", 75_828)],
+        "High school classrooms": [("1131", 103_134)],
+        "Athletics and activities (middle and high)": [("1122", 2_073), ("1132", 7_330)],
         "Special education": [("1220", 38_899), ("1250", 40_136), ("1260", 773)],
         "Alternative education": [("1280", 30_807)],
         "English language learners": [("1291", 15_450)],
@@ -95,6 +99,15 @@ GF_USES = {
         "Community services": [("3300", 2_391)],
     },
 }
+
+# "Instructional Other" (function 1100), a negative district-wide adjustment
+# PPS books against instruction. Vol 1 p. 107. Spread over the grade-level
+# classroom lines in proportion to their size, since PPS doesn't assign it.
+INSTRUCTION_ADJUSTMENT = ("1100", -3_984)
+ADJUSTED_LINES = ("Elementary classrooms (K-5)", "Middle school classrooms", "High school classrooms")
+
+# Budgeted General Fund FTE by function, 2026-27. Vol 1 p. 107.
+FUNCTION_FTE = {"1111": 870.20, "1121": 436.87, "1122": 11.60, "1131": 583.62, "1132": 3.45}
 
 GROUP_NOTES = {
     "Instruction": "Teachers, classroom aides, and classroom costs.",
@@ -274,11 +287,19 @@ def grouped_uses() -> list[dict]:
     total = 0
     for group, items in GF_USES.items():
         children = []
+        adjust_base = sum(v for label in ADJUSTED_LINES if label in items for _, v in items[label])
         for label, rows in items.items():
             amount = sum(v for _, v in rows)
+            codes = [c for c, _ in rows]
+            if label in ADJUSTED_LINES:
+                amount += round(INSTRUCTION_ADJUSTMENT[1] * amount / adjust_base)
+                codes.append(INSTRUCTION_ADJUSTMENT[0])
             total += amount
-            children.append({"label": label, "amount": amount,
-                             "codes": [c for c, _ in rows]})
+            child = {"label": label, "amount": amount, "codes": codes}
+            fte = sum(FUNCTION_FTE.get(c, 0) for c in codes)
+            if fte:
+                child["fte"] = round(fte, 2)
+            children.append(child)
         groups.append({"label": group, "note": GROUP_NOTES[group],
                        "amount": sum(c["amount"] for c in children),
                        "children": children})
