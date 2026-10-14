@@ -164,6 +164,8 @@
   :root { --rs-close: #d95926; --rs-program: #199e70; --rs-boundary: #3987e5;
     --rs-none: #6e7681; --rs-a: #3987e5; --rs-b: #199e70; --rs-receive: #3987e5; }
   #rs-map { height: 560px; position: relative; }
+  /* Wide screens: fill most of the viewport, capped so the toggle and table stay close. */
+  @media (min-width: 1000px) { #rs-map { height: clamp(560px, 78vh, 900px); } }
   .rs-arrow { background: none; border: 0; }
   .rs-toggle, .sped-toggle { display: inline-flex; border: 1px solid var(--border); border-radius: 6px;
     overflow: hidden; margin: 0 0 12px; }
