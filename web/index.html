@@ -3246,29 +3246,30 @@
       const ys = rows.map(r => short(r.name));
       const tip = (r) => `<b>${r.name}</b><br>Today: ${int(r.iepB)} of ${int(r.before)} students (${pct(r.iepB / r.before)})` +
         `<br>Estimated: ${int(r.iepA)} of ${int(r.after)} students (${pct(r.iepA / r.after)})`;
+      // One measure only (students with IEPs): today's count plus the estimated
+      // arrivals. Shares barely move, so they live in the table, not the bars.
+      const bar = (name, x, color, extra) => Object.assign({ type: "bar", orientation: "h", name, x, y: ys,
+        marker: { color }, customdata: rows.map(tip), hovertemplate: "%{customdata}<extra></extra>" }, extra);
       const traces = [
-        { type: "scatter", mode: "lines", hoverinfo: "skip", showlegend: false,
-          x: rows.flatMap(r => [r.iepB, r.iepA, null]), y: rows.flatMap(r => [short(r.name), short(r.name), null]),
-          line: { color: "#484f58", width: 3 } },
-        { type: "scatter", mode: "markers", name: "Today", x: rows.map(r => r.iepB), y: ys,
-          marker: { size: 11, color: "#8b949e" }, text: rows.map(tip), hovertemplate: "%{text}<extra></extra>" },
-        { type: "scatter", mode: "markers+text", name: `Scenario ${view} (estimate)`, x: rows.map(r => r.iepA), y: ys,
-          marker: { size: 13, color: "#f0883e" }, text: rows.map(r => `${pct(r.iepB / r.before)} → ${pct(r.iepA / r.after)}`),
-          textposition: "middle right", textfont: { size: 11, color: "#8b949e" }, cliponaxis: false,
-          customdata: rows.map(tip), hovertemplate: "%{customdata}<extra></extra>" },
+        bar("Already at the school", rows.map(r => r.iepB), "#6e7681"),
+        bar("Arriving under the scenario (estimate)", rows.map(r => r.iepA - r.iepB), "#f0883e", {
+          text: rows.map(r => `${int(r.iepB)} → ${int(r.iepA)}`), textposition: "outside", cliponaxis: false,
+          textfont: { size: 11, color: "#c9d1d9" } }),
       ];
-      el.style.height = (rows.length * 30 + 110) + "px";
+      const height = rows.length * 26 + 110;
+      el.style.height = height + "px";
       Plotly.react(el, traces, Object.assign(baseLayout(), {
-        margin: { l: mobile ? 110 : 150, r: mobile ? 70 : 90, t: 10, b: 60 },
+        height, barmode: "stack", bargap: 0.3,
+        margin: { l: mobile ? 110 : 150, r: mobile ? 60 : 80, t: 10, b: 50 },
         xaxis: { title: "Students with IEPs", gridcolor: "#30363d", zeroline: false, rangemode: "tozero" },
-        yaxis: { autorange: "reversed", automargin: true, gridcolor: "rgba(0,0,0,0)" },
-        legend: { orientation: "h", x: 0, y: 1.02, yanchor: "bottom", bgcolor: "rgba(0,0,0,0)" },
+        yaxis: { autorange: "reversed", automargin: true, ticksuffix: "  " },
+        legend: { orientation: "h", x: 0, y: 1.02, yanchor: "bottom", traceorder: "normal", bgcolor: "rgba(0,0,0,0)" },
       }), { displayModeBar: false, responsive: true });
 
       const gained = all.reduce((a, r) => a + r.iepA - r.iepB, 0);
       document.getElementById("sped-sub").textContent =
         `Scenario ${view}: ${all.length} schools take in students, gaining about ${int(gained)} students with IEPs in all. ` +
-        `Shown: the ${rows.length} that gain at least ${MIN_IEP_GAIN}. Grey is today; orange is the estimate. Labels show the share with IEPs, today → estimate.`;
+        `Shown: the ${rows.length} that gain at least ${MIN_IEP_GAIN}, sorted by students gained.`;
       const shift = Math.max(...all.map(r => Math.abs(r.iepA / r.after - r.iepB / r.before)));
       const drop = all.reduce((m, r) => (r.dcB - r.dcA > (m ? m.dcB - m.dcA : 0) ? r : m), null);
       document.getElementById("sped-mix").textContent =
