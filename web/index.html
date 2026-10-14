@@ -860,25 +860,25 @@
   <section id="section-sped">
     <h2>Students with IEPs (special education)</h2>
     <p class="note">
-      Students with an IEP on October 1, 2025, as a share of each school's enrollment, against the share of
-      students directly certified for free meals (PPS's poverty measure, 2024-25). Counts include students in
-      focus classrooms housed at the school. Sources:
+      How many students with IEPs each receiving school would serve under PPS's draft scenarios. This is our estimate,
+      not PPS's: this fall's students moved the way each scenario says, each group carrying its school's (or immersion
+      program's) share with IEPs on October 1, 2025. Counts include students in focus classrooms housed at the school. Sources:
       <a href="https://resources.finalsite.net/images/v1761768730/ppsnet/urzqafgv7wzzprexxjvw/SchoolProfiles-SPEDTAGLEP25-26.pdf" target="_blank" rel="noopener">PPS Enrollment Characteristics, October 2025</a>
-      and the PPS 2026-27 budget, Volume 2.
+      and the PPS 2026-27 budget, Volume 2. Each school's count today is in the table and popups; the poverty comparison is under
+      <a href="#section-scatters">Scatters</a>.
     </p>
     <div class="sped-toggle" role="group" aria-label="Scenario">
-      <button type="button" data-sped="now" aria-pressed="true">Today</button>
-      <button type="button" data-sped="A" aria-pressed="false">Scenario A (estimate)</button>
+      <button type="button" data-sped="A" aria-pressed="true">Scenario A (estimate)</button>
       <button type="button" data-sped="B" aria-pressed="false">Scenario B (estimate)</button>
     </div>
     <div class="panel chart-card">
       <p class="subtitle" id="sped-sub"></p>
-      <div id="plot-sped" style="height: 520px;"></div>
-      <p class="subtitle" id="sped-corr"></p>
+      <div id="plot-sped"></div>
+      <p class="subtitle" id="sped-mix"></p>
     </div>
-    <div class="panel" id="sped-table-panel" style="margin-top:16px; overflow-x:auto;" hidden>
+    <div class="panel" style="margin-top:16px; overflow-x:auto;">
       <h3>Receiving schools, before and after</h3>
-      <p class="subtitle">This fall's students, moved the way the scenario says. Each group of students carries its school's (or immersion program's) share with IEPs and share directly certified.</p>
+      <p class="subtitle">Each group of students carries its school's (or immersion program's) share with IEPs and share directly certified for free meals.</p>
       <table class="schools" id="sped-table"></table>
       <details class="inline-expand"><summary>How this is estimated, and what it leaves out</summary>
         <p>Uses the same model as the receiving-schools panel in the Scenarios section: fall 2025 K-8 counts, moved to PPS's receiving
@@ -3218,91 +3218,73 @@
     });
   })();
 
-  // ---------- STUDENTS WITH IEPs vs. POVERTY ----------
+  // ---------- STUDENTS WITH IEPs AT RECEIVING SCHOOLS ----------
   (function () {
     const el = document.getElementById("plot-sped");
     if (!el) return;
     const model = (data.rightsizing && data.rightsizing.model) ? data.rightsizing.model.scenarios : {};
-    const base = schools.filter(s => s.pct_sped_2526 != null && s.pct_direct_cert_pps_2425 != null);
+    const byName = new Map(schools.map(s => [s.school_name, s]));
     const total = (st) => Object.values(st || {}).reduce((a, v) => a + v.reduce((x, y) => x + y, 0), 0);
-    const pct = (v) => (v * 100).toFixed(1) + "%";
-    const pearson = (xs, ys) => {
-      const n = xs.length, mx = xs.reduce((a, b) => a + b) / n, my = ys.reduce((a, b) => a + b) / n;
-      let sxy = 0, sxx = 0, syy = 0;
-      xs.forEach((x, i) => { sxy += (x - mx) * (ys[i] - my); sxx += (x - mx) ** 2; syy += (ys[i] - my) ** 2; });
-      return sxy / Math.sqrt(sxx * syy);
-    };
-    // One row per school for the chosen view. Scenario rows come from the
-    // rightsizing model; schools it doesn't touch keep today's figures.
-    function points(view) {
-      const rows = model[view] || {};
-      return base.flatMap(s => {
-        const now = { students: s.sped_enrollment_2526, iep: s.sped_count_2526,
-          share: s.pct_sped_2526, dc: s.pct_direct_cert_pps_2425 };
-        const r = rows[s.school_name];
-        if (view === "now" || !r) return [{ s, now, est: now, receives: false }];
-        if (r.closes) return [];
+    const pct = (v) => Math.round(v * 100) + "%";
+    const int = (v) => Math.round(v).toLocaleString();
+    // Schools that stay open and gain students, largest IEP gain first.
+    function receivers(view) {
+      return Object.entries(model[view] || {}).flatMap(([name, r]) => {
         const before = total(r.before), after = total(r.after);
-        const receives = after > before + 0.5;
-        if (!receives || !after) return [{ s, now, est: now, receives: false }];
-        return [{ s, now, receives: true, est: { students: after, iep: r.iep_after,
-          share: r.iep_after / after, dc: r.dc_after / after } }];
-      });
+        if (r.closes || after <= before + 0.5 || !byName.has(name)) return [];
+        return [{ name: name.trim(), before, after, iepB: r.iep_before, iepA: r.iep_after,
+          dcB: r.dc_before / before, dcA: r.dc_after / after }];
+      }).sort((a, b) => (b.iepA - b.iepB) - (a.iepA - a.iepB));
     }
+    // Chart only the schools with a real change; the table lists every receiver.
+    const MIN_IEP_GAIN = 10;
     function render(view) {
+      const all = receivers(view);
+      const rows = all.filter(r => r.iepA - r.iepB >= MIN_IEP_GAIN);
       const mobile = window.innerWidth < 700;
-      const pts = points(view);
-      const size = (n) => Math.max(6, Math.sqrt(n) * (mobile ? 0.9 : 1.2));
-      const tip = (p) => `<b>${p.s.school_name}</b><br>` + (p.receives
-        ? `Today: ${Math.round(p.now.students)} students, ${Math.round(p.now.iep)} with IEPs (${pct(p.now.share)}), ${pct(p.now.dc)} direct cert<br>` +
-          `Estimated: ${Math.round(p.est.students)} students, ${Math.round(p.est.iep)} with IEPs (${pct(p.est.share)}), ${pct(p.est.dc)} direct cert`
-        : `${Math.round(p.est.students)} students, ${Math.round(p.est.iep)} with IEPs (${pct(p.est.share)})<br>${pct(p.est.dc)} direct cert`);
-      const trace = (sel, name, color) => {
-        const ps = pts.filter(sel);
-        return { type: "scatter", mode: "markers", name,
-          x: ps.map(p => p.est.dc * 100), y: ps.map(p => p.est.share * 100),
-          marker: { size: ps.map(p => size(p.est.students)), color, opacity: 0.8, line: { width: 1, color: "#0e1115" } },
-          text: ps.map(tip), hovertemplate: "%{text}<extra></extra>" };
-      };
-      // Faint segments from each receiving school's position today to its estimate.
-      const moves = pts.filter(p => p.receives);
-      const seg = { type: "scatter", mode: "lines", hoverinfo: "skip", showlegend: false,
-        x: moves.flatMap(p => [p.now.dc * 100, p.est.dc * 100, null]),
-        y: moves.flatMap(p => [p.now.share * 100, p.est.share * 100, null]),
-        line: { color: "rgba(240,136,62,0.45)", width: 1, dash: "dot" } };
-      const traces = view === "now"
-        ? [trace(() => true, "School", "#58a6ff")]
-        : [seg, trace(p => !p.receives, "Other schools", "#6e7681"), trace(p => p.receives, "Receives students (estimate)", "#f0883e")];
+      const short = (n) => n.replace(/ (Elementary|Middle|K-8)? ?School$/, "");
+      const ys = rows.map(r => short(r.name));
+      const tip = (r) => `<b>${r.name}</b><br>Today: ${int(r.iepB)} of ${int(r.before)} students (${pct(r.iepB / r.before)})` +
+        `<br>Estimated: ${int(r.iepA)} of ${int(r.after)} students (${pct(r.iepA / r.after)})`;
+      const traces = [
+        { type: "scatter", mode: "lines", hoverinfo: "skip", showlegend: false,
+          x: rows.flatMap(r => [r.iepB, r.iepA, null]), y: rows.flatMap(r => [short(r.name), short(r.name), null]),
+          line: { color: "#484f58", width: 3 } },
+        { type: "scatter", mode: "markers", name: "Today", x: rows.map(r => r.iepB), y: ys,
+          marker: { size: 11, color: "#8b949e" }, text: rows.map(tip), hovertemplate: "%{text}<extra></extra>" },
+        { type: "scatter", mode: "markers+text", name: `Scenario ${view} (estimate)`, x: rows.map(r => r.iepA), y: ys,
+          marker: { size: 13, color: "#f0883e" }, text: rows.map(r => `${pct(r.iepB / r.before)} → ${pct(r.iepA / r.after)}`),
+          textposition: "middle right", textfont: { size: 11, color: "#8b949e" }, cliponaxis: false,
+          customdata: rows.map(tip), hovertemplate: "%{customdata}<extra></extra>" },
+      ];
+      el.style.height = (rows.length * 30 + 110) + "px";
       Plotly.react(el, traces, Object.assign(baseLayout(), {
-        margin: { l: 60, r: 20, t: 20, b: 50 },
-        xaxis: { title: "Directly certified for free meals (PPS, 2024-25)", ticksuffix: "%", gridcolor: "#30363d", zeroline: false, rangemode: "tozero" },
-        yaxis: { title: "Students with IEPs", ticksuffix: "%", gridcolor: "#30363d", zeroline: false, rangemode: "tozero" },
-        showlegend: view !== "now",
-        legend: { orientation: "h", x: 0, y: 1.06, bgcolor: "rgba(0,0,0,0)" },
+        margin: { l: mobile ? 110 : 150, r: mobile ? 70 : 90, t: 10, b: 60 },
+        xaxis: { title: "Students with IEPs", gridcolor: "#30363d", zeroline: false, rangemode: "tozero" },
+        yaxis: { autorange: "reversed", automargin: true, gridcolor: "rgba(0,0,0,0)" },
+        legend: { orientation: "h", x: 0, y: 1.02, yanchor: "bottom", bgcolor: "rgba(0,0,0,0)" },
       }), { displayModeBar: false, responsive: true });
 
-      document.getElementById("sped-sub").textContent = view === "now"
-        ? `Each circle is a school, sized by enrollment. ${pts.length} schools.`
-        : `Scenario ${view}: closing schools are removed and receiving schools move to their estimated size and mix. Dotted lines start at each receiving school's position today.`;
-      const xs = pts.map(p => p.est.dc), share = pts.map(p => p.est.share), count = pts.map(p => p.est.iep);
-      document.getElementById("sped-corr").textContent =
-        `Correlation with direct certification across these ${pts.length} schools: share with IEPs r = ${pearson(xs, share).toFixed(2)}; ` +
-        `number with IEPs r = ${pearson(xs, count).toFixed(2)}. The number also grows with school size.`;
+      const gained = all.reduce((a, r) => a + r.iepA - r.iepB, 0);
+      document.getElementById("sped-sub").textContent =
+        `Scenario ${view}: ${all.length} schools take in students, gaining about ${int(gained)} students with IEPs in all. ` +
+        `Shown: the ${rows.length} that gain at least ${MIN_IEP_GAIN}. Grey is today; orange is the estimate. Labels show the share with IEPs, today → estimate.`;
+      const shift = Math.max(...all.map(r => Math.abs(r.iepA / r.after - r.iepB / r.before)));
+      const drop = all.reduce((m, r) => (r.dcB - r.dcA > (m ? m.dcB - m.dcA : 0) ? r : m), null);
+      document.getElementById("sped-mix").textContent =
+        `The share with IEPs moves by at most ${Math.round(shift * 100)} points at any receiving school, because closing ` +
+        `schools have rates close to the schools they join. The count is what grows.` +
+        (drop ? ` Merging lowers some schools' poverty rate: ${drop.name} goes from ${pct(drop.dcB)} to about ${pct(drop.dcA)} directly certified.` : "");
 
-      const panel = document.getElementById("sped-table-panel");
-      panel.hidden = view === "now";
-      if (view === "now") return;
       const arrow = (a, b, f) => `${f(a)} &rarr; ${f(b)}`;
-      const int = (v) => Math.round(v).toLocaleString();
-      moves.sort((a, b) => b.est.iep - a.est.iep);
       document.getElementById("sped-table").innerHTML =
         `<thead><tr><th>School</th><th style="text-align:right">Students</th><th style="text-align:right">With IEPs</th>` +
         `<th style="text-align:right">% with IEPs</th><th style="text-align:right">% direct cert</th></tr></thead><tbody>` +
-        moves.map(p => `<tr><td>${p.s.school_name}</td><td class="numeric">${arrow(p.now.students, p.est.students, int)}</td>` +
-          `<td class="numeric">${arrow(p.now.iep, p.est.iep, int)}</td><td class="numeric">${arrow(p.now.share, p.est.share, pct)}</td>` +
-          `<td class="numeric">${arrow(p.now.dc, p.est.dc, pct)}</td></tr>`).join("") + "</tbody>";
+        all.map(r => `<tr><td>${r.name}</td><td class="numeric">${arrow(r.before, r.after, int)}</td>` +
+          `<td class="numeric">${arrow(r.iepB, r.iepA, int)}</td><td class="numeric">${arrow(r.iepB / r.before, r.iepA / r.after, pct)}</td>` +
+          `<td class="numeric">${arrow(r.dcB, r.dcA, pct)}</td></tr>`).join("") + "</tbody>";
     }
-    let view = "now";
+    let view = "A";
     document.querySelectorAll(".sped-toggle button").forEach(btn => btn.addEventListener("click", () => {
       view = btn.dataset.sped;
       document.querySelectorAll(".sped-toggle button").forEach(b => b.setAttribute("aria-pressed", String(b === btn)));
