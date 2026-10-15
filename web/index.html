@@ -739,9 +739,9 @@
   </section>
 
   <section id="section-ratios">
-    <h2>Students per teacher (Fall 2023)</h2>
+    <h2>Students per teacher (2026-27)</h2>
     <p class="note">
-      Fall 2023 NCES enrollment divided by fall 2023 classroom-teacher FTE, a same-year snapshot of how many students each full-time teacher is accountable for. Excludes counselors, social workers, nurses, and other non-instructional staff. The dashed line marks the in-scope median. Small alternative and K-8 programs naturally cluster low (fixed teacher-FTE floor spread across fewer students); larger neighborhood elementaries and middle schools cluster high. Source: <a href="https://nces.ed.gov/ccd/" target="_blank" rel="noopener">NCES CCD</a> 2023.
+      PPS's 2026-27 projected enrollment divided by the classroom teachers it budgeted for each school this year. Special education and English learner teachers aren't counted, because PPS assigns them centrally, so these ratios run higher than counts that include every licensed staff member. The dashed line marks the in-scope median. Small alternative and K-8 programs cluster low (a fixed floor of teachers spread across fewer students); larger neighborhood elementaries and middle schools cluster high. These are this year's numbers: staffing after any closures will be set in PPS's 2027-28 budget, drafted in spring 2027 and adopted in June, before changes take effect that fall. Source: PPS 2026-27 Proposed Budget, Volume 2 (school reports).
     </p>
     <div class="panel chart-card"><div id="plot-ratio" style="height: 620px;"></div></div>
   </section>
@@ -2608,9 +2608,9 @@
 
   // ---------- STUDENT/TEACHER RATIO RANKING ----------
   (function () {
-    const rows = schools.filter(s => s.students_per_teacher_2023 != null)
-      .slice().sort((a, b) => b.students_per_teacher_2023 - a.students_per_teacher_2023);
-    const medianVal = median(rows.map(s => s.students_per_teacher_2023));
+    const rows = schools.filter(s => s.students_per_teacher_pps_2627 != null)
+      .slice().sort((a, b) => b.students_per_teacher_pps_2627 - a.students_per_teacher_pps_2627);
+    const medianVal = median(rows.map(s => s.students_per_teacher_pps_2627));
     const shortName = (n) => n
       .replace(/ Elementary School$/, "")
       .replace(/ Middle School$/, "")
@@ -2623,9 +2623,9 @@
       const mobile = window.innerWidth < 700;
       el.style.height = mobile ? (rows.length * 18 + 80) + "px" : "620px";
       const names = rows.map(s => shortName(s.school_name));
-      const values = rows.map(s => s.students_per_teacher_2023);
+      const values = rows.map(s => s.students_per_teacher_pps_2627);
       const fullNames = rows.map(s => s.school_name);
-      const customdata = rows.map(s => [s.enrollment_2023, s.teachers_fte_2023]);
+      const customdata = rows.map(s => [s.enrollment_pps_2627, s.teachers_fte_pps_2627]);
       const trace = mobile ? {
         type: "bar", orientation: "h",
         x: values, y: names,
@@ -2634,7 +2634,7 @@
         marker: { color: "#a371f7", line: { width: 0 } },
         customdata,
         hovertemplate: "<b>%{text}</b><br>" +
-          "%{customdata[0]} students / %{customdata[1]} teacher FTE<br>" +
+          "%{customdata[0]} students / %{customdata[1]} classroom teacher FTE<br>" +
           "Ratio: %{x:.1f}<extra></extra>",
       } : {
         type: "bar",
@@ -2644,14 +2644,14 @@
         marker: { color: "#a371f7", line: { width: 0 } },
         customdata,
         hovertemplate: "<b>%{text}</b><br>" +
-          "%{customdata[0]} students / %{customdata[1]} teacher FTE<br>" +
+          "%{customdata[0]} students / %{customdata[1]} classroom teacher FTE<br>" +
           "Ratio: %{y:.1f}<extra></extra>",
       };
       const layout = mobile ? Object.assign(baseLayout(), {
         margin: { l: 130, r: 24, t: 40, b: 40 },
         bargap: 0.2,
         xaxis: {
-          title: "Students per teacher FTE (Fall 2023)",
+          title: "Students per classroom teacher (2026-27)",
           gridcolor: "#30363d", zerolinecolor: "#30363d",
           rangemode: "tozero", side: "top", fixedrange: true,
         },
@@ -2684,7 +2684,7 @@
           showgrid: false, zeroline: false, fixedrange: true,
         },
         yaxis: {
-          title: "Students per teacher FTE (Fall 2023)",
+          title: "Students per classroom teacher (2026-27)",
           gridcolor: "#30363d", zerolinecolor: "#30363d",
           rangemode: "tozero",
         },

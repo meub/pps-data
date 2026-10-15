@@ -1234,6 +1234,16 @@ def main():
               if (m := pps_master_name(r["name"], names)) and r["pct_direct_cert_2425"] is not None}
     pps["pct_direct_cert_pps_2425"] = pps["School Name"].map(lambda n: dc_map.get(n) / 100 if n in dc_map else None)
 
+    # Classroom teachers per school, 2026-27 budget, and the 2026-27 enrollment
+    # PPS staffed to (Volume 2). "Teachers" is school-allocated FTE only; special
+    # education and ESL teachers are centrally allocated and not counted.
+    staff_map = {m: (r["enrollment"]["2026_27"], r["fte_2026_27"]["teachers"]) for r in budget_raw
+                 if (m := pps_master_name(r["name"], names)) and r["fte_2026_27"].get("teachers")
+                 and r["enrollment"].get("2026_27")}
+    pps["teachers_fte_pps_2627"] = pps["School Name"].map(lambda n: staff_map[n][1] if n in staff_map else None)
+    pps["enrollment_pps_2627"] = pps["School Name"].map(lambda n: staff_map[n][0] if n in staff_map else None)
+    pps["students_per_teacher_pps_2627"] = (pps["enrollment_pps_2627"] / pps["teachers_fte_pps_2627"]).round(1)
+
     # Rename columns to snake_case for easier downstream use.
     rename = {
         "School Institution ID": "ode_school_id",
@@ -1271,6 +1281,7 @@ def main():
         "year_built", "square_feet", "construction_type_2009",
         "functional_capacity_2021", "modular_classrooms_2021", "utilization_pct_2526",
         "sped_count_2526", "sped_enrollment_2526", "pct_sped_2526", "pct_direct_cert_pps_2425",
+        "teachers_fte_pps_2627", "enrollment_pps_2627", "students_per_teacher_pps_2627",
         "functional_capacity_model", "utilization_model_2526",
         "capacity_source_conflict", "fc_model_approx", "capacity_conflict_note",
         "capacity_source", "data_note",
@@ -1318,6 +1329,10 @@ def main():
             pps.loc[pps["school_name"] == row["school_name"],
                     ["sped_count_2526", "sped_enrollment_2526", "pct_sped_2526"]] = \
                 [r["sped"], r["total"], round(r["sped"] / r["total"], 4)]
+        if row["school_name"] in staff_map:
+            e, t = staff_map[row["school_name"]]
+            pps.loc[pps["school_name"] == row["school_name"],
+                    ["teachers_fte_pps_2627", "enrollment_pps_2627", "students_per_teacher_pps_2627"]] = [t, e, round(e / t, 1)]
         if row["school_name"] in dc_map:
             pps.loc[pps["school_name"] == row["school_name"], "pct_direct_cert_pps_2425"] = \
                 dc_map[row["school_name"]] / 100
