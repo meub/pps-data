@@ -875,24 +875,35 @@
     `${n0(ncLast.students).toLocaleString()} in ${ncLast.year}, while the buildings stay the same size. ` +
     `PPS would still have to close the budget gap with cuts. Keeping every school open changes ` +
     `where those cuts land and what the remaining money pays for.`;
-  Plotly.newPlot("plot-no-closures", [
-    { type: "scatter", mode: "lines", name: "Seats (PPS functional capacity)",
-      x: NC.series.map(s => s.year), y: NC.series.map(() => NC.seats),
-      line: { color: GRAY, dash: "dash", width: 2 }, hovertemplate: "Seats: %{y:,}<extra></extra>" },
-    { type: "scatter", mode: "lines+markers", name: "Students (forecast)",
-      x: NC.series.map(s => s.year), y: NC.series.map(s => s.students),
-      line: { color: BLUE, width: 3 }, marker: { size: 6 },
-      error_y: { type: "data", symmetric: false, color: BLUE, thickness: 1.5, width: 6,
-        array: NC.series.map((s, i) => i === NC.series.length - 1 ? NC.range_2035[1] - s.students : 0),
-        arrayminus: NC.series.map((s, i) => i === NC.series.length - 1 ? s.students - NC.range_2035[0] : 0) },
-      hovertemplate: "%{x}: %{y:,} students<extra></extra>" },
-  ], {
-    paper_bgcolor: SURFACE, plot_bgcolor: SURFACE, font: FONT,
-    margin: { l: 64, r: 16, t: mobile() ? 10 : 30, b: mobile() ? 110 : 50 },
+  // Seats (~43,000) would flatten the student line on a shared axis, so the
+  // chart zooms to enrollment and states the seat count in a label instead.
+  const ncYears = NC.series.map(s => s.year);
+  const ncDrop = Math.round((1 - ncLast.students / ncFirst.students) * 100);
+  const ncPad = 600;
+  Plotly.newPlot("plot-no-closures", [{
+    type: "scatter", mode: "lines+markers", name: "Students (forecast)",
+    x: ncYears, y: NC.series.map(s => s.students),
+    line: { color: BLUE, width: 3 }, marker: { size: 7 },
+    error_y: { type: "data", symmetric: false, color: BLUE, thickness: 1.5, width: 6,
+      array: NC.series.map((s, i) => i === NC.series.length - 1 ? NC.range_2035[1] - s.students : 0),
+      arrayminus: NC.series.map((s, i) => i === NC.series.length - 1 ? s.students - NC.range_2035[0] : 0) },
+    hovertemplate: "%{x}: %{y:,} students<extra></extra>",
+  }], {
+    paper_bgcolor: SURFACE, plot_bgcolor: SURFACE, font: FONT, showlegend: false,
+    margin: { l: 64, r: mobile() ? 16 : 40, t: mobile() ? 56 : 40, b: mobile() ? 70 : 50 },
     hoverlabel: { font: FONT, bgcolor: "#0d1117", bordercolor: GRID },
     xaxis: { gridcolor: GRID, fixedrange: true, tickangle: mobile() ? -45 : 0 },
-    yaxis: { gridcolor: GRID, zeroline: false, fixedrange: true, range: [0, NC.seats * 1.12], tickformat: "," },
-    legend: mobile() ? { orientation: "h", x: 0.5, xanchor: "center", y: -0.42 } : { orientation: "h", x: 0, y: 1.12 },
+    yaxis: { title: "Students", gridcolor: GRID, zeroline: false, fixedrange: true, tickformat: ",",
+      range: [NC.range_2035[0] - ncPad, ncFirst.students + ncPad * 2] },
+    annotations: [
+      { x: ncYears[0], y: ncFirst.students, text: ncFirst.students.toLocaleString(), showarrow: false,
+        yshift: 16, xanchor: "left", font: { ...FONT, size: 13 } },
+      { x: ncYears[ncYears.length - 1], y: ncLast.students, text: `${ncLast.students.toLocaleString()} (−${ncDrop}%)`,
+        showarrow: false, xshift: -14, yshift: -18, xanchor: "right", font: { ...FONT, size: 13 } },
+      { xref: "paper", yref: "paper", x: 0, y: 1.02, yanchor: "bottom", xanchor: "left", showarrow: false,
+        text: `Seats stay at ${NC.seats.toLocaleString()} the whole time.${mobile() ? "<br>" : " "}The bar on ${ncLast.year} is the forecast's low-high range.`,
+        font: { ...FONT, size: 12, color: MUTED } },
+    ],
   }, CONFIG);
   const [splitLo, splitHi] = NC.split_grade_range;
   const NC_ROWS = [
