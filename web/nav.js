@@ -16,7 +16,8 @@
     { group: "Budget", page: "budget", items: [
       ["section-flow", "Money in and out"], ["section-gap", "The yearly gap"],
       ["section-contracts", "Contracts"], ["section-schools", "Cost per student"],
-      ["section-savings", "Closure savings"], ["section-methodology", "Budget methodology"]] },
+      ["section-savings", "Closure savings"], ["section-no-closures", "If nothing closes"],
+      ["section-methodology", "Budget methodology"]] },
     { group: "Data", page: "index", items: [
       ["section-scatters", "Scatters"], ["section-table", "Table"],
       ["section-charters", "Charters"], ["section-methodology", "Methodology"]] },

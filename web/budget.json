@@ -5096,5 +5096,138 @@
     "students": 3216
    }
   }
+ },
+ "pps_closure_savings": [
+  10000,
+  12000
+ ],
+ "status_quo": {
+  "schools": 71,
+  "seats": 43162,
+  "fixed_cost": 54497524,
+  "fixed_per_student_by_size": {
+   "under 250": 2670,
+   "450 or more": 1780
+  },
+  "series": [
+   {
+    "year": "2025-26",
+    "students": 26431
+   },
+   {
+    "year": "2026-27",
+    "students": 26054
+   },
+   {
+    "year": "2027-28",
+    "students": 25737
+   },
+   {
+    "year": "2028-29",
+    "students": 25496
+   },
+   {
+    "year": "2029-30",
+    "students": 25265
+   },
+   {
+    "year": "2030-31",
+    "students": 24796
+   },
+   {
+    "year": "2031-32",
+    "students": 24497
+   },
+   {
+    "year": "2032-33",
+    "students": 24219
+   },
+   {
+    "year": "2033-34",
+    "students": 24041
+   },
+   {
+    "year": "2034-35",
+    "students": 23799
+   },
+   {
+    "year": "2035-36",
+    "students": 23529
+   }
+  ],
+  "years": [
+   {
+    "year": "2025-26",
+    "students": 26431,
+    "empty_seats": 16829,
+    "median_util": 0.613,
+    "under_50": 16,
+    "under_250": 9,
+    "k5_split_grades": 6,
+    "middle_small": 8,
+    "fixed_per_student": 2062
+   },
+   {
+    "year": "2027-28",
+    "students": 25737,
+    "empty_seats": 17521,
+    "median_util": 0.595,
+    "under_50": 18,
+    "under_250": 14,
+    "k5_split_grades": 8,
+    "middle_small": 8,
+    "fixed_per_student": 2117
+   },
+   {
+    "year": "2030-31",
+    "students": 24796,
+    "empty_seats": 18465,
+    "median_util": 0.56,
+    "under_50": 21,
+    "under_250": 14,
+    "k5_split_grades": 10,
+    "middle_small": 11,
+    "fixed_per_student": 2198
+   },
+   {
+    "year": "2035-36",
+    "students": 23529,
+    "empty_seats": 19746,
+    "median_util": 0.54,
+    "under_50": 28,
+    "under_250": 20,
+    "k5_split_grades": 14,
+    "middle_small": 11,
+    "fixed_per_student": 2316
+   }
+  ],
+  "range_2035": [
+   21681,
+   25889
+  ],
+  "split_grade_range": [
+   26,
+   40
+  ],
+  "small_middle": 450,
+  "middle_schools": 15,
+  "scenarios": {
+   "rs_a": {
+    "schools": 14,
+    "now": 4258,
+    "later": 3479,
+    "median_later": 231
+   },
+   "rs_b": {
+    "schools": 11,
+    "now": 3301,
+    "later": 2707,
+    "median_later": 222
+   }
+  },
+  "teachers_for_savings": [
+   63,
+   76
+  ]
  }
 }

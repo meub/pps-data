@@ -77,6 +77,7 @@
   .facts b { color: var(--fg); font-weight: 600; }
   #plot-schools { height: 520px; }
   #plot-savings { height: 260px; }
+  #plot-no-closures { height: 320px; }
   .estimate-badge { display: inline-block; font-size: var(--fs-micro); font-weight: 600;
     color: #e3b341; border: 1px solid #5c4a1a; background: #2a2210; border-radius: 10px;
     padding: 1px 8px; margin-left: 8px; vertical-align: middle; }
@@ -361,6 +362,37 @@
       <li>Program moves, boundary changes, and grade changes in the scenarios.</li>
       <li>State funding follows students, so closures don't change revenue directly.</li>
     </ul>
+  </section>
+
+  <section id="section-no-closures">
+    <h2>What if nothing closes <span class="estimate-badge">Estimate, not a PPS figure</span></h2>
+    <p class="note" id="nc-intro"></p>
+    <div class="panel panel-pad">
+      <div id="plot-no-closures" class="chart"></div>
+      <div class="table-scroll"><table class="data" id="nc-table"></table></div>
+    </div>
+    <div class="callout">
+      <h3>What keeping every school open changes</h3>
+      <ul class="caveats" id="nc-costs"></ul>
+      <h3 style="margin-top:14px">What it avoids</h3>
+      <ul class="caveats">
+        <li>No school communities close, and neighborhood schools and walking routes stay as they are.</li>
+        <li>No students change schools because of a closure.</li>
+        <li>No risk of families leaving PPS over a closure. The forecast doesn't model that, and if it
+          happens after closures it would cut into both enrollment and savings.</li>
+        <li>No one-time transition costs and no longer bus routes (the state reimburses about 70% of
+          transportation, so PPS pays the rest).</li>
+      </ul>
+    </div>
+    <p class="caveat">
+      Enrollment is Portland State's Population Research Center forecast, which assumes
+      today's schools and boundaries. Capacity is PPS's 2021 functional capacity. Fixed
+      building staff is each school's 2026-27 budgeted principal, assistant principal,
+      office, and custodial positions at PPS's average cost with benefits, held constant;
+      it leaves out utilities and upkeep. The 2035-36 forecast comes with a range, shown
+      in the chart. High schools, alternative programs, and schools without a forecast
+      are left out.
+    </p>
   </section>
 
   <section id="section-methodology" class="methodology">
@@ -772,10 +804,11 @@
     `PPS's own estimate is $10 million to $12 million a year. It plans to reinvest that money in the remaining schools, ` +
     `separate from the ${fmtM(gap)} it has to cut for 2027-28.`;
   // gap is in thousands of dollars, like every budget.json figure.
+  const [ppsLo, ppsHi] = D.pps_closure_savings;
   document.getElementById("savings-scale").textContent =
-    `For scale: $10 million to $12 million is about ${Math.round(10000 / gap * 100)}% to ${Math.round(12000 / gap * 100)}% ` +
+    `For scale: ${fmtM(ppsLo)} to ${fmtM(ppsHi)} is about ${Math.round(ppsLo / gap * 100)}% to ${Math.round(ppsHi / gap * 100)}% ` +
     `of the ${fmtM(gap)} gap for 2027-28. Even if all of it went toward the gap, PPS would still need about ` +
-    `${fmtM(gap - 12000)} to ${fmtM(gap - 10000)} in other cuts.`;
+    `${fmtM(gap - ppsHi)} to ${fmtM(gap - ppsLo)} in other cuts.`;
   const PARTS = [
     ["leadership", "Principal and office staff", AQUA],
     ["custodians", "Custodians", BLUE],
@@ -832,10 +865,65 @@
     `<b>Low estimate</b> = principal and office staff + custodians. <b>High estimate</b> adds the other two.`,
   ].map(x => `<li>${x}</li>`).join("");
 
+  // ---- What if nothing closes ----
+  const NC = D.status_quo, ncNow = NC.years[0], ncEnd = NC.years[NC.years.length - 1];
+  const ncFirst = NC.series[0], ncLast = NC.series[NC.series.length - 1];
+  const n0 = (v) => Math.round(v / 100) * 100;
+  document.getElementById("nc-intro").textContent =
+    `If PPS keeps all ${NC.schools} elementary, K-8, and middle schools below open, Portland State's forecast ` +
+    `has their enrollment going from ${n0(ncFirst.students).toLocaleString()} in ${ncFirst.year} to about ` +
+    `${n0(ncLast.students).toLocaleString()} in ${ncLast.year}, while the buildings stay the same size. ` +
+    `PPS would still have to close the budget gap with cuts. Keeping every school open changes ` +
+    `where those cuts land and what the remaining money pays for.`;
+  Plotly.newPlot("plot-no-closures", [
+    { type: "scatter", mode: "lines", name: "Seats (PPS functional capacity)",
+      x: NC.series.map(s => s.year), y: NC.series.map(() => NC.seats),
+      line: { color: GRAY, dash: "dash", width: 2 }, hovertemplate: "Seats: %{y:,}<extra></extra>" },
+    { type: "scatter", mode: "lines+markers", name: "Students (forecast)",
+      x: NC.series.map(s => s.year), y: NC.series.map(s => s.students),
+      line: { color: BLUE, width: 3 }, marker: { size: 6 },
+      error_y: { type: "data", symmetric: false, color: BLUE, thickness: 1.5, width: 6,
+        array: NC.series.map((s, i) => i === NC.series.length - 1 ? NC.range_2035[1] - s.students : 0),
+        arrayminus: NC.series.map((s, i) => i === NC.series.length - 1 ? s.students - NC.range_2035[0] : 0) },
+      hovertemplate: "%{x}: %{y:,} students<extra></extra>" },
+  ], {
+    paper_bgcolor: SURFACE, plot_bgcolor: SURFACE, font: FONT,
+    margin: { l: 64, r: 16, t: mobile() ? 10 : 30, b: mobile() ? 110 : 50 },
+    hoverlabel: { font: FONT, bgcolor: "#0d1117", bordercolor: GRID },
+    xaxis: { gridcolor: GRID, fixedrange: true, tickangle: mobile() ? -45 : 0 },
+    yaxis: { gridcolor: GRID, zeroline: false, fixedrange: true, range: [0, NC.seats * 1.12], tickformat: "," },
+    legend: mobile() ? { orientation: "h", x: 0.5, xanchor: "center", y: -0.42 } : { orientation: "h", x: 0, y: 1.12 },
+  }, CONFIG);
+  const [splitLo, splitHi] = NC.split_grade_range;
+  const NC_ROWS = [
+    ["Students", y => y.students.toLocaleString()],
+    ["Empty seats", y => y.empty_seats.toLocaleString()],
+    ["Median school utilization", y => Math.round(y.median_util * 100) + "%"],
+    ["Schools under 50% full", y => y.under_50],
+    ["Schools under 250 students", y => y.under_250],
+    [`K-5 schools with ${splitLo} to ${splitHi} students per grade`, y => y.k5_split_grades],
+    [`Middle schools under ${NC.small_middle} students (of ${NC.middle_schools})`, y => y.middle_small],
+    ["Fixed building staff cost per student", y => fmtUSD(y.fixed_per_student)],
+  ];
+  document.getElementById("nc-table").innerHTML =
+    `<tr><th></th>${NC.years.map(y => `<th class="num">${y.year}</th>`).join("")}</tr>` +
+    NC_ROWS.map(([label, f]) => `<tr><td>${label}</td>${NC.years.map(y => `<td class="num">${f(y)}</td>`).join("")}</tr>`).join("");
+  const [tLo, tHi] = NC.teachers_for_savings, size = NC.fixed_per_student_by_size;
+  const scA = NC.scenarios.rs_a, scB = NC.scenarios.rs_b;
+  const growth = Math.round((ncEnd.fixed_per_student / ncNow.fixed_per_student - 1) * 100);
+  document.getElementById("nc-costs").innerHTML = [
+    `<b>Fixed building costs are spread over fewer students.</b> Every school has a principal, office staff, and custodians, about ${fmtM(NC.fixed_cost / 1000)} a year across these schools. That's ${fmtUSD(ncNow.fixed_per_student)} per student in ${ncNow.year} and ${fmtUSD(ncEnd.fixed_per_student)} by ${ncEnd.year} in today's dollars, about ${growth}% more. In ${ncNow.year} it was ${fmtUSD(size["under 250"])} per student at schools under 250 students and ${fmtUSD(size["450 or more"])} at schools of 450 or more.`,
+    `<b>State funding is set per student</b>, so revenue falls with enrollment while those building costs don't. More of each year's cuts would come from staff who work with students, such as teachers, specialists, and electives.`,
+    `<b>PPS's ${fmtM(ppsLo)} to ${fmtM(ppsHi)} reinvestment wouldn't exist.</b> That's about ${tLo} to ${tHi} teaching positions at PPS's average cost of about ${fmtUSD(Math.round(c.licensed / 1000) * 1000)} with benefits.`,
+    `<b>More elementary schools have awkward grade sizes.</b> With ${splitLo} to ${splitHi} students per grade, a school has more than one class's worth of students but not two full classes, which often means combined-grade classes or uneven class sizes: ${ncNow.k5_split_grades} schools in ${ncNow.year}, ${ncEnd.k5_split_grades} by ${ncEnd.year}.`,
+    `<b>The schools on PPS's lists keep shrinking.</b> Scenario A's ${scA.schools} closing schools go from ${scA.now.toLocaleString()} students to about ${scA.later.toLocaleString()} by ${ncEnd.year} (median ${scA.median_later} per school); Scenario B's ${scB.schools} go from ${scB.now.toLocaleString()} to about ${scB.later.toLocaleString()}.`,
+  ].map(x => `<li>${x}</li>`).join("");
+
   // ---- Sources ----
   document.getElementById("source-list").innerHTML = Object.values(D.sources).map(s =>
     `<li><a href="${s.url}" target="_blank" rel="noopener">${s.title}</a>, ${s.publisher}.</li>`).join("") +
-    `<li>PPS, Rightsizing board presentation and draft scenarios, October 6, 2026.</li>`;
+    `<li>PPS, Rightsizing board presentation and draft scenarios, October 6, 2026.</li>` +
+    `<li><a href="https://resources.finalsite.net/images/v1785171463/ppsnet/ejdr22voeddvux8qwlob/PPS_Forecast_2026_27.pdf" target="_blank" rel="noopener">Portland Public Schools Enrollment Forecasts 2026-27 to 2035-36</a>, PSU Population Research Center, July 2026.</li>`;
 
   let lastMobile = mobile();
   window.addEventListener("resize", () => {

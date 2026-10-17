@@ -440,6 +440,84 @@ def closure_savings(rows: list[dict]) -> dict:
     return out
 
 
+# PPS's district-wide closure savings estimate, in thousands (Armstrong, Oct 2026).
+PPS_CLOSURE_SAVINGS = (10_000, 12_000)
+# Years shown in the "what if nothing closes" table. PRC's forecast assumes
+# today's schools and boundaries, which is the no-closure case.
+STATUS_QUO_YEARS = ["2025-26", "2027-28", "2030-31", "2035-36"]
+# K-5 schools averaging this many students per grade are past one class but
+# short of two full ones, so they tend to combine grades or run uneven sizes.
+SPLIT_GRADE_RANGE = (26, 40)
+# Middle schools below this size have trouble staffing a full elective lineup.
+SMALL_MIDDLE = 450
+
+
+def status_quo(rows: list[dict], cost: dict[str, float]) -> dict:
+    """PRC's no-closure forecast for K-5, K-8, and middle schools.
+
+    Fixed building staff (principal/AP, office, custodians) is held at its
+    2026-27 budgeted level, in 2026-27 dollars.
+    """
+    master = pd.read_csv(MASTER)
+    by_name = master.set_index(master["school_name"].str.strip())
+    col = lambda y: "prc_baseline_2025_26" if y == "2025-26" else "enrollment_forecast_" + y.replace("-", "_")
+    years = ["2025-26"] + [f"{y}-{(y + 1) % 100:02d}" for y in range(2026, 2036)]
+    recs = []
+    for r in rows:
+        if r["band"] not in ("K-5", "K-8", "Middle") or r["name"] == "Metro. Learning Center":
+            continue
+        m = by_name.loc[r["master_name"]]
+        cap = float(m["functional_capacity_2021"])
+        enroll = [float(m[col(y)]) for y in years]
+        if pd.isna(cap) or any(pd.isna(e) for e in enroll):
+            continue
+        f = r["fte_2026_27"]
+        recs.append({"band": r["band"], "cap": cap, "enroll": dict(zip(years, enroll)),
+                     "fixed": f["admin"] * cost["administrator"] + (f["clerical"] + f["custodial"]) * cost["classified"],
+                     "closes_a": r["rs_a"] == "closes", "closes_b": r["rs_b"] == "closes",
+                     "low": float(m["enrollment_forecast_2035_36_low"]), "high": float(m["enrollment_forecast_2035_36_high"])})
+    fixed = sum(s["fixed"] for s in recs)
+    seats = sum(s["cap"] for s in recs)
+
+    def year(y: str) -> dict:
+        e = [s["enroll"][y] for s in recs]
+        util = sorted(s["enroll"][y] / s["cap"] for s in recs)
+        per_grade = [s["enroll"][y] / 6 for s in recs if s["band"] == "K-5"]
+        lo, hi = SPLIT_GRADE_RANGE
+        return {
+            "year": y, "students": round(sum(e)),
+            "empty_seats": round(sum(max(0, s["cap"] - s["enroll"][y]) for s in recs)),
+            "median_util": round(util[len(util) // 2], 3),
+            "under_50": sum(u < 0.5 for u in util),
+            "under_250": sum(x < 250 for x in e),
+            "k5_split_grades": sum(lo <= g <= hi for g in per_grade),
+            "middle_small": sum(s["enroll"][y] < SMALL_MIDDLE for s in recs if s["band"] == "Middle"),
+            "fixed_per_student": round(fixed / sum(e)),
+        }
+
+    def scenario(key: str) -> dict:
+        c = [s for s in recs if s[key]]
+        last = sorted(s["enroll"][years[-1]] for s in c)
+        return {"schools": len(c), "now": round(sum(s["enroll"][years[0]] for s in c)),
+                "later": round(sum(last)), "median_later": round(last[len(last) // 2])}
+
+    by_size = {}
+    for label, lo, hi in (("under 250", 0, 250), ("450 or more", 450, 10_000)):
+        g = [s for s in recs if lo <= s["enroll"]["2025-26"] < hi]
+        by_size[label] = round(sum(s["fixed"] for s in g) / sum(s["enroll"]["2025-26"] for s in g))
+    return {
+        "schools": len(recs), "seats": round(seats), "fixed_cost": round(fixed),
+        "fixed_per_student_by_size": by_size,
+        "series": [{"year": y, "students": round(sum(s["enroll"][y] for s in recs))} for y in years],
+        "years": [year(y) for y in STATUS_QUO_YEARS],
+        "range_2035": [round(sum(s["low"] for s in recs)), round(sum(s["high"] for s in recs))],
+        "split_grade_range": SPLIT_GRADE_RANGE, "small_middle": SMALL_MIDDLE,
+        "middle_schools": sum(s["band"] == "Middle" for s in recs),
+        "scenarios": {"rs_a": scenario("closes_a"), "rs_b": scenario("closes_b")},
+        "teachers_for_savings": [round(k * 1000 / cost["licensed"]) for k in PPS_CLOSURE_SAVINGS],
+    }
+
+
 def main() -> None:
     payload = {
         "sources": SOURCES,
@@ -454,6 +532,8 @@ def main() -> None:
         "schools": schools(),
     }
     payload["savings"] = closure_savings(payload["schools"])
+    payload["pps_closure_savings"] = PPS_CLOSURE_SAVINGS
+    payload["status_quo"] = status_quo(payload["schools"], cost_per_fte())
     OUT.write_text(json.dumps(payload, indent=1, ensure_ascii=False) + "\n")
     print(f"wrote {OUT.relative_to(ROOT)}: {len(payload['schools'])} schools")
 
