@@ -563,7 +563,7 @@
   <section id="section-map">
     <h2>Map: building utilization at all 74 in-scope schools</h2>
     <p class="note">
-      Each marker sized by 2025-26 enrollment and labeled with building utilization (enrollment ÷ 2021 functional capacity). Red fill marks schools at less than 50% building utilization. A purple ring indicates an unreinforced masonry (URM) building.
+      Each marker sized by 2025-26 enrollment and labeled with building utilization (enrollment ÷ 2021 functional capacity). <span style="color:#2bb3a3">Teal</span> fill marks schools at less than 50% utilization. A purple ring indicates an unreinforced masonry (URM) building. PPS's capacity counts portable classrooms at 31 schools; uncheck "Count portables" to see the building alone.
     </p>
     <div class="map-filters">
       <span>Show:</span>
@@ -572,6 +572,7 @@
       <label><input id="map-filter-middle" type="checkbox" checked> Middle</label>
       <label><input id="map-filter-alternative" type="checkbox" checked> Alternative</label>
       <label class="sep"><input id="map-filter-non-neighborhood" type="checkbox"> Hide focus-option &amp; alternative programs</label>
+      <label class="sep"><input class="count-portables" type="checkbox" checked> Count portables in capacity</label>
     </div>
     <div class="panel"><div id="map"></div></div>
   </section>
@@ -581,10 +582,16 @@
     <p class="note">
       Current enrollment as a percentage of PPS's own functional capacity from the 2021 Long-Range Facility Plan. Functional capacity accounts for classroom count, modular rooms, and set-asides (SPED, art/music, DLI co-location). This is a planning number from PPS, not a raw square-footage estimate.
     </p>
+    <div class="map-filters">
+      <label><input class="count-portables" type="checkbox" checked> Count portables in capacity</label>
+    </div>
     <div class="panel chart-card"><div id="plot-ranking" style="height: 620px;"></div></div>
     <p class="note">
       * The school's capacity includes portable (modular) classrooms, as counted in the
       2021 plan. Portables are separate modular buildings on the school grounds, not rooms in the main building.
+      Unchecking "Count portables in capacity" uses PPS's capacity for the permanent building alone, from the
+      same plan's capacity charts. Some schools use their portables for art, music, or other specials, and some
+      portables have since been removed, so neither number is a perfect picture of how a school runs today.
     </p>
   </section>
 
@@ -961,6 +968,12 @@
       schools to ten at Forest Park. Those schools carry a * next to their capacity in
       the table and their name in the utilization chart. PPS has since removed the portables at
       Abernethy and Beach; their popups give the capacity without them.
+      The same plan's capacity charts (Vol 1, pp. 111, 113, and 119) split each school's
+      capacity into the permanent building and its portables. That building-only figure is
+      in the table ("Utilization, building only"), the map popups, and the "Count portables
+      in capacity" toggle on the map and utilization chart. Across the 31 schools, about
+      2,800 seats of PPS's capacity are in portables. Rigler, for example, has 589 seats with
+      its eight portables and 394 in the building.
     </p>
     <p>
       The workbook PPS released has its reduction inputs (SPED and Early Childhood
@@ -1233,6 +1246,17 @@
   // Portable (modular) classrooms PPS's 2021 LRFP counts in a school's capacity.
   const portables = (s) => Number(s.modular_classrooms_2021) || 0;
   const portablesText = (s) => `Capacity includes ${portables(s)} portable classroom${portables(s) === 1 ? "" : "s"}`;
+  // Whether utilization counts portables (PPS's figure) or the permanent
+  // building only. The map and ranking chart both read it; every
+  // .count-portables checkbox writes it and fires "portables-change".
+  let countPortables = true;
+  const utilOf = (s) => countPortables ? s.utilization_pct_2526 : s.utilization_permanent_2526;
+  const capOf = (s) => countPortables ? s.functional_capacity_2021 : s.functional_capacity_permanent_2021;
+  document.querySelectorAll(".count-portables").forEach(cb => cb.addEventListener("change", () => {
+    countPortables = cb.checked;
+    document.querySelectorAll(".count-portables").forEach(x => { x.checked = countPortables; });
+    document.dispatchEvent(new Event("portables-change"));
+  }));
 
   function fmt(val, type) {
     if (val === null || val === undefined || Number.isNaN(val) || val === "") return "—";
@@ -1290,20 +1314,23 @@
   });
 
   const mapMarkers = [];
+  // Under 50% gets a distinct, neutral teal rather than an alarm color.
+  const LOW_UTIL = "#2bb3a3", UTIL = "#58a6ff";
+  function markerStyle(s, util) {
+    const low = util != null && Math.round(util * 100) <= 49;
+    const urm = s.is_urm_building === true || s.is_urm_building === "True";
+    return { fillColor: low ? LOW_UTIL : UTIL, color: urm ? "#a371f7" : (low ? LOW_UTIL : UTIL) };
+  }
   schools.forEach(s => {
     if (s.latitude == null || s.longitude == null) return;
     const urm = s.is_urm_building === true || s.is_urm_building === "True";
     const util = s.utilization_pct_2526;
-    const lowUtil = util != null && Math.round(util * 100) <= 49;
-    const fillColor = lowUtil ? "#f85149" : "#58a6ff";
-    const borderColor = urm ? "#a371f7" : fillColor;
     const r = Math.max(7.5, Math.min(33, Math.sqrt(s.enrollment_2025_26 || 100) * 0.75));
     const marker = L.circleMarker([s.latitude, s.longitude], {
       radius: r,
-      color: borderColor,
       weight: urm ? 2.5 : 1,
-      fillColor: fillColor,
       fillOpacity: 0.72,
+      ...markerStyle(s, util),
     }).addTo(map);
     if (util != null) {
       marker.bindTooltip(`${Math.round(util * 100)}%`, {
@@ -1322,6 +1349,7 @@
         ["Construction type", s.construction_type_2009 || "—"],
         ["Functional capacity (2021)", fmt(s.functional_capacity_2021, "int") + (s.capacity_source === "Utilization workbook" ? " (PPS utilization workbook)" : "") + (portables(s) ? ` (includes ${portables(s)} portable${portables(s) === 1 ? "" : "s"})` : "")],
         ["Utilization 25-26", fmt(s.utilization_pct_2526, "pct_0_1")],
+        ...(portables(s) ? [["Building only (no portables)", `${fmt(s.functional_capacity_permanent_2021, "int")} capacity, ${fmt(s.utilization_permanent_2526, "pct_0_1")} utilization`]] : []),
         ["URM", fmt(s.is_urm_building, "bool")],
         ["URM retrofit cost", fmt(s.urm_retrofit_cost_usd, "usd")],
         ["Seismic retrofit", s.seismic_retrofit_status || "—"],
@@ -1429,6 +1457,14 @@
       else if (!visible && map.hasLayer(marker)) map.removeLayer(marker);
     });
   }
+  document.addEventListener("portables-change", () => {
+    mapMarkers.forEach(({ marker, school }) => {
+      const u = utilOf(school);
+      if (u == null) return;
+      marker.setStyle(markerStyle(school, u));
+      marker.setTooltipContent(`${Math.round(u * 100)}%`);
+    });
+  });
   ["map-filter-elementary", "map-filter-k8", "map-filter-middle",
    "map-filter-alternative", "map-filter-non-neighborhood"].forEach(id => {
     const el = document.getElementById(id);
@@ -1505,8 +1541,7 @@
 
   // ---------- RANKING BAR CHART ----------
   (function () {
-    const rows = schools.filter(s => s.utilization_pct_2526 != null)
-      .slice().sort((a, b) => b.utilization_pct_2526 - a.utilization_pct_2526);
+    const allRows = schools.filter(s => s.utilization_pct_2526 != null);
     const shortName = (n) => n
       .replace(/ Elementary School$/, "")
       .replace(/ Middle School$/, "")
@@ -1516,13 +1551,15 @@
     function renderRanking() {
       const el = document.getElementById("plot-ranking");
       if (!el) return;
+      const rows = allRows.slice().sort((a, b) => utilOf(b) - utilOf(a));
       const mobile = window.innerWidth < 700;
       el.style.height = mobile ? (rows.length * 18 + 80) + "px" : "620px";
       const names = rows.map(s => shortName(s.school_name) + (portables(s) ? " *" : ""));
-      const values = rows.map(s => s.utilization_pct_2526 * 100);
+      const values = rows.map(s => utilOf(s) * 100);
       const fullNames = rows.map(s => s.school_name);
-      const customdata = rows.map(s => [s.enrollment_2025_26, s.functional_capacity_2021,
-        portables(s) ? `<br>* ${portablesText(s)}` : ""]);
+      const customdata = rows.map(s => [s.enrollment_2025_26, capOf(s),
+        !portables(s) ? "" : countPortables ? `<br>* ${portablesText(s)}`
+          : `<br>* Building only; PPS's capacity with portables is ${s.functional_capacity_2021}`]);
       const trace = mobile ? {
         type: "bar", orientation: "h",
         x: values, y: names,
@@ -1588,7 +1625,8 @@
           showgrid: false, zeroline: false, fixedrange: true,
         },
         yaxis: {
-          title: "Utilization % (2025-26 enrollment ÷ 2021 functional capacity)",
+          title: countPortables ? "Utilization % (2025-26 enrollment ÷ 2021 functional capacity)"
+            : "Utilization % (2025-26 enrollment ÷ building-only capacity)",
           gridcolor: "#30363d", zerolinecolor: "#30363d",
           ticksuffix: "%", rangemode: "tozero",
         },
@@ -1609,6 +1647,7 @@
     }
 
     renderRanking();
+    document.addEventListener("portables-change", renderRanking);
     let resizeTimer;
     window.addEventListener("resize", () => {
       clearTimeout(resizeTimer);

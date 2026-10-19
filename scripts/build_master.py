@@ -614,6 +614,23 @@ FACILITY_NAME_MAP = {
 # EAST SYLVAN. Beverly Cleary operates both
 # Hollyrood and Fernwood campuses; per the LRFP note, its functional capacity
 # is the sum of both (handled below).
+# Permanent-building capacity for every LRFP school with portables, read from
+# the bar labels of the 2021 LRFP "Existing functional capacity" charts
+# (Vol 1 pp. 111 elementary, 113 K-8, 119 middle). The charts stack this
+# permanent functional capacity under the portables' seats (shown as gross),
+# so it is PPS's own building-only figure. Keyed by LRFP short name.
+LRFP_PERMANENT_CAPACITY = {
+    "FOREST PARK": 246, "MAPLEWOOD": 302, "RIEKE": 330, "WOODMERE": 381,
+    "RIGLER": 394, "BRIDGER": 413, "LEE": 419, "SITTON": 424,
+    "CAPITOL HILL": 426, "CHIEF JOSEPH": 447, "LLEWELLYN": 453,
+    "ABERNETHY": 468, "VESTAL": 481, "SABIN": 504, "AINSWORTH": 528,
+    "CHAPMAN": 542, "WOODLAWN": 567, "GLENCOE": 573, "SCOTT": 594,
+    "BRIDLEMILE": 618, "LENT": 632, "BEACH": 666, "ALAMEDA": 735,
+    "WINTERHAVEN": 234, "LAURELHURST": 441, "ASTOR": 456, "VERNON": 471,
+    "SUNNYSIDE": 492, "CHAVEZ": 545, "DA VINCI": 579, "OCKLEY GREEN": 624,
+}
+
+
 LRFP_NAME_MAP = {
     "Abernethy Elementary School": "ABERNETHY",
     "Ainsworth Elementary School": "AINSWORTH",
@@ -946,6 +963,18 @@ def main():
     )
     pps.loc[pps["School Name"].str.strip() == "Beverly Cleary School",
             "modular_classrooms_2021"] = lrfp_mod.get("HOLLYROOD", 0) + lrfp_mod.get("FERNWOOD", 0)
+    # Building-only capacity: PPS's permanent figure where the LRFP counts
+    # portables. Schools without portables get their functional capacity
+    # below, after the workbook fallback fills LRFP gaps.
+    has_mod = pps["modular_classrooms_2021"].fillna(0) > 0
+    perm = pps["School Name"].map(lambda n: LRFP_PERMANENT_CAPACITY.get(LRFP_NAME_MAP.get(n)))
+    # Cleveland's high school chart bar is labeled with its full functional
+    # capacity (portables stacked on top), so there is no building-only
+    # figure; high schools are out of scope anyway.
+    missing = [n for n in pps.loc[has_mod & perm.isna(), "School Name"] if n != "Cleveland High School"]
+    if missing:
+        sys.exit(f"schools with portables but no LRFP permanent capacity: {missing}")
+    pps["functional_capacity_permanent_2021"] = perm.where(has_mod)
 
     # Merge the functional capacity recovered from PPS's operational School
     # Utilization Model workbook (2025 records request). This is a second PPS
@@ -1070,6 +1099,11 @@ def main():
     ).round(4)
     pps["utilization_pct_2526"] = (
         pps["2025-26 Total Enrollment"] / pps["functional_capacity_2021"]
+    ).round(4)
+    pps["functional_capacity_permanent_2021"] = pps["functional_capacity_permanent_2021"].fillna(
+        pps["functional_capacity_2021"])
+    pps["utilization_permanent_2526"] = (
+        pps["2025-26 Total Enrollment"] / pps["functional_capacity_permanent_2021"]
     ).round(4)
     pps["utilization_model_2526"] = (
         pps["2025-26 Total Enrollment"] / pps["functional_capacity_model"]
@@ -1280,6 +1314,7 @@ def main():
         "dli_students_2526", "neighborhood_students_2526", "pct_dli_2526",
         "year_built", "square_feet", "construction_type_2009",
         "functional_capacity_2021", "modular_classrooms_2021", "utilization_pct_2526",
+        "functional_capacity_permanent_2021", "utilization_permanent_2526",
         "sped_count_2526", "sped_enrollment_2526", "pct_sped_2526", "pct_direct_cert_pps_2425",
         "teachers_fte_pps_2627", "enrollment_pps_2627", "students_per_teacher_pps_2627",
         "functional_capacity_model", "utilization_model_2526",
