@@ -582,15 +582,12 @@
     <p class="note">
       Current enrollment as a percentage of PPS's own functional capacity from the 2021 Long-Range Facility Plan. Functional capacity accounts for classroom count, modular rooms, and set-asides (SPED, art/music, DLI co-location). This is a planning number from PPS, not a raw square-footage estimate.
     </p>
-    <div class="map-filters">
-      <label><input class="count-portables" type="checkbox" checked> Count portables in capacity</label>
-    </div>
     <div class="panel chart-card"><div id="plot-ranking" style="height: 620px;"></div></div>
     <p class="note">
       * The school's capacity includes portable (modular) classrooms, as counted in the
       2021 plan. Portables are separate modular buildings on the school grounds, not rooms in the main building.
-      Unchecking "Count portables in capacity" uses PPS's capacity for the permanent building alone, from the
-      same plan's capacity charts. Some schools use their portables for art, music, or other specials, and some
+      For those schools, the lighter part of the bar shows how much higher utilization is for the permanent
+      building alone, using PPS's building-only capacity from the same plan's capacity charts. Some schools use their portables for art, music, or other specials, and some
       portables have since been removed, so neither number is a perfect picture of how a school runs today.
     </p>
   </section>
@@ -970,8 +967,8 @@
       Abernethy and Beach; their popups give the capacity without them.
       The same plan's capacity charts (Vol 1, pp. 111, 113, and 119) split each school's
       capacity into the permanent building and its portables. That building-only figure is
-      in the table ("Utilization, building only"), the map popups, and the "Count portables
-      in capacity" toggle on the map and utilization chart. Across the 31 schools, about
+      in the table ("Utilization, building only"), the map popups, the "Count portables
+      in capacity" toggle on the map, and the lighter segments in the utilization chart. Across the 31 schools, about
       2,800 seats of PPS's capacity are in portables. Rigler, for example, has 589 seats with
       its eight portables and 394 in the building.
     </p>
@@ -1551,36 +1548,38 @@
     function renderRanking() {
       const el = document.getElementById("plot-ranking");
       if (!el) return;
-      const rows = allRows.slice().sort((a, b) => utilOf(b) - utilOf(a));
+      // Sorted by PPS's figure. Schools with portables get a lighter segment
+      // stacked on top, up to their building-only utilization.
+      const rows = allRows.slice().sort((a, b) => b.utilization_pct_2526 - a.utilization_pct_2526);
       const mobile = window.innerWidth < 700;
-      el.style.height = mobile ? (rows.length * 18 + 80) + "px" : "620px";
+      el.style.height = mobile ? (rows.length * 18 + 110) + "px" : "620px";
       const names = rows.map(s => shortName(s.school_name) + (portables(s) ? " *" : ""));
-      const values = rows.map(s => utilOf(s) * 100);
+      const withP = rows.map(s => s.utilization_pct_2526 * 100);
+      const extra = rows.map(s => portables(s) && s.utilization_permanent_2526 != null
+        ? Math.max(0, (s.utilization_permanent_2526 - s.utilization_pct_2526) * 100) : 0);
       const fullNames = rows.map(s => s.school_name);
-      const customdata = rows.map(s => [s.enrollment_2025_26, capOf(s),
-        !portables(s) ? "" : countPortables ? `<br>* ${portablesText(s)}`
-          : `<br>* Building only; PPS's capacity with portables is ${s.functional_capacity_2021}`]);
-      const trace = mobile ? {
-        type: "bar", orientation: "h",
-        x: values, y: names,
+      const customdata = rows.map(s => [s.enrollment_2025_26, s.functional_capacity_2021,
+        portables(s) ? `<br>* ${portablesText(s)}` : "",
+        s.functional_capacity_permanent_2021, (s.utilization_permanent_2526 || 0) * 100]);
+      const pos = (vals) => mobile ? { orientation: "h", x: vals, y: names } : { x: rows.map((_, i) => i), y: vals };
+      const v = mobile ? "x" : "y";
+      const traces = [{
+        type: "bar", ...pos(withP), name: "With portables (PPS's figure)",
         text: fullNames, textposition: "none",
-        showlegend: false,
         marker: { color: "#58a6ff", line: { width: 0 } },
         customdata,
         hovertemplate: "<b>%{text}</b><br>" +
-          "Utilization: %{x:.0f}%<br>" +
+          `Utilization: %{${v}:.0f}%<br>` +
           "%{customdata[0]} students / %{customdata[1]} capacity%{customdata[2]}<extra></extra>",
-      } : {
-        type: "bar",
-        x: rows.map((_, i) => i), y: values,
+      }, {
+        type: "bar", ...pos(extra), name: "Building only (no portables)",
         text: fullNames, textposition: "none",
-        showlegend: false,
-        marker: { color: "#58a6ff", line: { width: 0 } },
+        marker: { color: "#a5d6ff", line: { width: 0 } },
         customdata,
         hovertemplate: "<b>%{text}</b><br>" +
-          "Utilization: %{y:.0f}%<br>" +
-          "%{customdata[0]} students / %{customdata[1]} capacity%{customdata[2]}<extra></extra>",
-      };
+          "Building only: %{customdata[4]:.0f}%<br>" +
+          "%{customdata[0]} students / %{customdata[3]} seats in the permanent building<extra></extra>",
+      }];
       const layout = mobile ? {
         paper_bgcolor: "#161b22", plot_bgcolor: "#161b22",
         font: { color: "#e6edf3", size: 11, family: '"Nunito Sans", -apple-system, Helvetica, Arial, sans-serif' },
@@ -1625,8 +1624,7 @@
           showgrid: false, zeroline: false, fixedrange: true,
         },
         yaxis: {
-          title: countPortables ? "Utilization % (2025-26 enrollment ÷ 2021 functional capacity)"
-            : "Utilization % (2025-26 enrollment ÷ building-only capacity)",
+          title: "Utilization % (2025-26 enrollment ÷ 2021 functional capacity)",
           gridcolor: "#30363d", zerolinecolor: "#30363d",
           ticksuffix: "%", rangemode: "tozero",
         },
@@ -1643,11 +1641,16 @@
           font: { size: 10, color: "#7d8590" },
         }],
       };
-      Plotly.react("plot-ranking", [trace], layout, { displayModeBar: false, responsive: true });
+      layout.barmode = "stack";
+      layout.showlegend = true;
+      layout.legend = mobile
+        ? { orientation: "h", x: 0.5, xanchor: "center", y: 1, yref: "container", yanchor: "top", traceorder: "normal" }
+        : { orientation: "h", x: 0, y: 1.08, traceorder: "normal" };
+      if (mobile) layout.margin.t = 80;
+      Plotly.react("plot-ranking", traces, layout, { displayModeBar: false, responsive: true });
     }
 
     renderRanking();
-    document.addEventListener("portables-change", renderRanking);
     let resizeTimer;
     window.addEventListener("resize", () => {
       clearTimeout(resizeTimer);
