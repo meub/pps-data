@@ -8368,7 +8368,7 @@
       "fc_model_approx": false,
       "capacity_conflict_note": null,
       "capacity_source": "Utilization workbook",
-      "data_note": null,
+      "data_note": "ODE and PPS report MLC as one K-12 school, so most figures here combine its K-8 and its 9-12 high school program. Enrollment and test scores can be split by grade and are shown below.",
       "gross_capacity": 600.0,
       "classrooms_total": 22.0,
       "avg_classroom_sqft": 868.0,
@@ -17584,6 +17584,54 @@
         "g7",
         "g8"
       ]
+    }
+  },
+  "grade_splits": {
+    "Metropolitan Learning Center": {
+      "enrollment": [
+        {
+          "year": "2022-23",
+          "k8": 277,
+          "hs": 71
+        },
+        {
+          "year": "2023-24",
+          "k8": 268,
+          "hs": 69
+        },
+        {
+          "year": "2024-25",
+          "k8": 264,
+          "hs": 55
+        },
+        {
+          "year": "2025-26",
+          "k8": 235,
+          "hs": 40
+        }
+      ],
+      "osas_2425": {
+        "ela": {
+          "grades_3_8": {
+            "proficient": 115,
+            "tested": 197
+          },
+          "grade_11": {
+            "proficient": 7,
+            "tested": 12
+          }
+        },
+        "math": {
+          "grades_3_8": {
+            "proficient": 90,
+            "tested": 197
+          },
+          "grade_11": {
+            "proficient": 3,
+            "tested": 11
+          }
+        }
+      }
     }
   }
 }

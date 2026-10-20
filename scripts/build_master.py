@@ -771,6 +771,10 @@ DATA_NOTES = {
         "Capacity is from PPS's 2021 facilities plan, which counts 54 seats in "
         "portable classrooms. PPS has since removed Abernethy's two portables. Without "
         "them, capacity is about 468 and utilization is about 57%, not 52%."),
+    "Metropolitan Learning Center": (
+        "ODE and PPS report MLC as one K-12 school, so most figures here combine "
+        "its K-8 and its 9-12 high school program. Enrollment and test scores can "
+        "be split by grade and are shown below."),
     "Marysville Elementary School": (
         "Marysville's full seismic retrofit (about $7 million) was substantially "
         "completed in September 2026, after Holmes's 2024 estimate, so it shows no "

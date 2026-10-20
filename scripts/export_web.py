@@ -7,6 +7,7 @@ import numpy as np
 import pandas as pd
 from pathlib import Path
 
+from grade_band_split import load as load_grade_splits
 from merge_rightsizing_scenarios import load_resolved
 from rightsizing_model import build as build_rightsizing_model
 from sklearn.cluster import KMeans
@@ -566,6 +567,8 @@ def main():
         "n_charters": len(charters),
         # PPS's lists name high schools too, so resolve against every row.
         "rightsizing": rightsizing,
+        # K-8 / 9-12 parts of schools ODE reports as one K-12 school (MLC).
+        "grade_splits": load_grade_splits(),
     }
     OUT_DATA.write_text(json.dumps(payload, indent=2, default=str))
     print(f"Wrote {len(schools)} schools + {len(charters)} charters to {OUT_DATA}")

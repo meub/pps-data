@@ -911,7 +911,7 @@
     <h3>Academic performance</h3>
     <dl>
       <dt><a href="https://www.oregon.gov/ode/educator-resources/assessment/Pages/Assessment-Group-Reports.aspx" target="_blank" rel="noopener">Oregon OSAS state assessments (2024-25, 2023-24)</a></dt>
-        <dd>School-level ELA and Math proficiency rates (meets/exceeds, all grades, all students).</dd>
+        <dd>School-level ELA and Math proficiency rates (meets/exceeds, all grades, all students). For Metropolitan Learning Center, which ODE reports as one K-12 school, the by-grade files split grades 3-8 from grade 11 (the high school test year).</dd>
       <dt><a href="https://www.oregon.gov/ode/schools-and-districts/reportcards/reportcards/Pages/default.aspx" target="_blank" rel="noopener">Oregon ODE At-A-Glance Source File (2024-25)</a></dt>
         <dd>The statewide CSV that backs every school's At-A-Glance profile. Source for regular-attenders %, experienced-teacher %, teacher retention %, and median class size.</dd>
     </dl>
@@ -1422,6 +1422,16 @@
         ["Driving time", fmt(s.nearest_alt_drive_min, "minutes")],
       ]],
     ];
+    const gs = (data.grade_splits || {})[s.school_name];
+    if (gs) {
+      const pctOf = (t) => t.tested ? `${Math.round(100 * t.proficient / t.tested)}% (${t.tested} tested)` : "—";
+      const os = gs.osas_2425;
+      sections.splice(1, 0, ["K-8 and 9-12 (high school program)", [
+        ...gs.enrollment.map(e => [`Enrollment ${e.year}`, `K-8 ${e.k8}, 9-12 ${e.hs}`]),
+        ["ELA proficient 24-25", `grades 3-8 ${pctOf(os.ela.grades_3_8)}; grade 11 ${pctOf(os.ela.grade_11)}`],
+        ["Math proficient 24-25", `grades 3-8 ${pctOf(os.math.grades_3_8)}; grade 11 ${pctOf(os.math.grade_11)}`],
+      ]]);
+    }
     const popupHtml =
       `<div class="map-popup"><b>${s.school_name}</b>` +
       `<div class="meta">${s.street_address || ""}</div>` +
@@ -2146,6 +2156,9 @@
         `<h4>This dashboard's data</h4>` +
         `<div class="row"><b style="display:inline">Enrollment 25-26:</b> ${fmt(s.enrollment_2025_26, "int")}</div>` +
         `<div class="row"><b style="display:inline">Utilization 25-26:</b> ${fmt(s.utilization_pct_2526, "pct_0_1")}</div>` +
+        (((data.grade_splits || {})[s.school_name] || {}).enrollment
+          ? (e => `<div class="row"><b style="display:inline">25-26 students:</b> K-8 ${e.k8}, 9-12 ${e.hs}</div>`)(
+              data.grade_splits[s.school_name].enrollment.slice(-1)[0]) : "") +
         `<div class="row"><b style="display:inline">Forecast 35-36:</b> ${fmt(s.enrollment_forecast_2035_36, "int")}</div>` +
         `<div class="row"><b style="display:inline">Year built:</b> ${fmt(s.year_built, "year")}</div>` +
         `<div class="row"><b style="display:inline">Seismic retrofit cost:</b> ${fmt(s.retrofit_cost_remaining_usd, "usd")}</div></div>`;
@@ -2244,11 +2257,19 @@
       const openK5 = schools.filter(s => isK5(s) && catOf(s, scen) !== "closes");
       const smallest = schools.filter(isK5).sort((a, b) => a.enrollment_2025_26 - b.enrollment_2025_26).slice(0, 10);
       const smallClosing = smallest.filter(s => catOf(s, scen) === "closes").length;
+      // PPS lists MLC's 9-12 closing as a note, not a school closure; size it
+      // from the K-8 / 9-12 split since ODE reports MLC as one school.
+      const mlc = schools.find(s => s.school_name === "Metropolitan Learning Center");
+      const mlcSplit = (data.grade_splits || {})["Metropolitan Learning Center"];
+      const mlcHs = mlc && mlcSplit && /9.12\) high school program also closes/.test(mlc[`rs_${scen.toLowerCase()}_detail`] || "")
+        ? mlcSplit.enrollment[mlcSplit.enrollment.length - 1].hs : 0;
       document.getElementById("rs-summary").innerHTML =
         `Schools that close in either scenario, smallest first. In Scenario ${scen}, closing elementary schools have a median of ` +
         `${fmt(Math.round(median(closingK5.map(s => s.enrollment_2025_26))), "int")} students this fall, against ` +
         `${fmt(Math.round(median(openK5.map(s => s.enrollment_2025_26))), "int")} for elementary schools that stay open. ` +
-        `Only ${smallClosing} of the 10 smallest elementary schools close; the other ${10 - smallClosing} stay open.`;
+        `Only ${smallClosing} of the 10 smallest elementary schools close; the other ${10 - smallClosing} stay open.` +
+        (mlcHs ? ` Scenario ${scen} also closes Metropolitan Learning Center's 9-12 high school program (${mlcHs} students this fall) ` +
+          `and makes MLC K-8; PPS doesn't count that as a school closure, so it isn't in this table.` : "");
     }
 
 
