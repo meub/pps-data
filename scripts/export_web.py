@@ -75,15 +75,16 @@ META = {
     "level": {"label": "Level", "desc": "Grade band served: elementary, k8, middle, high, alternative.", "source": "PPS Directory + ODE", "fmt": "text"},
     "is_closure_candidate": {"label": "Low enrollment (WW)", "desc": "One of the 15 lowest-enrollment schools listed by Willamette Week (2026-03-18). Often discussed as a closure shortlist, but PPS has not published its own list; that is expected Nov 2026, with a board vote in Dec 2026.", "source": "Willamette Week", "fmt": "bool"},
     "closure_rank": {"label": "WW low-enroll. rank", "desc": "Willamette Week's enrollment-based rank within the bottom 15 (1 = smallest). Not a PPS rank or prediction.", "source": "Willamette Week", "fmt": "int"},
+    "enrollment_2026_27": {"label": "Enrollment 26-27", "desc": "Total students PK-12 on October 1, 2026, PPS's own count (Period 1 ADM report). ODE publishes its count for the same date around February; last year the two matched within one student districtwide. PPS reports Hayhurst and Odyssey separately.", "source": "PPS October 1, 2026 enrollment by grade and program", "fmt": "int"},
     "enrollment_2025_26": {"label": "Enrollment 25-26", "desc": "Total students, fall 2025. Hayhurst and Odyssey use PPS's own split from PSU's 2026 forecast, because ODE reports Odyssey's students under Hayhurst even though Odyssey has been in the East Sylvan building since fall 2016.", "source": "Oregon ODE Fall Membership; PSU PRC 2026 for Hayhurst and Odyssey", "fmt": "int"},
     "enrollment_2024_25": {"label": "Enrollment 24-25", "desc": "Total students, fall 2024. Hayhurst and Odyssey use PPS's own split from PSU's 2026 forecast, because ODE reports Odyssey's students under Hayhurst even though Odyssey has been in the East Sylvan building since fall 2016.", "source": "Oregon ODE Fall Membership; PSU PRC 2026 for Hayhurst and Odyssey", "fmt": "int"},
-    "enrollment_pct_change": {"label": "Enrollment Δ% YoY", "desc": "Year-over-year enrollment change (2024-25 → 2025-26).", "source": "Derived from ODE", "fmt": "pct_0_1"},
+    "enrollment_pct_change": {"label": "Enrollment Δ% YoY", "desc": "Year-over-year enrollment change (2025-26 → 2026-27).", "source": "Derived: ODE 2025-26, PPS October 2026", "fmt": "pct_0_1"},
     "functional_capacity_2021": {"label": "Functional capacity", "desc": "PPS's planning number for how many students a building can educate: gross capacity (classrooms × student-station size by area) minus set-asides (SPED focus, art/music, computer lab, DLI co-location) and reduced by a configuration-specific utilization rate (85% at middle/high, higher at K-5/K-8), with further reductions for Title I and TSI/CSI schools. From the 2021 Long-Range Facility Plan. Where the 2021 LRFP omits a building (Metropolitan Learning Center), the figure comes from PPS's utilization workbook instead; capacity_source says which.", "source": "PPS Long-Range Facility Plan 2021 (Vol 1)", "fmt": "int"},
     "functional_capacity_permanent_2021": {"label": "Capacity, building only", "desc": "PPS's functional capacity for the permanent building, without portable (modular) classrooms. From the 2021 Long-Range Facility Plan's capacity charts, which split each school's capacity into permanent and modular parts. Same as functional capacity at schools without portables.", "source": "PPS Long-Range Facility Plan 2021 (Vol 1, pp. 111, 113, 119)", "fmt": "int"},
-    "utilization_permanent_2526": {"label": "Utilization, building only", "desc": "2025-26 enrollment ÷ PPS's building-only capacity (no portables). Differs from Utilization 25-26 only at the schools whose capacity counts portables.", "source": "Derived: ODE 2025-26 ÷ LRFP 2021 permanent capacity", "fmt": "pct_0_1"},
-    "utilization_pct_2526": {"label": "Utilization 25-26", "desc": "2025-26 enrollment ÷ 2021 functional capacity. Below 50% is substantially underused; above 100% is overcrowded per PPS's own planning standard. For a few schools PPS's operational utilization model reports a different capacity, and the utilization shifts accordingly (see the capacity-source flag).", "source": "Derived: ODE 2025-26 ÷ LRFP 2021", "fmt": "pct_0_1"},
+    "utilization_permanent_2627": {"label": "Utilization, building only", "desc": "2026-27 enrollment ÷ PPS's building-only capacity (no portables). Differs from Utilization 26-27 only at the schools whose capacity counts portables.", "source": "Derived: PPS October 2026 ÷ LRFP 2021 permanent capacity", "fmt": "pct_0_1"},
+    "utilization_pct_2627": {"label": "Utilization 26-27", "desc": "2026-27 enrollment ÷ 2021 functional capacity. Below 50% is substantially underused; above 100% is overcrowded per PPS's own planning standard. For a few schools PPS's operational utilization model reports a different capacity, and the utilization shifts accordingly (see the capacity-source flag).", "source": "Derived: PPS October 2026 ÷ LRFP 2021", "fmt": "pct_0_1"},
     "functional_capacity_model": {"label": "Functional capacity (util. model)", "desc": "The same functional-capacity measure recovered from PPS's operational School Utilization Model workbook (obtained via a 2025 public-records request), rather than from the 2021 LRFP. Recovered as enrollment ÷ utilization from the workbook's intact model years, so it is roughly 2021-vintage. Where it differs from the LRFP number by 5% or more the school is flagged.", "source": "PPS School Utilization Model workbook (2025 records request)", "fmt": "int"},
-    "utilization_model_2526": {"label": "Utilization 25-26 (util. model)", "desc": "2025-26 enrollment ÷ the utilization-model functional capacity. Shown alongside the LRFP-based utilization for schools where PPS's two sources disagree.", "source": "Derived: ODE 2025-26 ÷ PPS utilization model", "fmt": "pct_0_1"},
+    "utilization_model_2627": {"label": "Utilization 26-27 (util. model)", "desc": "2026-27 enrollment ÷ the utilization-model functional capacity. Shown alongside the LRFP-based utilization for schools where PPS's two sources disagree.", "source": "Derived: PPS October 2026 ÷ PPS utilization model", "fmt": "pct_0_1"},
     "capacity_source_conflict": {"label": "Capacity sources disagree?", "desc": "True when PPS's 2021 LRFP and its operational utilization model report functional capacities that differ by 5% or more for this building. Both are PPS's own numbers. The dashboard keeps the LRFP figure as primary but surfaces both.", "source": "Derived", "fmt": "bool"},
     "gross_capacity": {"label": "Gross capacity", "desc": "The building's raw classroom capacity before any set-asides or utilization rate: every room of 500+ sq ft, bracketed by size (24 / 27 / 30 students). This is the physical ceiling; functional capacity is what's left after PPS subtracts SPED, Early Childhood, art/music, computer, gym, co-located, and leased rooms and applies the configuration rate. Counted from the workbook's room-level classroom list, so it is 2026-current (reflects portable removals and the Benson re-measure). Hover for the room breakdown.", "source": "PPS School Utilization Model workbook — Classroom List", "fmt": "int"},
     "classrooms_total": {"label": "Rooms (inventory)", "desc": "Total instructional spaces in the building per PPS's room-level facilities inventory (regular classrooms, modulars, science labs, art/music, computer, gym, shop, and other 500+ sq ft spaces). Hover the gross-capacity cell for the type breakdown and average classroom size.", "source": "PPS School Utilization Model workbook — Classroom List", "fmt": "int"},
@@ -154,16 +155,16 @@ META = {
     "nearest_alt_school_mi": {"label": "Drive miles to nearest alt.", "desc": "Road-network driving distance (via OSRM) from this low-enrollment school to the nearest same-grade-band neighborhood school (elementary, k8, middle, or alternative). Focus-option / lottery schools are excluded as destinations since they admit district-wide, not by catchment. A rough proxy for transportation impact if this school were closed; actual PPS reassignment may differ.", "source": "Derived: OSRM driving routes over NCES CCD coordinates", "fmt": "miles"},
     "nearest_alt_school_name": {"label": "Nearest alt. school", "desc": "Name of the closest same-grade-band neighborhood school by driving distance.", "source": "Derived: OSRM driving routes over NCES CCD coordinates", "fmt": "text"},
     "nearest_alt_drive_min": {"label": "Drive time to nearest alt.", "desc": "Estimated free-flow driving time (via OSRM) to the nearest same-grade-band neighborhood school. Excludes traffic and pickup/dropoff time.", "source": "Derived: OSRM driving routes over NCES CCD coordinates", "fmt": "minutes"},
-    "is_transport_candidate": {"label": "Low-enroll. (transport set)", "desc": "One of the 20 lowest-enrollment in-scope schools by 2025-26 enrollment, excluding focus-option / lottery schools. Defines the schools analyzed in the transportation-impact section.", "source": "Derived from ODE 2025-26 enrollment", "fmt": "bool"},
+    "is_transport_candidate": {"label": "Low-enroll. (transport set)", "desc": "One of the 20 lowest-enrollment in-scope schools by 2026-27 enrollment, excluding focus-option / lottery schools. Defines the schools analyzed in the transportation-impact section.", "source": "Derived from PPS October 2026 enrollment", "fmt": "bool"},
     "enrollment_2018": {"label": "Enrollment 2018", "desc": "Fall 2018 enrollment (NCES CCD directory).", "source": "NCES CCD 2018", "fmt": "int"},
     "programs": {"label": "Programs", "desc": "Specialized programs hosted at this school. Captures Dual Language Immersion (DLI) language tracks plus K-8 focus options (Arts, Environmental, STEAM, Creative Science, TAG, Alternative). 'Access to programs' is one of the four PPS-announced closure-decision factors; closing a DLI host school would cut off that language pathway in its catchment.", "source": "PPS Dual Language + Enrollment & Transfer pages", "fmt": "text"},
     "has_dli": {"label": "Hosts DLI?", "desc": "School hosts a Dual Language Immersion program in any language.", "source": "Derived from PPS DLI program list", "fmt": "bool"},
     "dli_languages": {"label": "DLI languages", "desc": "Dual Language Immersion language(s) hosted at this school (Spanish, Chinese, Japanese, Russian, Vietnamese).", "source": "PPS Dual Language pages", "fmt": "text"},
     "has_focus_option": {"label": "Hosts focus option?", "desc": "School is one of the K-8 focus-option / specialized-curriculum programs (Buckman Arts, Bridger Creative Science, Sunnyside Environmental, Winterhaven STEAM, Odyssey TAG, ACCESS, MLC).", "source": "PPS Enrollment & Transfer", "fmt": "bool"},
-    "dli_students_2526": {"label": "DLI students 25-26", "desc": "Students enrolled in this school's Dual Language Immersion strand(s), October 2025. Populated only for the ~32 schools that host a DLI program. A school's total enrollment is divided between neighborhood/mainstream students and DLI-strand students; ODE's Fall Membership cannot separate them.", "source": "PPS Language Immersion Enrollment Report 2025-26", "fmt": "int"},
-    "neighborhood_students_2526": {"label": "Neighborhood students 25-26", "desc": "Total enrollment minus DLI-strand enrollment. At a DLI host school this is the mainstream/English-medium population; the cohort that would remain if the DLI program were relocated.", "source": "Derived: ODE − PPS Immersion Report", "fmt": "int"},
-    "pct_dli_2526": {"label": "% DLI 25-26", "desc": "Share of this school's students in a DLI strand. Ranges from ~4% at schools where a single DLI cohort visits (Jefferson) to 100% at whole-school DLI programs (Lent, Rigler, Richmond).", "source": "Derived: PPS Immersion Report ÷ ODE", "fmt": "pct_0_1"},
-    "enrollment_pct_change_7yr": {"label": "Enrollment Δ% 2018→2025", "desc": "7-year enrollment change from fall 2018 (NCES CCD) to fall 2025 (ODE). The in-scope set lost 20% over this window (median school -19%); schools well below that baseline are losing students faster than PPS as a whole.", "source": "Derived: NCES CCD 2018 + ODE 2025-26", "fmt": "pct_0_1"},
+    "dli_students_2627": {"label": "DLI students 26-27", "desc": "Students enrolled in this school's Dual Language Immersion strand(s), October 1, 2026. Populated only for schools that host a DLI program. A school's total enrollment is divided between neighborhood/mainstream students and DLI-strand students; ODE's Fall Membership cannot separate them.", "source": "PPS October 1, 2026 enrollment by grade and program", "fmt": "int"},
+    "neighborhood_students_2627": {"label": "Neighborhood students 26-27", "desc": "Total enrollment minus DLI-strand enrollment. At a DLI host school this is the mainstream/English-medium population; the cohort that would remain if the DLI program were relocated.", "source": "PPS October 1, 2026 enrollment by grade and program", "fmt": "int"},
+    "pct_dli_2627": {"label": "% DLI 26-27", "desc": "Share of this school's students in a DLI strand. Ranges from ~2% at Jefferson to 100% at whole-school DLI programs (Lent, Rigler, Richmond).", "source": "PPS October 1, 2026 enrollment by grade and program", "fmt": "pct_0_1"},
+    "enrollment_pct_change_8yr": {"label": "Enrollment Δ% 2018→2026", "desc": "8-year enrollment change from fall 2018 (NCES CCD) to fall 2026 (PPS). The in-scope set lost 22% over this window (median school -21%); schools well below that baseline are losing students faster than PPS as a whole.", "source": "Derived: NCES CCD 2018 + PPS October 2026", "fmt": "pct_0_1"},
     "prc_baseline_2025_26": {"label": "PRC baseline 25-26", "desc": "PRC's own historic 2025-26 enrollment (PPS's October 2025 count) used as the base year for its 10-year forecast (Table 5.5, medium scenario). Matches ODE 2025-26 within a few students. Hayhurst and Odyssey are the exception in ODE, which reports them together; the dashboard uses this split for both.", "source": "PSU Population Research Center 2026 (Table 5.5)", "fmt": "int"},
     "enrollment_forecast_2026_27": {"label": "Forecast 26-27 (med.)", "desc": "PRC medium-scenario enrollment forecast for 2026-27, the current school year. The best per-school estimate available until PPS publishes its October 2026 counts (expected late October) and ODE its Fall Membership file (expected around February 2027).", "source": "PSU Population Research Center 2026 (Table 5.5)", "fmt": "int"},
     "enrollment_forecast_2027_28": {"label": "Forecast 27-28 (med.)", "desc": "PRC medium-scenario enrollment forecast for 2027-28.", "source": "PSU Population Research Center 2026 (Table 5.5)", "fmt": "int"},
@@ -193,20 +194,20 @@ META = {
 TABLE_COLS = [
     "school_name", "level",
     "rs_a_category", "rs_b_category",
-    "enrollment_2025_26", "enrollment_pct_change",
+    "enrollment_2026_27", "enrollment_pct_change",
     "enrollment_forecast_2026_27",
-    "functional_capacity_2021", "utilization_pct_2526", "utilization_permanent_2526",
+    "functional_capacity_2021", "utilization_pct_2627", "utilization_permanent_2627",
     "gross_capacity", "classrooms_total", "leased_classrooms",
     "year_built", "square_feet", "fully_sprinklered",
     "pct_ela_prof_2425", "pct_math_prof_2425",
     "is_urm_building", "retrofit_cost_remaining_usd", "seismic_retrofit_status",
     "is_title_i", "pct_bipoc", "pct_direct_cert_pps_2425",
     "sped_count_2526", "pct_sped_2526",
-    "enrollment_pct_change_7yr",
+    "enrollment_pct_change_8yr",
     "enrollment_forecast_2035_36", "enrollment_forecast_pct_change_10yr",
     "utilization_pct_2035_36",
     "recent_boundary_change", "programs",
-    "has_dli", "pct_dli_2526", "pct_chronic_absent_2021", "support_staff_per_100",
+    "has_dli", "pct_dli_2627", "pct_chronic_absent_2021", "support_staff_per_100",
     "pct_regular_attenders_2425", "pct_experienced_teachers_2425",
     "pct_teacher_retention_2425", "class_size_2425", "students_per_teacher_pps_2627",
     "airflow_ach_e_median", "airflow_pct_below_3_ach",
@@ -220,7 +221,7 @@ TABLE_COLS = [
 # forecast, DLI strands) is intentionally omitted because it is null for them.
 CHARTER_TABLE_COLS = [
     "school_name", "level",
-    "enrollment_2025_26", "enrollment_pct_change",
+    "enrollment_2026_27", "enrollment_pct_change",
     "pct_ela_prof_2425", "pct_math_prof_2425",
     "pct_bipoc", "pct_frl", "pct_lep", "pct_idea",
     "pct_regular_attenders_2425", "pct_experienced_teachers_2425",
@@ -233,8 +234,8 @@ SCATTERS = [
     {
         "id": "enrollment_vs_utilization",
         "title": "Enrollment vs. building utilization",
-        "x": "enrollment_2025_26",
-        "y": "utilization_pct_2526",
+        "x": "enrollment_2026_27",
+        "y": "utilization_pct_2627",
         "subtitle": "Utilization = current enrollment ÷ 2021 functional capacity. The closure shortlist (low-enrollment schools) clusters in the lower-left quadrant of underused buildings. Horizontal line at 100% marks PPS's own planning capacity.",
     },
     {
@@ -264,7 +265,7 @@ SCATTERS = [
     {
         "id": "enrollment_vs_bipoc",
         "title": "Enrollment vs. % BIPOC students",
-        "x": "enrollment_2025_26",
+        "x": "enrollment_2026_27",
         "y": "pct_bipoc",
         "subtitle": "Across PPS, smaller-enrollment schools do not serve a disproportionately BIPOC student body; the cloud is roughly flat.",
     },
@@ -288,28 +289,28 @@ SCATTERS = [
     {
         "id": "enrollment_2018_vs_change",
         "title": "7-year enrollment change vs. current size (2018 → 2025)",
-        "x": "enrollment_2025_26",
-        "y": "enrollment_pct_change_7yr",
+        "x": "enrollment_2026_27",
+        "y": "enrollment_pct_change_8yr",
         "subtitle": "Long-term sustainability check. The in-scope set as a whole shrank ~20% over seven years; schools well below that line are losing students faster than the district overall.",
     },
     {
         "id": "forecast_change_vs_size",
         "title": "Projected 10-year enrollment change vs. current size",
-        "x": "enrollment_2025_26",
+        "x": "enrollment_2026_27",
         "y": "enrollment_forecast_pct_change_10yr",
         "subtitle": "PSU's Population Research Center projects districtwide enrollment to fall from ~42.6k to ~36.8k by 2035-36 (medium scenario). Schools in the lower-left — already small today and projected to keep shrinking — are the ones where future-utilization pressure is most acute.",
     },
     {
         "id": "forecast_utilization_vs_current",
         "title": "Current vs. projected 2035-36 utilization",
-        "x": "utilization_pct_2526",
+        "x": "utilization_pct_2627",
         "y": "utilization_pct_2035_36",
         "subtitle": "How underused each building gets by the end of PRC's 10-year forecast. The 45° line means 'holding steady'; below it means the building empties further. Below 50% is PPS's own threshold for 'substantially underused'.",
     },
     {
         "id": "ratio_vs_enrollment",
         "title": "Student/teacher ratio vs. enrollment",
-        "x": "enrollment_2025_26",
+        "x": "enrollment_2026_27",
         "y": "students_per_teacher_pps_2627",
         "subtitle": "Smaller schools sit lower because teacher FTE has a floor (a K-5 still needs one teacher per grade level regardless of section size). Schools well above the trend are stretched thin for their size; schools well below are staffed unusually richly. Ratio is PPS's 2026-27 budgeted classroom teachers; enrollment is fall 2025 ODE for consistency with other scatters.",
         "trendline": True,
@@ -318,7 +319,7 @@ SCATTERS = [
 
 # Features used for k-means clustering + PCA projection.
 CLUSTER_FEATURES = [
-    "enrollment_2025_26", "enrollment_pct_change", "utilization_pct_2526",
+    "enrollment_2026_27", "enrollment_pct_change", "utilization_pct_2627",
     "year_built", "avg_prof_2425", "pct_direct_cert", "pct_bipoc",
     "pct_lep", "pct_idea",
     "permits_units_within_1mi_since_2022", "pipeline_family_units_within_1mi",
@@ -391,12 +392,12 @@ def derive_columns(df):
     df.loc[cl_mask, "pca_x"] = coords[:, 0].round(3)
     df.loc[cl_mask, "pca_y"] = coords[:, 1].round(3)
 
-    # 7-year enrollment trend: 2018 (CCD) -> 2025-26 (ODE).
+    # 8-year enrollment trend: 2018 (CCD) -> 2026-27 (PPS October count).
     base = df["enrollment_2018"]
-    cur = df["enrollment_2025_26"]
+    cur = df["enrollment_2026_27"]
     valid = base.notna() & cur.notna() & (base > 0)
-    df["enrollment_pct_change_7yr"] = pd.NA
-    df.loc[valid, "enrollment_pct_change_7yr"] = (
+    df["enrollment_pct_change_8yr"] = pd.NA
+    df.loc[valid, "enrollment_pct_change_8yr"] = (
         (cur[valid] - base[valid]) / base[valid]
     ).round(4)
 
@@ -413,7 +414,7 @@ def derive_columns(df):
     # Transportation impact: road-network driving distance from each
     # low-enrollment candidate to the nearest *neighborhood* school of the same
     # grade band. The candidate set is the 20 lowest-enrollment in-scope schools
-    # by 2025-26 enrollment, excluding focus-option / lottery schools — those
+    # by 2026-27 enrollment, excluding focus-option / lottery schools — those
     # admit district-wide by lottery, not by catchment, so a nearest-neighborhood
     # distance is meaningless for them, whether as a candidate or a destination.
     # We rank candidate peers by great-circle distance, then ask OSRM for the
@@ -427,7 +428,7 @@ def derive_columns(df):
     df["nearest_alt_drive_min"] = pd.NA       # driving minutes
     focus = df["has_focus_option"].astype(bool)
     # Candidate set: the 20 lowest-enrollment non-lottery in-scope schools.
-    enroll = pd.to_numeric(df["enrollment_2025_26"], errors="coerce")
+    enroll = pd.to_numeric(df["enrollment_2026_27"], errors="coerce")
     eligible = df.index[(~focus) & enroll.notna()]
     low_idx = enroll.loc[eligible].nsmallest(N_CANDIDATES).index
     df["is_transport_candidate"] = False
@@ -495,12 +496,12 @@ def derive_charter_columns(df):
     df["pct_bipoc"] = 1 - df["pct_white"]
     df["avg_prof_2425"] = (df["pct_ela_prof_2425"] + df["pct_math_prof_2425"]) / 2
 
-    # 7-year enrollment trend where CCD history exists for the charter.
+    # 8-year enrollment trend where CCD history exists for the charter.
     base = df["enrollment_2018"]
-    cur = df["enrollment_2025_26"]
+    cur = df["enrollment_2026_27"]
     valid = base.notna() & cur.notna() & (base > 0)
-    df["enrollment_pct_change_7yr"] = pd.NA
-    df.loc[valid, "enrollment_pct_change_7yr"] = (
+    df["enrollment_pct_change_8yr"] = pd.NA
+    df.loc[valid, "enrollment_pct_change_8yr"] = (
         (cur[valid] - base[valid]) / base[valid]
     ).round(4)
 

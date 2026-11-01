@@ -9,12 +9,14 @@ forecast) reports MLC as a whole.
 
 Sources:
   data/raw/fall_membership_{year}.xlsx   ODE Fall Membership, counts by grade
+  data/raw/pps_october_enrollment_2026-27.json   PPS's October 2026 count by grade
   data/raw/pagr_schools_{ela,math}_tot_gnd_2425.xlsx
     ODE OSAS 2024-25 by student group and grade. The "all" files we use
     elsewhere only carry All Grades; these carry grades 3-8 and HS (11).
 """
 from __future__ import annotations
 
+import json
 import sys
 from pathlib import Path
 
@@ -30,6 +32,8 @@ OSAS_FILES = {"ela": RAW / "pagr_schools_ela_tot_gnd_2425.xlsx",
 OSAS_ALL = {"ela": RAW / "pagr_schools_ela_all_2425.xlsx",
             "math": RAW / "pagr_schools_math_all_2425.xlsx"}
 TOTAL = "Total Population (All Students)"
+OCT = RAW / "pps_october_enrollment_2026-27.json"
+OCT_NAMES = {"Metropolitan Learning Center": "Metro. Learning Center"}  # master -> PPS
 
 
 def _osas(path: Path, ode_id: int) -> pd.DataFrame:
@@ -44,6 +48,9 @@ def split(name: str, ode_id: int) -> dict:
     for year in YEARS:
         row = load_year(year).set_index("ode_school_id").loc[ode_id]
         enrollment.append({"year": year, "k8": int(row[K8].sum()), "hs": int(row[HS].sum())})
+    oct = json.loads(OCT.read_text())
+    g = next(r for r in oct["schools"] if r["name"] == OCT_NAMES[name])["grades"]
+    enrollment.append({"year": oct["school_year"], "k8": sum(g[k] for k in K8), "hs": sum(g[k] for k in HS)})
     tests = {}
     for subj, path in OSAS_FILES.items():
         g = _osas(path, ode_id)

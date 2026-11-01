@@ -1,6 +1,11 @@
 """Build master PPS schools dataset from ODE enrollment + closure-candidate list,
 merged with NCES CCD 2022 (addresses, lat/lon, FRL) and 2009 KPFF facility data
-(year built, square footage, construction type)."""
+(year built, square footage, construction type).
+
+Current enrollment is PPS's October 1, 2026 count
+(parse_pps_october_enrollment.py); ODE's Fall Membership for that date
+isn't out until about February, so the ODE 2025-26 file supplies the school
+list, demographics, and the prior year."""
 import json
 import sys
 import pandas as pd
@@ -21,11 +26,11 @@ OSAS_MATH_25 = ROOT / "data/raw/pagr_schools_math_all_2425.xlsx"
 OSAS_ELA_24 = ROOT / "data/raw/pagr_schools_ela_all_2324.xlsx"
 OSAS_MATH_24 = ROOT / "data/raw/pagr_schools_math_all_2324.xlsx"
 ODE_AAG = ROOT / "data/raw/ode_aag_schools_2425.csv"
-DLI_REPORT = ROOT / "data/raw/pps_immersion_details_2526.json"
 SPED_REPORT = ROOT / "data/raw/pps_sped_enrollment_2526.json"
 BUDGET_SCHOOLS = ROOT / "data/raw/pps_budget_school_reports.json"
 LRFP_CAPACITY = ROOT / "data/raw/pps_functional_capacity_2021.json"
 UTIL_MODEL = ROOT / "data/raw/pps_utilization_model_recovered.json"
+OCT_ENROLLMENT = ROOT / "data/raw/pps_october_enrollment_2026-27.json"
 OUT = ROOT / "data/pps_schools.csv"
 
 # Above this relative gap, the 2021 LRFP and the operational utilization model
@@ -332,6 +337,17 @@ SPED_NAME_MAP = {
     "Boise-Eliot/Humboldt": "Boise-Eliot Elementary School",
     "Metro. Learning Center": "Metropolitan Learning Center",
     "Arthur Academy": "Portland Arthur Academy Charter School",
+    # Renamed schools: PPS's 2026-27 reports use the new name, ODE's 2025-26
+    # file (and so the master) the old one.
+    "Sunrise": "Lee Elementary School",
+    "Brentwood": "Lane Middle School",
+}
+
+# Whole-school immersion programs. PPS's October enrollment prints them as one
+# row with no strand split; the October 2025 immersion report lists them at 100%.
+WHOLE_SCHOOL_IMMERSION = {
+    "Richmond Elementary School": "Japanese",
+    "Rigler Elementary School": "Spanish",
 }
 
 
@@ -1097,20 +1113,31 @@ def main():
         pps.loc[pps["School Name"] == "Odyssey Program (K-8)", col] = ody
     pps["data_note"] = pps["School Name"].map(DATA_NOTES)
 
+    # PPS's October 1, 2026 count. PPS reports Hayhurst and Odyssey
+    # separately, so no split is needed. Every school in the master must match.
+    with open(OCT_ENROLLMENT) as f:
+        oct_raw = json.load(f)["schools"]
+    names = list(pps["School Name"]) + [s["School Name"] for s in SUPPLEMENTAL_SCHOOLS]
+    oct_map = {m: r for r in oct_raw if (m := pps_master_name(r["name"], names))}
+    missing = [n for n in names if n not in oct_map]
+    if missing:
+        sys.exit(f"October 2026 enrollment: no row for {missing}")
+    pps["2026-27 Total Enrollment"] = pps["School Name"].map(lambda n: oct_map[n]["total"])
+
     pps["enrollment_pct_change"] = (
-        (pps["2025-26 Total Enrollment"] - pps["2024-25 Total Enrollment"])
-        / pps["2024-25 Total Enrollment"]
+        (pps["2026-27 Total Enrollment"] - pps["2025-26 Total Enrollment"])
+        / pps["2025-26 Total Enrollment"]
     ).round(4)
-    pps["utilization_pct_2526"] = (
-        pps["2025-26 Total Enrollment"] / pps["functional_capacity_2021"]
+    pps["utilization_pct_2627"] = (
+        pps["2026-27 Total Enrollment"] / pps["functional_capacity_2021"]
     ).round(4)
     pps["functional_capacity_permanent_2021"] = pps["functional_capacity_permanent_2021"].fillna(
         pps["functional_capacity_2021"])
-    pps["utilization_permanent_2526"] = (
-        pps["2025-26 Total Enrollment"] / pps["functional_capacity_permanent_2021"]
+    pps["utilization_permanent_2627"] = (
+        pps["2026-27 Total Enrollment"] / pps["functional_capacity_permanent_2021"]
     ).round(4)
-    pps["utilization_model_2526"] = (
-        pps["2025-26 Total Enrollment"] / pps["functional_capacity_model"]
+    pps["utilization_model_2627"] = (
+        pps["2026-27 Total Enrollment"] / pps["functional_capacity_model"]
     ).round(4)
 
     # PPS 2021 airflow/ventilation survey (Amerseco + Neudorfer Engineers,
@@ -1232,22 +1259,22 @@ def main():
     pps = pps.merge(aag_cols, on="_ode_int", how="left")
     pps = pps.drop(columns=["_ode_int"])
 
-    # Merge PPS annual Language Immersion Enrollment (2025-26): per-school DLI
-    # strand counts that ODE Fall Membership cannot separate. Only schools that
-    # host a DLI program appear in the report (~32 schools incl. HS feeders).
-    with open(DLI_REPORT) as f:
-        dli_raw = json.load(f)
-    dli_map = {DLI_NAME_MAP.get(r["name"], r["name"]): r for r in dli_raw}
-    unmapped = [r["name"] for r in dli_raw if r["name"] not in DLI_NAME_MAP]
-    if unmapped:
-        print(f"  DLI report: unmapped names: {unmapped}")
-    pps["dli_students_2526"] = pps["School Name"].map(
-        lambda n: dli_map.get(n, {}).get("dli_students"))
-    pps["pct_dli_2526"] = pps["School Name"].map(
-        lambda n: dli_map.get(n, {}).get("dli_pct"))
-    pps["neighborhood_students_2526"] = pps.apply(
-        lambda r: (r["2025-26 Total Enrollment"] - r["dli_students_2526"])
-        if pd.notna(r["dli_students_2526"]) else None, axis=1)
+    # Immersion strand counts from PPS's October 2026 enrollment, which prints
+    # one row per strand (ODE Fall Membership cannot separate them). DLI is
+    # every "... Immersion" row; other rows (Neighborhood Program, Portland
+    # International Scholars) are not.
+    def dli_count(n):
+        r = oct_map.get(n)
+        if r is None:
+            return None
+        if n in WHOLE_SCHOOL_IMMERSION:
+            assert not r["programs"], f"{n}: expected no strand rows"
+            return r["total"]
+        imm = [p["total"] for p in r["programs"] if p["program"].endswith(" Immersion")]
+        return sum(imm) if imm else None
+    pps["dli_students_2627"] = pps["School Name"].map(dli_count)
+    pps["neighborhood_students_2627"] = pps["2026-27 Total Enrollment"] - pps["dli_students_2627"]
+    pps["pct_dli_2627"] = (pps["dli_students_2627"] / pps["2026-27 Total Enrollment"]).round(4)
 
     # Merge PPS's October 2025 SpEd counts: students with an IEP flag in
     # Synergy, out of PK-12 enrollment (so shares differ slightly from ODE's
@@ -1290,6 +1317,7 @@ def main():
         "Virtual": "virtual",
         "2024-25 Total Enrollment": "enrollment_2024_25",
         "2025-26 Total Enrollment": "enrollment_2025_26",
+        "2026-27 Total Enrollment": "enrollment_2026_27",
         "2025-26 American Indian/ Alaska Native": "pct_ai_an_count",
         "2025-26 % American Indian/ Alaska Native": "pct_ai_an",
         "2025-26 Asian": "asian_count",
@@ -1315,20 +1343,20 @@ def main():
         "seismic_retrofit_status",
         "recent_boundary_change",
         "programs", "has_dli", "dli_languages", "has_focus_option",
-        "dli_students_2526", "neighborhood_students_2526", "pct_dli_2526",
+        "dli_students_2627", "neighborhood_students_2627", "pct_dli_2627",
         "year_built", "square_feet", "construction_type_2009",
-        "functional_capacity_2021", "modular_classrooms_2021", "utilization_pct_2526",
-        "functional_capacity_permanent_2021", "utilization_permanent_2526",
+        "functional_capacity_2021", "modular_classrooms_2021", "utilization_pct_2627",
+        "functional_capacity_permanent_2021", "utilization_permanent_2627",
         "sped_count_2526", "sped_enrollment_2526", "pct_sped_2526", "pct_direct_cert_pps_2425",
         "teachers_fte_pps_2627", "enrollment_pps_2627", "students_per_teacher_pps_2627",
-        "functional_capacity_model", "utilization_model_2526",
+        "functional_capacity_model", "utilization_model_2627",
         "capacity_source_conflict", "fc_model_approx", "capacity_conflict_note",
         "capacity_source", "data_note",
         "gross_capacity", "classrooms_total", "avg_classroom_sqft",
         "science_rooms", "art_music_rooms", "computer_rooms", "gym_rooms",
         "leased_classrooms", "lease_tenants",
         "fully_sprinklered", "k2_program", "k2_program_expires", "sprinkler_notes",
-        "enrollment_2024_25", "enrollment_2025_26", "enrollment_pct_change",
+        "enrollment_2024_25", "enrollment_2025_26", "enrollment_2026_27", "enrollment_pct_change",
         "enrollment_2018", "enrollment_2019", "enrollment_2020",
         "enrollment_2021", "enrollment_2022", "enrollment_2023",
         "ccd_enrollment_2022",
@@ -1363,6 +1391,8 @@ def main():
             continue
         pps = pd.concat([pps, pd.DataFrame([{c: row.get(c) for c in pps.columns}])],
                         ignore_index=True)
+        pps.loc[pps["school_name"] == row["school_name"], "enrollment_2026_27"] = \
+            oct_map[row["school_name"]]["total"]
         if row["school_name"] in sped_map:
             r = sped_map[row["school_name"]]
             pps.loc[pps["school_name"] == row["school_name"],

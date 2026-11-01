@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 """Rough before/after enrollment model for PPS's rightsizing scenarios.
 
-Holds fall 2025 enrollment fixed and moves students the way each scenario
+Holds fall 2026 enrollment fixed and moves students the way each scenario
 says, to show how big each receiving school gets by grade and strand. The
 dashboard turns these counts into estimated K-5 classes with a
 user-adjustable class-size target, and compares totals with each building's
 functional capacity.
 
 Inputs:
-  ODE Fall Membership 2025-26 grade counts (export_enrollment_by_grade.load_year)
-  PPS immersion report Oct 2025, students per language (data/raw/pps_immersion_details_2526.json)
+  PPS October 1, 2026 enrollment by grade and strand
+    (data/raw/pps_october_enrollment_2026-27.json, parse_pps_october_enrollment.py)
   Resolved scenarios with receiving schools (merge_rightsizing_scenarios.load_resolved)
 
 What moves, per scenario:
@@ -19,35 +19,31 @@ What moves, per scenario:
     (only Sellwood MS: Hosford and Lane).
   - Grade-level changes ("X 6-8 to Y") move all of X's grades 6-8.
   - Program moves from schools that stay open move that school's immersion
-    strand (its only language, unless PPS names one).
+    strand (its only language, unless PPS names one). Programs in
+    WHOLE_PROGRAM_MOVES move all their students.
   - EXTRA_FLOWS: assignments in the memo but not in the scenario PDF.
   - Students with IEPs move with their group: each strand carries its
     school's October 2025 IEP rate (PPS SpEd report; immersion and
     neighborhood programs use their own rates where PPS prints them).
 
 Assumptions and gaps (also shown on the dashboard):
-  - A strand's students are spread across grades in proportion to the
-    school's grade counts; PPS publishes strand totals, not strands by grade.
   - Attendance boundary changes are not modeled; PPS has not published how
     many students they move.
   - Program sizes PPS does not publish are not moved: Creston's Deaf and
-    Hard of Hearing program, and Odyssey (no grade counts; ODE reports it
-    under Hayhurst).
+    Hard of Hearing program.
   - Focus classrooms (SES, CB, ISC) are not moved separately: students in a
     closing school's focus rooms are assumed to go where its other students go.
-  - Hayhurst's ODE counts include Odyssey; they are scaled to PPS's
-    Hayhurst-only total.
 """
 from __future__ import annotations
 
 import json
 from pathlib import Path
 
-from build_master import DLI_NAME_MAP, HAYHURST_ODYSSEY_SPLIT, pps_master_name
-from export_enrollment_by_grade import GRADE_KEYS, load_year
+from build_master import WHOLE_SCHOOL_IMMERSION, pps_master_name
+from export_enrollment_by_grade import GRADE_KEYS
 
 ROOT = Path(__file__).resolve().parent.parent
-DLI_JSON = ROOT / "data" / "raw" / "pps_immersion_details_2526.json"
+OCT_JSON = ROOT / "data" / "raw" / "pps_october_enrollment_2026-27.json"
 SPED_JSON = ROOT / "data" / "raw" / "pps_sped_enrollment_2526.json"
 
 GRADES = GRADE_KEYS[:9]  # K-8; the scenarios change only elementary and middle grades
@@ -65,36 +61,28 @@ EXTRA_FLOWS = [
 # Closure groups whose size PPS does not publish; left in place, noted on the page.
 UNMODELED_GROUPS = {"Deaf and Hard of Hearing program"}
 
+# Programs that move as a whole (PPS: "Odyssey moves to the MLC site").
+WHOLE_PROGRAM_MOVES = {"Odyssey Program (K-8)"}
+
 
 def base_strands(master_names: set[str]) -> dict[str, dict[str, list[float]]]:
-    """school -> strand -> [K..8 counts] for fall 2025."""
-    grades = load_year("2025-26").set_index("school_name")
-    dli = {DLI_NAME_MAP.get(r["name"], r["name"]).strip(): r for r in json.loads(DLI_JSON.read_text())}
-    # ODE names are stripped; a few master names keep a trailing space
-    # ("Beverly Cleary School "), so key the output by the master spelling.
-    by_stripped = {n.strip(): n for n in master_names}
+    """school -> strand -> [K..8 counts] for fall 2026, from PPS's strand rows."""
+    names = sorted(master_names)
     out = {}
-    for ode_name, row in grades.iterrows():
-        name = by_stripped.get(ode_name)
-        if name is None:
+    for r in json.loads(OCT_JSON.read_text())["schools"]:
+        name = pps_master_name(r["name"], names)
+        if name is None or not any(r["grades"][g] for g in GRADES):
             continue
-        counts = [float(row[g]) for g in GRADES]
-        if name == "Hayhurst Elementary School":
-            # ODE counts include Odyssey; scale K-5 to PPS's Hayhurst-only total.
-            k5 = sum(counts[:6])
-            target = HAYHURST_ODYSSEY_SPLIT["2025-26 Total Enrollment"][0]
-            counts = [c * target / k5 if i < 6 else 0.0 for i, c in enumerate(counts)]
-        total = sum(counts)
-        if total == 0:
-            continue
+        rows = r["programs"] or [{"program": NEIGHBORHOOD, "grades": r["grades"]}]
         strands = {}
-        rep = dli.get(name.strip())
-        if rep and rep.get("dli_by_language") and rep["total_enrollment"]:
-            for lang, n in rep["dli_by_language"].items():
-                share = n / rep["total_enrollment"]
-                strands[lang] = [c * share for c in counts]
-        used = [sum(v[i] for v in strands.values()) for i in range(len(GRADES))]
-        strands[NEIGHBORHOOD] = [max(0.0, c - u) for c, u in zip(counts, used)]
+        for p in rows:
+            # Rows that aren't an immersion strand (Neighborhood Program, MLC's
+            # single program row) are the neighborhood group.
+            strand = p["program"].removesuffix(" Immersion") if p["program"].endswith(" Immersion") else NEIGHBORHOOD
+            if name in WHOLE_SCHOOL_IMMERSION:
+                strand = WHOLE_SCHOOL_IMMERSION[name]
+            counts = [float(p["grades"][g]) for g in GRADES]
+            strands[strand] = [a + b for a, b in zip(strands.get(strand, [0.0] * len(GRADES)), counts)]
         out[name] = strands
     return out
 
@@ -150,9 +138,8 @@ def build(resolved: dict, master_names: set[str], direct_cert: dict[str, float] 
         "dc": {n: {k: [c * dc.get(n, 0.0) for c in v] for k, v in st.items()} for n, st in base.items()},
     }
     result = {"assumptions": {
-        "grade_distribution": "Strand totals spread across grades in proportion to each school's grade counts.",
-        "not_modeled": ["Attendance boundary changes", "Creston Deaf and Hard of Hearing program (size not published)",
-                        "Odyssey's move to MLC (no grade counts)"],
+        "grade_distribution": "PPS's October 2026 counts by grade and strand.",
+        "not_modeled": ["Attendance boundary changes", "Creston Deaf and Hard of Hearing program (size not published)"],
     }, "scenarios": {}}
     for scen, s in resolved["scenarios"].items():
         closing = set(s["closing"])
@@ -189,7 +176,10 @@ def build(resolved: dict, master_names: set[str], direct_cert: dict[str, float] 
             if mv["kind"] != "program" or mv["from"] in closing or mv["from"] in grade_moved:
                 continue
             strands = base.get(mv["from"], {})
-            langs = [mv["program"]] if mv["program"] in strands else [k for k in strands if k != NEIGHBORHOOD]
+            if mv["from"] in WHOLE_PROGRAM_MOVES:
+                langs = list(strands)
+            else:
+                langs = [mv["program"]] if mv["program"] in strands else [k for k in strands if k != NEIGHBORHOOD]
             for strand in langs:
                 flows.append({"from": mv["from"], "to": mv["to"], "strand": strand, "grades": GRADES,
                               "share": 1.0, "text": mv["text"]})
